@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.gennlife.crf.utils.RandomString;
+import com.gennlife.crf.utils.RandomValue;
 
 /**
  * @Description: 烟台环境：添加患者信息_既往史
@@ -61,23 +61,23 @@ public class Yantai_Hzxx_AddJws {
 		
 		//高血压史年限
 		driver.findElementById("HBP_HISTORY_HBP_YEAR").clear();
-		driver.findElementById("HBP_HISTORY_HBP_YEAR").sendKeys(RandomString.randomRangeInt(5, 10));
+		driver.findElementById("HBP_HISTORY_HBP_YEAR").sendKeys(RandomValue.randomRangeInt(5, 10));
 		
 		//最高收缩压（mmHg）
 		driver.findElementById("HBP_HISTORY_HIGHEST_SYSTOLIC").clear();
-		driver.findElementById("HBP_HISTORY_HIGHEST_SYSTOLIC").sendKeys(RandomString.randomRangeInt(80, 120));
+		driver.findElementById("HBP_HISTORY_HIGHEST_SYSTOLIC").sendKeys(RandomValue.randomRangeInt(80, 120));
 		
 		//最高舒张压（mmHg）
 		driver.findElementById("HBP_HISTORY_HIGHEST_DIASTOLIC").clear();
-		driver.findElementById("HBP_HISTORY_HIGHEST_DIASTOLIC").sendKeys(RandomString.randomRangeInt(90, 100));
+		driver.findElementById("HBP_HISTORY_HIGHEST_DIASTOLIC").sendKeys(RandomValue.randomRangeInt(90, 100));
 		
 		//药物控制后舒张压（mmHg）
 		driver.findElementById("HBP_HISTORY_SYSTOLIC_AFTER_DRUG").clear();
-		driver.findElementById("HBP_HISTORY_SYSTOLIC_AFTER_DRUG").sendKeys(RandomString.randomRangeInt(90, 100));
+		driver.findElementById("HBP_HISTORY_SYSTOLIC_AFTER_DRUG").sendKeys(RandomValue.randomRangeInt(90, 100));
 		
 		//药物控制后收缩压（mmHg）
 		driver.findElementById("HBP_HISTORY_DIASTOLIC_AFTER_DRUG").clear();
-		driver.findElementById("HBP_HISTORY_DIASTOLIC_AFTER_DRUG").sendKeys(RandomString.randomRangeInt(90, 130));
+		driver.findElementById("HBP_HISTORY_DIASTOLIC_AFTER_DRUG").sendKeys(RandomValue.randomRangeInt(90, 130));
 		
 		//糖尿病史
 		//有无糖尿病史
@@ -88,7 +88,7 @@ public class Yantai_Hzxx_AddJws {
 		
 		//糖尿病时长（年）
 		driver.findElementById("DIABETES_HISTORY_DIABETES_YEARS").clear();
-		driver.findElementById("DIABETES_HISTORY_DIABETES_YEARS").sendKeys(RandomString.randomRangeInt(5, 13));
+		driver.findElementById("DIABETES_HISTORY_DIABETES_YEARS").sendKeys(RandomValue.randomRangeInt(5, 13));
 		
 		//高脂血症史
 		//有无高脂血症

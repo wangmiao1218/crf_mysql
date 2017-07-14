@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.gennlife.crf.utils.RandomString;
+import com.gennlife.crf.utils.RandomValue;
 
 /**
  * @Description: 烟台环境：添加住院_住院时情况
@@ -50,25 +50,25 @@ public class Yantai_Zy_AddZysqk {
 		
 		// 住院期间检查
 		//脑MRI_梗死部位
-		driver.findElementById("DHS_EXAMINATION_MRI_EXAMINATION_MRI_INFARCTION").sendKeys(RandomString.UUIDString());
+		driver.findElementById("DHS_EXAMINATION_MRI_EXAMINATION_MRI_INFARCTION").sendKeys(RandomValue.UUIDString());
 		
 		//脑CT_梗死部位
-		driver.findElementById("DHS_EXAMINATION_CT_EXAMINATION_CT_INFARCTION").sendKeys(RandomString.UUIDString());
+		driver.findElementById("DHS_EXAMINATION_CT_EXAMINATION_CT_INFARCTION").sendKeys(RandomValue.UUIDString());
 
 		//脑血管造影
-		driver.findElementById("DHS_EXAMINATION_BA_EXAMINATION_0_BA_ANGIOSTEGNOSIS_YES_NO").sendKeys(RandomString.UUIDString());
+		driver.findElementById("DHS_EXAMINATION_BA_EXAMINATION_0_BA_ANGIOSTEGNOSIS_YES_NO").sendKeys(RandomValue.UUIDString());
 		new Select(driver.findElementById("DHS_EXAMINATION_BA_EXAMINATION_0_BA_ANGIOSTEGNOSIS_LOCATION")).selectByValue("颈外动脉左侧");
-		driver.findElementById("DHS_EXAMINATION_BA_EXAMINATION_0_BA_ANGIOSTEGNOSIS_EXTENT").sendKeys(RandomString.randomRangeInt(10, 30));
+		driver.findElementById("DHS_EXAMINATION_BA_EXAMINATION_0_BA_ANGIOSTEGNOSIS_EXTENT").sendKeys(RandomValue.randomRangeInt(10, 30));
 		
 		//脑MRA
-		driver.findElementById("DHS_EXAMINATION_MRA_EXAMINATION_0_MRA_ANGIOSTEGNOSIS_YES_NO").sendKeys(RandomString.UUIDString());
+		driver.findElementById("DHS_EXAMINATION_MRA_EXAMINATION_0_MRA_ANGIOSTEGNOSIS_YES_NO").sendKeys(RandomValue.UUIDString());
 		new Select(driver.findElementById("DHS_EXAMINATION_MRA_EXAMINATION_0_MRA_ANGIOSTEGNOSIS_LOCATION")).selectByValue("颈总动脉左侧");
-		driver.findElementById("DHS_EXAMINATION_MRA_EXAMINATION_0_MRA_ANGIOSTEGNOSIS_EXTENT").sendKeys(RandomString.randomRangeInt(10, 30));
+		driver.findElementById("DHS_EXAMINATION_MRA_EXAMINATION_0_MRA_ANGIOSTEGNOSIS_EXTENT").sendKeys(RandomValue.randomRangeInt(10, 30));
 		
 		//颈动脉彩超
-		driver.findElementById("DHS_EXAMINATION_CA_EXAMINATION_0_CA_ANGIOSTEGNOSIS_YES_NO").sendKeys(RandomString.UUIDString());
+		driver.findElementById("DHS_EXAMINATION_CA_EXAMINATION_0_CA_ANGIOSTEGNOSIS_YES_NO").sendKeys(RandomValue.UUIDString());
 		new Select(driver.findElementById("DHS_EXAMINATION_CA_EXAMINATION_0_CA_ANGIOSTEGNOSIS_LOCATION")).selectByValue("颈总动脉左侧");
-		driver.findElementById("DHS_EXAMINATION_CA_EXAMINATION_0_CA_ANGIOSTEGNOSIS_EXTENT").sendKeys(RandomString.randomRangeInt(10, 30));
+		driver.findElementById("DHS_EXAMINATION_CA_EXAMINATION_0_CA_ANGIOSTEGNOSIS_EXTENT").sendKeys(RandomValue.randomRangeInt(10, 30));
 
 		//住院期间用药
 		//缺血性卒中溶栓治疗
@@ -110,7 +110,7 @@ public class Yantai_Zy_AddZysqk {
 		//药物过敏
 		new Select(driver.findElementById("DHS_CHANGE_ALLERGIC_DRUG_YES_NO")).selectByValue("是");
 		//过敏药物
-		driver.findElementById("DHS_CHANGE_ALLERGIC_DRUG_YES_NO").sendKeys(RandomString.UUIDString());
+		driver.findElementById("DHS_CHANGE_ALLERGIC_DRUG_YES_NO").sendKeys(RandomValue.UUIDString());
 		//是否死亡
 		new Select(driver.findElementById("DHS_CHANGE_DEAD_YES_NO")).selectByValue("是");
 		

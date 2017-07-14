@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.gennlife.crf.utils.RandomString;
+import com.gennlife.crf.utils.RandomValue;
 
 /**
  * @Description: 烟台环境：添加随访
@@ -59,75 +59,75 @@ public class Yantai_Sf_Addsf {
 		
 		// 回访时主诉
 		driver.findElementById("FOLLOW_UP_COMPLAINT").clear();
-		driver.findElementById("FOLLOW_UP_COMPLAINT").sendKeys(RandomString.UUIDString());
+		driver.findElementById("FOLLOW_UP_COMPLAINT").sendKeys(RandomValue.UUIDString());
 		
 		//回访时NIHSS评分
 		driver.findElementById("FOLLOW_UP_NIHSS").clear();
-		driver.findElementById("FOLLOW_UP_NIHSS").sendKeys(RandomString.randomRangeInt(10, 80));
+		driver.findElementById("FOLLOW_UP_NIHSS").sendKeys(RandomValue.randomRangeInt(10, 80));
 		
 		//回访时mRS评分
 		driver.findElementById("FOLLOW_UP_MRS").clear();
-		driver.findElementById("FOLLOW_UP_MRS").sendKeys(RandomString.randomRangeInt(10, 80));
+		driver.findElementById("FOLLOW_UP_MRS").sendKeys(RandomValue.randomRangeInt(10, 80));
 		
 		//血浆总胆固醇浓度
 		driver.findElementById("FOLLOW_UP_TC").clear();
-		driver.findElementById("FOLLOW_UP_TC").sendKeys(RandomString.randomRangeInt(10, 80));
+		driver.findElementById("FOLLOW_UP_TC").sendKeys(RandomValue.randomRangeInt(10, 80));
 		
 		//高密度脂蛋白
 		driver.findElementById("FOLLOW_UP_HDL").clear();
-		driver.findElementById("FOLLOW_UP_HDL").sendKeys(RandomString.randomRangeInt(20, 80));
+		driver.findElementById("FOLLOW_UP_HDL").sendKeys(RandomValue.randomRangeInt(20, 80));
 		
 		//低密度脂蛋白
 		driver.findElementById("FOLLOW_UP_LDL").clear();
-		driver.findElementById("FOLLOW_UP_LDL").sendKeys(RandomString.randomRangeInt(50, 90));
+		driver.findElementById("FOLLOW_UP_LDL").sendKeys(RandomValue.randomRangeInt(50, 90));
 		
 		//甘油三酯
 		driver.findElementById("FOLLOW_UP_TRIG").clear();
-		driver.findElementById("FOLLOW_UP_TRIG").sendKeys(RandomString.randomRangeInt(10, 40));
+		driver.findElementById("FOLLOW_UP_TRIG").sendKeys(RandomValue.randomRangeInt(10, 40));
 		
 		//肌酐
 		driver.findElementById("FOLLOW_UP_CREA").clear();
-		driver.findElementById("FOLLOW_UP_CREA").sendKeys(RandomString.randomRangeInt(10, 70));
+		driver.findElementById("FOLLOW_UP_CREA").sendKeys(RandomValue.randomRangeInt(10, 70));
 		
 		//尿素氮
 		driver.findElementById("FOLLOW_UP_BUN").clear();
-		driver.findElementById("FOLLOW_UP_BUN").sendKeys(RandomString.randomRangeInt(10, 60));
+		driver.findElementById("FOLLOW_UP_BUN").sendKeys(RandomValue.randomRangeInt(10, 60));
 		
 		//血尿酸
 		driver.findElementById("FOLLOW_UP_UA").clear();
-		driver.findElementById("FOLLOW_UP_UA").sendKeys(RandomString.randomRangeInt(10, 80));
+		driver.findElementById("FOLLOW_UP_UA").sendKeys(RandomValue.randomRangeInt(10, 80));
 		
 		//红细胞计数
 		driver.findElementById("FOLLOW_UP_RBC").clear();
-		driver.findElementById("FOLLOW_UP_RBC").sendKeys(RandomString.randomRangeInt(100, 500));
+		driver.findElementById("FOLLOW_UP_RBC").sendKeys(RandomValue.randomRangeInt(100, 500));
 		
 		//血红蛋白
 		driver.findElementById("FOLLOW_UP_HGB").clear();
-		driver.findElementById("FOLLOW_UP_HGB").sendKeys(RandomString.randomRangeInt(100, 400));
+		driver.findElementById("FOLLOW_UP_HGB").sendKeys(RandomValue.randomRangeInt(100, 400));
 		
 		//白细胞计数
 		driver.findElementById("FOLLOW_UP_WBC").clear();
-		driver.findElementById("FOLLOW_UP_WBC").sendKeys(RandomString.randomRangeInt(150, 400));
+		driver.findElementById("FOLLOW_UP_WBC").sendKeys(RandomValue.randomRangeInt(150, 400));
 		
 		//血小板计数
 		driver.findElementById("FOLLOW_UP_PLT").clear();
-		driver.findElementById("FOLLOW_UP_PLT").sendKeys(RandomString.randomRangeInt(200, 400));
+		driver.findElementById("FOLLOW_UP_PLT").sendKeys(RandomValue.randomRangeInt(200, 400));
 		
 		//空腹血糖
 		driver.findElementById("FOLLOW_UP_FASTING_GLUCOSE").clear();
-		driver.findElementById("FOLLOW_UP_FASTING_GLUCOSE").sendKeys(RandomString.randomRangeInt(10, 50));
+		driver.findElementById("FOLLOW_UP_FASTING_GLUCOSE").sendKeys(RandomValue.randomRangeInt(10, 50));
 		
 		//血浆同型半胱氨酸
 		driver.findElementById("FOLLOW_UP_CYSTEINE").clear();
-		driver.findElementById("FOLLOW_UP_CYSTEINE").sendKeys(RandomString.randomRangeInt(100, 400));
+		driver.findElementById("FOLLOW_UP_CYSTEINE").sendKeys(RandomValue.randomRangeInt(100, 400));
 		
 		//颈动脉彩超结果
 		driver.findElementById("FOLLOW_UP_CA").clear();
-		driver.findElementById("FOLLOW_UP_CA").sendKeys(RandomString.UUIDString());
+		driver.findElementById("FOLLOW_UP_CA").sendKeys(RandomValue.UUIDString());
 		
 		//经颅多普勒结果
 		driver.findElementById("FOLLOW_UP_TCD").clear();
-		driver.findElementById("FOLLOW_UP_TCD").sendKeys(RandomString.UUIDString());
+		driver.findElementById("FOLLOW_UP_TCD").sendKeys(RandomValue.UUIDString());
 
 		// 保存
 		driver.findElementById("input-save").click();

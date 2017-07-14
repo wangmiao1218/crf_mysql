@@ -10,14 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.gennlife.crf.base.SelectBase;
 import com.gennlife.crf.bean.CrfTemplateTest4;
 import com.gennlife.crf.service.CrfTemplateTest4Service;
 import com.gennlife.crf.utils.CreateWebDriver;
 import com.gennlife.crf.utils.ListAndStringUtils;
 import com.gennlife.crf.utils.LoginCrfOfYantai;
 import com.gennlife.crf.utils.QuitWebDriver;
-import com.gennlife.crf.utils.RandomString;
+import com.gennlife.crf.utils.RandomIdCardGenerator;
+import com.gennlife.crf.utils.RandomValue;
 
 /**
  * @Description: 烟台环境，test4科室，添加单病种数据库中crf的患者信息
@@ -51,11 +51,11 @@ public class AddCrfTemplateTest4Controller{
 			for (int i = 0; i < list.size(); i++) {
 				if ("字符串".contains(list.get(i).getVariableType())) {
 					driver.findElementById(list.get(i).getIdXpath()).clear();
-					driver.findElementById(list.get(i).getIdXpath()).sendKeys(RandomString.UUIDString());
+					driver.findElementById(list.get(i).getIdXpath()).sendKeys(RandomValue.UUIDString());
 				}
 				else if ("数值".contains(list.get(i).getVariableType())) {
 					driver.findElementById(list.get(i).getIdXpath()).clear();
-					driver.findElementById(list.get(i).getIdXpath()).sendKeys(RandomString.randomRangeInt(20, 200));
+					driver.findElementById(list.get(i).getIdXpath()).sendKeys(RandomValue.randomRangeInt(20, 200));
 				}
 				else if ("日期".contains(list.get(i).getVariableType())) {
 					driver.findElementById(list.get(i).getIdXpath()).clear();
@@ -103,22 +103,42 @@ public class AddCrfTemplateTest4Controller{
 
 		if ("添加页面".contains(value)) {
 			//一般病史
+			//添加判断姓名、家庭住址、电话、身份证
 			for (int i = 0; i < ybxxList.size(); i++) {
 				if ("字符串".contains(ybxxList.get(i).getVariableType())) {
-					driver.findElementById(ybxxList.get(i).getIdXpath()).clear();
-					driver.findElementById(ybxxList.get(i).getIdXpath()).sendKeys(RandomString.UUIDString());
+					//姓名
+					if (ybxxList.get(i).getDateFormat()!=null && "姓名".contains(ybxxList.get(i).getDateFormat())) {
+						driver.findElementById(ybxxList.get(i).getIdXpath()).clear();
+						driver.findElementById(ybxxList.get(i).getIdXpath()).sendKeys(RandomValue.randomChineseName());
+					}
+					else if (ybxxList.get(i).getDateFormat()!=null && "家庭住址".contains(ybxxList.get(i).getDateFormat())) {
+						driver.findElementById(ybxxList.get(i).getIdXpath()).clear();
+						driver.findElementById(ybxxList.get(i).getIdXpath()).sendKeys(RandomValue.randomHomeAddress());
+					}
+					else if (ybxxList.get(i).getDateFormat()!=null && "身份证".contains(ybxxList.get(i).getDateFormat())) {
+						driver.findElementById(ybxxList.get(i).getIdXpath()).clear();
+						driver.findElementById(ybxxList.get(i).getIdXpath()).sendKeys(RandomIdCardGenerator.RandomIdCardGenerator());
+					}
+					else if (ybxxList.get(i).getDateFormat()!=null && "电话".contains(ybxxList.get(i).getDateFormat())) {
+						driver.findElementById(ybxxList.get(i).getIdXpath()).clear();
+						driver.findElementById(ybxxList.get(i).getIdXpath()).sendKeys(RandomValue.randomTel());
+					}
+					else if (ybxxList.get(i).getDateFormat()==null) {
+						driver.findElementById(ybxxList.get(i).getIdXpath()).clear();
+						driver.findElementById(ybxxList.get(i).getIdXpath()).sendKeys(RandomValue.UUIDString());
+					}
 				}
 				else if ("数值".contains(ybxxList.get(i).getVariableType())) {
 					driver.findElementById(ybxxList.get(i).getIdXpath()).clear();
-					driver.findElementById(ybxxList.get(i).getIdXpath()).sendKeys(RandomString.randomRangeInt(20, 200));
+					driver.findElementById(ybxxList.get(i).getIdXpath()).sendKeys(RandomValue.randomRangeInt(20, 200));
 				}
 				else if ("日期".contains(ybxxList.get(i).getVariableType())) {
 					if ("yyyy-MM-dd".contains(ybxxList.get(i).getDateFormat())) {
 						driver.findElementById(ybxxList.get(i).getIdXpath()).clear();
-						driver.findElementById(ybxxList.get(i).getIdXpath()).sendKeys(RandomString.randomDateyyyyMMdd());
+						driver.findElementById(ybxxList.get(i).getIdXpath()).sendKeys(RandomValue.randomDateyyyyMMdd());
 					}else if ("yyyy-MM-dd HH:mm:ss".contains(ybxxList.get(i).getDateFormat())) {
 						driver.findElementById(ybxxList.get(i).getIdXpath()).clear();
-						driver.findElementById(ybxxList.get(i).getIdXpath()).sendKeys(RandomString.randomDateyyyyMMddHHmmss());
+						driver.findElementById(ybxxList.get(i).getIdXpath()).sendKeys(RandomValue.randomDateyyyyMMddHHmmss());
 					}
 				}
 				else if ("枚举".contains(ybxxList.get(i).getVariableType())) {
@@ -137,19 +157,19 @@ public class AddCrfTemplateTest4Controller{
 			for (int i = 0; i < jwsList.size(); i++) {
 				if ("字符串".contains(jwsList.get(i).getVariableType())) {
 					driver.findElementById(jwsList.get(i).getIdXpath()).clear();
-					driver.findElementById(jwsList.get(i).getIdXpath()).sendKeys(RandomString.UUIDString());
+					driver.findElementById(jwsList.get(i).getIdXpath()).sendKeys(RandomValue.UUIDString());
 				}
 				else if ("数值".contains(jwsList.get(i).getVariableType())) {
 					driver.findElementById(jwsList.get(i).getIdXpath()).clear();
-					driver.findElementById(jwsList.get(i).getIdXpath()).sendKeys(RandomString.randomRangeInt(20, 200));
+					driver.findElementById(jwsList.get(i).getIdXpath()).sendKeys(RandomValue.randomRangeInt(20, 200));
 				}
 				else if ("日期".contains(jwsList.get(i).getVariableType())) {
 					if ("yyyy-MM-dd".contains(jwsList.get(i).getDateFormat())) {
 						driver.findElementById(jwsList.get(i).getIdXpath()).clear();
-						driver.findElementById(jwsList.get(i).getIdXpath()).sendKeys(RandomString.randomDateyyyyMMdd());
+						driver.findElementById(jwsList.get(i).getIdXpath()).sendKeys(RandomValue.randomDateyyyyMMdd());
 					}else if ("yyyy-MM-dd HH:mm:ss".contains(jwsList.get(i).getDateFormat())) {
 						driver.findElementById(jwsList.get(i).getIdXpath()).clear();
-						driver.findElementById(jwsList.get(i).getIdXpath()).sendKeys(RandomString.randomDateyyyyMMddHHmmss());
+						driver.findElementById(jwsList.get(i).getIdXpath()).sendKeys(RandomValue.randomDateyyyyMMddHHmmss());
 					}
 				}
 				else if ("枚举".contains(jwsList.get(i).getVariableType())) {
@@ -168,19 +188,19 @@ public class AddCrfTemplateTest4Controller{
 			for (int i = 0; i < jzbsList.size(); i++) {
 				if ("字符串".contains(jzbsList.get(i).getVariableType())) {
 					driver.findElementById(jzbsList.get(i).getIdXpath()).clear();
-					driver.findElementById(jzbsList.get(i).getIdXpath()).sendKeys(RandomString.UUIDString());
+					driver.findElementById(jzbsList.get(i).getIdXpath()).sendKeys(RandomValue.UUIDString());
 				}
 				else if ("数值".contains(jzbsList.get(i).getVariableType())) {
 					driver.findElementById(jzbsList.get(i).getIdXpath()).clear();
-					driver.findElementById(jzbsList.get(i).getIdXpath()).sendKeys(RandomString.randomRangeInt(20, 200));
+					driver.findElementById(jzbsList.get(i).getIdXpath()).sendKeys(RandomValue.randomRangeInt(20, 200));
 				}
 				else if ("日期".contains(jzbsList.get(i).getVariableType())) {
 					if ("yyyy-MM-dd".contains(jzbsList.get(i).getDateFormat())) {
 						driver.findElementById(jzbsList.get(i).getIdXpath()).clear();
-						driver.findElementById(jzbsList.get(i).getIdXpath()).sendKeys(RandomString.randomDateyyyyMMdd());
+						driver.findElementById(jzbsList.get(i).getIdXpath()).sendKeys(RandomValue.randomDateyyyyMMdd());
 					}else if ("yyyy-MM-dd HH:mm:ss".contains(jzbsList.get(i).getDateFormat())) {
 						driver.findElementById(jzbsList.get(i).getIdXpath()).clear();
-						driver.findElementById(jzbsList.get(i).getIdXpath()).sendKeys(RandomString.randomDateyyyyMMddHHmmss());
+						driver.findElementById(jzbsList.get(i).getIdXpath()).sendKeys(RandomValue.randomDateyyyyMMddHHmmss());
 					}
 				}
 				else if ("枚举".contains(jzbsList.get(i).getVariableType())) {
@@ -199,19 +219,19 @@ public class AddCrfTemplateTest4Controller{
 			for (int i = 0; i < xysList.size(); i++) {
 				if ("字符串".contains(xysList.get(i).getVariableType())) {
 					driver.findElementById(xysList.get(i).getIdXpath()).clear();
-					driver.findElementById(xysList.get(i).getIdXpath()).sendKeys(RandomString.UUIDString());
+					driver.findElementById(xysList.get(i).getIdXpath()).sendKeys(RandomValue.UUIDString());
 				}
 				else if ("数值".contains(xysList.get(i).getVariableType())) {
 					driver.findElementById(xysList.get(i).getIdXpath()).clear();
-					driver.findElementById(xysList.get(i).getIdXpath()).sendKeys(RandomString.randomRangeInt(20, 200));
+					driver.findElementById(xysList.get(i).getIdXpath()).sendKeys(RandomValue.randomRangeInt(20, 200));
 				}
 				else if ("日期".contains(xysList.get(i).getVariableType())) {
 					if ("yyyy-MM-dd".contains(xysList.get(i).getDateFormat())) {
 						driver.findElementById(xysList.get(i).getIdXpath()).clear();
-						driver.findElementById(xysList.get(i).getIdXpath()).sendKeys(RandomString.randomDateyyyyMMdd());
+						driver.findElementById(xysList.get(i).getIdXpath()).sendKeys(RandomValue.randomDateyyyyMMdd());
 					}else if ("yyyy-MM-dd HH:mm:ss".contains(xysList.get(i).getDateFormat())) {
 						driver.findElementById(xysList.get(i).getIdXpath()).clear();
-						driver.findElementById(xysList.get(i).getIdXpath()).sendKeys(RandomString.randomDateyyyyMMddHHmmss());
+						driver.findElementById(xysList.get(i).getIdXpath()).sendKeys(RandomValue.randomDateyyyyMMddHHmmss());
 					}
 				}
 				else if ("枚举".contains(xysList.get(i).getVariableType())) {
@@ -230,19 +250,19 @@ public class AddCrfTemplateTest4Controller{
 			for (int i = 0; i < yjsList.size(); i++) {
 				if ("字符串".contains(yjsList.get(i).getVariableType())) {
 					driver.findElementById(yjsList.get(i).getIdXpath()).clear();
-					driver.findElementById(yjsList.get(i).getIdXpath()).sendKeys(RandomString.UUIDString());
+					driver.findElementById(yjsList.get(i).getIdXpath()).sendKeys(RandomValue.UUIDString());
 				}
 				else if ("数值".contains(yjsList.get(i).getVariableType())) {
 					driver.findElementById(yjsList.get(i).getIdXpath()).clear();
-					driver.findElementById(yjsList.get(i).getIdXpath()).sendKeys(RandomString.randomRangeInt(20, 200));
+					driver.findElementById(yjsList.get(i).getIdXpath()).sendKeys(RandomValue.randomRangeInt(20, 200));
 				}
 				else if ("日期".contains(yjsList.get(i).getVariableType())) {
 					if ("yyyy-MM-dd".contains(yjsList.get(i).getDateFormat())) {
 						driver.findElementById(yjsList.get(i).getIdXpath()).clear();
-						driver.findElementById(yjsList.get(i).getIdXpath()).sendKeys(RandomString.randomDateyyyyMMdd());
+						driver.findElementById(yjsList.get(i).getIdXpath()).sendKeys(RandomValue.randomDateyyyyMMdd());
 					}else if ("yyyy-MM-dd HH:mm:ss".contains(yjsList.get(i).getDateFormat())) {
 						driver.findElementById(yjsList.get(i).getIdXpath()).clear();
-						driver.findElementById(yjsList.get(i).getIdXpath()).sendKeys(RandomString.randomDateyyyyMMddHHmmss());
+						driver.findElementById(yjsList.get(i).getIdXpath()).sendKeys(RandomValue.randomDateyyyyMMddHHmmss());
 					}
 				}
 				else if ("枚举".contains(yjsList.get(i).getVariableType())) {
@@ -299,19 +319,19 @@ public class AddCrfTemplateTest4Controller{
 		for (int i = 0; i < rysqkList.size(); i++) {
 			if ("字符串".contains(rysqkList.get(i).getVariableType())) {
 				driver.findElementById(rysqkList.get(i).getIdXpath()).clear();
-				driver.findElementById(rysqkList.get(i).getIdXpath()).sendKeys(RandomString.UUIDString());
+				driver.findElementById(rysqkList.get(i).getIdXpath()).sendKeys(RandomValue.UUIDString());
 			}
 			else if ("数值".contains(rysqkList.get(i).getVariableType())) {
 				driver.findElementById(rysqkList.get(i).getIdXpath()).clear();
-				driver.findElementById(rysqkList.get(i).getIdXpath()).sendKeys(RandomString.randomRangeInt(20, 200));
+				driver.findElementById(rysqkList.get(i).getIdXpath()).sendKeys(RandomValue.randomRangeInt(20, 200));
 			}
 			else if ("日期".contains(rysqkList.get(i).getVariableType())) {
 				if ("yyyy-MM-dd".contains(rysqkList.get(i).getDateFormat())) {
 					driver.findElementById(rysqkList.get(i).getIdXpath()).clear();
-					driver.findElementById(rysqkList.get(i).getIdXpath()).sendKeys(RandomString.randomDateyyyyMMdd());
+					driver.findElementById(rysqkList.get(i).getIdXpath()).sendKeys(RandomValue.randomDateyyyyMMdd());
 				}else if ("yyyy-MM-dd HH:mm:ss".contains(rysqkList.get(i).getDateFormat())) {
 					driver.findElementById(rysqkList.get(i).getIdXpath()).clear();
-					driver.findElementById(rysqkList.get(i).getIdXpath()).sendKeys(RandomString.randomDateyyyyMMddHHmmss());
+					driver.findElementById(rysqkList.get(i).getIdXpath()).sendKeys(RandomValue.randomDateyyyyMMddHHmmss());
 				}
 			}
 			else if ("枚举".contains(rysqkList.get(i).getVariableType())) {
@@ -330,19 +350,19 @@ public class AddCrfTemplateTest4Controller{
 		for (int i = 0; i < zysqkList.size(); i++) {
 			if ("字符串".contains(zysqkList.get(i).getVariableType())) {
 				driver.findElementById(zysqkList.get(i).getIdXpath()).clear();
-				driver.findElementById(zysqkList.get(i).getIdXpath()).sendKeys(RandomString.UUIDString());
+				driver.findElementById(zysqkList.get(i).getIdXpath()).sendKeys(RandomValue.UUIDString());
 			}
 			else if ("数值".contains(zysqkList.get(i).getVariableType())) {
 				driver.findElementById(zysqkList.get(i).getIdXpath()).clear();
-				driver.findElementById(zysqkList.get(i).getIdXpath()).sendKeys(RandomString.randomRangeInt(20, 200));
+				driver.findElementById(zysqkList.get(i).getIdXpath()).sendKeys(RandomValue.randomRangeInt(20, 200));
 			}
 			else if ("日期".contains(zysqkList.get(i).getVariableType())) {
 				if ("yyyy-MM-dd".contains(zysqkList.get(i).getDateFormat())) {
 					driver.findElementById(zysqkList.get(i).getIdXpath()).clear();
-					driver.findElementById(zysqkList.get(i).getIdXpath()).sendKeys(RandomString.randomDateyyyyMMdd());
+					driver.findElementById(zysqkList.get(i).getIdXpath()).sendKeys(RandomValue.randomDateyyyyMMdd());
 				}else if ("yyyy-MM-dd HH:mm:ss".contains(zysqkList.get(i).getDateFormat())) {
 					driver.findElementById(zysqkList.get(i).getIdXpath()).clear();
-					driver.findElementById(zysqkList.get(i).getIdXpath()).sendKeys(RandomString.randomDateyyyyMMddHHmmss());
+					driver.findElementById(zysqkList.get(i).getIdXpath()).sendKeys(RandomValue.randomDateyyyyMMddHHmmss());
 				}
 			}
 			else if ("枚举".contains(zysqkList.get(i).getVariableType())) {
@@ -361,19 +381,19 @@ public class AddCrfTemplateTest4Controller{
 		for (int i = 0; i < cysqkList.size(); i++) {
 			if ("字符串".contains(cysqkList.get(i).getVariableType())) {
 				driver.findElementById(cysqkList.get(i).getIdXpath()).clear();
-				driver.findElementById(cysqkList.get(i).getIdXpath()).sendKeys(RandomString.UUIDString());
+				driver.findElementById(cysqkList.get(i).getIdXpath()).sendKeys(RandomValue.UUIDString());
 			}
 			else if ("数值".contains(cysqkList.get(i).getVariableType())) {
 				driver.findElementById(cysqkList.get(i).getIdXpath()).clear();
-				driver.findElementById(cysqkList.get(i).getIdXpath()).sendKeys(RandomString.randomRangeInt(20, 200));
+				driver.findElementById(cysqkList.get(i).getIdXpath()).sendKeys(RandomValue.randomRangeInt(20, 200));
 			}
 			else if ("日期".contains(cysqkList.get(i).getVariableType())) {
 				if ("yyyy-MM-dd".contains(cysqkList.get(i).getDateFormat())) {
 					driver.findElementById(cysqkList.get(i).getIdXpath()).clear();
-					driver.findElementById(cysqkList.get(i).getIdXpath()).sendKeys(RandomString.randomDateyyyyMMdd());
+					driver.findElementById(cysqkList.get(i).getIdXpath()).sendKeys(RandomValue.randomDateyyyyMMdd());
 				}else if ("yyyy-MM-dd HH:mm:ss".contains(cysqkList.get(i).getDateFormat())) {
 					driver.findElementById(cysqkList.get(i).getIdXpath()).clear();
-					driver.findElementById(cysqkList.get(i).getIdXpath()).sendKeys(RandomString.randomDateyyyyMMddHHmmss());
+					driver.findElementById(cysqkList.get(i).getIdXpath()).sendKeys(RandomValue.randomDateyyyyMMddHHmmss());
 				}
 			}
 			else if ("枚举".contains(cysqkList.get(i).getVariableType())) {
@@ -428,19 +448,19 @@ public class AddCrfTemplateTest4Controller{
 		for (int i = 0; i < rysqkList.size(); i++) {
 			if ("字符串".contains(rysqkList.get(i).getVariableType())) {
 				driver.findElementById(rysqkList.get(i).getIdXpath()).clear();
-				driver.findElementById(rysqkList.get(i).getIdXpath()).sendKeys(RandomString.UUIDString());
+				driver.findElementById(rysqkList.get(i).getIdXpath()).sendKeys(RandomValue.UUIDString());
 			}
 			else if ("数值".contains(rysqkList.get(i).getVariableType())) {
 				driver.findElementById(rysqkList.get(i).getIdXpath()).clear();
-				driver.findElementById(rysqkList.get(i).getIdXpath()).sendKeys(RandomString.randomRangeInt(20, 200));
+				driver.findElementById(rysqkList.get(i).getIdXpath()).sendKeys(RandomValue.randomRangeInt(20, 200));
 			}
 			else if ("日期".contains(rysqkList.get(i).getVariableType())) {
 				if ("yyyy-MM-dd".contains(rysqkList.get(i).getDateFormat())) {
 					driver.findElementById(rysqkList.get(i).getIdXpath()).clear();
-					driver.findElementById(rysqkList.get(i).getIdXpath()).sendKeys(RandomString.randomDateyyyyMMdd());
+					driver.findElementById(rysqkList.get(i).getIdXpath()).sendKeys(RandomValue.randomDateyyyyMMdd());
 				}else if ("yyyy-MM-dd HH:mm:ss".contains(rysqkList.get(i).getDateFormat())) {
 					driver.findElementById(rysqkList.get(i).getIdXpath()).clear();
-					driver.findElementById(rysqkList.get(i).getIdXpath()).sendKeys(RandomString.randomDateyyyyMMddHHmmss());
+					driver.findElementById(rysqkList.get(i).getIdXpath()).sendKeys(RandomValue.randomDateyyyyMMddHHmmss());
 				}
 			}
 			else if ("枚举".contains(rysqkList.get(i).getVariableType())) {
@@ -459,19 +479,19 @@ public class AddCrfTemplateTest4Controller{
 		for (int i = 0; i < zysqkList.size(); i++) {
 			if ("字符串".contains(zysqkList.get(i).getVariableType())) {
 				driver.findElementById(zysqkList.get(i).getIdXpath()).clear();
-				driver.findElementById(zysqkList.get(i).getIdXpath()).sendKeys(RandomString.UUIDString());
+				driver.findElementById(zysqkList.get(i).getIdXpath()).sendKeys(RandomValue.UUIDString());
 			}
 			else if ("数值".contains(zysqkList.get(i).getVariableType())) {
 				driver.findElementById(zysqkList.get(i).getIdXpath()).clear();
-				driver.findElementById(zysqkList.get(i).getIdXpath()).sendKeys(RandomString.randomRangeInt(20, 200));
+				driver.findElementById(zysqkList.get(i).getIdXpath()).sendKeys(RandomValue.randomRangeInt(20, 200));
 			}
 			else if ("日期".contains(zysqkList.get(i).getVariableType())) {
 				if ("yyyy-MM-dd".contains(zysqkList.get(i).getDateFormat())) {
 					driver.findElementById(zysqkList.get(i).getIdXpath()).clear();
-					driver.findElementById(zysqkList.get(i).getIdXpath()).sendKeys(RandomString.randomDateyyyyMMdd());
+					driver.findElementById(zysqkList.get(i).getIdXpath()).sendKeys(RandomValue.randomDateyyyyMMdd());
 				}else if ("yyyy-MM-dd HH:mm:ss".contains(zysqkList.get(i).getDateFormat())) {
 					driver.findElementById(zysqkList.get(i).getIdXpath()).clear();
-					driver.findElementById(zysqkList.get(i).getIdXpath()).sendKeys(RandomString.randomDateyyyyMMddHHmmss());
+					driver.findElementById(zysqkList.get(i).getIdXpath()).sendKeys(RandomValue.randomDateyyyyMMddHHmmss());
 				}
 			}
 			else if ("枚举".contains(zysqkList.get(i).getVariableType())) {
@@ -490,19 +510,19 @@ public class AddCrfTemplateTest4Controller{
 		for (int i = 0; i < cysqkList.size(); i++) {
 			if ("字符串".contains(cysqkList.get(i).getVariableType())) {
 				driver.findElementById(cysqkList.get(i).getIdXpath()).clear();
-				driver.findElementById(cysqkList.get(i).getIdXpath()).sendKeys(RandomString.UUIDString());
+				driver.findElementById(cysqkList.get(i).getIdXpath()).sendKeys(RandomValue.UUIDString());
 			}
 			else if ("数值".contains(cysqkList.get(i).getVariableType())) {
 				driver.findElementById(cysqkList.get(i).getIdXpath()).clear();
-				driver.findElementById(cysqkList.get(i).getIdXpath()).sendKeys(RandomString.randomRangeInt(20, 200));
+				driver.findElementById(cysqkList.get(i).getIdXpath()).sendKeys(RandomValue.randomRangeInt(20, 200));
 			}
 			else if ("日期".contains(cysqkList.get(i).getVariableType())) {
 				if ("yyyy-MM-dd".contains(cysqkList.get(i).getDateFormat())) {
 					driver.findElementById(cysqkList.get(i).getIdXpath()).clear();
-					driver.findElementById(cysqkList.get(i).getIdXpath()).sendKeys(RandomString.randomDateyyyyMMdd());
+					driver.findElementById(cysqkList.get(i).getIdXpath()).sendKeys(RandomValue.randomDateyyyyMMdd());
 				}else if ("yyyy-MM-dd HH:mm:ss".contains(cysqkList.get(i).getDateFormat())) {
 					driver.findElementById(cysqkList.get(i).getIdXpath()).clear();
-					driver.findElementById(cysqkList.get(i).getIdXpath()).sendKeys(RandomString.randomDateyyyyMMddHHmmss());
+					driver.findElementById(cysqkList.get(i).getIdXpath()).sendKeys(RandomValue.randomDateyyyyMMddHHmmss());
 				}
 			}
 			else if ("枚举".contains(cysqkList.get(i).getVariableType())) {
@@ -555,19 +575,19 @@ public class AddCrfTemplateTest4Controller{
 		for (int i = 0; i < sfList.size(); i++) {
 			if ("字符串".contains(sfList.get(i).getVariableType())) {
 				driver.findElementById(sfList.get(i).getIdXpath()).clear();
-				driver.findElementById(sfList.get(i).getIdXpath()).sendKeys(RandomString.UUIDString());
+				driver.findElementById(sfList.get(i).getIdXpath()).sendKeys(RandomValue.UUIDString());
 			}
 			else if ("数值".contains(sfList.get(i).getVariableType())) {
 				driver.findElementById(sfList.get(i).getIdXpath()).clear();
-				driver.findElementById(sfList.get(i).getIdXpath()).sendKeys(RandomString.randomRangeInt(20, 200));
+				driver.findElementById(sfList.get(i).getIdXpath()).sendKeys(RandomValue.randomRangeInt(20, 200));
 			}
 			else if ("日期".contains(sfList.get(i).getVariableType())) {
 				if ("yyyy-MM-dd".contains(sfList.get(i).getDateFormat())) {
 					driver.findElementById(sfList.get(i).getIdXpath()).clear();
-					driver.findElementById(sfList.get(i).getIdXpath()).sendKeys(RandomString.randomDateyyyyMMdd());
+					driver.findElementById(sfList.get(i).getIdXpath()).sendKeys(RandomValue.randomDateyyyyMMdd());
 				}else if ("yyyy-MM-dd HH:mm:ss".contains(sfList.get(i).getDateFormat())) {
 					driver.findElementById(sfList.get(i).getIdXpath()).clear();
-					driver.findElementById(sfList.get(i).getIdXpath()).sendKeys(RandomString.randomDateyyyyMMddHHmmss());
+					driver.findElementById(sfList.get(i).getIdXpath()).sendKeys(RandomValue.randomDateyyyyMMddHHmmss());
 				}
 			}
 			else if ("枚举".contains(sfList.get(i).getVariableType())) {

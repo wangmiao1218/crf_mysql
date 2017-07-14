@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.gennlife.crf.utils.RandomString;
+import com.gennlife.crf.utils.RandomValue;
 
 /**
  * @Description: 烟台环境：添加住院_入院时情况
@@ -59,11 +59,11 @@ public class Yantai_Zy_AddRysqk {
 		
 		//入院主诉
 		driver.findElementById("ADMIS_INFO_INPATIENT_COMPLAINT").clear();
-		driver.findElementById("ADMIS_INFO_INPATIENT_COMPLAINT").sendKeys(RandomString.UUIDString());
+		driver.findElementById("ADMIS_INFO_INPATIENT_COMPLAINT").sendKeys(RandomValue.UUIDString());
 		
 		//主诉时间（天）
 		driver.findElementById("ADMIS_INFO_COMPLAINT_DAYS").clear();
-		driver.findElementById("ADMIS_INFO_COMPLAINT_DAYS").sendKeys(RandomString.randomRangeInt(10, 23));
+		driver.findElementById("ADMIS_INFO_COMPLAINT_DAYS").sendKeys(RandomValue.randomRangeInt(10, 23));
 		
 		//发病时间
 		driver.findElementById("ADMIS_INFO_MORBIDITY_TIME").sendKeys("2002-07-01 00:00:00");
@@ -81,23 +81,23 @@ public class Yantai_Zy_AddRysqk {
 		
 		//高血压史年限
 		driver.findElementById("HOS_DISEASE_HISTORY_HOS_HBP_HISTORY_HOS_HBP_YEAR").clear();
-		driver.findElementById("HOS_DISEASE_HISTORY_HOS_HBP_HISTORY_HOS_HBP_YEAR").sendKeys(RandomString.randomRangeInt(5, 10));
+		driver.findElementById("HOS_DISEASE_HISTORY_HOS_HBP_HISTORY_HOS_HBP_YEAR").sendKeys(RandomValue.randomRangeInt(5, 10));
 		
 		//最高收缩压（mmHg）
 		driver.findElementById("HOS_DISEASE_HISTORY_HOS_HBP_HISTORY_HOS_HIGHEST_SYSTOLIC").clear();
-		driver.findElementById("HOS_DISEASE_HISTORY_HOS_HBP_HISTORY_HOS_HIGHEST_SYSTOLIC").sendKeys(RandomString.randomRangeInt(80, 120));
+		driver.findElementById("HOS_DISEASE_HISTORY_HOS_HBP_HISTORY_HOS_HIGHEST_SYSTOLIC").sendKeys(RandomValue.randomRangeInt(80, 120));
 		
 		//最高舒张压（mmHg）
 		driver.findElementById("HOS_DISEASE_HISTORY_HOS_HBP_HISTORY_HOS_HIGHEST_DIASTOLIC").clear();
-		driver.findElementById("HOS_DISEASE_HISTORY_HOS_HBP_HISTORY_HOS_HIGHEST_DIASTOLIC").sendKeys(RandomString.randomRangeInt(90, 100));
+		driver.findElementById("HOS_DISEASE_HISTORY_HOS_HBP_HISTORY_HOS_HIGHEST_DIASTOLIC").sendKeys(RandomValue.randomRangeInt(90, 100));
 		
 		//药物控制后舒张压（mmHg）
 		driver.findElementById("HOS_DISEASE_HISTORY_HOS_HBP_HISTORY_HOS_SYSTOLIC_AFTER_DRUG").clear();
-		driver.findElementById("HOS_DISEASE_HISTORY_HOS_HBP_HISTORY_HOS_SYSTOLIC_AFTER_DRUG").sendKeys(RandomString.randomRangeInt(90, 100));
+		driver.findElementById("HOS_DISEASE_HISTORY_HOS_HBP_HISTORY_HOS_SYSTOLIC_AFTER_DRUG").sendKeys(RandomValue.randomRangeInt(90, 100));
 		
 		//药物控制后收缩压（mmHg）
 		driver.findElementById("HOS_DISEASE_HISTORY_HOS_HBP_HISTORY_HOS_DIASTOLIC_AFTER_DRUG").clear();
-		driver.findElementById("HOS_DISEASE_HISTORY_HOS_HBP_HISTORY_HOS_DIASTOLIC_AFTER_DRUG").sendKeys(RandomString.randomRangeInt(90, 130));
+		driver.findElementById("HOS_DISEASE_HISTORY_HOS_HBP_HISTORY_HOS_DIASTOLIC_AFTER_DRUG").sendKeys(RandomValue.randomRangeInt(90, 130));
 		
 		//糖尿病史
 		//有无糖尿病史
@@ -108,7 +108,7 @@ public class Yantai_Zy_AddRysqk {
 		
 		//糖尿病时长（年）
 		driver.findElementById("HOS_DISEASE_HISTORY_HOS_DIABETES_HISTORY_HOS_DIABETES_YEARS").clear();
-		driver.findElementById("HOS_DISEASE_HISTORY_HOS_DIABETES_HISTORY_HOS_DIABETES_YEARS").sendKeys(RandomString.randomRangeInt(5, 13));
+		driver.findElementById("HOS_DISEASE_HISTORY_HOS_DIABETES_HISTORY_HOS_DIABETES_YEARS").sendKeys(RandomValue.randomRangeInt(5, 13));
 		
 		//高脂血症史
 		//有无高脂血症
@@ -235,22 +235,22 @@ public class Yantai_Zy_AddRysqk {
 		
 		// 亲属类型
 		driver.findElementById("HOS_FAMILY_INHERITANCE_HISTORY_HOS_FAMILY_TYPE").clear();
-		driver.findElementById("HOS_FAMILY_INHERITANCE_HISTORY_HOS_FAMILY_TYPE").sendKeys(RandomString.UUIDString());
+		driver.findElementById("HOS_FAMILY_INHERITANCE_HISTORY_HOS_FAMILY_TYPE").sendKeys(RandomValue.UUIDString());
 		
 		// 吸烟史
 		//有无吸烟史
 		new Select(driver.findElementById("HOS_SMOKE_HISTORY_HOS_PAST_SMOKE_HISTORY_YES_NO")).selectByValue("有");
 		// 吸烟量（支/天）
 		driver.findElementById("HOS_SMOKE_HISTORY_HOS_SMOKE_RATE").clear();
-		driver.findElementById("HOS_SMOKE_HISTORY_HOS_SMOKE_RATE").sendKeys(RandomString.randomRangeInt(3,9));
+		driver.findElementById("HOS_SMOKE_HISTORY_HOS_SMOKE_RATE").sendKeys(RandomValue.randomRangeInt(3,9));
 		// 吸烟时长（年）
 		driver.findElementById("HOS_SMOKE_HISTORY_HOS_SMOKE_YEARS").clear();
-		driver.findElementById("HOS_SMOKE_HISTORY_HOS_SMOKE_YEARS").sendKeys(RandomString.randomRangeInt(1,15));
+		driver.findElementById("HOS_SMOKE_HISTORY_HOS_SMOKE_YEARS").sendKeys(RandomValue.randomRangeInt(1,15));
 		//是否戒烟
 		new Select(driver.findElementById("HOS_SMOKE_HISTORY_HOS_SMOKE_QUIT_YES_NO")).selectByValue("是");
 		//戒烟时间（年）
 		driver.findElementById("HOS_SMOKE_HISTORY_HOS_QUIT_YEARS").clear();
-		driver.findElementById("HOS_SMOKE_HISTORY_HOS_QUIT_YEARS").sendKeys(RandomString.randomRangeInt(1,15));
+		driver.findElementById("HOS_SMOKE_HISTORY_HOS_QUIT_YEARS").sendKeys(RandomValue.randomRangeInt(1,15));
 
 		// 饮酒史
 		//有无饮酒史
@@ -259,12 +259,12 @@ public class Yantai_Zy_AddRysqk {
 		new Select(driver.findElementById("HOS_DRINK_HISTORY_HOS_DRINK_VOLUME")).selectByValue("中度饮酒");
 		// 饮酒时长（年）
 		driver.findElementById("HOS_DRINK_HISTORY_HOS_DRINK_TIME").clear();
-		driver.findElementById("HOS_DRINK_HISTORY_HOS_DRINK_TIME").sendKeys(RandomString.randomRangeInt(1,15));
+		driver.findElementById("HOS_DRINK_HISTORY_HOS_DRINK_TIME").sendKeys(RandomValue.randomRangeInt(1,15));
 		//是否戒酒
 		new Select(driver.findElementById("HOS_DRINK_HISTORY_HOS_QUIT_DRINK_YES_NO")).selectByValue("是");
 		//戒酒时间（年）
 		driver.findElementById("HOS_DRINK_HISTORY_HOS_QUIT_DRINK_TIME").clear();
-		driver.findElementById("HOS_DRINK_HISTORY_HOS_QUIT_DRINK_TIME").sendKeys(RandomString.randomRangeInt(1,15));
+		driver.findElementById("HOS_DRINK_HISTORY_HOS_QUIT_DRINK_TIME").sendKeys(RandomValue.randomRangeInt(1,15));
 		
 		//本次发病的主要表现
 		//患侧
@@ -318,127 +318,127 @@ public class Yantai_Zy_AddRysqk {
 		
 		//入院后首次NIHSS评分
 		driver.findElementById("PHYSICAL_EXAMINATION_TEST_ADMISS_NIHSS_FIRST").clear();
-		driver.findElementById("PHYSICAL_EXAMINATION_TEST_ADMISS_NIHSS_FIRST").sendKeys(RandomString.randomRangeInt(46,80));
+		driver.findElementById("PHYSICAL_EXAMINATION_TEST_ADMISS_NIHSS_FIRST").sendKeys(RandomValue.randomRangeInt(46,80));
 		
 		//入院后首次GCS评分
 		driver.findElementById("PHYSICAL_EXAMINATION_TEST_ADMISS_GCS_FIRST").clear();
-		driver.findElementById("PHYSICAL_EXAMINATION_TEST_ADMISS_GCS_FIRST").sendKeys(RandomString.randomRangeInt(54,95));
+		driver.findElementById("PHYSICAL_EXAMINATION_TEST_ADMISS_GCS_FIRST").sendKeys(RandomValue.randomRangeInt(54,95));
 		
 		//入院后首次空腹血糖（mmol/l）
 		driver.findElementById("PHYSICAL_EXAMINATION_TEST_ADMISS_FASTING_GLUCOSE_FIRST").clear();
-		driver.findElementById("PHYSICAL_EXAMINATION_TEST_ADMISS_FASTING_GLUCOSE_FIRST").sendKeys(RandomString.randomRangeInt(1,15));
+		driver.findElementById("PHYSICAL_EXAMINATION_TEST_ADMISS_FASTING_GLUCOSE_FIRST").sendKeys(RandomValue.randomRangeInt(1,15));
 		
 		//入院后糖化血红蛋白（%）
 		driver.findElementById("PHYSICAL_EXAMINATION_TEST_ADMISS_HGB").clear();
-		driver.findElementById("PHYSICAL_EXAMINATION_TEST_ADMISS_HGB").sendKeys(RandomString.randomRangeInt(6,78));
+		driver.findElementById("PHYSICAL_EXAMINATION_TEST_ADMISS_HGB").sendKeys(RandomValue.randomRangeInt(6,78));
 		
 		//入院后血浆同型半胱氨酸（umol/l）
 		driver.findElementById("PHYSICAL_EXAMINATION_TEST_ADMISS_CYSTEINE_FIRST").clear();
-		driver.findElementById("PHYSICAL_EXAMINATION_TEST_ADMISS_CYSTEINE_FIRST").sendKeys(RandomString.randomRangeInt(55,95));
+		driver.findElementById("PHYSICAL_EXAMINATION_TEST_ADMISS_CYSTEINE_FIRST").sendKeys(RandomValue.randomRangeInt(55,95));
 		
 		
 		for (int i = 1; i < 11; i++) {
 			//入院后10次血压监测情况_第i次收缩压
 			driver.findElementById("PHYSICAL_EXAMINATION_TEST_ADMISS_SYSTOLIC_"+i).clear();
-			driver.findElementById("PHYSICAL_EXAMINATION_TEST_ADMISS_SYSTOLIC_"+i).sendKeys(RandomString.randomRangeInt(80,120));
+			driver.findElementById("PHYSICAL_EXAMINATION_TEST_ADMISS_SYSTOLIC_"+i).sendKeys(RandomValue.randomRangeInt(80,120));
 			
 			//入院后10次血压监测情况_第i次舒张压
 			driver.findElementById("PHYSICAL_EXAMINATION_TEST_ADMISS_DIASTOLIC_"+i).clear();
-			driver.findElementById("PHYSICAL_EXAMINATION_TEST_ADMISS_DIASTOLIC_"+i).sendKeys(RandomString.randomRangeInt(90,150));
+			driver.findElementById("PHYSICAL_EXAMINATION_TEST_ADMISS_DIASTOLIC_"+i).sendKeys(RandomValue.randomRangeInt(90,150));
 			
 		}
 		
 		//最高收缩压
 		driver.findElementById("PHYSICAL_EXAMINATION_TEST_HIGHEST_SYSTOLIC").clear();
-		driver.findElementById("PHYSICAL_EXAMINATION_TEST_HIGHEST_SYSTOLIC").sendKeys(RandomString.randomRangeInt(80,150));
+		driver.findElementById("PHYSICAL_EXAMINATION_TEST_HIGHEST_SYSTOLIC").sendKeys(RandomValue.randomRangeInt(80,150));
 		
 		//最高舒张压
 		driver.findElementById("PHYSICAL_EXAMINATION_TEST_HIGHEST_DIASTOLIC").clear();
-		driver.findElementById("PHYSICAL_EXAMINATION_TEST_HIGHEST_DIASTOLIC").sendKeys(RandomString.randomRangeInt(80,150));
+		driver.findElementById("PHYSICAL_EXAMINATION_TEST_HIGHEST_DIASTOLIC").sendKeys(RandomValue.randomRangeInt(80,150));
 		
 		//最低收缩压
 		driver.findElementById("PHYSICAL_EXAMINATION_TEST_LOWEST_SYSTOLIC").clear();
-		driver.findElementById("PHYSICAL_EXAMINATION_TEST_LOWEST_SYSTOLIC").sendKeys(RandomString.randomRangeInt(80,150));
+		driver.findElementById("PHYSICAL_EXAMINATION_TEST_LOWEST_SYSTOLIC").sendKeys(RandomValue.randomRangeInt(80,150));
 		
 		//最低舒张压
 		driver.findElementById("PHYSICAL_EXAMINATION_TEST_LOWEST_DIASTOLIC").clear();
-		driver.findElementById("PHYSICAL_EXAMINATION_TEST_LOWEST_DIASTOLIC").sendKeys(RandomString.randomRangeInt(80,150));
+		driver.findElementById("PHYSICAL_EXAMINATION_TEST_LOWEST_DIASTOLIC").sendKeys(RandomValue.randomRangeInt(80,150));
 		
 		//收缩压最大压差
 		driver.findElementById("PHYSICAL_EXAMINATION_TEST_MAX_PRESSURE_DIFF_SYSTOLIC").clear();
-		driver.findElementById("PHYSICAL_EXAMINATION_TEST_MAX_PRESSURE_DIFF_SYSTOLIC").sendKeys(RandomString.randomRangeInt(10,40));
+		driver.findElementById("PHYSICAL_EXAMINATION_TEST_MAX_PRESSURE_DIFF_SYSTOLIC").sendKeys(RandomValue.randomRangeInt(10,40));
 		
 		//舒张压最大压差
 		driver.findElementById("PHYSICAL_EXAMINATION_TEST_MAX_PRESSURE_DIFF_DIASTOLIC").clear();
-		driver.findElementById("PHYSICAL_EXAMINATION_TEST_MAX_PRESSURE_DIFF_DIASTOLIC").sendKeys(RandomString.randomRangeInt(10,40));
+		driver.findElementById("PHYSICAL_EXAMINATION_TEST_MAX_PRESSURE_DIFF_DIASTOLIC").sendKeys(RandomValue.randomRangeInt(10,40));
 		
 		//收缩压平均值
 		driver.findElementById("PHYSICAL_EXAMINATION_TEST_AVERAGE_SYSTOLIC").clear();
-		driver.findElementById("PHYSICAL_EXAMINATION_TEST_AVERAGE_SYSTOLIC").sendKeys(RandomString.randomRangeInt(12,50));
+		driver.findElementById("PHYSICAL_EXAMINATION_TEST_AVERAGE_SYSTOLIC").sendKeys(RandomValue.randomRangeInt(12,50));
 		
 		//舒张压平均值
 		driver.findElementById("PHYSICAL_EXAMINATION_TEST_AVERAGE_DIASTOLIC").clear();
-		driver.findElementById("PHYSICAL_EXAMINATION_TEST_AVERAGE_DIASTOLIC").sendKeys(RandomString.randomRangeInt(12,50));
+		driver.findElementById("PHYSICAL_EXAMINATION_TEST_AVERAGE_DIASTOLIC").sendKeys(RandomValue.randomRangeInt(12,50));
 		
 		//收缩压标准差
 		driver.findElementById("PHYSICAL_EXAMINATION_TEST_SD_SYSTOLIC").clear();
-		driver.findElementById("PHYSICAL_EXAMINATION_TEST_SD_SYSTOLIC").sendKeys(RandomString.randomRangeInt(12,50));
+		driver.findElementById("PHYSICAL_EXAMINATION_TEST_SD_SYSTOLIC").sendKeys(RandomValue.randomRangeInt(12,50));
 		
 		//舒张压标准差
 		driver.findElementById("PHYSICAL_EXAMINATION_TEST_SD_DIASTOLIC").clear();
-		driver.findElementById("PHYSICAL_EXAMINATION_TEST_SD_DIASTOLIC").sendKeys(RandomString.randomRangeInt(12,50));
+		driver.findElementById("PHYSICAL_EXAMINATION_TEST_SD_DIASTOLIC").sendKeys(RandomValue.randomRangeInt(12,50));
 		
 		//入院首次血常规_红细胞计数
 		driver.findElementById("PHYSICAL_EXAMINATION_TEST_ADMISS_RBC_FIRST").clear();
-		driver.findElementById("PHYSICAL_EXAMINATION_TEST_ADMISS_RBC_FIRST").sendKeys(RandomString.randomRangeInt(12,50));
+		driver.findElementById("PHYSICAL_EXAMINATION_TEST_ADMISS_RBC_FIRST").sendKeys(RandomValue.randomRangeInt(12,50));
 		
 		//入院首次血常规_血红蛋白
 		driver.findElementById("PHYSICAL_EXAMINATION_TEST_ADMISS_HGB_FIRST").clear();
-		driver.findElementById("PHYSICAL_EXAMINATION_TEST_ADMISS_HGB_FIRST").sendKeys(RandomString.randomRangeInt(12,45));
+		driver.findElementById("PHYSICAL_EXAMINATION_TEST_ADMISS_HGB_FIRST").sendKeys(RandomValue.randomRangeInt(12,45));
 		
 		//入院首次血常规_白细胞计数
 		driver.findElementById("PHYSICAL_EXAMINATION_TEST_ADMISS_WBC_FIRST").clear();
-		driver.findElementById("PHYSICAL_EXAMINATION_TEST_ADMISS_WBC_FIRST").sendKeys(RandomString.randomRangeInt(11,35));
+		driver.findElementById("PHYSICAL_EXAMINATION_TEST_ADMISS_WBC_FIRST").sendKeys(RandomValue.randomRangeInt(11,35));
 		
 		//入院首次血常规_血红蛋白
 		driver.findElementById("PHYSICAL_EXAMINATION_TEST_ADMISS_HGB_FIRST").clear();
-		driver.findElementById("PHYSICAL_EXAMINATION_TEST_ADMISS_HGB_FIRST").sendKeys(RandomString.randomRangeInt(23,65));
+		driver.findElementById("PHYSICAL_EXAMINATION_TEST_ADMISS_HGB_FIRST").sendKeys(RandomValue.randomRangeInt(23,65));
 		
 		//入院首次血常规_白细胞计数
 		driver.findElementById("PHYSICAL_EXAMINATION_TEST_ADMISS_WBC_FIRST").clear();
-		driver.findElementById("PHYSICAL_EXAMINATION_TEST_ADMISS_WBC_FIRST").sendKeys(RandomString.randomRangeInt(23,65));
+		driver.findElementById("PHYSICAL_EXAMINATION_TEST_ADMISS_WBC_FIRST").sendKeys(RandomValue.randomRangeInt(23,65));
 		
 		//入院首次血常规_血小板计数
 		driver.findElementById("PHYSICAL_EXAMINATION_TEST_ADMISS_PLT_FIRST").clear();
-		driver.findElementById("PHYSICAL_EXAMINATION_TEST_ADMISS_PLT_FIRST").sendKeys(RandomString.randomRangeInt(23,65));
+		driver.findElementById("PHYSICAL_EXAMINATION_TEST_ADMISS_PLT_FIRST").sendKeys(RandomValue.randomRangeInt(23,65));
 		
 		//入院首次血脂情况_血浆总胆固醇浓度
 		driver.findElementById("PHYSICAL_EXAMINATION_TEST_ADMISS_TC_FIRST").clear();
-		driver.findElementById("PHYSICAL_EXAMINATION_TEST_ADMISS_TC_FIRST").sendKeys(RandomString.randomRangeInt(23,65));
+		driver.findElementById("PHYSICAL_EXAMINATION_TEST_ADMISS_TC_FIRST").sendKeys(RandomValue.randomRangeInt(23,65));
 		
 		//入院首次血脂情况_高密度脂蛋白
 		driver.findElementById("PHYSICAL_EXAMINATION_TEST_ADMISS_HDL_FIRST").clear();
-		driver.findElementById("PHYSICAL_EXAMINATION_TEST_ADMISS_HDL_FIRST").sendKeys(RandomString.randomRangeInt(23,65));
+		driver.findElementById("PHYSICAL_EXAMINATION_TEST_ADMISS_HDL_FIRST").sendKeys(RandomValue.randomRangeInt(23,65));
 		
 		//入院首次血脂情况_低密度脂蛋白
 		driver.findElementById("PHYSICAL_EXAMINATION_TEST_ADMISS_LDL_FIRST").clear();
-		driver.findElementById("PHYSICAL_EXAMINATION_TEST_ADMISS_LDL_FIRST").sendKeys(RandomString.randomRangeInt(23,65));
+		driver.findElementById("PHYSICAL_EXAMINATION_TEST_ADMISS_LDL_FIRST").sendKeys(RandomValue.randomRangeInt(23,65));
 		
 		//入院首次血脂情况_甘油三酯
 		driver.findElementById("PHYSICAL_EXAMINATION_TEST_ADMISS_TRIG_FIRST").clear();
-		driver.findElementById("PHYSICAL_EXAMINATION_TEST_ADMISS_TRIG_FIRST").sendKeys(RandomString.randomRangeInt(23,65));
+		driver.findElementById("PHYSICAL_EXAMINATION_TEST_ADMISS_TRIG_FIRST").sendKeys(RandomValue.randomRangeInt(23,65));
 		
 		//入院次晨肾功/尿酸_肌酐
 		driver.findElementById("PHYSICAL_EXAMINATION_TEST_ADMISS_CREA_FIRST").clear();
-		driver.findElementById("PHYSICAL_EXAMINATION_TEST_ADMISS_CREA_FIRST").sendKeys(RandomString.randomRangeInt(23,65));
+		driver.findElementById("PHYSICAL_EXAMINATION_TEST_ADMISS_CREA_FIRST").sendKeys(RandomValue.randomRangeInt(23,65));
 		
 		//入院次晨肾功/尿酸_尿素氮
 		driver.findElementById("PHYSICAL_EXAMINATION_TEST_ADMISS_BUN_FIRST").clear();
-		driver.findElementById("PHYSICAL_EXAMINATION_TEST_ADMISS_BUN_FIRST").sendKeys(RandomString.randomRangeInt(23,65));
+		driver.findElementById("PHYSICAL_EXAMINATION_TEST_ADMISS_BUN_FIRST").sendKeys(RandomValue.randomRangeInt(23,65));
 		
 		//入院次晨肾功/尿酸_血尿酸
 		driver.findElementById("PHYSICAL_EXAMINATION_TEST_ADMISS_UA_FIRST").clear();
-		driver.findElementById("PHYSICAL_EXAMINATION_TEST_ADMISS_UA_FIRST").sendKeys(RandomString.randomRangeInt(23,65));
+		driver.findElementById("PHYSICAL_EXAMINATION_TEST_ADMISS_UA_FIRST").sendKeys(RandomValue.randomRangeInt(23,65));
 		
 		//CYP2C19基因检测 
 		new Select(driver.findElementById("PHYSICAL_EXAMINATION_TEST_CYP2C19_GENETEST")).selectByValue("未化验");

@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.gennlife.crf.utils.RandomString;
+import com.gennlife.crf.utils.RandomValue;
 
 /**
  * @Description: 烟台环境：添加住院_出院时情况
@@ -50,15 +50,15 @@ public class Yantai_Zy_AddCysqk {
 		
 		// 出院时NIHSS评分
 		driver.findElementById("DIS_NIHSSA").clear();
-		driver.findElementById("DIS_NIHSSA").sendKeys(RandomString.randomRangeInt(20, 67));
+		driver.findElementById("DIS_NIHSSA").sendKeys(RandomValue.randomRangeInt(20, 67));
 		
 		//出院时GCS评分
 		driver.findElementById("DIS_GCS").clear();
-		driver.findElementById("DIS_GCS").sendKeys(RandomString.randomRangeInt(20, 67));
+		driver.findElementById("DIS_GCS").sendKeys(RandomValue.randomRangeInt(20, 67));
 		
 		//出院时mRS评分
 		driver.findElementById("DIS_MRS").clear();
-		driver.findElementById("DIS_MRS").sendKeys(RandomString.randomRangeInt(20, 67));
+		driver.findElementById("DIS_MRS").sendKeys(RandomValue.randomRangeInt(20, 67));
 		
 		// 出院诊断_主要诊断
 		new Select(driver.findElementById("DIS_MAIN_DIAGNOSIS")).selectByValue("脑梗死");

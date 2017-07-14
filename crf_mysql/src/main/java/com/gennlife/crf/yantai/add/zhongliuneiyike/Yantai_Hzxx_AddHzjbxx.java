@@ -5,7 +5,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.gennlife.crf.utils.RandomString;
+import com.gennlife.crf.utils.RandomValue;
 
 /**
  * @Description: 烟台环境：添加患者信息_患者基本信息方法
@@ -37,11 +37,11 @@ public class Yantai_Hzxx_AddHzjbxx{
 			//添加操作
 			//患者编号（必填项）
 			driver.findElementById("PATIENT_SN").clear();
-			driver.findElementById("PATIENT_SN").sendKeys(RandomString.UUIDString());
+			driver.findElementById("PATIENT_SN").sendKeys(RandomValue.UUIDString());
 			
 			//姓名
 			driver.findElementById("NAME").clear();
-			driver.findElementById("NAME").sendKeys("姓名"+RandomString.UUIDString());
+			driver.findElementById("NAME").sendKeys("姓名"+RandomValue.UUIDString());
 
 			// 性别
 			new Select(
@@ -88,19 +88,19 @@ public class Yantai_Hzxx_AddHzjbxx{
 			
 			//身高（cm）
 			driver.findElementById("HEIGHT").clear();
-			driver.findElementById("HEIGHT").sendKeys(RandomString.randomRangeInt(100,200));
+			driver.findElementById("HEIGHT").sendKeys(RandomValue.randomRangeInt(100,200));
 			
 			//体重（kg）
 			driver.findElementById("WEIGHT").clear();
-			driver.findElementById("WEIGHT").sendKeys(RandomString.randomRangeInt(100,200));
+			driver.findElementById("WEIGHT").sendKeys(RandomValue.randomRangeInt(100,200));
 			
 			//BMI（kg/m2）
 			driver.findElementById("BMI").clear();
-			driver.findElementById("BMI").sendKeys(RandomString.randomRangeInt(10,20));
+			driver.findElementById("BMI").sendKeys(RandomValue.randomRangeInt(10,20));
 			
 			//患者联系地址
 			driver.findElementById("PATIENT_ADDRESS").clear();
-			driver.findElementById("PATIENT_ADDRESS").sendKeys("患者联系地址"+RandomString.UUIDString());
+			driver.findElementById("PATIENT_ADDRESS").sendKeys("患者联系地址"+RandomValue.UUIDString());
 			
 			//患者联系电话
 			driver.findElementById("PATIENT_CONTACT").clear();
@@ -108,11 +108,11 @@ public class Yantai_Hzxx_AddHzjbxx{
 			
 			//患者工作单位
 			driver.findElementById("PATIENT_WORKUNIT").clear();
-			driver.findElementById("PATIENT_WORKUNIT").sendKeys("患者工作单位"+RandomString.UUIDString());
+			driver.findElementById("PATIENT_WORKUNIT").sendKeys("患者工作单位"+RandomValue.UUIDString());
 			
 			//亲属联系地址
 			driver.findElementById("RELATIVE_ADDRESS").clear();
-			driver.findElementById("RELATIVE_ADDRESS").sendKeys("亲属联系地址"+RandomString.UUIDString());
+			driver.findElementById("RELATIVE_ADDRESS").sendKeys("亲属联系地址"+RandomValue.UUIDString());
 			
 			//亲属联系电话
 			driver.findElementById("RELATIVE_CONTACT").clear();

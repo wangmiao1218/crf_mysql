@@ -5,7 +5,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.gennlife.crf.utils.RandomString;
+import com.gennlife.crf.utils.RandomValue;
 
 /**
  * @Description: 安贞环境：添加患者信息_添加基本信息方法
@@ -36,7 +36,7 @@ public class Anzhen_Hzxx_AddJbxx{
 			//添加操作
 			// 病案号
 			driver.findElementById("u-crf-PATIENT_ID_NUMBER").clear();
-			driver.findElementById("u-crf-PATIENT_ID_NUMBER").sendKeys(RandomString.UUIDString());
+			driver.findElementById("u-crf-PATIENT_ID_NUMBER").sendKeys(RandomValue.UUIDString());
 
 			// 调查时间(日期空间div)，直接xpath定位
 			driver.findElementByXPath("/html/body/div[2]/div[2]/div[2]/div[3]/div/input").click();
@@ -48,7 +48,7 @@ public class Anzhen_Hzxx_AddJbxx{
 			Thread.sleep(2000);
 			
 			driver.findElementByXPath("/html/body/div[2]/div[2]/div[2]/div[4]/div/input").clear();
-			driver.findElementByXPath("/html/body/div[2]/div[2]/div[2]/div[4]/div/input").sendKeys("姓名"+RandomString.UUIDString());
+			driver.findElementByXPath("/html/body/div[2]/div[2]/div[2]/div[4]/div/input").sendKeys("姓名"+RandomValue.UUIDString());
 
 			// 性别
 			new Select(
@@ -72,7 +72,7 @@ public class Anzhen_Hzxx_AddJbxx{
 			driver.findElementByXPath("/html/body/div[2]/div[2]/div[2]/div[9]/div/input").sendKeys("13088889999");
 			
 			driver.findElementByXPath("/html/body/div[2]/div[2]/div[2]/div[10]/div/input").clear();
-			driver.findElementByXPath("/html/body/div[2]/div[2]/div[2]/div[10]/div/input").sendKeys("姓名"+RandomString.UUIDString());
+			driver.findElementByXPath("/html/body/div[2]/div[2]/div[2]/div[10]/div/input").sendKeys("姓名"+RandomValue.UUIDString());
 
 			// 联系人与患者关系
 			new Select(driver.findElementByXPath("/html/body/div[2]/div[2]/div[2]/div[11]/div/select")).selectByValue("本人");
@@ -81,7 +81,7 @@ public class Anzhen_Hzxx_AddJbxx{
 			driver.findElementByXPath("/html/body/div[2]/div[2]/div[2]/div[12]/div/input").sendKeys("13088889999");
 			
 			driver.findElementByXPath("/html/body/div[2]/div[2]/div[2]/div[13]/div/input").clear();
-			driver.findElementByXPath("/html/body/div[2]/div[2]/div[2]/div[13]/div/input").sendKeys("通讯地址"+RandomString.UUIDString());
+			driver.findElementByXPath("/html/body/div[2]/div[2]/div[2]/div[13]/div/input").sendKeys("通讯地址"+RandomValue.UUIDString());
 
 			// 民族、职业、受教育程度、婚姻状况、主要医疗付费方式
 			new Select(
@@ -152,7 +152,7 @@ public class Anzhen_Hzxx_AddJbxx{
 			Thread.sleep(2000);
 			
 			driver.findElementByXPath("/html/body/div[2]/div[2]/div[2]/div[4]/div/input").clear();
-			driver.findElementByXPath("/html/body/div[2]/div[2]/div[2]/div[4]/div/input").sendKeys("姓名"+RandomString.UUIDString());
+			driver.findElementByXPath("/html/body/div[2]/div[2]/div[2]/div[4]/div/input").sendKeys("姓名"+RandomValue.UUIDString());
 			
 			// 性别
 			new Select(
@@ -167,7 +167,7 @@ public class Anzhen_Hzxx_AddJbxx{
 			
 			//通讯地址
 			driver.findElementByXPath("/html/body/div[2]/div[2]/div[2]/div[7]/div/input").clear();
-			driver.findElementByXPath("/html/body/div[2]/div[2]/div[2]/div[7]/div/input").sendKeys("通讯地址"+RandomString.UUIDString());
+			driver.findElementByXPath("/html/body/div[2]/div[2]/div[2]/div[7]/div/input").sendKeys("通讯地址"+RandomValue.UUIDString());
 			
 			// 民族
 			new Select(

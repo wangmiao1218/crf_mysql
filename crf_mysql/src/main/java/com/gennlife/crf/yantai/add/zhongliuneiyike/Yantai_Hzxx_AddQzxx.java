@@ -7,7 +7,7 @@ import java.util.Set;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.support.ui.Select;
 
-import com.gennlife.crf.utils.RandomString;
+import com.gennlife.crf.utils.RandomValue;
 
 /**
  * @Description: 烟台环境：添加患者信息_确诊信息
@@ -43,7 +43,7 @@ public class Yantai_Hzxx_AddQzxx{
 		
 		//主要诊断
 		driver.findElementById("MAIN_DIAGNOSIS").clear();
-		driver.findElementById("MAIN_DIAGNOSIS").sendKeys(RandomString.UUIDString());
+		driver.findElementById("MAIN_DIAGNOSIS").sendKeys(RandomValue.UUIDString());
 		
 		//主要诊断时间
 		driver.findElementById("MAIN_DIAGNOSIS_DATE").click();
@@ -51,7 +51,7 @@ public class Yantai_Hzxx_AddQzxx{
 		
 		//次要诊断1
 		driver.findElementById("SECONDARY_DIAGNOSIS1").clear();
-		driver.findElementById("SECONDARY_DIAGNOSIS1").sendKeys(RandomString.UUIDString());
+		driver.findElementById("SECONDARY_DIAGNOSIS1").sendKeys(RandomValue.UUIDString());
 		
 		//次要诊断1时间
 		driver.findElementById("SECONDARY_DIAGNOSIS1_DATE").click();
@@ -59,7 +59,7 @@ public class Yantai_Hzxx_AddQzxx{
 
 		//次要诊断2
 		driver.findElementById("SECONDARY_DIAGNOSIS2").clear();
-		driver.findElementById("SECONDARY_DIAGNOSIS2").sendKeys(RandomString.UUIDString());
+		driver.findElementById("SECONDARY_DIAGNOSIS2").sendKeys(RandomValue.UUIDString());
 		
 		//次要诊断2时间
 		driver.findElementById("SECONDARY_DIAGNOSIS2_DATE").click();
@@ -67,7 +67,7 @@ public class Yantai_Hzxx_AddQzxx{
 		
 		//次要诊断3
 		driver.findElementById("SECONDARY_DIAGNOSIS3").clear();
-		driver.findElementById("SECONDARY_DIAGNOSIS3").sendKeys(RandomString.UUIDString());
+		driver.findElementById("SECONDARY_DIAGNOSIS3").sendKeys(RandomValue.UUIDString());
 		
 		//次要诊断3时间
 		driver.findElementById("SECONDARY_DIAGNOSIS3_DATE").click();
@@ -75,7 +75,7 @@ public class Yantai_Hzxx_AddQzxx{
 		
 		//次要诊断4
 		driver.findElementById("SECONDARY_DIAGNOSIS4").clear();
-		driver.findElementById("SECONDARY_DIAGNOSIS4").sendKeys(RandomString.UUIDString());
+		driver.findElementById("SECONDARY_DIAGNOSIS4").sendKeys(RandomValue.UUIDString());
 		
 		//次要诊断4时间
 		driver.findElementById("SECONDARY_DIAGNOSIS4_DATE").click();
@@ -83,7 +83,7 @@ public class Yantai_Hzxx_AddQzxx{
 		
 		//确诊年龄
 		driver.findElementById("AGE_CONFIRMED").clear();
-		driver.findElementById("AGE_CONFIRMED").sendKeys(RandomString.randomRangeInt(20,80));
+		driver.findElementById("AGE_CONFIRMED").sendKeys(RandomValue.randomRangeInt(20,80));
 		
 		//入院时间
 		driver.findElementById("INPATIENT_DATE").click();
@@ -91,7 +91,7 @@ public class Yantai_Hzxx_AddQzxx{
 
 		//肿瘤位置
 		driver.findElementById("G_CA_LOCATION").clear();
-		driver.findElementById("G_CA_LOCATION").sendKeys(RandomString.UUIDString());
+		driver.findElementById("G_CA_LOCATION").sendKeys(RandomValue.UUIDString());
 		
 		//住院时间（天）
 		driver.findElementById("INPATIENT_DAYS").clear();
@@ -99,7 +99,7 @@ public class Yantai_Hzxx_AddQzxx{
 		
 		//主诉
 		driver.findElementById("G_INPATIENT_COMPLAINT").clear();
-		driver.findElementById("G_INPATIENT_COMPLAINT").sendKeys(RandomString.UUIDString());
+		driver.findElementById("G_INPATIENT_COMPLAINT").sendKeys(RandomValue.UUIDString());
 		
 		//主诉时间
 		driver.findElementById("G_COMPLAINT_DAYS").click();

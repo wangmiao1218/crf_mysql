@@ -4,11 +4,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections4.map.HashedMap;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gennlife.crf.bean.CrfTemplate;
@@ -43,10 +42,12 @@ public class CrfTemplateController {
 	@ResponseBody
 	//报错：@RequestMapping(value = "getCrfTemplateList", method = RequestMethod.GET)
 	@RequestMapping("getCrfTemplateList")
-	public PageInfo<CrfTemplate> getCrfTemplateList(CrfTemplate crfTemplate, Integer page,Integer limit) throws Exception {
+	//public PageInfo<CrfTemplate> getCrfTemplateList(CrfTemplate crfTemplate, Integer page,Integer limit) throws Exception {
+	public PageInfo<CrfTemplate> getCrfTemplateList(CrfTemplate crfTemplate, @RequestParam(defaultValue="0",required=false)Integer page,@RequestParam(defaultValue="10",required=false)Integer limit) throws Exception {
 		// 查询列表
 		Map<String, Object> map = new HashedMap<>();
 
+		//空指针异常(加@RequestParam)
 		PageHelper.startPage(page, limit);
 		
 		List<CrfTemplate> list = crfTemplateService.getCrfTemplateList(map);

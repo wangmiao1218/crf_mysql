@@ -61,12 +61,12 @@ public class TestAnzhen_Hzxx_AddJbxx {
 	public void hzxx_AddJbxx_TiJian() throws Exception {
 		// 登录并到add页面
 		PhantomJSDriver driver = CreateWebDriver.createWebDriverByPhantomJSDriver();
+		
 		String value = LoginCrfOfAnzhen.loginAndToAddOfTiJianAndBasicInfoByPhantomJSDriver(driver);
 		System.out.println(value);
-		
 		String text = Anzhen_Hzxx_AddJbxx.hzxx_AddJbxx_TiJian(driver, value);
 		System.out.println(text);
-		
+
 		// 关闭driver
 		QuitWebDriver.quitWebDriverByPhantomJSDriver(driver);
 	}

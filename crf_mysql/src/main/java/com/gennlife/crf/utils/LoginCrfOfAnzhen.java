@@ -15,11 +15,16 @@ import org.openqa.selenium.phantomjs.PhantomJSDriver;
  * @Date: 2017年6月9日 下午2:23:49
  */
 public class LoginCrfOfAnzhen {
-	public static final String xpathOfMenZhen="/html/body/div[1]/div[8]/div/div/div/div[2]/a[1]";
-	public static final String xpathOfZhuYuan="/html/body/div[1]/div[8]/div/div/div/div[2]/a[2]";
-	public static final String xpathOfTiJian="/html/body/div[1]/div[8]/div/div/div/div[2]/a[3]";
-	public static final String xpathOfSheQu="/html/body/div[1]/div[8]/div/div/div/div[2]/a[4]";
+	public static final String xpathOfMenZhen=".//*[@id='modal-container']/div/div/div/div[2]/a[1]";
+	public static final String xpathOfZhuYuan=".//*[@id='modal-container']/div/div/div/div[2]/a[2]";
+	public static final String xpathOfTiJian=".//*[@id='modal-container']/div/div/div/div[2]/a[3]";
+	public static final String xpathOfSheQu=".//*[@id='modal-container']/div/div/div/div[2]/a[4]";
+	
+	public static final String danbingzhongUrl="http://119.253.137.125/uranus/crf_case.html";
 
+	public static final String loginName ="3333";
+	public static final String pwd ="123456";
+	
 	/**
 	 * @Title: loginByChromeWebDriver
 	 * @Description: 仅登录,通过chrome驱动，有页面显示的方式
@@ -126,34 +131,32 @@ public class LoginCrfOfAnzhen {
 	 * @throws
 	 */
 	public static String loginByPhantomJSDriver(PhantomJSDriver driver) {
-		driver.get("http://119.253.137.125/uranus/crf_case.html");
+		driver.get(danbingzhongUrl);
 
 		// 等待
 		try {
-			Thread.sleep(500);
+			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 
 		// 登录
-		WebElement loginName = driver.findElementByXPath("/html/body/div[1]/form/div/input[1]");
-		WebElement pwd = driver.findElementByXPath("/html/body/div[1]/form/div/input[2]");
-
-		//loginName.sendKeys("wangzxe@foxmail.com");
-		loginName.sendKeys("wangmiao@gennlife.com");
-		pwd.sendKeys("ls123456");
+		driver.findElementById("loginName").clear();
+		driver.findElementById("loginName").sendKeys(loginName);
+		driver.findElementById("pwd").clear();
+		driver.findElementById("pwd").sendKeys(pwd);
 
 		driver.findElementById("login").click();
 
 		// 等待
 		try {
-			Thread.sleep(500);
+			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 
 		String returnString=null;
-		String text = driver.findElementByXPath("/html/body/div/div[3]/div/div[2]/div/div[1]/button[1]").getText();
+		String text = driver.findElementByXPath(".//*[@id='action-container']/div[1]/button[1]").getText();
 		
 		//
 		if ("添加".equals(text)) {
@@ -175,10 +178,9 @@ public class LoginCrfOfAnzhen {
 		String returnString = loginByPhantomJSDriver(driver);
 
 		if ("登陆成功".equals(returnString)) {
-
 			// 获取添加按钮
-			driver.findElementByXPath("/html/body/div/div[3]/div/div[2]/div/div[1]/button[1]").click();
-			
+			driver.findElementByXPath(".//*[@id='action-container']/div[1]/button[1]").click();
+						
 			try {
 				Thread.sleep(500);
 			} catch (InterruptedException e) {
@@ -196,10 +198,8 @@ public class LoginCrfOfAnzhen {
 
 			// 得到当前窗口的set集合
 			Set<String> winHandels = driver.getWindowHandles();
-
 			// 将set集合存入list对象
 			List<String> it = new ArrayList<String>(winHandels);
-
 			// 切换到弹出的新窗口
 			driver.switchTo().window(it.get(1));
 		}
@@ -213,8 +213,8 @@ public class LoginCrfOfAnzhen {
 		String value = null;
 
 		// 获取保存按钮，若存在则在添加页面
-		String text = driver.findElementByXPath("html/body/div[2]/div[2]/div[1]/div[2]/button[2]").getText();
-		//
+		String text = driver.findElementById("input-save").getText();
+		
 		if ("保存".equals(text)) {
 			value = "添加页面";
 		}
@@ -231,32 +231,30 @@ public class LoginCrfOfAnzhen {
 	 */
 	public static String loginAndToAddOfZhuYuanAndBasicInfoByPhantomJSDriver(PhantomJSDriver driver) {
 		String returnString = loginByPhantomJSDriver(driver);
-		
+
 		if ("登陆成功".equals(returnString)) {
 			// 获取添加按钮
-			driver.findElementByXPath("/html/body/div/div[3]/div/div[2]/div/div[1]/button[1]").click();
-			
+			driver.findElementByXPath(".//*[@id='action-container']/div[1]/button[1]").click();
+						
 			try {
 				Thread.sleep(500);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			
-			// 获取基线_住院
+
+			// 获取基线_门诊
 			driver.findElementByXPath(xpathOfZhuYuan).click();
-			
+
 			try {
 				Thread.sleep(500);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			
+
 			// 得到当前窗口的set集合
 			Set<String> winHandels = driver.getWindowHandles();
-			
 			// 将set集合存入list对象
 			List<String> it = new ArrayList<String>(winHandels);
-			
 			// 切换到弹出的新窗口
 			driver.switchTo().window(it.get(1));
 		}
@@ -268,10 +266,10 @@ public class LoginCrfOfAnzhen {
 		}
 		
 		String value = null;
-		
+
 		// 获取保存按钮，若存在则在添加页面
-		String text = driver.findElementByXPath("html/body/div[2]/div[2]/div[1]/div[2]/button[2]").getText();
-		//
+		String text = driver.findElementById("input-save").getText();
+		
 		if ("保存".equals(text)) {
 			value = "添加页面";
 		}
@@ -288,32 +286,30 @@ public class LoginCrfOfAnzhen {
 	 */
 	public static String loginAndToAddOfTiJianAndBasicInfoByPhantomJSDriver(PhantomJSDriver driver) {
 		String returnString = loginByPhantomJSDriver(driver);
-		
+
 		if ("登陆成功".equals(returnString)) {
 			// 获取添加按钮
-			driver.findElementByXPath("/html/body/div/div[3]/div/div[2]/div/div[1]/button[1]").click();
-			
+			driver.findElementByXPath(".//*[@id='action-container']/div[1]/button[1]").click();
+						
 			try {
-				Thread.sleep(2000);
+				Thread.sleep(500);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			
-			// 获取基线_体检
+
+			// 获取基线_门诊
 			driver.findElementByXPath(xpathOfTiJian).click();
-			
+
 			try {
-				Thread.sleep(2000);
+				Thread.sleep(500);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			
+
 			// 得到当前窗口的set集合
 			Set<String> winHandels = driver.getWindowHandles();
-			
 			// 将set集合存入list对象
 			List<String> it = new ArrayList<String>(winHandels);
-			
 			// 切换到弹出的新窗口
 			driver.switchTo().window(it.get(1));
 		}
@@ -325,10 +321,10 @@ public class LoginCrfOfAnzhen {
 		}
 		
 		String value = null;
-		
+
 		// 获取保存按钮，若存在则在添加页面
-		String text = driver.findElementByXPath("html/body/div[2]/div[2]/div[1]/div[2]/button[2]").getText();
-		//
+		String text = driver.findElementById("input-save").getText();
+		
 		if ("保存".equals(text)) {
 			value = "添加页面";
 		}
@@ -345,47 +341,45 @@ public class LoginCrfOfAnzhen {
 	 */
 	public static String loginAndToAddOfSheQuAndBasicInfoByPhantomJSDriver(PhantomJSDriver driver) {
 		String returnString = loginByPhantomJSDriver(driver);
-		
+
 		if ("登陆成功".equals(returnString)) {
 			// 获取添加按钮
-			driver.findElementByXPath("/html/body/div/div[3]/div/div[2]/div/div[1]/button[1]").click();
-			
+			driver.findElementByXPath(".//*[@id='action-container']/div[1]/button[1]").click();
+						
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(500);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			
-			// 获取基线_社区
+
+			// 获取基线_门诊
 			driver.findElementByXPath(xpathOfSheQu).click();
-			
+
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(500);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			
+
 			// 得到当前窗口的set集合
 			Set<String> winHandels = driver.getWindowHandles();
-			
 			// 将set集合存入list对象
 			List<String> it = new ArrayList<String>(winHandels);
-			
 			// 切换到弹出的新窗口
 			driver.switchTo().window(it.get(1));
 		}
 		
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 		
 		String value = null;
-		
+
 		// 获取保存按钮，若存在则在添加页面
-		String text = driver.findElementByXPath("html/body/div[2]/div[2]/div[1]/div[2]/button[2]").getText();
-		//
+		String text = driver.findElementById("input-save").getText();
+		
 		if ("保存".equals(text)) {
 			value = "添加页面";
 		}

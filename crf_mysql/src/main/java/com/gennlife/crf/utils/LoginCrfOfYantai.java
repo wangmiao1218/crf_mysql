@@ -16,9 +16,6 @@ import org.openqa.selenium.phantomjs.PhantomJSDriver;
  */
 public class LoginCrfOfYantai {
 	
-	//loginAndToAddBasicInfoByPhantomJSDriver
-	//loginAndToDanbingzhongByPhantomJSDriver
-	
 	//public static final String loginUrl ="http://119.253.137.167/uranus/login.html";
 	//test4科室
 	public static final String loginName ="3333";

@@ -1,7 +1,7 @@
 package com.gennlife.crf.bean;
 
 /**
- * @Description: CrfTemplate实体类，与数据库表对应
+ * @Description: CrfTemplate实体类，与数据库表对应(crf_template_anzhen_all)
  * @author: wangmiao
  * @Date: 2017年6月14日 下午6:48:50 
  */

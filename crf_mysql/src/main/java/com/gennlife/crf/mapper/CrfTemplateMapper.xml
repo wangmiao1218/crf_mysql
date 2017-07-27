@@ -25,7 +25,7 @@
 		parameterType="java.util.Map">
 		SELECT
 		<include refid="CrfTemplate_Column_List"></include>
-		from crf_template_anzhen
+		from crf_template_anzhen_all
 	</select>
 
 
@@ -34,7 +34,7 @@
 		parameterType="java.lang.String">
 		SELECT
 		<include refid="CrfTemplate_Column_List"></include>
-		from crf_template_anzhen
+		from crf_template_anzhen_all
 		where englishName=#{englishName}
 	</select>
 
@@ -44,13 +44,13 @@
 		parameterType="java.lang.String">
 		SELECT
 		<include refid="CrfTemplate_Column_List"></include>
-		from crf_template_anzhen
+		from crf_template_anzhen_all
 		where variableType=#{variableType}
 	</select>
 
 	<!-- 更新CrfTemplate -->
 	<update id="updateCrfTemplate" parameterType="com.gennlife.crf.bean.CrfTemplate">
-		update crf_template_anzhen
+		update crf_template_anzhen_all
 		<set>
 			<if test="baseName != null">
 				baseName = #{baseName,jdbcType=VARCHAR},

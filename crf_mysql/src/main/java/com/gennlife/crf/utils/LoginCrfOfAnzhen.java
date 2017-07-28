@@ -22,8 +22,8 @@ public class LoginCrfOfAnzhen {
 	
 	public static final String danbingzhongUrl="http://119.253.137.125/uranus/crf_case.html";
 
-	public static final String loginName ="3333";
-	public static final String pwd ="123456";
+	public static final String loginName ="wangmiao@gennlife.com";
+	public static final String pwd ="ls123456";
 	
 	/**
 	 * @Title: loginByChromeWebDriver
@@ -182,7 +182,7 @@ public class LoginCrfOfAnzhen {
 			driver.findElementByXPath(".//*[@id='action-container']/div[1]/button[1]").click();
 						
 			try {
-				Thread.sleep(500);
+				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

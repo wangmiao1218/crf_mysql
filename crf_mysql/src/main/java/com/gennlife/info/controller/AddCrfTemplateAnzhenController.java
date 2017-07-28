@@ -51,8 +51,20 @@ public class AddCrfTemplateAnzhenController{
 					new Select(driver.findElementById(list.get(i).getIdXpath())).selectByValue(list.get(i).getInputValue());
 				}
 				else {
-					driver.findElementById(list.get(i).getIdXpath()).clear();
-					driver.findElementById(list.get(i).getIdXpath()).sendKeys(list.get(i).getInputValue());
+					if ("调查时间".contains(list.get(i).getChineseName())) {
+						driver.findElementById(list.get(i).getIdXpath()).click();
+						driver.findElementByXPath(".//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[6]/a").click();
+					}
+					else if ("出生日期".contains(list.get(i).getChineseName())) {
+						driver.findElementById(list.get(i).getIdXpath()).click();
+						driver.findElementByXPath(".//*[@id='ui-datepicker-div']/div/div/select[1]").click();
+						driver.findElementByXPath(".//*[@id='ui-datepicker-div']/div/div/select[1]/option[82]").click();//1998
+						driver.findElementByXPath(".//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[3]/a").click();
+					}
+					else {
+						driver.findElementById(list.get(i).getIdXpath()).clear();
+						driver.findElementById(list.get(i).getIdXpath()).sendKeys(list.get(i).getInputValue());
+					}
 				}
 			}
 			
@@ -61,6 +73,8 @@ public class AddCrfTemplateAnzhenController{
 			Thread.sleep(1000);
 			driver.findElementByClassName("u-btn").click();
 			Thread.sleep(2000);
+			
+			//
 			
 		}
 

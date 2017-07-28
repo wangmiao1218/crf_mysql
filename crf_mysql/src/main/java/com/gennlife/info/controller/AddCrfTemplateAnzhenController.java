@@ -78,16 +78,16 @@ public class AddCrfTemplateAnzhenController{
 			Thread.sleep(1000);
 			
 			//个人病史
-			AnzhenMethodByDriverAndIdXpath.globalMethod(driver, "crf-data-tree_3_span", crfTemplateAnzhenService.getCrfTemplateAnzhenListByBaseName("个人病史"));
+			AnzhenMethodByDriverAndIdXpath.globalMethod_Enum_MultiSelect(driver, "crf-data-tree_3_span", crfTemplateAnzhenService.getCrfTemplateAnzhenListByBaseName("个人病史"));
 			
 			//家族史
-			AnzhenMethodByDriverAndIdXpath.globalMethod(driver, "crf-data-tree_4_span", crfTemplateAnzhenService.getCrfTemplateAnzhenListByBaseName("家族史"));
+			AnzhenMethodByDriverAndIdXpath.globalMethod_Enum_MultiSelect(driver, "crf-data-tree_4_span", crfTemplateAnzhenService.getCrfTemplateAnzhenListByBaseName("家族史"));
 			
 			//生活方式
-			AnzhenMethodByDriverAndIdXpath.globalMethod(driver, "crf-data-tree_5_span", crfTemplateAnzhenService.getCrfTemplateAnzhenListByBaseName("生活方式"));
+			AnzhenMethodByDriverAndIdXpath.globalMethod_Enum_MultiSelect(driver, "crf-data-tree_5_span", crfTemplateAnzhenService.getCrfTemplateAnzhenListByBaseName("生活方式"));
 			
 			//本次入院前2周内药物治疗史
-			AnzhenMethodByDriverAndIdXpath.globalMethod(driver, "crf-data-tree_6_span", crfTemplateAnzhenService.getCrfTemplateAnzhenListByBaseName("本次入院前2周内药物治疗史"));
+			AnzhenMethodByDriverAndIdXpath.globalMethod_Enum_MultiSelect(driver, "crf-data-tree_6_span", crfTemplateAnzhenService.getCrfTemplateAnzhenListByBaseName("本次入院前2周内药物治疗史"));
 			
 			
 			

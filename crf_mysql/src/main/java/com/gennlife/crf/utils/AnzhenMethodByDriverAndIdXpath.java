@@ -16,7 +16,7 @@ public class AnzhenMethodByDriverAndIdXpath {
 
 	
 	/** 
-	* @Title: globalMethod 
+	* @Title: globalMethod_Enum_MultiSelect(只针对枚举、多选、以及输入框) 
 	* @Description: 只需传入driver、左侧点击的路径，以及list，根据数据库中配置，录入固定的数据
 	* @param: @param driver
 	* @param: @param idXpath 前台点击的左侧路径
@@ -25,7 +25,7 @@ public class AnzhenMethodByDriverAndIdXpath {
 	* @return: void
 	* @throws 
 	*/
-	public static void globalMethod(PhantomJSDriver driver,String idXpath,List<CrfTemplateAnzhen> list) throws Exception{
+	public static void globalMethod_Enum_MultiSelect(PhantomJSDriver driver,String idXpath,List<CrfTemplateAnzhen> list) throws Exception{
 		driver.findElementById(idXpath).click();
 		Thread.sleep(1500);
 		

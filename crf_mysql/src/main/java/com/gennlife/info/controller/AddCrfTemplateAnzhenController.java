@@ -110,6 +110,7 @@ public class AddCrfTemplateAnzhenController{
 		String value = LoginCrfOfAnzhen.loginByPhantomJSDriver(driver);
 		
 		if ("登陆成功".contains(value)) {
+			//已有基本信息的病例xpath
 			driver.findElementByXPath(".//*[@id='case-list-container']/tbody/tr[3]/td[2]/a").click();
 			// 得到当前窗口的set集合
 			Set<String> winHandels = driver.getWindowHandles();

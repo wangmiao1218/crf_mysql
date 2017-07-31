@@ -27,10 +27,13 @@ public class AnzhenMethodByDriverAndIdXpath {
 	*/
 	public static void globalMethod_Enum_MultiSelect(PhantomJSDriver driver,String idXpath,List<CrfTemplateAnzhen> list) throws Exception{
 		driver.findElementById(idXpath).click();
-		Thread.sleep(1500);
+		Thread.sleep(3000);
 		
 		// 循环list
 		for (int i = 0; i < list.size(); i++) {
+			//测试有问题的字段时使用
+			System.out.println(list.get(i).getChineseName());
+			
 			if ("枚举型".contains(list.get(i).getVariableType())) {
 				new Select(driver.findElementById(list.get(i).getIdXpath())).selectByValue(list.get(i).getInputValue());
 			}
@@ -40,6 +43,27 @@ public class AnzhenMethodByDriverAndIdXpath {
 				for (int j = 1; j < Integer.parseInt(list.get(i).getDateFormat()); j++) {
 					driver.findElementByXPath(list.get(i).getInputValue()+j+"]/a/label").click();
 				}
+			}
+			else if ("多选_联动".contains(list.get(i).getVariableType())) {
+				//for checkBox
+				//driver.findElementByXPath(list.get(i).getIdXpath()).click();
+				for (int j = 1; j < Integer.parseInt(list.get(i).getDateFormat()); j++) {
+					//多选联动时，需要放到内循环里面
+					driver.findElementByXPath(list.get(i).getIdXpath()).click();
+					driver.findElementByXPath(list.get(i).getInputValue()+j+"]/a/label").click();
+				}
+			}
+			else if ("日期型".contains(list.get(i).getVariableType()) && "单点击".contains(list.get(i).getDateFormat())){
+				driver.findElementById(list.get(i).getIdXpath()).click();
+			}
+			else if ("日期型".contains(list.get(i).getVariableType()) && "时分".contains(list.get(i).getDateFormat())){
+				driver.findElementById(list.get(i).getIdXpath()).click();
+				driver.findElementByXPath(".//*[@id='ui-datepicker-div']/div[3]/button[1]").click();
+			}
+			else if ("图片型".contains(list.get(i).getVariableType())){
+				//driver.findElementById(list.get(i).getIdXpath()).click();
+				
+				
 			}
 			else {
 				driver.findElementById(list.get(i).getIdXpath()).clear();
@@ -52,7 +76,9 @@ public class AnzhenMethodByDriverAndIdXpath {
 		Thread.sleep(1000);
 		driver.findElementByClassName("u-btn").click();
 		Thread.sleep(1000);
-		
 	}
 
+	
+	
+	
 }

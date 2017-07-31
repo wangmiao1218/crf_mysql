@@ -58,6 +58,7 @@ public class AnzhenMethodByDriverAndIdXpath {
 			}
 			else if ("日期型".contains(list.get(i).getVariableType()) && "时分".contains(list.get(i).getDateFormat())){
 				driver.findElementById(list.get(i).getIdXpath()).click();
+				//现在时间按钮的xpath
 				driver.findElementByXPath(".//*[@id='ui-datepicker-div']/div[3]/button[1]").click();
 			}
 			else if ("图片型".contains(list.get(i).getVariableType())){

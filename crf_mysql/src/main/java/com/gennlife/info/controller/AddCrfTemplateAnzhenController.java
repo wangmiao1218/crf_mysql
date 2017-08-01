@@ -132,17 +132,17 @@ public class AddCrfTemplateAnzhenController{
 			//就诊－电生理检查
 			//AnzhenMethodByDriverAndIdXpath.globalMethod_Enum_MultiSelect(driver, "crf-data-tree_11_span", crfTemplateAnzhenService.getCrfTemplateAnzhenListByBaseName("就诊－电生理检查"));
 			
-			//就诊－超声检查(???????)
+			//就诊－超声检查
 			//AnzhenMethodByDriverAndIdXpath.globalMethod_Enum_MultiSelect(driver, "crf-data-tree_12_span", crfTemplateAnzhenService.getCrfTemplateAnzhenListByBaseName("就诊－超声检查"));
 			
 			//就诊－CT检查
-			AnzhenMethodByDriverAndIdXpath.globalMethod_Enum_MultiSelect(driver, "crf-data-tree_13_span", crfTemplateAnzhenService.getCrfTemplateAnzhenListByBaseName("就诊－CT检查"));
+			//AnzhenMethodByDriverAndIdXpath.globalMethod_Enum_MultiSelect(driver, "crf-data-tree_13_span", crfTemplateAnzhenService.getCrfTemplateAnzhenListByBaseName("就诊－CT检查"));
 			
 			//就诊－眼底检查
-			//AnzhenMethodByDriverAndIdXpath.globalMethod_Enum_MultiSelect(driver, "crf-data-tree_14_span", crfTemplateAnzhenService.getCrfTemplateAnzhenListByBaseName("就诊－眼底检查"));
+			AnzhenMethodByDriverAndIdXpath.globalMethod_Enum_MultiSelect(driver, "crf-data-tree_14_span", crfTemplateAnzhenService.getCrfTemplateAnzhenListByBaseName("就诊－眼底检查"));
 			
 			//就诊－多导睡眠图(PSG)监测
-			//AnzhenMethodByDriverAndIdXpath.globalMethod_Enum_MultiSelect(driver, "crf-data-tree_15_span", crfTemplateAnzhenService.getCrfTemplateAnzhenListByBaseName("就诊－多导睡眠图(PSG)监测"));
+			AnzhenMethodByDriverAndIdXpath.globalMethod_Enum_MultiSelect(driver, "crf-data-tree_15_span", crfTemplateAnzhenService.getCrfTemplateAnzhenListByBaseName("就诊－多导睡眠图(PSG)监测"));
 			
 			//就诊－实验室检验
 			//AnzhenMethodByDriverAndIdXpath.globalMethod_Enum_MultiSelect(driver, "crf-data-tree_16_span", crfTemplateAnzhenService.getCrfTemplateAnzhenListByBaseName("就诊－实验室检验"));

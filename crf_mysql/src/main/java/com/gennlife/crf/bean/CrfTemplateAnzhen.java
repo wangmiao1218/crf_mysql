@@ -16,6 +16,24 @@ public class CrfTemplateAnzhen {
 	private String dateFormat;
 	private String rangeData;
 	private String inputValue;
+	private String inputValue02;
+	private String inputValue03;
+
+	public String getInputValue02() {
+		return inputValue02;
+	}
+
+	public void setInputValue02(String inputValue02) {
+		this.inputValue02 = inputValue02;
+	}
+
+	public String getInputValue03() {
+		return inputValue03;
+	}
+
+	public void setInputValue03(String inputValue03) {
+		this.inputValue03 = inputValue03;
+	}
 
 	public String getRangeData() {
 		return rangeData;
@@ -102,12 +120,13 @@ public class CrfTemplateAnzhen {
 
 	@Override
 	public String toString() {
-		return "CrfTemplateAnZhen [id=" + id + ", baseName=" + baseName
+		return "CrfTemplateAnzhen [id=" + id + ", baseName=" + baseName
 				+ ", chineseName=" + chineseName + ", englishName="
 				+ englishName + ", idXpath=" + idXpath + ", dataType="
 				+ dataType + ", variableType=" + variableType + ", dateFormat="
 				+ dateFormat + ", rangeData=" + rangeData + ", inputValue="
-				+ inputValue + "]";
+				+ inputValue + ", inputValue02=" + inputValue02
+				+ ", inputValue03=" + inputValue03 + "]";
 	}
 
 }

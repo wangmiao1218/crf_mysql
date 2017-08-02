@@ -248,35 +248,34 @@ public class AddCrfTemplateAnzhenController{
 			Thread.sleep(2000);
 			
 			//就诊－体格检查
-			//AnzhenMethodByDriverAndIdXpath.inputValueByVariableType(driver, "crf-data-tree_8_span", crfTemplateAnzhenService.getCrfTemplateAnzhenListByBaseName("就诊－体格检查"));
+			AnzhenInputValueMethod.inputValueByVariableType(driver, "crf-data-tree_8_span", crfTemplateAnzhenService.getCrfTemplateAnzhenListByBaseName("就诊－体格检查"));
 			
 			//就诊－24小时动态血压监测
-			//AnzhenMethodByDriverAndIdXpath.inputValueByVariableType(driver, "crf-data-tree_9_span", crfTemplateAnzhenService.getCrfTemplateAnzhenListByBaseName("就诊－24小时动态血压监测"));
+			AnzhenInputValueMethod.inputValueByVariableType(driver, "crf-data-tree_9_span", crfTemplateAnzhenService.getCrfTemplateAnzhenListByBaseName("就诊－24小时动态血压监测"));
 			
 			//就诊－四肢血压及动脉弹性检查
-			//AnzhenMethodByDriverAndIdXpath.inputValueByVariableType(driver, "crf-data-tree_10_span", crfTemplateAnzhenService.getCrfTemplateAnzhenListByBaseName("就诊－四肢血压及动脉弹性检查"));
+			AnzhenInputValueMethod.inputValueByVariableType(driver, "crf-data-tree_10_span", crfTemplateAnzhenService.getCrfTemplateAnzhenListByBaseName("就诊－四肢血压及动脉弹性检查"));
 			
 			//就诊－电生理检查
-			//AnzhenMethodByDriverAndIdXpath.inputValueByVariableType(driver, "crf-data-tree_11_span", crfTemplateAnzhenService.getCrfTemplateAnzhenListByBaseName("就诊－电生理检查"));
+			AnzhenInputValueMethod.inputValueByVariableType(driver, "crf-data-tree_11_span", crfTemplateAnzhenService.getCrfTemplateAnzhenListByBaseName("就诊－电生理检查"));
 			
 			//就诊－超声检查
-			//AnzhenMethodByDriverAndIdXpath.inputValueByVariableType(driver, "crf-data-tree_12_span", crfTemplateAnzhenService.getCrfTemplateAnzhenListByBaseName("就诊－超声检查"));
+			AnzhenInputValueMethod.inputValueByVariableType(driver, "crf-data-tree_12_span", crfTemplateAnzhenService.getCrfTemplateAnzhenListByBaseName("就诊－超声检查"));
 			
 			//就诊－CT检查
-			//AnzhenMethodByDriverAndIdXpath.inputValueByVariableType(driver, "crf-data-tree_13_span", crfTemplateAnzhenService.getCrfTemplateAnzhenListByBaseName("就诊－CT检查"));
+			AnzhenInputValueMethod.inputValueByVariableType(driver, "crf-data-tree_13_span", crfTemplateAnzhenService.getCrfTemplateAnzhenListByBaseName("就诊－CT检查"));
 			
 			//就诊－眼底检查
-			//AnzhenMethodByDriverAndIdXpath.inputValueByVariableType(driver, "crf-data-tree_14_span", crfTemplateAnzhenService.getCrfTemplateAnzhenListByBaseName("就诊－眼底检查"));
+			AnzhenInputValueMethod.inputValueByVariableType(driver, "crf-data-tree_14_span", crfTemplateAnzhenService.getCrfTemplateAnzhenListByBaseName("就诊－眼底检查"));
 			
 			//就诊－多导睡眠图(PSG)监测
-			//AnzhenMethodByDriverAndIdXpath.inputValueByVariableType(driver, "crf-data-tree_15_span", crfTemplateAnzhenService.getCrfTemplateAnzhenListByBaseName("就诊－多导睡眠图(PSG)监测"));
+			AnzhenInputValueMethod.inputValueByVariableType(driver, "crf-data-tree_15_span", crfTemplateAnzhenService.getCrfTemplateAnzhenListByBaseName("就诊－多导睡眠图(PSG)监测"));
 			
 			//就诊－实验室检验
-			//AnzhenMethodByDriverAndIdXpath.inputValueByVariableType(driver, "crf-data-tree_16_span", crfTemplateAnzhenService.getCrfTemplateAnzhenListByBaseName("就诊－实验室检验"));
+			AnzhenInputValueMethod.inputValueByVariableType(driver, "crf-data-tree_16_span", crfTemplateAnzhenService.getCrfTemplateAnzhenListByBaseName("就诊－实验室检验"));
 			
 			//就诊－住院与诊断
 			AnzhenInputValueMethod.inputValueByVariableType(driver, "crf-data-tree_17_span", crfTemplateAnzhenService.getCrfTemplateAnzhenListByBaseName("就诊－住院与诊断"));
-			
 		}
 
 		// 关闭driver
@@ -536,5 +535,50 @@ public class AddCrfTemplateAnzhenController{
 	}
 	
 
+	/** 
+	* @Title: addCrfTemplateAnzhen_Sf 
+	* @Description: 添加随访
+	* @param: @throws Exception :
+	* @return: String
+	* @throws 
+	*/
+	@RequestMapping("addCrfTemplateAnzhen_Sf")
+	public String addCrfTemplateAnzhen_Sf() throws Exception {
+		// 登录并到add页面
+		PhantomJSDriver driver = CreateWebDriver.createWebDriverByPhantomJSDriver();
+		String value = LoginCrfOfAnzhen.loginByPhantomJSDriver(driver);
+		
+		if ("登陆成功".contains(value)) {
+			//已有基本信息的病例xpath
+			driver.findElementByXPath(".//*[@id='case-list-container']/tbody/tr[2]/td[2]/a").click();
+			// 得到当前窗口的set集合
+			Set<String> winHandels = driver.getWindowHandles();
+			// 将set集合存入list对象
+			List<String> it = new ArrayList<String>(winHandels);
+			// 切换到弹出的新窗口
+			driver.switchTo().window(it.get(1));
+			Thread.sleep(2000);
+			
+			//随访
+			driver.findElementByClassName("dropdown-toggle").click();
+			driver.findElementById("add-followup").click();
+			
+			//AnzhenInputValueMethod.inputValueByVariableType(driver, "crf-data-tree_16_span", crfTemplateAnzhenService.getCrfTemplateAnzhenListByBaseName("随访"));
+			
+			
+			//
+			driver.findElementById("input-save").click();
+			Thread.sleep(1000);
+			driver.findElementByClassName("u-btn").click();
+			Thread.sleep(1000);
+		}
+
+		// 关闭driver
+		QuitWebDriver.quitWebDriverByPhantomJSDriver(driver);
+
+		return "redirect:/page/ok.html";
+	}
+	
+	
 	
 }

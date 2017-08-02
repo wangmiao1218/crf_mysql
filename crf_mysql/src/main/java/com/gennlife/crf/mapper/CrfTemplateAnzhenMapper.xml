@@ -12,11 +12,14 @@
 		<result column="dateFormat" property="dateFormat" jdbcType="VARCHAR" />
 		<result column="rangeData" property="rangeData" jdbcType="VARCHAR" />
 		<result column="inputValue" property="inputValue" jdbcType="VARCHAR" />
+		<result column="inputValue02" property="inputValue02" jdbcType="VARCHAR" />
+		<result column="inputValue03" property="inputValue03" jdbcType="VARCHAR" />
 	</resultMap>
 
 	<sql id="CrfTemplateAnzhen_Column_List">
 		id, baseName,
-		chineseName,englishName,idXpath,dataType,variableType,dateFormat,rangeData,inputValue
+		chineseName,englishName,idXpath,dataType,variableType,dateFormat,
+		rangeData,inputValue,inputValue02,inputValue03
 	</sql>
 	
 	<!--  查询CrfTemplateAnzhen列表数据 -->

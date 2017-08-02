@@ -2,6 +2,7 @@ package com.gennlife.crf.utils;
 
 import java.util.List;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.support.ui.Select;
 
@@ -12,12 +13,12 @@ import com.gennlife.crf.bean.CrfTemplateAnzhen;
  * @author: wangmiao
  * @Date: 2017年7月28日 下午4:58:39 
  */
-public class AnzhenMethodByDriverAndIdXpath {
+public class AnzhenInputValueMethod {
 
 	
 	/** 
-	* @Title: globalMethod_Enum_MultiSelect(只针对枚举、多选、以及输入框) 
-	* @Description: 只需传入driver、左侧点击的路径，以及list，根据数据库中配置，录入固定的数据
+	* @Title: inputValueByVariableType(只针对枚举、多选、以及输入框) 
+	* @Description: 根据变量类型，输入值（只需传入driver、左侧点击的路径，以及list，根据数据库中配置，录入固定的数据）
 	* @param: @param driver
 	* @param: @param idXpath 前台点击的左侧路径
 	* @param: @param list
@@ -25,7 +26,7 @@ public class AnzhenMethodByDriverAndIdXpath {
 	* @return: void
 	* @throws 
 	*/
-	public static void globalMethod_Enum_MultiSelect(PhantomJSDriver driver,String idXpath,List<CrfTemplateAnzhen> list) throws Exception{
+	public static void inputValueByVariableType(PhantomJSDriver driver,String idXpath,List<CrfTemplateAnzhen> list) throws Exception{
 		driver.findElementById(idXpath).click();
 		Thread.sleep(3000);
 		
@@ -65,6 +66,22 @@ public class AnzhenMethodByDriverAndIdXpath {
 				//driver.findElementById(list.get(i).getIdXpath()).click();
 				
 				
+			}
+			//******处理有输入提示的输入框
+			else if ("本次主要出院诊断".contains(list.get(i).getChineseName())){
+				driver.findElementById(list.get(i).getIdXpath()).clear();
+				driver.findElementById(list.get(i).getIdXpath()).sendKeys(list.get(i).getInputValue());
+				//需等待，否则提示框还没出现
+				Thread.sleep(3000);
+		        By zd = new By.ByXPath("//ul[@class='ui-autocomplete ui-front ui-menu ui-widget ui-widget-content']//span[contains(text(),'原发性高血压')]");
+		        driver.findElement(zd).click();
+			}
+			else if ("其他出院诊断".contains(list.get(i).getChineseName())){
+				driver.findElementById(list.get(i).getIdXpath()).clear();
+				driver.findElementById(list.get(i).getIdXpath()).sendKeys(list.get(i).getInputValue());
+				Thread.sleep(3000);
+		        By qtzd = new By.ByXPath("//ul[@class='ui-autocomplete ui-front ui-menu ui-widget ui-widget-content']//span[contains(text(),'1型糖尿病性高血压')]");
+		        driver.findElement(qtzd).click();
 			}
 			else {
 				driver.findElementById(list.get(i).getIdXpath()).clear();

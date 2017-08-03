@@ -293,4 +293,44 @@ public class AnzhenInputValueMethod {
 	}
 	
 	
+	
+
+	/** 
+	* @Title: test????????????失败
+	* @Description: 根据变量类型，输入值（只需传入driver、左侧点击的路径，以及list，根据数据库中配置，录入固定的数据）
+	* @param: @param driver
+	* @param: @param idXpath 前台点击的左侧路径
+	* @param: @param list
+	* @param: @throws Exception :
+	* @return: void
+	* @throws 
+	*/
+	public static void test(PhantomJSDriver driver,String idXpath,List<CrfTemplateAnzhen> list) throws Exception{
+		driver.findElementById(idXpath).click();
+		Thread.sleep(3000);
+		
+		// 循环list
+		for (int i = 0; i < list.size(); i++) {
+			//测试有问题的字段时使用
+			//System.out.println(list.get(i).getChineseName());
+			
+			if ("图片型".contains(list.get(i).getVariableType())){
+				System.out.println(list.get(i).getChineseName());
+				driver.findElementByXPath(list.get(i).getIdXpath()).click();
+				Thread.sleep(6000);
+				Runtime.getRuntime().exec("C:\\Users\\www\\Desktop\\file.exe");
+				//Runtime.getRuntime().exec("D:\\AutoIt3\\AutoIt3.exe C:\\Users\\www\\Desktop\\file.au3");
+				Thread.sleep(6000);
+				System.out.println("ok");
+			}
+		}
+		
+		//循环后保存
+		driver.findElementById("input-save").click();
+		Thread.sleep(1000);
+		driver.findElementByClassName("u-btn").click();
+		Thread.sleep(1000);
+	}
+
+	
 }

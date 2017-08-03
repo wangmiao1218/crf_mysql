@@ -559,18 +559,20 @@ public class AddCrfTemplateAnzhenController{
 			driver.switchTo().window(it.get(1));
 			Thread.sleep(2000);
 			
-			//随访
+			//随访1
 			driver.findElementByClassName("dropdown-toggle").click();
 			driver.findElementById("add-followup").click();
+			AnzhenInputValueMethod.inputValueByVariableType_Sf_inputValue(driver, crfTemplateAnzhenService.getCrfTemplateAnzhenListByBaseName("随访"));
 			
-			//AnzhenInputValueMethod.inputValueByVariableType(driver, "crf-data-tree_16_span", crfTemplateAnzhenService.getCrfTemplateAnzhenListByBaseName("随访"));
-			
-			
-			//
-			driver.findElementById("input-save").click();
-			Thread.sleep(1000);
-			driver.findElementByClassName("u-btn").click();
-			Thread.sleep(1000);
+			//随访2
+			driver.findElementByClassName("dropdown-toggle").click();
+			driver.findElementById("add-followup").click();
+			AnzhenInputValueMethod.inputValueByVariableType_Sf_inputValue02(driver, crfTemplateAnzhenService.getCrfTemplateAnzhenListByBaseName("随访"));
+		
+			//随访3
+			driver.findElementByClassName("dropdown-toggle").click();
+			driver.findElementById("add-followup").click();
+			AnzhenInputValueMethod.inputValueByVariableType_Sf_inputValue03(driver, crfTemplateAnzhenService.getCrfTemplateAnzhenListByBaseName("随访"));
 		}
 
 		// 关闭driver
@@ -578,7 +580,6 @@ public class AddCrfTemplateAnzhenController{
 
 		return "redirect:/page/ok.html";
 	}
-	
 	
 	
 }

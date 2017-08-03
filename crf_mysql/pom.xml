@@ -5,6 +5,14 @@
 	<artifactId>crf_mysql</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<dependencies>
+		<!-- JavaCSV -->
+		<!-- https://mvnrepository.com/artifact/net.sourceforge.javacsv/javacsv -->
+		<dependency>
+	    	<groupId>net.sourceforge.javacsv</groupId>
+	    	<artifactId>javacsv</artifactId>
+	    	<version>2.0</version>
+		</dependency>
+		
 		<!-- Gson -->
 		<dependency>
 			<groupId>com.google.code.gson</groupId>

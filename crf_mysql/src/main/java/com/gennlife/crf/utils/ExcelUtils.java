@@ -53,7 +53,7 @@ public class ExcelUtils {
  			//指定 列beginCell
  			Cell cell = row.getCell(beginCell);
  			String value = cell.getStringCellValue();
- 			if (keyWord.contains(value)) {  
+ 			if (keyWord.equals(value)) {  
  				returnNum= rowNum;
  			}
  		}

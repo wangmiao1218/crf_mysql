@@ -24,7 +24,10 @@ public class TestWriteExcelCrfTemplateAnzhen {
 
 	private String filePath = "E:\\安贞\\！安贞数据导出";
 	private String fileName = "test01.xlsx";
+	private String fileNameSf = "test.xlsx";
+	
 	private String sheetName = "Sheet1";
+	private String sheetNameSf = "随访3";
 	
 	
 	@Test
@@ -43,7 +46,8 @@ public class TestWriteExcelCrfTemplateAnzhen {
 	@Test
 	public void writeExcelByCompareEnglishName() throws Exception{
 		List<CrfTemplateAnzhen> list = crfTemplateAnzhenService.getCrfTemplateAnzhenList(new HashedMap<String, Object>());
-		Excel excel = new Excel(filePath, fileName, sheetName);
+		//Excel excel = new Excel(filePath, fileName, sheetName);
+		Excel excel = new Excel(filePath, fileNameSf, sheetNameSf);
 		Integer beginCell=3;
 		
 		String str = WriteExcelCrfTemplateAnzhen.writeExcelByCompareEnglishName(excel, list, beginCell);

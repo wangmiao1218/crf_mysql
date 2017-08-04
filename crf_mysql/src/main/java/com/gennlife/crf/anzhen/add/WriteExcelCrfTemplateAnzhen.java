@@ -31,15 +31,19 @@ public class WriteExcelCrfTemplateAnzhen{
 	public static String writeExcelByCompareEnglishName(Excel excel,List<CrfTemplateAnzhen> list,Integer beginCell) throws Exception {
 		for (int i = 0; i < list.size(); i++) {
 			Integer beginRow = ExcelUtils.searchKeyWord(excel,1,list.get(i).getEnglishName());
+			//随访专用
+			//Integer beginRowSf = ExcelUtils.searchKeyWord(excel,1,"FOLLOW_UP_3_"+list.get(i).getEnglishName());
 			
 			//判断是否为null
-			if (beginRow!=null) {
+			if (beginRow != null) {
 				//设计excel时，要确定写入几列
 				ExcelUtils.writeAndSaveContent(excel,list.get(i).getChineseName(),beginRow,beginCell);
 				ExcelUtils.writeAndSaveContent(excel,list.get(i).getEnglishName(),beginRow,beginCell+1);
 				ExcelUtils.writeAndSaveContent(excel,list.get(i).getInputValue(),beginRow,beginCell+2);
 			}
+			
 		}
+		
 		return "写入完成。。。";
 	}
 	

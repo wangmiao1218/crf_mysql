@@ -25,5 +25,10 @@ public class TestExcelUtils {
 		System.out.println("OK");
 	}
 	
-	
+	@Test
+	public void readTwoContentAndJudge(){
+		Excel excel = new Excel(filePath, fileName, sheetName);
+		String string = ExcelUtils.readTwoContentAndJudge(excel, 8, 2, 5);
+		System.out.println(string);
+	}
 }

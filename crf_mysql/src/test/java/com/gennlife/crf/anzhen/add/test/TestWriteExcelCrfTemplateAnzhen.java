@@ -26,12 +26,25 @@ public class TestWriteExcelCrfTemplateAnzhen {
 	private String fileName = "test01.xlsx";
 	private String sheetName = "Sheet1";
 	
-	private Integer beginCell=3;
+	
+	@Test
+	public void readTwoContentAndJudgeAndWriteResult() throws Exception{
+		Excel excel = new Excel(filePath, fileName, sheetName);
+		Integer allRow=10;
+		Integer beginCell=2;
+		Integer endCell=5;
+		Integer writeCell=6;
+		
+		String str = WriteExcelCrfTemplateAnzhen.readTwoContentAndJudgeAndWriteResult(excel, allRow, beginCell, endCell, writeCell);
+		System.out.println(str);
+	}
+	
 	
 	@Test
 	public void writeExcelByCompareEnglishName() throws Exception{
 		List<CrfTemplateAnzhen> list = crfTemplateAnzhenService.getCrfTemplateAnzhenList(new HashedMap<String, Object>());
 		Excel excel = new Excel(filePath, fileName, sheetName);
+		Integer beginCell=3;
 		
 		String str = WriteExcelCrfTemplateAnzhen.writeExcelByCompareEnglishName(excel, list, beginCell);
 		System.out.println(str);

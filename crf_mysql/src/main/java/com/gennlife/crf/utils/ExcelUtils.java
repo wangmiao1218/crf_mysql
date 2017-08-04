@@ -84,28 +84,45 @@ public class ExcelUtils {
 	* @Title: readTwoContentAndJudge 
 	* @Description: 读取某行中，指定的两列值，判断是否相等
 	* @param: Excel excel :传入excel
-	* @param: int beginRow :行号（从 0 算起）
-	* @param: int beginCell :前面列号（从 0 算起）
-	* @param: int endCell：后面列号（从 0 算起）
-	* @return: String 相等返回pass，反之返回no
+	* @param: Integer beginRow :行号（从 0 算起）
+	* @param: Integer beginCell :前面列号（从 0 算起）
+	* @param: Integer endCell：后面列号（从 0 算起）
+	* @return: String 都为null或比较相等，则返回pass，反之返回no
 	* @throws 
 	*/
-	public static String readTwoContentAndJudge(Excel excel, int beginRow, int beginCell,int endCell) {
+	public static String readTwoContentAndJudge(Excel excel, Integer beginRow, Integer beginCell,Integer endCell) {
 		Workbook workbook = excel.getWorkbook();
 		Sheet sheet = workbook.getSheet(excel.getSheetName());
+		//根据行获取row
 		Row row = sheet.getRow(beginRow);
 		
-		String string = row.getCell(beginCell).toString();
-		String trimString = ListAndStringUtils.trimString(string);
-		
-		String string2 = row.getCell(endCell).toString();
+		//分别根据列号获取对应的cell
+		Cell beginCellContent = row.getCell(beginCell);
+		Cell endCellContent = row.getCell(endCell);
 		
 		String valueString=null;
-		//判断
-		if (trimString.contains(string2) && string2.contains(trimString) ) {
+		
+		//判断：都为空，也为pass
+		if (beginCellContent==null && endCellContent ==null) {
 			valueString="pass";
-		}else {
+		}
+		
+		//任意一个为空则返回no
+		if ((beginCellContent==null && endCellContent !=null) || (beginCellContent!=null && endCellContent ==null) ) {
 			valueString="no";
+		}
+				
+		//都不为null时，进行比较
+		if (beginCellContent != null && endCellContent != null) {
+			String beginCellStr = ListAndStringUtils.trimString(beginCellContent.toString());
+			String endCellStr = ListAndStringUtils.trimString(endCellContent.toString());
+			
+			//判断
+			if (beginCellStr.equals(endCellStr)) {
+				valueString="pass";
+			}else {
+				valueString="no";
+			}
 		}
 		
 		return valueString;

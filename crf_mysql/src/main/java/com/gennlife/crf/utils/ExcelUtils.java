@@ -30,6 +30,11 @@ public class ExcelUtils {
     * @throws 
     */
     public static Integer searchKeyWord(Excel excel,int beginCell,String keyWord) {  
+    	//先判断keyWord是否为null
+    	if (keyWord ==null) {
+			return null;
+		}
+    	
         // 构造Workbook
     	Workbook workbook = excel.getWorkbook();  
   
@@ -39,8 +44,6 @@ public class ExcelUtils {
         
         //获取sheet
 		Sheet sheet = workbook.getSheet(excel.getSheetName());
-  
-		//
 		Integer returnNum = null;
 		
        // 循环读取指定列数据

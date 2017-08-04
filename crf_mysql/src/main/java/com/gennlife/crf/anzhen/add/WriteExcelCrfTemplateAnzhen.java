@@ -15,10 +15,10 @@ public class WriteExcelCrfTemplateAnzhen{
 
 	/** 
 	* @Title: writeExcelByCompareEnglishName 
-	* @Description: 读取数据库列表的englishname，比较excel中某列是否存在，存在则从数据库取出相应的值填入到excel
-	* @param: @param excel 需要写入的excel
-	* @param: @param list 查询数据库的list
-	* @param: @param beginCell 传入的列号
+	* @Description: 读取数据库列表的englishname，比较excel中某列是否存在，存在则从数据库取出相应的值填入到excel对应列
+	* @param: @param excel： 需要写入的excel
+	* @param: @param list ：查询数据库的list
+	* @param: @param beginCell ：传入的列号
 	* @param: @throws Exception :
 	* @return: String
 	* @throws 

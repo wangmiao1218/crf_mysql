@@ -13,7 +13,6 @@ import com.gennlife.crf.anzhen.add.WriteExcelCrfTemplateAnzhen;
 import com.gennlife.crf.bean.CrfTemplateAnzhen;
 import com.gennlife.crf.bean.Excel;
 import com.gennlife.crf.service.CrfTemplateAnzhenService;
-import com.gennlife.crf.utils.ExcelUtils;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:spring.xml")

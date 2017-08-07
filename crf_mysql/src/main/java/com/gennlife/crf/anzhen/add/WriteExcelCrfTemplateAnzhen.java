@@ -2,14 +2,9 @@ package com.gennlife.crf.anzhen.add;
 
 import java.util.List;
 
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-
 import com.gennlife.crf.bean.CrfTemplateAnzhen;
 import com.gennlife.crf.bean.Excel;
 import com.gennlife.crf.utils.ExcelUtils;
-import com.gennlife.crf.utils.ListAndStringUtils;
 
 /**
  * @Description: 安贞环境，根据数据库，写入excel
@@ -33,7 +28,6 @@ public class WriteExcelCrfTemplateAnzhen{
 			Integer beginRow = ExcelUtils.searchKeyWord(excel,1,list.get(i).getEnglishName());
 			//随访专用
 			//Integer beginRowSf = ExcelUtils.searchKeyWord(excel,1,"FOLLOW_UP_3_"+list.get(i).getEnglishName());
-			
 			//判断是否为null
 			if (beginRow != null) {
 				//设计excel时，要确定写入几列
@@ -41,9 +35,7 @@ public class WriteExcelCrfTemplateAnzhen{
 				ExcelUtils.writeAndSaveContent(excel,list.get(i).getEnglishName(),beginRow,beginCell+1);
 				ExcelUtils.writeAndSaveContent(excel,list.get(i).getInputValue(),beginRow,beginCell+2);
 			}
-			
 		}
-		
 		return "写入完成。。。";
 	}
 	
@@ -67,9 +59,7 @@ public class WriteExcelCrfTemplateAnzhen{
 				ExcelUtils.writeAndSaveContent(excel,result,i,writeCell);
 			}
 		}
-		
 		return "比较完成。。。";
-		
 	}
 
 	

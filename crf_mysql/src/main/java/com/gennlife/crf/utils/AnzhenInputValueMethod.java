@@ -3,7 +3,6 @@ package com.gennlife.crf.utils;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.By.ByXPath;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.support.ui.Select;
 
@@ -30,7 +29,6 @@ public class AnzhenInputValueMethod {
 	public static void inputValueByVariableType(PhantomJSDriver driver,String idXpath,List<CrfTemplateAnzhen> list) throws Exception{
 		driver.findElementById(idXpath).click();
 		Thread.sleep(3000);
-		
 		// 循环list
 		for (int i = 0; i < list.size(); i++) {
 			//测试有问题的字段时使用

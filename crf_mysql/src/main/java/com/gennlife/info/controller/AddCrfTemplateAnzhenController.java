@@ -61,7 +61,7 @@ public class AddCrfTemplateAnzhenController{
 						driver.findElementById(jbxxList.get(i).getIdXpath()).click();
 						driver.findElementByXPath(".//*[@id='ui-datepicker-div']/div/div/select[1]").click();
 						driver.findElementByXPath(".//*[@id='ui-datepicker-div']/div/div/select[1]/option[82]").click();//1998
-						driver.findElementByXPath(".//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[3]/a").click();
+						driver.findElementByXPath(".//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[6]/a").click();
 					}
 					else {
 						driver.findElementById(jbxxList.get(i).getIdXpath()).clear();
@@ -110,7 +110,7 @@ public class AddCrfTemplateAnzhenController{
 		
 		if ("登陆成功".contains(value)) {
 			//已有基本信息的病例xpath
-			driver.findElementByXPath(".//*[@id='case-list-container']/tbody/tr[3]/td[2]/a").click();
+			driver.findElementByXPath(".//*[@id='case-list-container']/tbody/tr[5]/td[2]/a").click();
 			// 得到当前窗口的set集合
 			Set<String> winHandels = driver.getWindowHandles();
 			// 将set集合存入list对象
@@ -238,7 +238,7 @@ public class AddCrfTemplateAnzhenController{
 		
 		if ("登陆成功".contains(value)) {
 			//已有基本信息的病例xpath
-			driver.findElementByXPath(".//*[@id='case-list-container']/tbody/tr[2]/td[2]/a").click();
+			driver.findElementByXPath(".//*[@id='case-list-container']/tbody/tr[6]/td[2]/a").click();
 			// 得到当前窗口的set集合
 			Set<String> winHandels = driver.getWindowHandles();
 			// 将set集合存入list对象
@@ -365,7 +365,7 @@ public class AddCrfTemplateAnzhenController{
 		
 		if ("登陆成功".contains(value)) {
 			//已有基本信息的病例xpath
-			driver.findElementByXPath(".//*[@id='case-list-container']/tbody/tr[5]/td[2]/a").click();
+			driver.findElementByXPath(".//*[@id='case-list-container']/tbody/tr[7]/td[2]/a").click();
 			// 得到当前窗口的set集合
 			Set<String> winHandels = driver.getWindowHandles();
 			// 将set集合存入list对象
@@ -490,7 +490,7 @@ public class AddCrfTemplateAnzhenController{
 		
 		if ("登陆成功".contains(value)) {
 			//已有基本信息的病例xpath
-			driver.findElementByXPath(".//*[@id='case-list-container']/tbody/tr[6]/td[2]/a").click();
+			driver.findElementByXPath(".//*[@id='case-list-container']/tbody/tr[8]/td[2]/a").click();
 			// 得到当前窗口的set集合
 			Set<String> winHandels = driver.getWindowHandles();
 			// 将set集合存入list对象
@@ -550,7 +550,7 @@ public class AddCrfTemplateAnzhenController{
 		
 		if ("登陆成功".contains(value)) {
 			//已有基本信息的病例xpath
-			driver.findElementByXPath(".//*[@id='case-list-container']/tbody/tr[2]/td[2]/a").click();
+			driver.findElementByXPath(".//*[@id='case-list-container']/tbody/tr[5]/td[2]/a").click();
 			// 得到当前窗口的set集合
 			Set<String> winHandels = driver.getWindowHandles();
 			// 将set集合存入list对象

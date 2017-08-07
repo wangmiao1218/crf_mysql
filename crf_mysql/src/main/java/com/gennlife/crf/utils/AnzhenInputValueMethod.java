@@ -143,7 +143,7 @@ public class AnzhenInputValueMethod {
 				driver.findElementById(list.get(i).getIdXpath()).clear();
 				driver.findElementById(list.get(i).getIdXpath()).sendKeys(list.get(i).getInputValue());
 				//需等待，否则提示框还没出现
-				Thread.sleep(3000);
+				Thread.sleep(5000);
 				By zd = new By.ByXPath("//ul[@class='ui-autocomplete ui-front ui-menu ui-widget ui-widget-content']//span[contains(text(),'"+list.get(i).getInputValue()+"')]");
 				driver.findElement(zd).click();
 			}
@@ -208,7 +208,7 @@ public class AnzhenInputValueMethod {
 				driver.findElementById(list.get(i).getIdXpath()).clear();
 				driver.findElementById(list.get(i).getIdXpath()).sendKeys(list.get(i).getInputValue02());
 				//需等待，否则提示框还没出现
-				Thread.sleep(3000);
+				Thread.sleep(5000);
 				By zd = new By.ByXPath("//ul[@class='ui-autocomplete ui-front ui-menu ui-widget ui-widget-content']//span[contains(text(),'"+list.get(i).getInputValue02()+"')]");
 				driver.findElement(zd).click();
 			}
@@ -273,7 +273,7 @@ public class AnzhenInputValueMethod {
 				driver.findElementById(list.get(i).getIdXpath()).clear();
 				driver.findElementById(list.get(i).getIdXpath()).sendKeys(list.get(i).getInputValue03());
 				//需等待，否则提示框还没出现
-				Thread.sleep(3000);
+				Thread.sleep(5000);
 				By zd = new By.ByXPath("//ul[@class='ui-autocomplete ui-front ui-menu ui-widget ui-widget-content']//span[contains(text(),'"+list.get(i).getInputValue03()+"')]");
 				driver.findElement(zd).click();
 			}

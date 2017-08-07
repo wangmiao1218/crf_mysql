@@ -8,6 +8,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
+import org.openqa.selenium.support.ui.Select;
 
 /**
  * @Description: 登录crf系统相关方法（安贞）
@@ -148,6 +149,12 @@ public class LoginCrfOfAnzhen {
 
 		driver.findElementById("login").click();
 
+		//切换医院
+		Select sel = new Select(driver.findElementByXPath(".//*[@id='crf-lab']/select"));
+		//北京清华长庚医院
+        //sel.selectByValue("anzhen-beijingqinghuazhanggengyiyuan"); 
+        sel.selectByValue("anzhen-nanfangyikedaxuenanfangyiyuan"); 
+		
 		// 等待
 		try {
 			Thread.sleep(1000);

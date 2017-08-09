@@ -142,6 +142,9 @@ public class AnzhenInputValueMethod {
 			else if ("字符串_诊断".equals(list.get(i).getVariableType())){
 				driver.findElementById(list.get(i).getIdXpath()).clear();
 				driver.findElementById(list.get(i).getIdXpath()).sendKeys(list.get(i).getInputValue());
+				//第一次输入可能会没有下拉提示
+				driver.findElementById(list.get(i).getIdXpath()).clear();
+				driver.findElementById(list.get(i).getIdXpath()).sendKeys(list.get(i).getInputValue());
 				//需等待，否则提示框还没出现
 				Thread.sleep(5000);
 				By zd = new By.ByXPath("//ul[@class='ui-autocomplete ui-front ui-menu ui-widget ui-widget-content']//span[contains(text(),'"+list.get(i).getInputValue()+"')]");
@@ -207,6 +210,9 @@ public class AnzhenInputValueMethod {
 			else if ("字符串_诊断".equals(list.get(i).getVariableType())){
 				driver.findElementById(list.get(i).getIdXpath()).clear();
 				driver.findElementById(list.get(i).getIdXpath()).sendKeys(list.get(i).getInputValue02());
+				//第一次输入可能会没有下拉提示
+				driver.findElementById(list.get(i).getIdXpath()).clear();
+				driver.findElementById(list.get(i).getIdXpath()).sendKeys(list.get(i).getInputValue02());
 				//需等待，否则提示框还没出现
 				Thread.sleep(5000);
 				By zd = new By.ByXPath("//ul[@class='ui-autocomplete ui-front ui-menu ui-widget ui-widget-content']//span[contains(text(),'"+list.get(i).getInputValue02()+"')]");
@@ -270,6 +276,9 @@ public class AnzhenInputValueMethod {
 			}
 			//******处理有输入提示的输入框
 			else if ("字符串_诊断".equals(list.get(i).getVariableType())){
+				driver.findElementById(list.get(i).getIdXpath()).clear();
+				driver.findElementById(list.get(i).getIdXpath()).sendKeys(list.get(i).getInputValue03());
+				//第一次输入可能会没有下拉提示
 				driver.findElementById(list.get(i).getIdXpath()).clear();
 				driver.findElementById(list.get(i).getIdXpath()).sendKeys(list.get(i).getInputValue03());
 				//需等待，否则提示框还没出现

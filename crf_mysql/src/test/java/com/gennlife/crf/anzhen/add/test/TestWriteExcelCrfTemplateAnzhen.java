@@ -23,16 +23,17 @@ public class TestWriteExcelCrfTemplateAnzhen {
 
 	private String filePath = "E:\\安贞\\！安贞数据导出";
 	private String fileName = "test01.xlsx";
-	private String fileNameSf = "test.xlsx";
+	private String sheetName = "随访123";
 	
-	private String sheetName = "Sheet1";
+	
+	private String fileNameSf = "test.xlsx";
 	private String sheetNameSf = "随访3";
 	
 	
 	@Test
 	public void readTwoContentAndJudgeAndWriteResult() throws Exception{
 		Excel excel = new Excel(filePath, fileName, sheetName);
-		Integer allRow=10;
+		Integer allRow=2833;
 		Integer beginCell=2;
 		Integer endCell=5;
 		Integer writeCell=6;

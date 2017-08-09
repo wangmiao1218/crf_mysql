@@ -942,7 +942,7 @@ public class AddCrfTemplateAnzhenController{
 		
 		if ("登陆成功".contains(value)) {
 			//已有基本信息的病例xpath
-			driver.findElementByXPath(".//*[@id='case-list-container']/tbody/tr[9]/td[2]/a").click();
+			driver.findElementByXPath(".//*[@id='case-list-container']/tbody/tr[10]/td[2]/a").click();
 			// 得到当前窗口的set集合
 			Set<String> winHandels = driver.getWindowHandles();
 			// 将set集合存入list对象

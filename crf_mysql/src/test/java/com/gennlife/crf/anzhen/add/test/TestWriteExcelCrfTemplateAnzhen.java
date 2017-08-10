@@ -22,8 +22,8 @@ public class TestWriteExcelCrfTemplateAnzhen {
 	private CrfTemplateAnzhenService crfTemplateAnzhenService;
 
 	private String filePath = "E:\\安贞\\！安贞数据导出";
-	private String fileName = "test01.xlsx";
-	private String sheetName = "随访123";
+	private String fileName = "1.xlsx";
+	private String sheetName = "全部";
 	
 	
 	private String fileNameSf = "test.xlsx";
@@ -33,7 +33,7 @@ public class TestWriteExcelCrfTemplateAnzhen {
 	@Test
 	public void readTwoContentAndJudgeAndWriteResult() throws Exception{
 		Excel excel = new Excel(filePath, fileName, sheetName);
-		Integer allRow=2833;
+		Integer allRow=3899;
 		Integer beginCell=2;
 		Integer endCell=5;
 		Integer writeCell=6;

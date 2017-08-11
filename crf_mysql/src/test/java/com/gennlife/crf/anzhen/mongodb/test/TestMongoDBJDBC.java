@@ -16,7 +16,7 @@ public class TestMongoDBJDBC {
 	public void testMongoDBConnection() {
 		// 连接到 mongodb 服务
 		//MongoClient mongoClient = new MongoClient("119.253.137.125", 9001);
-
+		
 		// 连接到数据库
 		//MongoDatabase mongoDatabase = mongoClient.getDatabase("CRF_Model");
 		//System.out.println("Connect to database successfully");

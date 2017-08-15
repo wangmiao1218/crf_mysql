@@ -175,7 +175,7 @@ public class LoginCrfOfAnzhen {
 		String returnString=null;
 		String text = driver.findElementByXPath(".//*[@id='action-container']/div[1]/button[1]").getText();
 		
-		//
+		//判断
 		if ("添加".equals(text)) {
 			returnString = "登陆成功";
 		}

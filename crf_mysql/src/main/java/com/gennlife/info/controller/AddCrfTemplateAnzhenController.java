@@ -543,7 +543,6 @@ public class AddCrfTemplateAnzhenController{
 		return "redirect:/page/ok.html";
 	}
 	
-	
 	/** 
 	* @Title: addCrfTemplateAnzhen_TjzxWithoutHzxx 
 	* @Description: 添加体检中心（体检中心下面所有信息，无随访）
@@ -602,7 +601,6 @@ public class AddCrfTemplateAnzhenController{
 
 		return "redirect:/page/ok.html";
 	}
-
 	
 	/** 
 	* @Title: addCrfTemplateAnzhen_Tjzx_All 
@@ -765,8 +763,6 @@ public class AddCrfTemplateAnzhenController{
 		return "redirect:/page/ok.html";
 	}
 	
-	
-	
 	/** 
 	* @Title: addCrfTemplateAnzhen_SqWithoutHzxx 
 	* @Description: 添加社区（社区下面所有信息，无随访）
@@ -825,9 +821,7 @@ public class AddCrfTemplateAnzhenController{
 
 		return "redirect:/page/ok.html";
 	}
-
-	
-	
+		
 	/** 
 	* @Title: addCrfTemplateAnzhen_Sq_All 
 	* @Description: 添加社区全部信息，包括三次随访
@@ -923,9 +917,7 @@ public class AddCrfTemplateAnzhenController{
 
 		return "redirect:/page/ok.html";
 	}
-	
-
-	
+		
 	
 	/** 
 	* @Title: addCrfTemplateAnzhen_Sf 
@@ -972,8 +964,6 @@ public class AddCrfTemplateAnzhenController{
 
 		return "redirect:/page/ok.html";
 	}
-	
-	
 
 	
 	/** 
@@ -1010,7 +1000,6 @@ public class AddCrfTemplateAnzhenController{
 
 		return "redirect:/page/ok.html";
 	}
-	
-	
+		
 	
 }

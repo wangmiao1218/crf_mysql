@@ -24,7 +24,7 @@ public class ExcelUtils {
 
 	 /** 
     * @Title: readExcelOfList 
-    * @Description: 搜索某一个文件中，指定列，返回list
+    * @Description: 搜索某一个文件中，指定列所有数值，并添加到list中，返回list
     * @param: Excel excel：传入excel
     * @param: int beginCell：列号（从0 开始）
     * @return: List<String>
@@ -218,7 +218,7 @@ public class ExcelUtils {
 	* @param: Integer beginRow :行号（从 0 算起）
 	* @param: Integer beginCell :前面列号（从 0 算起）
 	* @param: Integer endCell：后面列号（从 0 算起）
-	* @return: String 都为null或比较相等，则返回pass，反之返回no
+	* @return: String ：都为null或比较相等，则返回pass，反之返回no
 	* @throws 
 	*/
 	public static String readTwoContentAndJudge(Excel excel, Integer beginRow, Integer beginCell,Integer endCell) {

@@ -17,7 +17,6 @@ public class TestExcelUtils {
 	public void searchKeyWordOfOneLine(){
 		Excel excel = new Excel(filePath, fileName, sheetName);
 		Integer i = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "英文名");
-		
 		System.out.println(i);
 	}
 	
@@ -29,7 +28,6 @@ public class TestExcelUtils {
 			System.out.println(list.get(i));
 		}
 		System.out.println(list.size());
-		
 	}
 	
 	@Test

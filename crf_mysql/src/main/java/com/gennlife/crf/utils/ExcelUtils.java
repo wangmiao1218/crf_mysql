@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.ss.usermodel.Cell;
@@ -20,6 +22,54 @@ import com.gennlife.crf.bean.Excel;
  */
 public class ExcelUtils {
 
+	 /** 
+    * @Title: readExcelOfLine 
+    * @Description: 搜索某一个文件中，指定列，返回list
+    * @param: Excel excel：传入excel
+    * @param: int beginCell：列号（从0 开始）
+    * @return: List<String>
+    * @throws 
+    */
+    public static List<String> readExcelOfLine(Excel excel,int beginCell) {  
+        // 构造Workbook
+    	Workbook workbook = excel.getWorkbook();  
+  
+        if (workbook == null){
+        	return null;  //不存在
+        }  
+        
+        //获取sheet
+		Sheet sheet = workbook.getSheet(excel.getSheetName());
+		
+		List<String> list = new ArrayList<String>();
+       // 循环读取指定列数据
+ 		for ( int rowNum= 0; rowNum <= sheet.getLastRowNum(); rowNum++) {
+ 			Row row = sheet.getRow(rowNum);
+ 			
+ 			Cell cell = null;
+ 			//判断是否为空
+ 			if (row!=null) {
+ 				//指定 列beginCell
+ 	 			cell = row.getCell(beginCell);
+			}
+ 			
+ 			String value=null;
+ 			//判断是否为空
+ 			if (cell!=null) {
+ 				value = cell.getStringCellValue();
+			}
+ 			
+ 			//将值放入list中
+ 			if (value!=null) {  
+ 				list.add(value);
+ 			}
+ 			
+ 		}
+		return list;
+
+    }  
+    
+	
     /** 
     * @Title: searchKeyWord 
     * @Description: 搜索某一个文件中，指定列，是否包含某个关键字 ,储存在返回行号，不存在返回null
@@ -50,9 +100,19 @@ public class ExcelUtils {
  		for ( int rowNum= 0; rowNum <= sheet.getLastRowNum(); rowNum++) {
  			Row row = sheet.getRow(rowNum);
  			
- 			//指定 列beginCell
- 			Cell cell = row.getCell(beginCell);
- 			String value = cell.getStringCellValue();
+ 			Cell cell = null;
+ 			//判断是否为空
+ 			if (row!=null) {
+ 				//指定 列beginCell
+ 	 			cell = row.getCell(beginCell);
+			}
+ 			
+ 			String value=null;
+ 			//判断是否为空
+ 			if (cell!=null) {
+ 				value = cell.getStringCellValue();
+			}
+ 			
  			if (keyWord.equals(value)) {  
  				returnNum= rowNum;
  			}
@@ -73,10 +133,29 @@ public class ExcelUtils {
 	*/
 	public static String readContent(Excel excel, int beginRow, int beginCell) {
 		Workbook workbook = excel.getWorkbook();
+		
+		if (workbook == null){
+        	return null;  //不存在
+        }  
+		
 		Sheet sheet = workbook.getSheet(excel.getSheetName());
+		//获取row
 		Row row = sheet.getRow(beginRow);
-		Cell cell = row.getCell(beginCell);
-		return cell.toString();
+		
+		Cell cell = null;
+		//判断是否为空
+		if (row!=null) {
+			//指定 列beginCell
+			cell = row.getCell(beginCell);
+		}
+			
+		String value=null;
+		//判断是否为空
+		if (cell!=null) {
+			value = cell.getStringCellValue();
+		}
+		
+		return value;
 	}
 
 	
@@ -92,6 +171,11 @@ public class ExcelUtils {
 	*/
 	public static String readTwoContentAndJudge(Excel excel, Integer beginRow, Integer beginCell,Integer endCell) {
 		Workbook workbook = excel.getWorkbook();
+		
+		if (workbook == null){
+        	return null;  //不存在
+        } 
+		
 		Sheet sheet = workbook.getSheet(excel.getSheetName());
 		//根据行获取row
 		Row row = sheet.getRow(beginRow);
@@ -164,6 +248,7 @@ public class ExcelUtils {
 		// 保存
 		// 根据参数传入的数据文件路径和文件名称，组合出Excel数据文件的绝对路径，声明一个File文件对象
 		File file = new File(excel.getFilePath() + "\\" + excel.getFileName());
+		
 		//建立输出流
 		FileOutputStream fos=null;
 		try {

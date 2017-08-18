@@ -14,6 +14,14 @@ public class TestExcelUtils {
 	private String sheetName = "患者信息";
 	
 	@Test
+	public void searchKeyWordOfOneLine(){
+		Excel excel = new Excel(filePath, fileName, sheetName);
+		Integer i = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "英文名");
+		
+		System.out.println(i);
+	}
+	
+	@Test
 	public void readExcelOfLine(){
 		Excel excel = new Excel(filePath, fileName, sheetName);
 		List<String> list = ExcelUtils.readExcelOfList(excel,1);

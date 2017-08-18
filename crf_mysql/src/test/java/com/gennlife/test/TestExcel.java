@@ -52,7 +52,7 @@ public class TestExcel {
 		String sheetName = "Sheet1";
 		Excel excel = new Excel(filePath, fileName, sheetName);
 		
-		Integer integer = ExcelUtils.searchKeyWord(excel,1, "�Ա�");
+		Integer integer = ExcelUtils.searchKeyWordOfList(excel,1, "�Ա�");
 		
 		System.out.println(integer);
 		

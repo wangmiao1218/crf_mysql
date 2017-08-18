@@ -16,7 +16,7 @@ public class TestExcelUtils {
 	@Test
 	public void readExcelOfLine(){
 		Excel excel = new Excel(filePath, fileName, sheetName);
-		List<String> list = ExcelUtils.readExcelOfLine(excel,1);
+		List<String> list = ExcelUtils.readExcelOfList(excel,1);
 		for (int i = 0; i < list.size(); i++) {
 			System.out.println(list.get(i));
 		}
@@ -27,7 +27,7 @@ public class TestExcelUtils {
 	@Test
 	public void searchKeyWord(){
 		Excel excel = new Excel(filePath, fileName, sheetName);
-		Integer integer = ExcelUtils.searchKeyWord(excel,0, "性别");
+		Integer integer = ExcelUtils.searchKeyWordOfList(excel,0, "性别");
 		System.out.println(integer);
 	}
 	

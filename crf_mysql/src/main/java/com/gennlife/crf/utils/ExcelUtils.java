@@ -23,14 +23,14 @@ import com.gennlife.crf.bean.Excel;
 public class ExcelUtils {
 
 	 /** 
-    * @Title: readExcelOfLine 
+    * @Title: readExcelOfList 
     * @Description: 搜索某一个文件中，指定列，返回list
     * @param: Excel excel：传入excel
     * @param: int beginCell：列号（从0 开始）
     * @return: List<String>
     * @throws 
     */
-    public static List<String> readExcelOfLine(Excel excel,int beginCell) {  
+    public static List<String> readExcelOfList(Excel excel,int beginCell) {  
         // 构造Workbook
     	Workbook workbook = excel.getWorkbook();  
   
@@ -71,7 +71,7 @@ public class ExcelUtils {
     
 	
     /** 
-    * @Title: searchKeyWord 
+    * @Title: searchKeyWordOfList 
     * @Description: 搜索某一个文件中，指定列，是否包含某个关键字 ,储存在返回行号，不存在返回null
     * @param: Excel excel：传入excel
     * @param: int beginCell：列号（从0 开始）
@@ -79,7 +79,7 @@ public class ExcelUtils {
     * @return: String
     * @throws 
     */
-    public static Integer searchKeyWord(Excel excel,int beginCell,String keyWord) {  
+    public static Integer searchKeyWordOfList(Excel excel,int beginCell,String keyWord) {  
     	//先判断keyWord是否为null
     	if (keyWord ==null) {
 			return null;

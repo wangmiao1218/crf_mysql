@@ -25,7 +25,7 @@ public class WriteExcelCrfTemplateAnzhen{
 	*/
 	public static String writeExcelByCompareEnglishName(Excel excel,List<CrfTemplateAnzhen> list,Integer beginCell) throws Exception {
 		for (int i = 0; i < list.size(); i++) {
-			Integer beginRow = ExcelUtils.searchKeyWord(excel,1,list.get(i).getEnglishName());
+			Integer beginRow = ExcelUtils.searchKeyWordOfList(excel,1,list.get(i).getEnglishName());
 			//随访专用
 			//Integer beginRowSf = ExcelUtils.searchKeyWord(excel,1,"FOLLOW_UP_3_"+list.get(i).getEnglishName());
 			//判断是否为null

@@ -1,26 +1,13 @@
 package com.gennlife.crf.anzhen.mongodb.test;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+
+import net.sf.json.JSONObject;
 
 import org.junit.Test;
-
-import com.mongodb.DBObject;
-import com.mongodb.MongoClient;
-import com.mongodb.MongoCredential;
-import com.mongodb.ServerAddress;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.json.JSONArray;
 
 public class TestInsertMongoDB {
 
@@ -57,9 +44,9 @@ public class TestInsertMongoDB {
 		String s2=s.replace("21100003", "21166666");
 		//System.out.println(s2);
 		
-		
-		/*JSONObject jsonObject = new JSONObject(s2);
-		System.out.println(jsonObject);*/
+		//JSONObject jsonObject = JSONObject.fromObject(s2); 
+		//JSONObject jsonObject = new JSONObject(s2);
+		//System.out.println(jsonObject);
 		
 	}
 

@@ -66,7 +66,7 @@ public class FileUtils {
 	* @param: File oldfile：旧文件
 	* @param: String oldStr：旧的值
 	* @param: String replaceStr：替换后的值
-	* @param: File newFlie :新文件
+	* @param: File newFlie :新的文件
 	* @return: void
 	* @throws 
 	*/

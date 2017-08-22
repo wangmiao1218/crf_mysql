@@ -1222,5 +1222,4 @@ public class AddCrfTemplateAnzhenController{
 		return "redirect:/page/ok.html";
 	}
 		
-	
 }

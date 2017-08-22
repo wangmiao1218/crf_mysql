@@ -31,17 +31,71 @@ public class AddCrfTemplateAnzhenController{
 	private CrfTemplateAnzhenService crfTemplateAnzhenService;
 
 	/** 
-	* @Title: addCrfTemplateAnzhen_Mz_Hzxx 
-	* @Description: 添加门诊_患者信息(包括基本信息、个人病史、家族史、生活方式、本次入院前2周内药物治疗史)
+	* @Title: addCrfTemplateAnzhen_Mz_Jbxx 
+	* @Description: 添加门诊_患者信息_基本信息
 	* @param: @throws Exception :
 	* @return: String
 	* @throws 
 	*/
+	@RequestMapping("addCrfTemplateAnzhen_Mz_Jbxx")
+	public String addCrfTemplateAnzhen_Mz_Jbxx() throws Exception {
+		// 获取所有基本信息list
+		List<CrfTemplateAnzhen> jbxxList = crfTemplateAnzhenService.getCrfTemplateAnzhenListByBaseName("基本信息");
+
+		// 登录并到add页面
+		PhantomJSDriver driver = CreateWebDriver.createWebDriverByPhantomJSDriver();
+		String value = LoginCrfOfAnzhen.loginAndToAddOfMenZhenAndBasicInfoByPhantomJSDriver(driver);
+		
+		if ("添加页面".contains(value)) {
+			// 循环jbxxList
+			for (int i = 0; i < jbxxList.size(); i++) {
+				if ("枚举型".contains(jbxxList.get(i).getVariableType())) {
+					new Select(driver.findElementById(jbxxList.get(i).getIdXpath())).selectByValue(jbxxList.get(i).getInputValue());
+				}
+				else {
+					if ("调查时间".contains(jbxxList.get(i).getChineseName())) {
+						driver.findElementById(jbxxList.get(i).getIdXpath()).click();
+						driver.findElementByXPath(".//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[2]/a").click();
+					}
+					else if ("出生日期".contains(jbxxList.get(i).getChineseName())) {
+						driver.findElementById(jbxxList.get(i).getIdXpath()).click();
+						driver.findElementByXPath(".//*[@id='ui-datepicker-div']/div/div/select[1]").click();
+						driver.findElementByXPath(".//*[@id='ui-datepicker-div']/div/div/select[1]/option[82]").click();//1998
+						driver.findElementByXPath(".//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[6]/a").click();
+					}
+					else {
+						driver.findElementById(jbxxList.get(i).getIdXpath()).clear();
+						driver.findElementById(jbxxList.get(i).getIdXpath()).sendKeys(jbxxList.get(i).getInputValue());
+					}
+				}
+			}
+			
+			//循环后保存
+			driver.findElementById("input-save").click();
+			Thread.sleep(1000);
+			driver.findElementByClassName("u-btn").click();
+			Thread.sleep(1000);
+		}
+
+		// 关闭driver
+		QuitWebDriver.quitWebDriverByPhantomJSDriver(driver);
+
+		return "redirect:/page/ok.html";
+	}
+	
+	
+	/** 
+	 * @Title: addCrfTemplateAnzhen_Mz_Hzxx 
+	 * @Description: 添加门诊_患者信息(包括基本信息、个人病史、家族史、生活方式、本次入院前2周内药物治疗史)
+	 * @param: @throws Exception :
+	 * @return: String
+	 * @throws 
+	 */
 	@RequestMapping("addCrfTemplateAnzhen_Mz_Hzxx")
 	public String addCrfTemplateAnzhen_Mz_Hzxx() throws Exception {
 		// 获取所有基本信息list
 		List<CrfTemplateAnzhen> jbxxList = crfTemplateAnzhenService.getCrfTemplateAnzhenListByBaseName("基本信息");
-
+		
 		// 登录并到add页面
 		PhantomJSDriver driver = CreateWebDriver.createWebDriverByPhantomJSDriver();
 		String value = LoginCrfOfAnzhen.loginAndToAddOfMenZhenAndBasicInfoByPhantomJSDriver(driver);
@@ -88,12 +142,13 @@ public class AddCrfTemplateAnzhenController{
 			//本次入院前2周内药物治疗史
 			AnzhenInputValueMethod.inputValueByVariableType(driver, "crf-data-tree_6_span", crfTemplateAnzhenService.getCrfTemplateAnzhenListByBaseName("本次入院前2周内药物治疗史"));
 		}
-
+		
 		// 关闭driver
 		QuitWebDriver.quitWebDriverByPhantomJSDriver(driver);
-
+		
 		return "redirect:/page/ok.html";
 	}
+	
 	
 	/** 
 	* @Title: addCrfTemplateAnzhen_MzWithoutHzxx 
@@ -255,17 +310,71 @@ public class AddCrfTemplateAnzhenController{
 	
 	
 	/** 
-	* @Title: addCrfTemplateAnzhen_Zy_Hzxx 
-	* @Description: 添加住院_患者信息(包括基本信息、个人病史、家族史、生活方式、本次入院前2周内药物治疗史)
+	* @Title: addCrfTemplateAnzhen_Zy_Jbxx 
+	* @Description: 添加住院_患者信息_基本信息
 	* @param: @throws Exception :
 	* @return: String
 	* @throws 
 	*/
+	@RequestMapping("addCrfTemplateAnzhen_Zy_Jbxx")
+	public String addCrfTemplateAnzhen_Zy_Jbxx() throws Exception {
+		// 获取所有基本信息list
+		List<CrfTemplateAnzhen> jbxxList = crfTemplateAnzhenService.getCrfTemplateAnzhenListByBaseName("基本信息");
+
+		// 登录并到add页面
+		PhantomJSDriver driver = CreateWebDriver.createWebDriverByPhantomJSDriver();
+		String value = LoginCrfOfAnzhen.loginAndToAddOfZhuYuanAndBasicInfoByPhantomJSDriver(driver);
+		
+		if ("添加页面".contains(value)) {
+			// 循环jbxxList
+			for (int i = 0; i < jbxxList.size(); i++) {
+				if ("枚举型".contains(jbxxList.get(i).getVariableType())) {
+					new Select(driver.findElementById(jbxxList.get(i).getIdXpath())).selectByValue(jbxxList.get(i).getInputValue());
+				}
+				else {
+					if ("调查时间".contains(jbxxList.get(i).getChineseName())) {
+						driver.findElementById(jbxxList.get(i).getIdXpath()).click();
+						driver.findElementByXPath(".//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[2]/a").click();
+					}
+					else if ("出生日期".contains(jbxxList.get(i).getChineseName())) {
+						driver.findElementById(jbxxList.get(i).getIdXpath()).click();
+						driver.findElementByXPath(".//*[@id='ui-datepicker-div']/div/div/select[1]").click();
+						driver.findElementByXPath(".//*[@id='ui-datepicker-div']/div/div/select[1]/option[82]").click();//1998
+						driver.findElementByXPath(".//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[6]/a").click();
+					}
+					else {
+						driver.findElementById(jbxxList.get(i).getIdXpath()).clear();
+						driver.findElementById(jbxxList.get(i).getIdXpath()).sendKeys(jbxxList.get(i).getInputValue());
+					}
+				}
+			}
+			
+			//循环后保存
+			driver.findElementById("input-save").click();
+			Thread.sleep(1000);
+			driver.findElementByClassName("u-btn").click();
+			Thread.sleep(1000);
+		}
+
+		// 关闭driver
+		QuitWebDriver.quitWebDriverByPhantomJSDriver(driver);
+
+		return "redirect:/page/ok.html";
+	}	
+	
+	
+	/** 
+	 * @Title: addCrfTemplateAnzhen_Zy_Hzxx 
+	 * @Description: 添加住院_患者信息(包括基本信息、个人病史、家族史、生活方式、本次入院前2周内药物治疗史)
+	 * @param: @throws Exception :
+	 * @return: String
+	 * @throws 
+	 */
 	@RequestMapping("addCrfTemplateAnzhen_Zy_Hzxx")
 	public String addCrfTemplateAnzhen_Zy_Hzxx() throws Exception {
 		// 获取所有基本信息list
 		List<CrfTemplateAnzhen> jbxxList = crfTemplateAnzhenService.getCrfTemplateAnzhenListByBaseName("基本信息");
-
+		
 		// 登录并到add页面
 		PhantomJSDriver driver = CreateWebDriver.createWebDriverByPhantomJSDriver();
 		String value = LoginCrfOfAnzhen.loginAndToAddOfZhuYuanAndBasicInfoByPhantomJSDriver(driver);
@@ -312,12 +421,14 @@ public class AddCrfTemplateAnzhenController{
 			//本次入院前2周内药物治疗史
 			AnzhenInputValueMethod.inputValueByVariableType(driver, "crf-data-tree_6_span", crfTemplateAnzhenService.getCrfTemplateAnzhenListByBaseName("本次入院前2周内药物治疗史"));
 		}
-
+		
 		// 关闭driver
 		QuitWebDriver.quitWebDriverByPhantomJSDriver(driver);
-
+		
 		return "redirect:/page/ok.html";
 	}
+	
+	
 	
 	/** 
 	* @Title: addCrfTemplateAnzhen_ZyWithoutHzxx 
@@ -479,17 +590,71 @@ public class AddCrfTemplateAnzhenController{
 	
 	
 	/** 
-	* @Title: addCrfTemplateAnzhen_Tjzx_Hzxx 
-	* @Description: 添加体检中心_患者信息(包括基本信息、个人病史、家族史、生活方式、本次入院前2周内药物治疗史)
+	* @Title: addCrfTemplateAnzhen_Tjzx_Jbxx
+	* @Description: 添加体检中心_患者信息_基本信息
 	* @param: @throws Exception :
 	* @return: String
 	* @throws 
 	*/
+	@RequestMapping("addCrfTemplateAnzhen_Tjzx_Jbxx")
+	public String addCrfTemplateAnzhen_Tjzx_Jbxx() throws Exception {
+		// 获取所有基本信息list
+		List<CrfTemplateAnzhen> jbxxList = crfTemplateAnzhenService.getCrfTemplateAnzhenListByBaseName("基本信息");
+
+		// 登录并到add页面
+		PhantomJSDriver driver = CreateWebDriver.createWebDriverByPhantomJSDriver();
+		String value = LoginCrfOfAnzhen.loginAndToAddOfTiJianAndBasicInfoByPhantomJSDriver(driver);
+		
+		if ("添加页面".contains(value)) {
+			// 循环jbxxList
+			for (int i = 0; i < jbxxList.size(); i++) {
+				if ("枚举型".contains(jbxxList.get(i).getVariableType())) {
+					new Select(driver.findElementById(jbxxList.get(i).getIdXpath())).selectByValue(jbxxList.get(i).getInputValue());
+				}
+				else {
+					if ("调查时间".contains(jbxxList.get(i).getChineseName())) {
+						driver.findElementById(jbxxList.get(i).getIdXpath()).click();
+						driver.findElementByXPath(".//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[2]/a").click();
+					}
+					else if ("出生日期".contains(jbxxList.get(i).getChineseName())) {
+						driver.findElementById(jbxxList.get(i).getIdXpath()).click();
+						driver.findElementByXPath(".//*[@id='ui-datepicker-div']/div/div/select[1]").click();
+						driver.findElementByXPath(".//*[@id='ui-datepicker-div']/div/div/select[1]/option[82]").click();//1998
+						driver.findElementByXPath(".//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[6]/a").click();
+					}
+					else {
+						driver.findElementById(jbxxList.get(i).getIdXpath()).clear();
+						driver.findElementById(jbxxList.get(i).getIdXpath()).sendKeys(jbxxList.get(i).getInputValue());
+					}
+				}
+			}
+			
+			//循环后保存
+			driver.findElementById("input-save").click();
+			Thread.sleep(1000);
+			driver.findElementByClassName("u-btn").click();
+			Thread.sleep(1000);
+		}
+
+		// 关闭driver
+		QuitWebDriver.quitWebDriverByPhantomJSDriver(driver);
+
+		return "redirect:/page/ok.html";
+	}
+	
+	
+	/** 
+	 * @Title: addCrfTemplateAnzhen_Tjzx_Hzxx 
+	 * @Description: 添加体检中心_患者信息(包括基本信息、个人病史、家族史、生活方式、本次入院前2周内药物治疗史)
+	 * @param: @throws Exception :
+	 * @return: String
+	 * @throws 
+	 */
 	@RequestMapping("addCrfTemplateAnzhen_Tjzx_Hzxx")
 	public String addCrfTemplateAnzhen_Tjzx_Hzxx() throws Exception {
 		// 获取所有基本信息list
 		List<CrfTemplateAnzhen> jbxxList = crfTemplateAnzhenService.getCrfTemplateAnzhenListByBaseName("基本信息");
-
+		
 		// 登录并到add页面
 		PhantomJSDriver driver = CreateWebDriver.createWebDriverByPhantomJSDriver();
 		String value = LoginCrfOfAnzhen.loginAndToAddOfTiJianAndBasicInfoByPhantomJSDriver(driver);
@@ -536,12 +701,13 @@ public class AddCrfTemplateAnzhenController{
 			//本次入院前2周内药物治疗史
 			AnzhenInputValueMethod.inputValueByVariableType(driver, "crf-data-tree_6_span", crfTemplateAnzhenService.getCrfTemplateAnzhenListByBaseName("本次入院前2周内药物治疗史"));
 		}
-
+		
 		// 关闭driver
 		QuitWebDriver.quitWebDriverByPhantomJSDriver(driver);
-
+		
 		return "redirect:/page/ok.html";
 	}
+	
 	
 	/** 
 	* @Title: addCrfTemplateAnzhen_TjzxWithoutHzxx 
@@ -699,17 +865,71 @@ public class AddCrfTemplateAnzhenController{
 	
 	
 	/** 
-	* @Title: addCrfTemplateAnzhen_Sq_Hzxx 
-	* @Description: 添加社区_患者信息(包括基本信息、个人病史、家族史、生活方式、本次入院前2周内药物治疗史)
+	* @Title: addCrfTemplateAnzhen_Sq_Jbxx 
+	* @Description: 添加社区_患者信息_基本信息
 	* @param: @throws Exception :
 	* @return: String
 	* @throws 
 	*/
+	@RequestMapping("addCrfTemplateAnzhen_Sq_Jbxx")
+	public String addCrfTemplateAnzhen_Sq_Jbxx() throws Exception {
+		// 获取所有基本信息list
+		List<CrfTemplateAnzhen> jbxxList = crfTemplateAnzhenService.getCrfTemplateAnzhenListByBaseName("基本信息");
+
+		// 登录并到add页面
+		PhantomJSDriver driver = CreateWebDriver.createWebDriverByPhantomJSDriver();
+		String value = LoginCrfOfAnzhen.loginAndToAddOfSheQuAndBasicInfoByPhantomJSDriver(driver);
+		
+		if ("添加页面".contains(value)) {
+			// 循环jbxxList
+			for (int i = 0; i < jbxxList.size(); i++) {
+				if ("枚举型".contains(jbxxList.get(i).getVariableType())) {
+					new Select(driver.findElementById(jbxxList.get(i).getIdXpath())).selectByValue(jbxxList.get(i).getInputValue());
+				}
+				else {
+					if ("调查时间".contains(jbxxList.get(i).getChineseName())) {
+						driver.findElementById(jbxxList.get(i).getIdXpath()).click();
+						driver.findElementByXPath(".//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[2]/a").click();
+					}
+					else if ("出生日期".contains(jbxxList.get(i).getChineseName())) {
+						driver.findElementById(jbxxList.get(i).getIdXpath()).click();
+						driver.findElementByXPath(".//*[@id='ui-datepicker-div']/div/div/select[1]").click();
+						driver.findElementByXPath(".//*[@id='ui-datepicker-div']/div/div/select[1]/option[82]").click();//1998
+						driver.findElementByXPath(".//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[6]/a").click();
+					}
+					else {
+						driver.findElementById(jbxxList.get(i).getIdXpath()).clear();
+						driver.findElementById(jbxxList.get(i).getIdXpath()).sendKeys(jbxxList.get(i).getInputValue());
+					}
+				}
+			}
+			
+			//循环后保存
+			driver.findElementById("input-save").click();
+			Thread.sleep(1000);
+			driver.findElementByClassName("u-btn").click();
+			Thread.sleep(1000);
+		}
+
+		// 关闭driver
+		QuitWebDriver.quitWebDriverByPhantomJSDriver(driver);
+
+		return "redirect:/page/ok.html";
+	}
+	
+	
+	/** 
+	 * @Title: addCrfTemplateAnzhen_Sq_Hzxx 
+	 * @Description: 添加社区_患者信息(包括基本信息、个人病史、家族史、生活方式、本次入院前2周内药物治疗史)
+	 * @param: @throws Exception :
+	 * @return: String
+	 * @throws 
+	 */
 	@RequestMapping("addCrfTemplateAnzhen_Sq_Hzxx")
 	public String addCrfTemplateAnzhen_Sq_Hzxx() throws Exception {
 		// 获取所有基本信息list
 		List<CrfTemplateAnzhen> jbxxList = crfTemplateAnzhenService.getCrfTemplateAnzhenListByBaseName("基本信息");
-
+		
 		// 登录并到add页面
 		PhantomJSDriver driver = CreateWebDriver.createWebDriverByPhantomJSDriver();
 		String value = LoginCrfOfAnzhen.loginAndToAddOfSheQuAndBasicInfoByPhantomJSDriver(driver);
@@ -756,12 +976,13 @@ public class AddCrfTemplateAnzhenController{
 			//本次入院前2周内药物治疗史
 			AnzhenInputValueMethod.inputValueByVariableType(driver, "crf-data-tree_6_span", crfTemplateAnzhenService.getCrfTemplateAnzhenListByBaseName("本次入院前2周内药物治疗史"));
 		}
-
+		
 		// 关闭driver
 		QuitWebDriver.quitWebDriverByPhantomJSDriver(driver);
-
+		
 		return "redirect:/page/ok.html";
 	}
+	
 	
 	/** 
 	* @Title: addCrfTemplateAnzhen_SqWithoutHzxx 

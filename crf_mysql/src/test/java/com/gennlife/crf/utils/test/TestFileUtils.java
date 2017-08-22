@@ -10,17 +10,17 @@ public class TestFileUtils {
 
 	@Test
 	public void fortest() throws Exception {
-		String fileName1="E:\\安贞\\_wm数据json&js\\安贞3w数据_北京长庚_无图片\\2.json";
+		String fileName1="E:\\安贞\\_wm数据json&js\\安贞3w数据_上海交通_有图片_不同id\\1.json";
 		File oldfile = new File(fileName1);
-		String returnValue = FileUtils.readFileAndReturnValue(oldfile, "13100002");
-		String returnValue2 = FileUtils.readFileAndReturnValue(oldfile, "38cca9c1-0830-4518-99d4-b74a58c9b90515dbbc2e934");
+		String returnValue = FileUtils.readFileAndReturnValue(oldfile, "21100003");
+		String returnValue2 = FileUtils.readFileAndReturnValue(oldfile, "50b3b83a-cb39-4406-8dd8-64d29747686615dbb8ab022");
 
-		for (int i = 1; i < 30001; i++) {
-			String substring = returnValue.replace("13100002", 13110000+i+"");
-			File newFile = new File("E:\\安贞\\_wm数据json&js\\安贞3w数据_北京长庚_无图片\\2_"+i+".json");
+		for (int i = 1; i < 101; i++) {
+			String substring = returnValue.replace("21100003", 21110000+i+"");
+			File newFile = new File("E:\\安贞\\_wm数据json&js\\安贞3w数据_上海交通_有图片_不同id\\1_"+i+".json");
 			FileUtils.readFileAndReplaceStrToNewFile(oldfile, returnValue, substring, newFile);
 			
-			String substring2 = returnValue2.replace("38cca9c1-0830-4518-99d4-b74a58c9b90515dbbc2e934", 13110000+i+"-0830-4518-99d4-b74a58c9b90515dbbc2e934");
+			String substring2 = returnValue2.replace("50b3b83a-cb39-4406-8dd8-64d29747686615dbb8ab022", 21110000+i+"-cb39-4406-8dd8-64d29747686615dbb8ab022");
 			FileUtils.readFileAndReplaceStrToNewFile(newFile, returnValue2, substring2, newFile);
 		}
 		

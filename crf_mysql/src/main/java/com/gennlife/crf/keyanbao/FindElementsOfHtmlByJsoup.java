@@ -18,8 +18,8 @@ public class FindElementsOfHtmlByJsoup {
 
 	public static void findElements() throws Exception {
 		
-		//File input = new File("E:\\科研宝\\748045.htm");
-		File input = new File("E:\\科研宝\\748330.htm");
+		File input = new File("E:\\科研宝\\748045.htm");
+		//File input = new File("E:\\科研宝\\748330.htm");
 		Document doc = Jsoup.parse(input, "UTF-8", "http://www.jb51.net/");
 
 		Element content = doc.getElementById("crfpanel");
@@ -30,7 +30,15 @@ public class FindElementsOfHtmlByJsoup {
 		  System.out.println(value);
 		}
 		
-		//System.out.println(doc);
+		System.out.println("-----------------");
+		
+		Elements elementsByClass = content.getElementsByClass("leftlabel td-label");
+		
+		for (Element eb : elementsByClass) {
+		  String value2 = eb.text();
+		  System.out.println(value2);
+		}
+		
 	}
 	
 	

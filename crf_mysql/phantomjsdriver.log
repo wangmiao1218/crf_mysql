@@ -1072,8 +1072,8 @@ ave a unique "key" prop. Check the render method of `UIModal`. See https://fb.me
 [INFO  - 2017-08-23T09:56:41.382Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
 [INFO  - 2017-08-23T10:01:41.382Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
 [INFO  - 2017-08-23T10:06:41.392Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
-cripts/app/patient/patient.list.js?ver=4.3.00.20170717.002:66)
-  dispatch (https://crabyter.sinyoo.net/Scripts/symutiselect/jquery.js:5095)
+[INFO  - 2017-08-23T10:11:41.404Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+)
   handle (https://crabyter.sinyoo.net/Scripts/symutiselect/jquery.js:4766)
   dispatchEvent (:0)
   U (:119)
@@ -1220,9 +1220,8 @@ ating 'f.apply(this, arguments)')
 [INFO  - 2017-08-23T09:56:36.807Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
 [INFO  - 2017-08-23T10:01:36.807Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
 [INFO  - 2017-08-23T10:06:36.807Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
-ts/jquery.easyui.min-1.4.1.js:4848)
-  each (https://crabyter.sinyoo.net/bundles/jquery?v=N9X31oj24lli1uVFpX6uj0M2WdN7GdgMjnvYEUoIx7s1:1)
-  each (https://crabyter.sinyoo.net/bundles/jquery?v=N9X31oj24lli1uVFpX6uj0M2WdN7GdgMjnvYEUoIx7s1:1)
+[INFO  - 2017-08-23T10:11:36.806Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+ each (https://crabyter.sinyoo.net/bundles/jquery?v=N9X31oj24lli1uVFpX6uj0M2WdN7GdgMjnvYEUoIx7s1:1)
   _389 (https://crabyter.sinyoo.net/Scripts/jquery.easyui.min-1.4.1.js:4845)
   init (https://crabyter.sinyoo.net/Scripts/jquery.easyui.min-1.4.1.js:4852)
   (anonymous function) (https://crabyter.sinyoo.net/Scripts/jquery.easyui.min-1.4.1.js:5164)
@@ -1263,8 +1262,8 @@ ts/jquery.easyui.min-1.4.1.js:4848)
 [INFO  - 2017-08-23T09:56:09.725Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
 [INFO  - 2017-08-23T10:01:09.726Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
 [INFO  - 2017-08-23T10:06:09.726Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2017-08-23T10:11:09.726Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
 onManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
-[INFO  - 2017-08-23T08:41:52.157Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
 [INFO  - 2017-08-23T08:46:52.157Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
 [INFO  - 2017-08-23T08:51:52.157Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
 [INFO  - 2017-08-23T08:56:52.192Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
@@ -1282,3 +1281,4 @@ onManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up p
 [INFO  - 2017-08-23T09:56:52.259Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
 [INFO  - 2017-08-23T10:01:52.258Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
 [INFO  - 2017-08-23T10:06:52.259Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2017-08-23T10:11:52.259Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW

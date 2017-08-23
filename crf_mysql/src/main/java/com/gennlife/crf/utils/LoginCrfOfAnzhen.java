@@ -185,7 +185,7 @@ public class LoginCrfOfAnzhen {
 
 	
 	/**
-	 * @Title: loginAndToAddByPhantomJSDriver
+	 * @Title: loginAndToAddOfMenZhenAndBasicInfoByPhantomJSDriver
 	 * @Description: 登录并到添加页面,基本信息页面（门诊），通过PhantomJSDriver，无页面显示的方式
 	 * @param: PhantomJSDriver driver :传入driver
 	 * @return: String：返回，登录并到添加页面，成功返回“添加页面”
@@ -240,7 +240,7 @@ public class LoginCrfOfAnzhen {
 	}
 	
 	/**
-	 * @Title: loginAndToAddByPhantomJSDriver
+	 * @Title: loginAndToAddOfZhuYuanAndBasicInfoByPhantomJSDriver
 	 * @Description: 登录并到添加页面,基本信息页面（住院），通过PhantomJSDriver，无页面显示的方式
 	 * @param: PhantomJSDriver driver :传入driver
 	 * @return: String：返回，登录并到添加页面，成功返回“添加页面”
@@ -295,7 +295,7 @@ public class LoginCrfOfAnzhen {
 	}
 	
 	/**
-	 * @Title: loginAndToAddByPhantomJSDriver
+	 * @Title: loginAndToAddOfTiJianAndBasicInfoByPhantomJSDriver
 	 * @Description: 登录并到添加页面,基本信息页面（体检），通过PhantomJSDriver，无页面显示的方式
 	 * @param: PhantomJSDriver driver :传入driver
 	 * @return: String：返回，登录并到添加页面，成功返回“添加页面”
@@ -350,7 +350,7 @@ public class LoginCrfOfAnzhen {
 	}
 	
 	/**
-	 * @Title: loginAndToAddByPhantomJSDriver
+	 * @Title: loginAndToAddOfSheQuAndBasicInfoByPhantomJSDriver
 	 * @Description: 登录并到添加页面,基本信息页面（社区），通过PhantomJSDriver，无页面显示的方式
 	 * @param: PhantomJSDriver driver :传入driver
 	 * @return: String：返回，登录并到添加页面，成功返回“添加页面”

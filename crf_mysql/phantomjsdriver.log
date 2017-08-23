@@ -1153,8 +1153,8 @@ ave a unique "key" prop. Check the render method of `UIModal`. See https://fb.me
 [INFO  - 2017-08-23T09:58:09.508Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
 [INFO  - 2017-08-23T10:03:09.508Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
 [INFO  - 2017-08-23T10:08:09.508Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
-ating 'f.apply(this, arguments)')
-[ERROR - 2017-08-23T07:41:09.203Z] Session [670c9b40-87d6-11e7-9ea3-295e0054a3ec] - page.onError - stack:
+[INFO  - 2017-08-23T10:13:09.544Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+:
   (anonymous function) (https://crabyter.sinyoo.net/Scripts/app/patient/patient.list.js?ver=4.3.00.20170717.002:66)
   dispatch (https://crabyter.sinyoo.net/Scripts/symutiselect/jquery.js:5095)
   handle (https://crabyter.sinyoo.net/Scripts/symutiselect/jquery.js:4766)

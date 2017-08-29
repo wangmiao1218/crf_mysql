@@ -30,6 +30,7 @@ public class FindElementsOfHtmlByJsoup {
 		  System.out.println(value);
 		}
 		
+		
 		System.out.println("-----------------");
 		
 		Elements elementsByClass = content.getElementsByClass("leftlabel td-label");

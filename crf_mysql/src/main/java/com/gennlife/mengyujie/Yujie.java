@@ -37,14 +37,11 @@ public class Yujie{
 				if (excelrxRowNum!=null) {
 					ExcelUtils.writeAndSaveContent(excelrx, exceldcenglish, excelrxRowNum, 3);
 				}
-				
 			}
-			
 		}
-		
-		
 		return "写入完成。。。";
 	}
+	
 	
 	
 }

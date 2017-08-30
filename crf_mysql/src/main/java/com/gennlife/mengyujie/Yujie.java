@@ -19,7 +19,7 @@ public class Yujie{
 		for (int i = 0; i < list.size(); i++) {
 			if (list.get(i)!=null) {
 				//搜索exceldc返回的行号
-				Integer exceldcRowNum = ExcelUtils.searchKeyWordOfList(exceldc, beginCelldc, list.get(i));
+				Integer exceldcRowNum = ExcelUtils.searchKeyWordOfListReturnRowNum(exceldc, beginCelldc, list.get(i));
 				
 				String exceldcenglish = null;
 				if (exceldcRowNum!=null) {
@@ -30,7 +30,7 @@ public class Yujie{
 				Integer excelrxRowNum = null;
 				if (exceldcenglish!=null) {
 					//读excelrx行号
-					excelrxRowNum = ExcelUtils.searchKeyWordOfList(excelrx, beginCellrx, list.get(i));
+					excelrxRowNum = ExcelUtils.searchKeyWordOfListReturnRowNum(excelrx, beginCellrx, list.get(i));
 				}
 				
 				//写入乳腺英文列号3

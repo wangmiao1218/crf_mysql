@@ -1,9 +1,10 @@
 package com.gennlife.mengyujie;
 
 import java.util.List;
-
+import java.util.Map;
 import com.gennlife.crf.bean.Excel;
 import com.gennlife.crf.utils.ExcelUtils;
+import com.gennlife.crf.utils.ListAndStringUtils;
 
 /**
  * @Description:
@@ -12,6 +13,13 @@ import com.gennlife.crf.utils.ExcelUtils;
  */
 public class WriteSchemaCrfTemplateOfMyj {
 
+	/** 
+	* @Title: writeSchema 
+	* @Description: 根据结构，在crf模板中，写入schema路径
+	* @param: @param excelmb 结构的excel
+	* @param: @param excel :要写入的excel
+	* @throws 
+	*/
 	public static void writeSchema(Excel excelmb,Excel excel) {
 		Integer chNameCellNum = ExcelUtils.searchKeyWordOfOneLine(excelmb, 0, "中文名称");
 		Integer enNameCellNum = ExcelUtils.searchKeyWordOfOneLine(excelmb, 0, "英文名称");
@@ -27,20 +35,18 @@ public class WriteSchemaCrfTemplateOfMyj {
 			//判断excel是否存在该sheet
 			if (ExcelUtils.checkSheetOfExcelExist(excel)) {
 				//继续判断为两组还是三组
-				Integer rowNum = ExcelUtils.searchKeyWordOfList(excelmb, chNameCellNum, list.get(i));
+				Integer rowNum = ExcelUtils.searchKeyWordOfListReturnRowNum(excelmb, chNameCellNum, list.get(i));
 				String groupInfo = ExcelUtils.readContent(excelmb, rowNum, groupInfoCellNum);
 				//获取表名
 				String tableName = ExcelUtils.readContent(excelmb, rowNum, enNameCellNum);
 				
 				if ("两组".equals(groupInfo)) {
 					//转到第二组的逻辑
-					System.out.println("两组");
 					writeSchemaOfTwoGroups(excel,tableName);
 				}
 				
 				if ("三组".equals(groupInfo)) {
 					//转到第三组的逻辑
-					System.out.println("三组");
 					writeSchemaOfThreeGroups(excel,tableName);
 				}
 			}
@@ -54,14 +60,107 @@ public class WriteSchemaCrfTemplateOfMyj {
 	}
 	
 	
+	/** 
+	* @Title: writeSchemaOfTwoGroups 
+	* @Description: 两组的情况，在crf模板中，写入schema路径
+	* @param: @param excel 传入excel
+	* @param: @param tableName :传入的表名
+	* @throws 
+	*/
 	public static void writeSchemaOfTwoGroups(Excel excel,String tableName) {
+		Integer twoGroupCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "第二组");
+		Integer chNameCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "属性中文名");
+		Integer enNameCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "英文名");
+		Integer mainKeyCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "__displayMainKey");
+		Integer mainValueCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "__displayMainValue");
+		Integer linkageCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "联动");
 		
+		//获取中文名称一列（用readExcelOfListReturnListMap，因为有重复值）(除表头)
+		List<Map<Integer,String>> list = ExcelUtils.readExcelOfListReturnListMap(excel, linkageCellNum);
+		for (int i = 1; i < list.size(); i++) {
+			Map<Integer, String> map = list.get(i);
+			//定义“联动”列的行号和内容（即：写入值时对应的行号）
+			Integer writeContentRowNum=null;
+			String allString=null;
+			for (Map.Entry<Integer, String> entry : map.entrySet()) {  
+				writeContentRowNum=entry.getKey();
+				allString=entry.getValue();
+			}
+			
+			//分割
+			String[] strings = ListAndStringUtils.trimStringOfEqualSign(allString);
+			
+			//获取字段名的行号及英文名(由于没有重复值，所以使用searchKeyWordOfListReturnRowNum)
+			Integer chNameRowNum = ExcelUtils.searchKeyWordOfListReturnRowNum(excel, chNameCellNum, strings[0]);
+			String fieldEnName = ExcelUtils.readContent(excel, chNameRowNum, enNameCellNum);
+			
+			//获取对应第二组的行号英文名(从所在行号往上查找)
+			Integer twoGroupRowNum = ExcelUtils.searchValueOfListByOrderDescReturnRowNum(excel, writeContentRowNum, twoGroupCellNum);
+			String twoGroupEnName = ExcelUtils.readContent(excel,twoGroupRowNum,enNameCellNum);
+			
+			//最终内容
+			String newContent="schema."+tableName+"."+twoGroupEnName+"."+fieldEnName;
+			System.out.println(newContent);
+			
+			ExcelUtils.writeAndSaveContent(excel, newContent, writeContentRowNum, mainKeyCellNum);
+			ExcelUtils.writeAndSaveContent(excel, strings[1], writeContentRowNum, mainValueCellNum);
+		}
 		
 	}
 	
-	
+
+	/** 
+	* @Title: writeSchemaOfThreeGroups 
+	* @Description: 三组的情况，在crf模板中，写入schema路径
+	* @param: @param excel 传入excel
+	* @param: @param tableName :传入的表名
+	* @throws 
+	*/
 	public static void writeSchemaOfThreeGroups(Excel excel,String tableName) {
+		Integer twoGroupCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "第二组");
+		Integer threeGroupCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "第三组");
+		Integer chNameCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "属性中文名");
+		Integer enNameCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "英文名");
+		Integer mainKeyCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "__displayMainKey");
+		Integer mainValueCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "__displayMainValue");
+		Integer linkageCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "联动");
 		
+		//获取中文名称一列（用readExcelOfListReturnListMap，因为有重复值）(除表头)
+		List<Map<Integer,String>> list = ExcelUtils.readExcelOfListReturnListMap(excel, linkageCellNum);
+		for (int i = 1; i < list.size(); i++) {
+			Map<Integer, String> map = list.get(i);
+			//定义“联动”列的行号和内容（即：写入值时对应的行号）
+			Integer writeContentRowNum=null;
+			String allString=null;
+			for (Map.Entry<Integer, String> entry : map.entrySet()) {  
+				writeContentRowNum=entry.getKey();
+				allString=entry.getValue();
+			}
+			
+			//分割
+			String[] strings = ListAndStringUtils.trimStringOfEqualSign(allString);
+			
+			//获取字段名的行号及英文名(由于没有重复值，所以使用searchKeyWordOfListReturnRowNum)
+			Integer chNameRowNum = ExcelUtils.searchKeyWordOfListReturnRowNum(excel, chNameCellNum, strings[0]);
+			String fieldEnName = ExcelUtils.readContent(excel, chNameRowNum, enNameCellNum);
+			
+			//获取对应第二组的行号英文名(从所在行号往上查找)
+			Integer twoGroupRowNum = null;
+			String twoGroupEnName = null;
+			
+			
+			//获取对应第三组的行号英文名(从所在行号往上查找)
+			Integer threeGroupRowNum = ExcelUtils.searchValueOfListByOrderDescReturnRowNum(excel, writeContentRowNum, twoGroupCellNum);
+			String threeGroupEnName = ExcelUtils.readContent(excel,twoGroupRowNum,enNameCellNum);
+			
+			
+			//最终内容
+			String newContent="schema."+tableName+"."+twoGroupEnName+"."+fieldEnName;
+			System.out.println(newContent);
+			
+			//ExcelUtils.writeAndSaveContent(excel, newContent, writeContentRowNum, mainKeyCellNum);
+			//ExcelUtils.writeAndSaveContent(excel, strings[1], writeContentRowNum, mainValueCellNum);
+		}
 		
 	}
 	

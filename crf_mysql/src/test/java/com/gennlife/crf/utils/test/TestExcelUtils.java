@@ -11,9 +11,33 @@ import com.gennlife.crf.utils.ExcelUtils;
 public class TestExcelUtils {
 	
 	private String filePath = "E:\\yujie\\2";
-	private String fileName = "1.xlsx";
+	private String fileName = "test.xlsx";
 	private String sheetName = "患者信息";
 	
+	
+	@Test
+	public void searchValueOfListBetweenTwoRowNumByOrderDescReturnRowNum(){
+		Excel excel = new Excel(filePath, fileName, sheetName);
+		Integer integer = ExcelUtils.searchValueOfListBetweenTwoRowNumByOrderDescReturnRowNum(excel, 5,15, 0);
+		System.out.println(integer);
+	}
+	
+	@Test
+	public void searchValueOfListByOrderDescReturnRowNum(){
+		Excel excel = new Excel(filePath, fileName, sheetName);
+		Integer integer = ExcelUtils.searchValueOfListByOrderDescReturnRowNum(excel, 20, 0);
+		System.out.println(integer);
+	}
+	
+	
+	@Test
+	public void readExcelOfListReturnListMap(){
+		Excel excel = new Excel(filePath, fileName, sheetName);
+		List<Map<Integer,String>> list = ExcelUtils.readExcelOfListReturnListMap(excel,7);
+		for (int i = 0; i < list.size(); i++) {
+			System.out.println(list.get(i));
+		}
+	}
 	
 	@Test
 	public void checkSheetOfExcelExist(){
@@ -62,7 +86,7 @@ public class TestExcelUtils {
 	@Test
 	public void searchKeyWord(){
 		Excel excel = new Excel(filePath, fileName, sheetName);
-		Integer integer = ExcelUtils.searchKeyWordOfList(excel,0, "性别");
+		Integer integer = ExcelUtils.searchKeyWordOfListReturnRowNum(excel,0, "性别");
 		System.out.println(integer);
 	}
 	

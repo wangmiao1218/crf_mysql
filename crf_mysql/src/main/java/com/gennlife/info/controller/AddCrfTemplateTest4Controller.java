@@ -142,7 +142,7 @@ public class AddCrfTemplateTest4Controller{
 					}
 				}
 				else if ("枚举".contains(ybxxList.get(i).getVariableType())) {
-					new Select(driver.findElementById(ybxxList.get(i).getIdXpath())).selectByValue(ListAndStringUtils.StringListReturnRandomString(ybxxList.get(i).getRangeData()));
+					new Select(driver.findElementById(ybxxList.get(i).getIdXpath())).selectByValue(ListAndStringUtils.stringListReturnRandomString(ybxxList.get(i).getRangeData()));
 				}
 			}
 			// 保存
@@ -173,7 +173,7 @@ public class AddCrfTemplateTest4Controller{
 					}
 				}
 				else if ("枚举".contains(jwsList.get(i).getVariableType())) {
-					new Select(driver.findElementById(jwsList.get(i).getIdXpath())).selectByValue(ListAndStringUtils.StringListReturnRandomString(jwsList.get(i).getRangeData()));
+					new Select(driver.findElementById(jwsList.get(i).getIdXpath())).selectByValue(ListAndStringUtils.stringListReturnRandomString(jwsList.get(i).getRangeData()));
 				}
 			}
 			// 保存
@@ -204,7 +204,7 @@ public class AddCrfTemplateTest4Controller{
 					}
 				}
 				else if ("枚举".contains(jzbsList.get(i).getVariableType())) {
-					new Select(driver.findElementById(jzbsList.get(i).getIdXpath())).selectByValue(ListAndStringUtils.StringListReturnRandomString(jzbsList.get(i).getRangeData()));
+					new Select(driver.findElementById(jzbsList.get(i).getIdXpath())).selectByValue(ListAndStringUtils.stringListReturnRandomString(jzbsList.get(i).getRangeData()));
 				}
 			}
 			// 保存
@@ -235,7 +235,7 @@ public class AddCrfTemplateTest4Controller{
 					}
 				}
 				else if ("枚举".contains(xysList.get(i).getVariableType())) {
-					new Select(driver.findElementById(xysList.get(i).getIdXpath())).selectByValue(ListAndStringUtils.StringListReturnRandomString(xysList.get(i).getRangeData()));
+					new Select(driver.findElementById(xysList.get(i).getIdXpath())).selectByValue(ListAndStringUtils.stringListReturnRandomString(xysList.get(i).getRangeData()));
 				}
 			}
 			// 保存
@@ -266,7 +266,7 @@ public class AddCrfTemplateTest4Controller{
 					}
 				}
 				else if ("枚举".contains(yjsList.get(i).getVariableType())) {
-					new Select(driver.findElementById(yjsList.get(i).getIdXpath())).selectByValue(ListAndStringUtils.StringListReturnRandomString(yjsList.get(i).getRangeData()));
+					new Select(driver.findElementById(yjsList.get(i).getIdXpath())).selectByValue(ListAndStringUtils.stringListReturnRandomString(yjsList.get(i).getRangeData()));
 				}
 			}
 			// 保存
@@ -335,7 +335,7 @@ public class AddCrfTemplateTest4Controller{
 				}
 			}
 			else if ("枚举".contains(rysqkList.get(i).getVariableType())) {
-				new Select(driver.findElementById(rysqkList.get(i).getIdXpath())).selectByValue(ListAndStringUtils.StringListReturnRandomString(rysqkList.get(i).getRangeData()));
+				new Select(driver.findElementById(rysqkList.get(i).getIdXpath())).selectByValue(ListAndStringUtils.stringListReturnRandomString(rysqkList.get(i).getRangeData()));
 			}
 		}
 		// 保存
@@ -366,7 +366,7 @@ public class AddCrfTemplateTest4Controller{
 				}
 			}
 			else if ("枚举".contains(zysqkList.get(i).getVariableType())) {
-				new Select(driver.findElementById(zysqkList.get(i).getIdXpath())).selectByValue(ListAndStringUtils.StringListReturnRandomString(zysqkList.get(i).getRangeData()));
+				new Select(driver.findElementById(zysqkList.get(i).getIdXpath())).selectByValue(ListAndStringUtils.stringListReturnRandomString(zysqkList.get(i).getRangeData()));
 			}
 		}
 		// 保存
@@ -397,7 +397,7 @@ public class AddCrfTemplateTest4Controller{
 				}
 			}
 			else if ("枚举".contains(cysqkList.get(i).getVariableType())) {
-				new Select(driver.findElementById(cysqkList.get(i).getIdXpath())).selectByValue(ListAndStringUtils.StringListReturnRandomString(cysqkList.get(i).getRangeData()));
+				new Select(driver.findElementById(cysqkList.get(i).getIdXpath())).selectByValue(ListAndStringUtils.stringListReturnRandomString(cysqkList.get(i).getRangeData()));
 			}
 		}
 		// 保存
@@ -464,7 +464,7 @@ public class AddCrfTemplateTest4Controller{
 				}
 			}
 			else if ("枚举".contains(rysqkList.get(i).getVariableType())) {
-				new Select(driver.findElementById(rysqkList.get(i).getIdXpath())).selectByValue(ListAndStringUtils.StringListReturnRandomString(rysqkList.get(i).getRangeData()));
+				new Select(driver.findElementById(rysqkList.get(i).getIdXpath())).selectByValue(ListAndStringUtils.stringListReturnRandomString(rysqkList.get(i).getRangeData()));
 			}
 		}
 		// 保存
@@ -495,7 +495,7 @@ public class AddCrfTemplateTest4Controller{
 				}
 			}
 			else if ("枚举".contains(zysqkList.get(i).getVariableType())) {
-				new Select(driver.findElementById(zysqkList.get(i).getIdXpath())).selectByValue(ListAndStringUtils.StringListReturnRandomString(zysqkList.get(i).getRangeData()));
+				new Select(driver.findElementById(zysqkList.get(i).getIdXpath())).selectByValue(ListAndStringUtils.stringListReturnRandomString(zysqkList.get(i).getRangeData()));
 			}
 		}
 		// 保存
@@ -526,7 +526,7 @@ public class AddCrfTemplateTest4Controller{
 				}
 			}
 			else if ("枚举".contains(cysqkList.get(i).getVariableType())) {
-				new Select(driver.findElementById(cysqkList.get(i).getIdXpath())).selectByValue(ListAndStringUtils.StringListReturnRandomString(cysqkList.get(i).getRangeData()));
+				new Select(driver.findElementById(cysqkList.get(i).getIdXpath())).selectByValue(ListAndStringUtils.stringListReturnRandomString(cysqkList.get(i).getRangeData()));
 			}
 		}
 		// 保存
@@ -591,7 +591,7 @@ public class AddCrfTemplateTest4Controller{
 				}
 			}
 			else if ("枚举".contains(sfList.get(i).getVariableType())) {
-				new Select(driver.findElementById(sfList.get(i).getIdXpath())).selectByValue(ListAndStringUtils.StringListReturnRandomString(sfList.get(i).getRangeData()));
+				new Select(driver.findElementById(sfList.get(i).getIdXpath())).selectByValue(ListAndStringUtils.stringListReturnRandomString(sfList.get(i).getRangeData()));
 			}
 		}
 		// 保存
@@ -667,7 +667,7 @@ public class AddCrfTemplateTest4Controller{
 					}
 				}
 				else if ("枚举".contains(ybxxList.get(i).getVariableType())) {
-					new Select(driver.findElementById(ybxxList.get(i).getIdXpath())).selectByValue(ListAndStringUtils.StringListReturnRandomString(ybxxList.get(i).getRangeData()));
+					new Select(driver.findElementById(ybxxList.get(i).getIdXpath())).selectByValue(ListAndStringUtils.stringListReturnRandomString(ybxxList.get(i).getRangeData()));
 				}
 			}
 			// 保存
@@ -698,7 +698,7 @@ public class AddCrfTemplateTest4Controller{
 					}
 				}
 				else if ("枚举".contains(jwsList.get(i).getVariableType())) {
-					new Select(driver.findElementById(jwsList.get(i).getIdXpath())).selectByValue(ListAndStringUtils.StringListReturnRandomString(jwsList.get(i).getRangeData()));
+					new Select(driver.findElementById(jwsList.get(i).getIdXpath())).selectByValue(ListAndStringUtils.stringListReturnRandomString(jwsList.get(i).getRangeData()));
 				}
 			}
 			// 保存
@@ -729,7 +729,7 @@ public class AddCrfTemplateTest4Controller{
 					}
 				}
 				else if ("枚举".contains(jzbsList.get(i).getVariableType())) {
-					new Select(driver.findElementById(jzbsList.get(i).getIdXpath())).selectByValue(ListAndStringUtils.StringListReturnRandomString(jzbsList.get(i).getRangeData()));
+					new Select(driver.findElementById(jzbsList.get(i).getIdXpath())).selectByValue(ListAndStringUtils.stringListReturnRandomString(jzbsList.get(i).getRangeData()));
 				}
 			}
 			// 保存
@@ -760,7 +760,7 @@ public class AddCrfTemplateTest4Controller{
 					}
 				}
 				else if ("枚举".contains(xysList.get(i).getVariableType())) {
-					new Select(driver.findElementById(xysList.get(i).getIdXpath())).selectByValue(ListAndStringUtils.StringListReturnRandomString(xysList.get(i).getRangeData()));
+					new Select(driver.findElementById(xysList.get(i).getIdXpath())).selectByValue(ListAndStringUtils.stringListReturnRandomString(xysList.get(i).getRangeData()));
 				}
 			}
 			// 保存
@@ -791,7 +791,7 @@ public class AddCrfTemplateTest4Controller{
 					}
 				}
 				else if ("枚举".contains(yjsList.get(i).getVariableType())) {
-					new Select(driver.findElementById(yjsList.get(i).getIdXpath())).selectByValue(ListAndStringUtils.StringListReturnRandomString(yjsList.get(i).getRangeData()));
+					new Select(driver.findElementById(yjsList.get(i).getIdXpath())).selectByValue(ListAndStringUtils.stringListReturnRandomString(yjsList.get(i).getRangeData()));
 				}
 			}
 			// 保存
@@ -829,7 +829,7 @@ public class AddCrfTemplateTest4Controller{
 					}
 				}
 				else if ("枚举".contains(rysqkList.get(i).getVariableType())) {
-					new Select(driver.findElementById(rysqkList.get(i).getIdXpath())).selectByValue(ListAndStringUtils.StringListReturnRandomString(rysqkList.get(i).getRangeData()));
+					new Select(driver.findElementById(rysqkList.get(i).getIdXpath())).selectByValue(ListAndStringUtils.stringListReturnRandomString(rysqkList.get(i).getRangeData()));
 				}
 			}
 			// 保存
@@ -859,7 +859,7 @@ public class AddCrfTemplateTest4Controller{
 					}
 				}
 				else if ("枚举".contains(zysqkList.get(i).getVariableType())) {
-					new Select(driver.findElementById(zysqkList.get(i).getIdXpath())).selectByValue(ListAndStringUtils.StringListReturnRandomString(zysqkList.get(i).getRangeData()));
+					new Select(driver.findElementById(zysqkList.get(i).getIdXpath())).selectByValue(ListAndStringUtils.stringListReturnRandomString(zysqkList.get(i).getRangeData()));
 				}
 			}
 			// 保存
@@ -889,7 +889,7 @@ public class AddCrfTemplateTest4Controller{
 					}
 				}
 				else if ("枚举".contains(cysqkList.get(i).getVariableType())) {
-					new Select(driver.findElementById(cysqkList.get(i).getIdXpath())).selectByValue(ListAndStringUtils.StringListReturnRandomString(cysqkList.get(i).getRangeData()));
+					new Select(driver.findElementById(cysqkList.get(i).getIdXpath())).selectByValue(ListAndStringUtils.stringListReturnRandomString(cysqkList.get(i).getRangeData()));
 				}
 			}
 			// 保存
@@ -929,7 +929,7 @@ public class AddCrfTemplateTest4Controller{
 					}
 				}
 				else if ("枚举".contains(rysqkList_mjz.get(i).getVariableType())) {
-					new Select(driver.findElementById(rysqkList_mjz.get(i).getIdXpath())).selectByValue(ListAndStringUtils.StringListReturnRandomString(rysqkList_mjz.get(i).getRangeData()));
+					new Select(driver.findElementById(rysqkList_mjz.get(i).getIdXpath())).selectByValue(ListAndStringUtils.stringListReturnRandomString(rysqkList_mjz.get(i).getRangeData()));
 				}
 			}
 			// 保存
@@ -960,7 +960,7 @@ public class AddCrfTemplateTest4Controller{
 					}
 				}
 				else if ("枚举".contains(zysqkList_mjz.get(i).getVariableType())) {
-					new Select(driver.findElementById(zysqkList_mjz.get(i).getIdXpath())).selectByValue(ListAndStringUtils.StringListReturnRandomString(zysqkList_mjz.get(i).getRangeData()));
+					new Select(driver.findElementById(zysqkList_mjz.get(i).getIdXpath())).selectByValue(ListAndStringUtils.stringListReturnRandomString(zysqkList_mjz.get(i).getRangeData()));
 				}
 			}
 			// 保存
@@ -991,7 +991,7 @@ public class AddCrfTemplateTest4Controller{
 					}
 				}
 				else if ("枚举".contains(cysqkList_mjz.get(i).getVariableType())) {
-					new Select(driver.findElementById(cysqkList_mjz.get(i).getIdXpath())).selectByValue(ListAndStringUtils.StringListReturnRandomString(cysqkList_mjz.get(i).getRangeData()));
+					new Select(driver.findElementById(cysqkList_mjz.get(i).getIdXpath())).selectByValue(ListAndStringUtils.stringListReturnRandomString(cysqkList_mjz.get(i).getRangeData()));
 				}
 			}
 			// 保存
@@ -1028,7 +1028,7 @@ public class AddCrfTemplateTest4Controller{
 					}
 				}
 				else if ("枚举".contains(sfList.get(i).getVariableType())) {
-					new Select(driver.findElementById(sfList.get(i).getIdXpath())).selectByValue(ListAndStringUtils.StringListReturnRandomString(sfList.get(i).getRangeData()));
+					new Select(driver.findElementById(sfList.get(i).getIdXpath())).selectByValue(ListAndStringUtils.stringListReturnRandomString(sfList.get(i).getRangeData()));
 				}
 			}
 			// 保存

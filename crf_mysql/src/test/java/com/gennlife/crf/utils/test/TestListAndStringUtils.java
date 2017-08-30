@@ -1,20 +1,23 @@
 package com.gennlife.crf.utils.test;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.gennlife.crf.utils.ListAndStringUtils;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:spring.xml")
 public class TestListAndStringUtils {
+	
+	@Test
+	public void trimStringOfEqualSign(){
+		String value="有无疾病史=有";
+		String[] strings = ListAndStringUtils.trimStringOfEqualSign(value);
+		System.out.println(strings[0]);
+		System.out.println(strings[1]);
+	}
 	
 	@Test
 	public void StringListReturnRandomString(){
 		String value="I型糖尿病;II型糖尿病";
-		String string = ListAndStringUtils.StringListReturnRandomString(value);
+		String string = ListAndStringUtils.stringListReturnRandomString(value);
 		System.out.println(string);
 	}
 	

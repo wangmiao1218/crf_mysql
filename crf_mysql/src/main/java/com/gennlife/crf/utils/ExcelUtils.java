@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -43,6 +44,55 @@ public class ExcelUtils {
     	Sheet sheet = workbook.getSheet(excel.getSheetName());
     	
     	return sheet==null ? false:true;
+    }  
+    
+    /** 
+     * @Title: readExcelOfListReturnListMap（有重复值时使用）
+     * @Description: 搜索某一个文件中，指定列所有数值，并添加到list中(list中为map，k为行号，v为值)，返回list
+     * @param: Excel excel：传入excel
+     * @param: Integer beginCell：列号（从0 开始）
+     * @return: List<Map<Integer, String>> list中(list中为map，k为行号，v为值)
+     * @throws 
+     */
+    public static List<Map<Integer, String>> readExcelOfListReturnListMap(Excel excel,Integer beginCell) {  
+    	// 构造Workbook
+    	Workbook workbook = excel.getWorkbook();  
+    	
+    	if (workbook == null){
+    		return null;  //不存在
+    	}  
+    	
+    	//获取sheet
+    	Sheet sheet = workbook.getSheet(excel.getSheetName());
+    	
+    	List<Map<Integer, String>> list = new ArrayList<Map<Integer, String>>();
+    	// 循环读取指定列数据
+    	for ( int rowNum= 0; rowNum <= sheet.getLastRowNum(); rowNum++) {
+    		Row row = sheet.getRow(rowNum);
+    		
+    		Cell cell = null;
+    		//判断是否为空
+    		if (row!=null) {
+    			//指定 列beginCell
+    			cell = row.getCell(beginCell);
+    		}
+    		
+    		String value=null;
+    		//判断是否为空
+    		if (cell!=null) {
+    			value = cell.getStringCellValue();
+    		}
+    		
+    		//将值放入list中
+    		if (value!=null && !"".equals(value)) { 
+    			Map<Integer, String> map =new HashMap<Integer, String>();
+    			map.put(rowNum, value);
+    			list.add(map);
+    		}
+    		
+    	}
+    	return list;
+    	
     }  
     
     /** 
@@ -146,15 +196,15 @@ public class ExcelUtils {
 	
     
     /** 
-     * @Title: searchKeyWordOfList 
+     * @Title: searchKeyWordOfListReturnRowNum 
      * @Description: 搜索某一个文件中，指定列，是否包含某个关键字 ,存在返回行号，不存在返回null
      * @param: Excel excel：传入excel
-     * @param: int beginCell：列号（从0 开始）
+     * @param: Integer beginCell：列号（从0 开始）
      * @param: String keyWord：要搜索的关键字
      * @return: Integer：存在返回行号，不存在返回null
      * @throws 
      */
-    public static Integer searchKeyWordOfList(Excel excel,int beginCell,String keyWord) {  
+    public static Integer searchKeyWordOfListReturnRowNum(Excel excel,Integer beginCell,String keyWord) {  
     	//先判断keyWord是否为null
     	if (keyWord ==null) {
     		return null;
@@ -297,6 +347,109 @@ public class ExcelUtils {
     		
     	}
     	return map;
+    	
+    }  
+    
+    /** 
+     * @Title: searchValueOfListByOrderDescReturnRowNum 
+     * @Description: 搜索某一个文件中，指定列,从beginRow行开始，往上遍历，返回第一个有值行号
+     * @param: Excel excel：传入excel
+     * @param: Integer beginRow：行号（从0 开始）
+     * @param: Integer beginCell：列号（从0 开始）
+     * @return: Integer：返回行号
+     * @throws 
+     */
+    public static Integer searchValueOfListByOrderDescReturnRowNum(Excel excel,Integer beginRow,Integer beginCell) {  
+    	// 构造Workbook
+    	Workbook workbook = excel.getWorkbook();  
+    	
+    	if (workbook == null){
+    		return null;  //不存在
+    	}  
+    	
+    	//获取sheet
+    	Sheet sheet = workbook.getSheet(excel.getSheetName());
+    	Integer rowNumInteger=null;
+    	// 循环读取指定列数据
+    	for ( int rowNum =beginRow;rowNum>=0; rowNum--) {
+    		Row row = sheet.getRow(rowNum);
+    		
+    		Cell cell = null;
+    		//判断是否为空
+    		if (row!=null) {
+    			//指定 列beginCell
+    			cell = row.getCell(beginCell);
+    		}
+    		
+    		String value=null;
+    		//判断是否为空
+    		if (cell!=null) {
+    			value = cell.getStringCellValue();
+    		}
+    		
+    		//逆序获取第一个有值，停止
+    		if (value!=null && !"".equals(value)) {
+    			rowNumInteger=rowNum;
+    			break;
+    		}
+    		
+    	}
+    	return rowNumInteger;
+    	
+    }  
+    
+    
+    /** 
+    * @Title: searchValueOfListBetweenTwoRowNumByOrderDescReturnRowNum 
+    * @Description: 搜索某一个文件中，指定列,smallRow和bigRow之间，从bigRow往上到smallRow遍历，返回第一个有值行号，若为空则返回null
+    * @param: @param excel
+    * @param: @param smallRow
+    * @param: @param bigRow
+    * @param: @param beginCell
+    * @return: Integer ：从bigRow往上到smallRow遍历，返回第一个有值行号，若为空则返回null
+    * @throws 
+    */
+    public static Integer searchValueOfListBetweenTwoRowNumByOrderDescReturnRowNum(Excel excel,Integer smallRow,Integer bigRow,Integer beginCell) {  
+    	// 构造Workbook
+    	Workbook workbook = excel.getWorkbook();  
+    	
+    	if (workbook == null){
+    		return null;  //不存在
+    	}  
+    	
+    	//获取sheet
+    	Sheet sheet = workbook.getSheet(excel.getSheetName());
+    	Integer rowNumInteger=null;
+    	// 循环读取指定列数据
+    	for ( int rowNum =bigRow;rowNum >= smallRow; rowNum--) {
+    		Row row = sheet.getRow(rowNum);
+    		
+    		Cell cell = null;
+    		//判断是否为空
+    		if (row!=null) {
+    			//指定 列beginCell
+    			cell = row.getCell(beginCell);
+    		}
+    		
+    		String value=null;
+    		//判断是否为空
+    		if (cell!=null) {
+    			value = cell.getStringCellValue();
+    		}
+    		
+    		//逆序获取第一个有值，停止
+    		if (value!=null && !"".equals(value)) {
+    			rowNumInteger=rowNum;
+    			break;
+    		}
+    		
+    		//若value为空，则返回null
+    		if (value==null) {
+    			rowNumInteger=null;
+			}
+    		
+    	}
+    	return rowNumInteger;
     	
     }  
     

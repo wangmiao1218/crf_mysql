@@ -51,15 +51,30 @@ public class ListAndStringUtils {
 		return sb.toString();
 	}
 	
+	/** 
+	* @Title: trimStringOfEqualSign 
+	* @Description: 将字符串用=分割，然后去掉空格，返回数组
+	* @param: @param value
+	* @return: String[]
+	* @throws 
+	*/
+	public static String[] trimStringOfEqualSign(String value){
+		String[] strings = value.split("=");
+		for (int i = 0; i < strings.length; i++) {
+			strings[i]=strings[i].trim();
+		}
+		return strings;
+	}
+	
 	
 	/** 
-	* @Title: StringListReturnRandomString 
+	* @Title: stringListReturnRandomString 
 	* @Description: 将string从数据库中取出，转为list，随机取出list中元素
 	* @param: @param value
 	* @return: String
 	* @throws 
 	*/
-	public static String StringListReturnRandomString(String value){
+	public static String stringListReturnRandomString(String value){
 		//将list取出分隔后，随机生成list
 		String[] strings = value.split(";");
 		// 存放内容的集合  

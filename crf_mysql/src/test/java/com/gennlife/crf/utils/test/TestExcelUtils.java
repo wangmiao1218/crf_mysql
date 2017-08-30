@@ -16,6 +16,13 @@ public class TestExcelUtils {
 	
 	
 	@Test
+	public void checkSheetOfExcelExist(){
+		Excel excel = new Excel(filePath, fileName, sheetName);
+		String value = ExcelUtils.checkSheetOfExcelExist(excel);
+		System.out.println(value);
+	}
+	
+	@Test
 	public void searchValueOfListByOrderDesc(){
 		Excel excel = new Excel(filePath, fileName, sheetName);
 		Map<Integer, String> map = ExcelUtils.searchValueOfListByOrderDesc(excel,19, 0);
@@ -45,7 +52,7 @@ public class TestExcelUtils {
 	@Test
 	public void readExcelOfList(){
 		Excel excel = new Excel(filePath, fileName, sheetName);
-		List<String> list = ExcelUtils.readExcelOfList(excel,1);
+		List<String> list = ExcelUtils.readExcelOfList(excel,7);
 		for (int i = 0; i < list.size(); i++) {
 			System.out.println(list.get(i));
 		}
@@ -72,4 +79,5 @@ public class TestExcelUtils {
 		String string = ExcelUtils.readTwoContentAndJudge(excel, 8, 2, 5);
 		System.out.println(string);
 	}
+	
 }

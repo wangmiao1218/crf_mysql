@@ -24,15 +24,14 @@ import com.gennlife.crf.bean.Excel;
  */
 public class ExcelUtils {
 
-	 /** 
-    * @Title: readExcelOfList 
-    * @Description: 搜索某一个文件中，指定列所有数值，并添加到list中，返回list
-    * @param: Excel excel：传入excel
-    * @param: int beginCell：列号（从0 开始）
-    * @return: List<String>
+    /** 
+    * @Title: checkSheetOfExcelExist 
+    * @Description: 搜索某一个文件中,指定sheet是否存在，存在返回名称，不存在返回null
+    * @param: Excel excel
+    * @return: String ：存在返回名称，不存在返回null
     * @throws 
     */
-    public static List<String> readExcelOfList(Excel excel,int beginCell) {  
+    public static String checkSheetOfExcelExist(Excel excel) {  
         // 构造Workbook
     	Workbook workbook = excel.getWorkbook();  
   
@@ -41,34 +40,56 @@ public class ExcelUtils {
         }  
         
         //获取sheet
-		Sheet sheet = workbook.getSheet(excel.getSheetName());
-		
-		List<String> list = new ArrayList<String>();
-       // 循环读取指定列数据
- 		for ( int rowNum= 0; rowNum <= sheet.getLastRowNum(); rowNum++) {
- 			Row row = sheet.getRow(rowNum);
- 			
- 			Cell cell = null;
- 			//判断是否为空
- 			if (row!=null) {
- 				//指定 列beginCell
- 	 			cell = row.getCell(beginCell);
-			}
- 			
- 			String value=null;
- 			//判断是否为空
- 			if (cell!=null) {
- 				value = cell.getStringCellValue();
-			}
- 			
- 			//将值放入list中
- 			if (value!=null) {  
- 				list.add(value);
- 			}
- 			
- 		}
-		return list;
-
+    	Sheet sheet = workbook.getSheet(excel.getSheetName());
+    	
+    	return sheet==null ? null:excel.getSheetName();
+    }  
+    
+    /** 
+     * @Title: readExcelOfList 
+     * @Description: 搜索某一个文件中，指定列所有数值，并添加到list中，返回list
+     * @param: Excel excel：传入excel
+     * @param: int beginCell：列号（从0 开始）
+     * @return: List<String>
+     * @throws 
+     */
+    public static List<String> readExcelOfList(Excel excel,int beginCell) {  
+    	// 构造Workbook
+    	Workbook workbook = excel.getWorkbook();  
+    	
+    	if (workbook == null){
+    		return null;  //不存在
+    	}  
+    	
+    	//获取sheet
+    	Sheet sheet = workbook.getSheet(excel.getSheetName());
+    	
+    	List<String> list = new ArrayList<String>();
+    	// 循环读取指定列数据
+    	for ( int rowNum= 0; rowNum <= sheet.getLastRowNum(); rowNum++) {
+    		Row row = sheet.getRow(rowNum);
+    		
+    		Cell cell = null;
+    		//判断是否为空
+    		if (row!=null) {
+    			//指定 列beginCell
+    			cell = row.getCell(beginCell);
+    		}
+    		
+    		String value=null;
+    		//判断是否为空
+    		if (cell!=null) {
+    			value = cell.getStringCellValue();
+    		}
+    		
+    		//将值放入list中
+    		if (value!=null && !"".equals(value)) {  
+    			list.add(value);
+    		}
+    		
+    	}
+    	return list;
+    	
     }  
     
 	

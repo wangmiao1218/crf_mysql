@@ -28,10 +28,10 @@ public class ExcelUtils {
     * @Title: checkSheetOfExcelExist 
     * @Description: 搜索某一个文件中,指定sheet是否存在，存在返回名称，不存在返回null
     * @param: Excel excel
-    * @return: String ：存在返回名称，不存在返回null
+    * @return: Boolean ：存在返回true，不存在返回false
     * @throws 
     */
-    public static String checkSheetOfExcelExist(Excel excel) {  
+    public static Boolean checkSheetOfExcelExist(Excel excel) {  
         // 构造Workbook
     	Workbook workbook = excel.getWorkbook();  
   
@@ -42,18 +42,18 @@ public class ExcelUtils {
         //获取sheet
     	Sheet sheet = workbook.getSheet(excel.getSheetName());
     	
-    	return sheet==null ? null:excel.getSheetName();
+    	return sheet==null ? false:true;
     }  
     
     /** 
      * @Title: readExcelOfList 
      * @Description: 搜索某一个文件中，指定列所有数值，并添加到list中，返回list
      * @param: Excel excel：传入excel
-     * @param: int beginCell：列号（从0 开始）
+     * @param: Integer beginCell：列号（从0 开始）
      * @return: List<String>
      * @throws 
      */
-    public static List<String> readExcelOfList(Excel excel,int beginCell) {  
+    public static List<String> readExcelOfList(Excel excel,Integer beginCell) {  
     	// 构造Workbook
     	Workbook workbook = excel.getWorkbook();  
     	

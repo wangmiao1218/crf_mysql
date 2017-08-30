@@ -18,8 +18,8 @@ public class TestExcelUtils {
 	@Test
 	public void checkSheetOfExcelExist(){
 		Excel excel = new Excel(filePath, fileName, sheetName);
-		String value = ExcelUtils.checkSheetOfExcelExist(excel);
-		System.out.println(value);
+		Boolean b = ExcelUtils.checkSheetOfExcelExist(excel);
+		System.out.println(b);
 	}
 	
 	@Test

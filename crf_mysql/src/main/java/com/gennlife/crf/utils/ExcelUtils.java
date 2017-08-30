@@ -6,7 +6,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.commons.collections4.map.HashedMap;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -170,6 +172,110 @@ public class ExcelUtils {
     		}
     	}
     	return returnNum;
+    	
+    }  
+    
+    
+    /** 
+     * @Title: searchValueOfListByOrder 
+     * @Description: 搜索某一个文件中，指定列,从上到下遍历，值返回第一个有值
+     * @param: Excel excel：传入excel
+     * @param: Integer beginCell：列号（从0 开始）
+     * @return: Map<Integer, String>：返回map键值对：行号、值
+     * @throws 
+     */
+    public static Map<Integer, String> searchValueOfListByOrder(Excel excel,Integer beginCell) {  
+    	// 构造Workbook
+    	Workbook workbook = excel.getWorkbook();  
+    	
+    	if (workbook == null){
+    		return null;  //不存在
+    	}  
+    	
+    	//获取sheet
+    	Sheet sheet = workbook.getSheet(excel.getSheetName());
+    	
+    	Map<Integer,String> map = new HashedMap<Integer, String>();
+    	// 循环读取指定列数据
+    	for ( int rowNum= 0; rowNum <= sheet.getLastRowNum(); rowNum++) {
+    		Row row = sheet.getRow(rowNum);
+    		
+    		Cell cell = null;
+    		//判断是否为空
+    		if (row!=null) {
+    			//指定 列beginCell
+    			cell = row.getCell(beginCell);
+    		}
+    		
+    		String value =null;
+    		//判断是否为空
+    		if (cell!=null) {
+    			value = cell.getStringCellValue();
+    		}
+    		
+    		//除去表头
+    		if ("联动".equals(value)) {
+				continue;
+			}
+    		
+    		//获取第一个有值，停止
+    		if (value!=null && !"".equals(value)) {
+    			map.put(rowNum, value);
+				break;
+			}
+    		
+    	}
+    	return map;
+    	
+    }  
+    
+  
+    /** 
+     * @Title: searchValueOfListByOrderDesc 
+     * @Description: 搜索某一个文件中，指定列,从beginRow行开始，往上遍历，返回第一个有值
+     * @param: Excel excel：传入excel
+     * @param: Integer beginRow：行号（从0 开始）
+     * @param: Integer beginCell：列号（从0 开始）
+     * @return: Map<Integer, String>：返回map键值对：行号、值
+     * @throws 
+     */
+    public static Map<Integer, String> searchValueOfListByOrderDesc(Excel excel,Integer beginRow,Integer beginCell) {  
+    	// 构造Workbook
+    	Workbook workbook = excel.getWorkbook();  
+    	
+    	if (workbook == null){
+    		return null;  //不存在
+    	}  
+    	
+    	//获取sheet
+    	Sheet sheet = workbook.getSheet(excel.getSheetName());
+    	
+        Map<Integer,String> map = new HashedMap<Integer, String>();
+    	// 循环读取指定列数据
+    	for ( int rowNum =beginRow;rowNum>=0; rowNum--) {
+    		Row row = sheet.getRow(rowNum);
+    		
+    		Cell cell = null;
+    		//判断是否为空
+    		if (row!=null) {
+    			//指定 列beginCell
+    			cell = row.getCell(beginCell);
+    		}
+    		
+    		String value=null;
+    		//判断是否为空
+    		if (cell!=null) {
+    			value = cell.getStringCellValue();
+    		}
+    		
+    		//逆序获取第一个有值，停止
+    		if (value!=null && !"".equals(value)) {
+    			map.put(rowNum, value);
+				break;
+			}
+    		
+    	}
+    	return map;
     	
     }  
     

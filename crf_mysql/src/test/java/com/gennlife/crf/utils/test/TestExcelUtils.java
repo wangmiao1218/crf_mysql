@@ -1,6 +1,7 @@
 package com.gennlife.crf.utils.test;
 
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Test;
 
@@ -9,9 +10,30 @@ import com.gennlife.crf.utils.ExcelUtils;
 
 public class TestExcelUtils {
 	
-	private String filePath = "E:\\yujie";
-	private String fileName = "英文版乳腺癌2.xlsx";
+	private String filePath = "E:\\yujie\\2";
+	private String fileName = "1.xlsx";
 	private String sheetName = "患者信息";
+	
+	
+	@Test
+	public void searchValueOfListByOrderDesc(){
+		Excel excel = new Excel(filePath, fileName, sheetName);
+		Map<Integer, String> map = ExcelUtils.searchValueOfListByOrderDesc(excel,19, 0);
+		
+		for (Map.Entry<Integer, String> entry : map.entrySet()) {  
+			System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue());  
+		}
+	}
+	
+	@Test
+	public void searchValueOfListByOrder(){
+		Excel excel = new Excel(filePath, fileName, sheetName);
+		Map<Integer, String> map = ExcelUtils.searchValueOfListByOrder(excel, 7);
+		
+		for (Map.Entry<Integer, String> entry : map.entrySet()) {  
+			System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue());  
+		}
+	}
 	
 	@Test
 	public void searchKeyWordOfOneLine(){
@@ -21,7 +43,7 @@ public class TestExcelUtils {
 	}
 	
 	@Test
-	public void readExcelOfLine(){
+	public void readExcelOfList(){
 		Excel excel = new Excel(filePath, fileName, sheetName);
 		List<String> list = ExcelUtils.readExcelOfList(excel,1);
 		for (int i = 0; i < list.size(); i++) {

@@ -145,17 +145,21 @@ public class WriteSchemaCrfTemplateOfMyj {
 			String fieldEnName = ExcelUtils.readContent(excel, chNameRowNum, enNameCellNum);
 			
 			//获取对应第二组的行号英文名(从所在行号往上查找)
-			Integer twoGroupRowNum = null;
-			String twoGroupEnName = null;
+			Integer twoGroupRowNum = ExcelUtils.searchValueOfListByOrderDescReturnRowNum(excel, writeContentRowNum, twoGroupCellNum);
+			String twoGroupEnName = ExcelUtils.readContent(excel,twoGroupRowNum,enNameCellNum);
 			
-			
-			//获取对应第三组的行号英文名(从所在行号往上查找)
-			Integer threeGroupRowNum = ExcelUtils.searchValueOfListByOrderDescReturnRowNum(excel, writeContentRowNum, twoGroupCellNum);
-			String threeGroupEnName = ExcelUtils.readContent(excel,twoGroupRowNum,enNameCellNum);
-			
+			//获取对应第三组的行号英文名(从所在行号往上查找，直到到第二组名称的行号)
+			Integer threeGroupRowNum = ExcelUtils.searchValueOfListBetweenTwoRowNumByOrderDescReturnRowNum(excel, twoGroupRowNum, writeContentRowNum, threeGroupCellNum);
 			
 			//最终内容
-			String newContent="schema."+tableName+"."+twoGroupEnName+"."+fieldEnName;
+			String newContent=null;
+			//可能没有第三组情况
+			if (threeGroupRowNum==null) {
+				newContent="schema."+tableName+"."+twoGroupEnName+"."+fieldEnName;
+			}else {
+				String threeGroupEnName = ExcelUtils.readContent(excel,threeGroupRowNum,enNameCellNum);
+				newContent="schema."+tableName+"."+twoGroupEnName+"."+threeGroupEnName+"."+fieldEnName;
+			}
 			System.out.println(newContent);
 			
 			//ExcelUtils.writeAndSaveContent(excel, newContent, writeContentRowNum, mainKeyCellNum);

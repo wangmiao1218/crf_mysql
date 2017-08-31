@@ -2,6 +2,8 @@ package com.gennlife.crf.utils;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -136,6 +138,30 @@ public class FileUtils {
 	}
 	
 	
+	/** 
+	* @Title: copyFile 
+	* @Description: 拷贝文件到另一个目录
+	* @param: @param oldPath
+	* @param: @param newPath
+	* @return: void
+	* @throws 
+	*/
+	public static void copyFile(String oldfile,String newfile) throws Exception {
+		FileInputStream fis = new FileInputStream(oldfile);
+		String path= ListAndStringUtils.stringToSubstringReturnFilePath(newfile);
+		if(!new File(path).exists())   {
+		    new File(path).mkdirs();
+		}
+		
+		FileOutputStream fos = new FileOutputStream(newfile);
+		int len = 0;
+		byte[] buf = new byte[1024];
+		while ((len = fis.read(buf)) != -1) {
+			fos.write(buf, 0, len);
+		}
+		fos.close();
+		fis.close();
+	}
 	
 	
 }

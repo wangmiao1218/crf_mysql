@@ -7,6 +7,20 @@ import com.gennlife.crf.utils.ListAndStringUtils;
 public class TestListAndStringUtils {
 	
 	@Test
+	public void stringToSubstringReturnFilePath(){
+		String value="E:\\yujie\\2\\模板结构-乳腺癌.xlsx";
+		String str = ListAndStringUtils.stringToSubstringReturnFilePath(value);
+		System.out.println(str);
+	}
+	
+	@Test
+	public void stringToSubstringReturnFileName(){
+		String value="E:\\yujie\\2\\test.xlsx";
+		String str = ListAndStringUtils.stringToSubstringReturnFileName(value);
+		System.out.println(str);
+	}
+	
+	@Test
 	public void trimStringOfEqualSign(){
 		String value="有无疾病史=有";
 		String[] strings = ListAndStringUtils.trimStringOfEqualSign(value);

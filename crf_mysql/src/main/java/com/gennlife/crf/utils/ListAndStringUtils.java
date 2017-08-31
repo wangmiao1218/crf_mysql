@@ -6,6 +6,8 @@ import java.util.Random;
 
 import org.openqa.selenium.WebElement;
 
+import com.alibaba.druid.util.StringUtils;
+
 /**
  * @Description: 字符串处理的工具集
  * @author: wangmiao
@@ -99,5 +101,44 @@ public class ListAndStringUtils {
         }  
 		return returnValue;
 	}
+	
+	/** 
+	* @Title: StringToSubstring 
+	* @Description: 将\变成\\后，再将路径中去掉最后一个\\之后，返回filePath
+	* @param: @param value
+	* @return: String
+	* @throws 
+	*/
+	public static String stringReplaceReturnValue(String filePath) {
+		return filePath.replaceAll("\\\\","\\\\\\\\");
+	}
+	
+	/** 
+	 * @Title: StringToSubstring 
+	 * @Description: 将\变成\\后，再将路径中去掉最后一个\\之后，返回filePath
+	 * @param: @param value
+	 * @return: String
+	 * @throws 
+	 */
+	public static String stringToSubstringReturnFilePath(String value) {
+		value= value.replaceAll("\\\\","\\\\\\\\");
+		String fileName = value.substring(value.lastIndexOf("\\")+1);
+		String[] strings = value.split(fileName);
+		strings[0]=strings[0].substring(0, strings[0].length()-2);
+		return strings[0];
+	}
+	
+	/** 
+	 * @Title: strToSubstr 
+	 * @Description: 将\变成\\后，再将路径中去掉最后一个\\之前，只剩下文件名,返回filename
+	 * @param: @param value
+	 * @return: String:只剩下文件名,返回filename
+	 * @throws 
+	 */
+	public static String stringToSubstringReturnFileName(String value) {
+		value= value.replaceAll("\\\\","\\\\\\\\");
+		return value.substring(value.lastIndexOf("\\")+1);
+	}
+	
 	
 }

@@ -100,7 +100,6 @@ public class WriteSchemaCrfTemplateOfMyj {
 			
 			//最终内容
 			String newContent="schema."+tableName+"."+twoGroupEnName+"."+fieldEnName;
-			System.out.println(newContent);
 			
 			ExcelUtils.writeAndSaveContent(excel, newContent, writeContentRowNum, mainKeyCellNum);
 			ExcelUtils.writeAndSaveContent(excel, strings[1], writeContentRowNum, mainValueCellNum);
@@ -160,10 +159,9 @@ public class WriteSchemaCrfTemplateOfMyj {
 				String threeGroupEnName = ExcelUtils.readContent(excel,threeGroupRowNum,enNameCellNum);
 				newContent="schema."+tableName+"."+twoGroupEnName+"."+threeGroupEnName+"."+fieldEnName;
 			}
-			System.out.println(newContent);
 			
-			//ExcelUtils.writeAndSaveContent(excel, newContent, writeContentRowNum, mainKeyCellNum);
-			//ExcelUtils.writeAndSaveContent(excel, strings[1], writeContentRowNum, mainValueCellNum);
+			ExcelUtils.writeAndSaveContent(excel, newContent, writeContentRowNum, mainKeyCellNum);
+			ExcelUtils.writeAndSaveContent(excel, strings[1], writeContentRowNum, mainValueCellNum);
 		}
 		
 	}

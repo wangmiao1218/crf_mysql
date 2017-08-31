@@ -12,8 +12,15 @@ public class TestExcelUtils {
 	
 	private String filePath = "E:\\yujie\\2";
 	private String fileName = "test.xlsx";
-	private String sheetName = "患者信息";
+	private String sheetName = "影像学检查";
 	
+	
+	@Test
+	public void searchKeyWordOfListByOrderDescReturnRowNum(){
+		Excel excel = new Excel(filePath, fileName, sheetName);
+		Integer integer = ExcelUtils.searchKeyWordOfListByOrderDescReturnRowNum(excel,19, 2, "软组织层是否可见液性暗区");
+		System.out.println(integer);
+	}
 	
 	@Test
 	public void searchValueOfListBetweenTwoRowNumByOrderDescReturnRowNum(){

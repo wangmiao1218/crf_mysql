@@ -145,11 +145,11 @@ public class ExcelUtils {
 	
     /** 
     * @Title: searchKeyWordOfOneLine 
-    * @Description: 搜索某一个文件中，指定行，是否包含某个关键字 ,存在返回列号，不存在返回null
+    * @Description: 搜索某一个文件中，指定行，是否包含某个关键字 ,存在返回列号，不存在返回null(若重复，则返回最后一个)
     * @param: Excel excel：传入excel
     * @param: int beginRow：行号（从0 开始）：一般是0，读取表头行
     * @param: String keyWord：要搜索的关键字
-    * @return: Integer ：存在返回列号，不存在返回null
+    * @return: Integer ：存在返回列号，不存在返回null(若重复，则返回最后一个)
     * @throws 
     */
     public static Integer searchKeyWordOfOneLine(Excel excel,int beginRow,String keyWord) {  
@@ -197,11 +197,11 @@ public class ExcelUtils {
     
     /** 
      * @Title: searchKeyWordOfListReturnRowNum 
-     * @Description: 搜索某一个文件中，指定列，是否包含某个关键字 ,存在返回行号，不存在返回null
+     * @Description: 搜索某一个文件中，指定列，是否包含某个关键字 ,存在返回行号，不存在返回null(若重复，则返回最后一个)
      * @param: Excel excel：传入excel
      * @param: Integer beginCell：列号（从0 开始）
      * @param: String keyWord：要搜索的关键字
-     * @return: Integer：存在返回行号，不存在返回null
+     * @return: Integer：存在返回行号，不存在返回null(若重复，则返回最后一个)
      * @throws 
      */
     public static Integer searchKeyWordOfListReturnRowNum(Excel excel,Integer beginCell,String keyWord) {  
@@ -241,6 +241,69 @@ public class ExcelUtils {
     		if (keyWord.equals(value)) {  
     			returnNum= rowNum;
     		}
+    	}
+    	return returnNum;
+    	
+    }  
+    
+    
+    /** 
+     * @Title: searchKeyWordOfListByOrderDescReturnRowNum 
+     * @Description: 搜索某一个文件中，指定列beginCell，从beginRow开始往上找，是否包含某个关键字 ,存在则返回最近的行号，不存在返回null(若重复，则返回往上离着最近的一个)
+     * @param: Excel excel：传入excel
+     * @param: Integer beginRow：行号（从0 开始）
+     * @param: Integer beginCell：列号（从0 开始）
+     * @param: String keyWord：要搜索的关键字
+     * @return: Integer：存在则返回最近的行号，不存在返回null(若重复，则返回往上离着最近的一个)
+     * @throws 
+     */
+    public static Integer searchKeyWordOfListByOrderDescReturnRowNum(Excel excel,Integer beginRow,Integer beginCell,String keyWord) {  
+    	//先判断keyWord是否为null
+    	if (keyWord ==null) {
+    		return null;
+    	}
+    	
+    	// 构造Workbook
+    	Workbook workbook = excel.getWorkbook();  
+    	
+    	if (workbook == null){
+    		return null;  //不存在
+    	}  
+    	
+    	//获取sheet
+    	Sheet sheet = workbook.getSheet(excel.getSheetName());
+    	
+    	Integer returnNum = null;
+    	// 循环读取指定列数据
+    	for ( int rowNum=beginRow; rowNum >= 0; rowNum--) {
+    		Row row = sheet.getRow(rowNum);
+    		
+    		Cell cell = null;
+    		//判断是否为空
+    		if (row!=null) {
+    			//指定 列beginCell
+    			cell = row.getCell(beginCell);
+    		}
+    		
+    		String value=null;
+    		//判断是否为空
+    		if (cell!=null) {
+    			value = cell.getStringCellValue();
+    		}
+    		
+    		//逆序获取第一个有值且相等的，停止
+    		if (value!=null && keyWord.equals(value)) {
+    			returnNum= rowNum;
+    			break;
+    		}
+    		
+    		/*
+    		//若value为空，则返回null
+    		if (value==null && !keyWord.equals(value)) {
+    			returnNum=null;
+			}
+			*/
+    		
     	}
     	return returnNum;
     	

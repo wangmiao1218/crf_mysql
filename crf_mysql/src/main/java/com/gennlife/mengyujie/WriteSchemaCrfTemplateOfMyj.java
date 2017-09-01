@@ -90,7 +90,9 @@ public class WriteSchemaCrfTemplateOfMyj {
 			
 			//分割
 			String[] strings = ListAndStringUtils.trimStringOfEqualSign(allString);
-			
+			if (strings.length==1 || strings.length==0) {
+				break;
+			}
 			//获取=前字段名的行号及英文名(由于有重复值，所以使用searchKeyWordOfListByOrderDescReturnRowNum，逆序查找离着最近的值)
 			Integer chNameRowNum = ExcelUtils.searchKeyWordOfListByOrderDescReturnRowNum(excel, writeContentRowNum, chNameCellNum, strings[0]);
 			String fieldEnName = ExcelUtils.readContent(excel, chNameRowNum, enNameCellNum);
@@ -139,6 +141,9 @@ public class WriteSchemaCrfTemplateOfMyj {
 			
 			//分割
 			String[] strings = ListAndStringUtils.trimStringOfEqualSign(allString);
+			if (strings.length==1 || strings.length==0) {
+				break;
+			}
 			
 			//获取=前字段名的行号及英文名(由于有重复值，所以使用searchKeyWordOfListByOrderDescReturnRowNum，逆序查找离着最近的值)
 			Integer chNameRowNum = ExcelUtils.searchKeyWordOfListByOrderDescReturnRowNum(excel, writeContentRowNum, chNameCellNum, strings[0]);

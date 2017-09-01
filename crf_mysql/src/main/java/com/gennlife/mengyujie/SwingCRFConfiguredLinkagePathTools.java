@@ -31,10 +31,10 @@ import com.gennlife.crf.utils.FileUtils;
 import com.gennlife.crf.utils.ListAndStringUtils;
 
 
-public class TestSwing extends JFrame implements ActionListener {
+public class SwingCRFConfiguredLinkagePathTools extends JFrame implements ActionListener {
 	
     private static final long serialVersionUID = -1189035634361220261L;
-    private static Logger logger = Logger.getLogger(TestSwing.class);   
+    private static Logger logger = Logger.getLogger(SwingCRFConfiguredLinkagePathTools.class);   
     
     JFrame mainframe;
     JPanel panel;
@@ -267,7 +267,7 @@ public class TestSwing extends JFrame implements ActionListener {
     
    
     public static void main(String []args){
-    	TestSwing f = new TestSwing();
+    	SwingCRFConfiguredLinkagePathTools f = new SwingCRFConfiguredLinkagePathTools();
         f.show();
     }
     

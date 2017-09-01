@@ -22,4 +22,11 @@
 
 	<mvc:view-controller path="/login" view-name="../login" />
 	<mvc:view-controller path="/index" view-name="index" />
+	
+	<!-- 配置文件上传解析器 -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="defaultEncoding" value="utf-8" />
+		<property name="maxUploadSize" value="2024000" />
+	</bean>
+	
 </beans>

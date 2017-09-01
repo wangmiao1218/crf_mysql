@@ -145,6 +145,8 @@ public class SwingCRFConfiguredLinkagePathTools extends JFrame implements Action
     public void actionPerformed(ActionEvent event) {
         System.out.println(event.getActionCommand());
         if(event.getSource() == start_button){
+        	//页面显示
+            outtext_textarea.setText("请稍后...");
             //确认对话框弹出       
             int result = JOptionPane.showConfirmDialog(null, "请确认文件处于关闭状态，是否开始执行?", "确认", 0);//YES_NO_OPTION
             if (result == 1) {//是：0，否：1，取消：2
@@ -156,9 +158,6 @@ public class SwingCRFConfiguredLinkagePathTools extends JFrame implements Action
                 JOptionPane.showMessageDialog(null, "路径不能为空", "提示", 2);//弹出提示对话框，warning
                 return;
             }else{
-            	 //页面显示
-                outtext_textarea.setText("正在执行，请稍后(执行过程不要打开文件)...");
-                
                 String infilepath = infilepath_textfield.getText();
                 String infilepath2 = infilepath_textfield2.getText();
                 String outfilepath = outfilepath_textfield.getText();
@@ -204,6 +203,20 @@ public class SwingCRFConfiguredLinkagePathTools extends JFrame implements Action
                 //调用方法结束
                 logger.debug("end..."); 
                
+                //打开输出文件所在文件夹
+                result = JOptionPane.showConfirmDialog(null, "已完成！是否打开输出文件所在文件夹?", "确认", 0);//YES_NO_OPTION
+                if (result == 0) {//是：0，否：1，取消：2
+                    try {
+                        @SuppressWarnings("unused")
+                        //调用cmd方法打开文件夹
+                        Process process = Runtime.getRuntime().exec("cmd.exe  /c start "+filePath);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }   
+                }
+                
+                //打开日志
+               /* 
                 result = JOptionPane.showConfirmDialog(null, "已完成！是否打开日志文件?", "确认", 0);//YES_NO_OPTION
                 if (result == 0) {//是：0，否：1，取消：2
                     try {
@@ -213,6 +226,7 @@ public class SwingCRFConfiguredLinkagePathTools extends JFrame implements Action
                         e.printStackTrace();
                     }   
                 }
+                */
                 //页面显示
                 outtext_textarea.setText("ok...");
             }       

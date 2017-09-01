@@ -91,14 +91,20 @@ public class WriteSchemaCrfTemplateOfMyj {
 			//分割
 			String[] strings = ListAndStringUtils.trimStringOfEqualSign(allString);
 			if (strings.length==1 || strings.length==0) {
-				break;
+				continue;
 			}
 			//获取=前字段名的行号及英文名(由于有重复值，所以使用searchKeyWordOfListByOrderDescReturnRowNum，逆序查找离着最近的值)
 			Integer chNameRowNum = ExcelUtils.searchKeyWordOfListByOrderDescReturnRowNum(excel, writeContentRowNum, chNameCellNum, strings[0]);
+			if (chNameRowNum==null) {
+				continue;
+			}
 			String fieldEnName = ExcelUtils.readContent(excel, chNameRowNum, enNameCellNum);
 			
 			//获取对应第二组的行号英文名(从上面字段名所在行号，往上查找，查最近一个有值的)
 			Integer twoGroupRowNum = ExcelUtils.searchValueOfListByOrderDescReturnRowNum(excel, chNameRowNum, twoGroupCellNum);
+			if (twoGroupRowNum==null) {
+				continue;
+			}
 			String twoGroupEnName = ExcelUtils.readContent(excel,twoGroupRowNum,enNameCellNum);
 			
 			//最终内容
@@ -142,15 +148,21 @@ public class WriteSchemaCrfTemplateOfMyj {
 			//分割
 			String[] strings = ListAndStringUtils.trimStringOfEqualSign(allString);
 			if (strings.length==1 || strings.length==0) {
-				break;
+				continue;
 			}
 			
 			//获取=前字段名的行号及英文名(由于有重复值，所以使用searchKeyWordOfListByOrderDescReturnRowNum，逆序查找离着最近的值)
 			Integer chNameRowNum = ExcelUtils.searchKeyWordOfListByOrderDescReturnRowNum(excel, writeContentRowNum, chNameCellNum, strings[0]);
+			if (chNameRowNum==null) {
+				continue;
+			}
 			String fieldEnName = ExcelUtils.readContent(excel, chNameRowNum, enNameCellNum);
 			
 			//获取对应第二组的行号、英文名(从上面字段名所在行号，往上查找，查最近一个有值的)
 			Integer twoGroupRowNum = ExcelUtils.searchValueOfListByOrderDescReturnRowNum(excel, chNameRowNum, twoGroupCellNum);
+			if (twoGroupRowNum==null) {
+				continue;
+			}
 			String twoGroupEnName = ExcelUtils.readContent(excel,twoGroupRowNum,enNameCellNum);
 			
 			//获取对应第三组的行号、英文名(从上面字段名所在行号，往上查找，查最近一个有值的，直到到第二组名称的行号)

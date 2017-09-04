@@ -35,20 +35,12 @@ jQuery.extend({
 				jQuery('<input type="hidden" name="' + i + '" value="' + data[i] + '" />').appendTo(form);
 			}			
 		}		
-		/*改源码，支持多文件上传
 		var oldElement = jQuery('#' + fileElementId);
 		var newElement = jQuery(oldElement).clone();
 		jQuery(oldElement).attr('id', fileId);
 		jQuery(oldElement).before(newElement);
 		jQuery(oldElement).appendTo(form);
-		 */
-		 for(var i in fileElementId){  
-            var oldElement = jQuery('#' + fileElementId[i]);  
-            var newElement = jQuery(oldElement).clone();  
-            jQuery(oldElement).attr('id', fileId);  
-            jQuery(oldElement).before(newElement);  
-            jQuery(oldElement).appendTo(form);  
-	     }   
+
 
 		
 		// set attributes

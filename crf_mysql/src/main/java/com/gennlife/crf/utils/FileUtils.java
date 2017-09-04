@@ -3,6 +3,7 @@ package com.gennlife.crf.utils;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -61,57 +62,57 @@ public class FileUtils {
 
 	}
 
-	
-	/** 
-	* @Title: readFileAndReplaceToNewFile 
-	* @Description: 按行读取文件，读取包含oldStr的行，替换为replaceStr，并另存为一个新文件
-	* @param: File oldfile：旧文件
-	* @param: String oldStr：旧的值
-	* @param: String replaceStr：替换后的值
-	* @param: File newFlie :新的文件
-	* @return: void
-	* @throws 
-	*/
-	public static void readFileAndReplaceStrToNewFile(File oldfile, String oldStr,String replaceStr,File newFlie) {
+	/**
+	 * @Title: readFileAndReplaceToNewFile
+	 * @Description: 按行读取文件，读取包含oldStr的行，替换为replaceStr，并另存为一个新文件
+	 * @param: File oldfile：旧文件
+	 * @param: String oldStr：旧的值
+	 * @param: String replaceStr：替换后的值
+	 * @param: File newFlie :新的文件
+	 * @return: void
+	 * @throws
+	 */
+	public static void readFileAndReplaceStrToNewFile(File oldfile,String oldStr, String replaceStr, File newFlie) {
 		String str = null;
 		// 读取文件
 		FileReader fr = null;
 		BufferedReader br = null;
-		
-		//写入文件
+
+		// 写入文件
 		FileWriter fw = null;
 		try {
 			fr = new FileReader(oldfile);
 			br = new BufferedReader(fr);
 
-			//定义StringBuffer
+			// 定义StringBuffer
 			StringBuffer buf = new StringBuffer();
-			
+
 			// 保存该行前面的内容
-			for (int i = 1; (str = br.readLine()) != null && !str.contains(oldStr); i++) {
+			for (int i = 1; (str = br.readLine()) != null
+					&& !str.contains(oldStr); i++) {
 				buf = buf.append(str);
 				buf = buf.append(System.getProperty("line.separator"));
 			}
-			
+
 			// 将内容插入
 			buf = buf.append(replaceStr);
-			
+
 			// 保存该行后面的内容
 			while ((str = br.readLine()) != null) {
 				buf = buf.append(System.getProperty("line.separator"));
 				buf = buf.append(str);
 			}
 
-			//保存另一个文件
+			// 保存另一个文件
 			fw = new FileWriter(newFlie);
 			PrintWriter pw = new PrintWriter(fw);
 			pw.write(buf.toString().toCharArray());
 			pw.flush();
 			pw.close();
-			
+
 		} catch (IOException e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			try {
 				if (br != null) {
 					br.close();
@@ -125,7 +126,7 @@ public class FileUtils {
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
-			}	
+			}
 			try {
 				if (fw != null) {
 					fw.close();
@@ -134,25 +135,26 @@ public class FileUtils {
 				e.printStackTrace();
 			}
 		}
-		
+
 	}
-	
-	
-	/** 
-	* @Title: copyFile 
-	* @Description: 拷贝文件到另一个目录
-	* @param: @param oldPath
-	* @param: @param newPath
-	* @return: void
-	* @throws 
-	*/
-	public static void copyFile(String oldfile,String newfile) throws Exception {
+
+	/**
+	 * @Title: copyFile
+	 * @Description: 拷贝文件到另一个目录
+	 * @param: @param oldPath
+	 * @param: @param newPath
+	 * @return: void
+	 * @throws
+	 */
+	public static void copyFile(String oldfile, String newfile)
+			throws Exception {
 		FileInputStream fis = new FileInputStream(oldfile);
-		String path= ListAndStringUtils.stringToSubstringReturnFilePath(newfile);
-		if(!new File(path).exists())   {
-		    new File(path).mkdirs();
+		String path = ListAndStringUtils
+				.stringToSubstringReturnFilePath(newfile);
+		if (!new File(path).exists()) {
+			new File(path).mkdirs();
 		}
-		
+
 		FileOutputStream fos = new FileOutputStream(newfile);
 		int len = 0;
 		byte[] buf = new byte[1024];
@@ -162,6 +164,37 @@ public class FileUtils {
 		fos.close();
 		fis.close();
 	}
-	
-	
+
+	/** 
+	* @Title: deleteFile 
+	* @Description: 删除某个文件夹下的所有文件夹和文件
+	* @param: @param delpath：文件绝对路径
+	* @param: @return
+	* @return: boolean
+	* @throws 
+	*/
+	public static boolean deleteFile(String delpath) throws Exception {
+		try {
+			File file = new File(delpath);
+			if (!file.isDirectory()) {
+				file.delete();
+			} else if (file.isDirectory()) {
+				File[] fileList = file.listFiles();
+				for (int i = 0; i < fileList.length; i++) {
+					File delfile = fileList[i];
+					if (!delfile.isDirectory()) {
+						delfile.delete();
+					} else if (delfile.isDirectory()) {
+						deleteFile(fileList[i].getPath());
+					}
+				}
+				//不删文件夹
+				//file.delete();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return true;
+	}
+
 }

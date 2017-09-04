@@ -78,33 +78,23 @@
 <body>
     <div class="asideR-cont">
         <div class="add-cnt">
-       	 <form action="" id="userMesForm" method="post">
-            <ul class="add-lst">
-              <li>
-                 <label class="lbl-txt">模板结构(Excel):</label>
-                 <div class="upload-box">
-                     <input type="text" class="input-text" id="path" />
-                     <!-- file的标签 -->
-                     <input type="file" class="file-upload" id="uploadFile" name="uploadFile" />
-                     <button class="browse-btn">浏览</button>
-                     <button class="upload-btn" id="upload-btn" onclick="upload()" >上传</button>
-                 </div>
-                 </br>
-                 </br> 
-                 <label class="lbl-txt">单病种模板(Excel):</label>
-                 <div class="upload-box">
-                     <input type="text" class="input-text" id="path2" />
-                    <!--  file的标签 -->
-                     <input type="file" class="file-upload" id="uploadFile2" name="uploadFile" />
-                     <button class="browse-btn">浏览</button>
-                     <button class="upload-btn" id="upload-btn2" onclick="upload()" >上传</button>
-                 </div>
-             </li>
-            </ul>
-         </form>
-            <div class="form-aciton">
-                <button class="submit-btn" onclick="saveUser()">开始处理</button>
-            </div>
+	        <form action="<%=rootPath %>/linkagePathController/uploadFiles" method="post" enctype="multipart/form-data">  
+	    		<ul class="add-lst">
+	     			<li>
+				        <label class="lbl-txt">模板结构(Excel):</label>
+				    	<input type="file" id="uploadFile" name="files"> 
+				    	<br><br>
+				    	<label class="lbl-txt">单病种模板(Excel):</label>
+				    	<input type="file" id="uploadFile2" name="files"> 
+				    	<br><br>
+				    	<p style="color:red;margin-left:20px">若传错，则重新选择新文件，点击上传即可。</p>
+			   		</li>
+	        	</ul>
+	    	</form> 
+	        <div class="form-aciton" style="margin-left:40px">
+	        	<button class="upload-btn" id="upload-btn" onclick="upload()" >上传文件</button>
+	            <button class="submit-btn" onclick="saveUser()">开始处理</button>
+	        </div>
         </div>
     </div>
 	<!--上传  -->

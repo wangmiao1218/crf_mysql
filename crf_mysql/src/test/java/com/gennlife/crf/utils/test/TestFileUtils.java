@@ -9,6 +9,12 @@ import com.gennlife.crf.utils.FileUtils;
 public class TestFileUtils {
 
 	@Test
+	public void deleteFile() throws Exception {
+		String delpath="F:\\uploadFile\\test\\";
+		FileUtils.deleteFile(delpath);
+	}
+	
+	@Test
 	public void copyFile() throws Exception {
 		String oldfile="E:\\yujie\\2\\模板结构-乳腺癌.xlsx";
 		String newfile="E:\\yujie\\2\\out\\模板结构-乳腺癌.xlsx";

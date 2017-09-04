@@ -13,7 +13,7 @@ Ext.require([
 
 var data, store, columns, queryGrid,pager;
 Ext.onReady(function(){
-	initCombo();
+	//initCombo();
     onfocus();
     //initButton();
     //initCombo("simpleCombo");
@@ -21,6 +21,7 @@ Ext.onReady(function(){
 });
 
 //初始化下拉框
+/*
 function initCombo(){
 	// 生成下拉框数据源
     var store = Ext.create('Ext.data.Store', {
@@ -71,7 +72,7 @@ function initCombo(){
         
     });
 }
-
+*/
 
  //点击保存按钮
 function saveUser(){
@@ -125,43 +126,33 @@ function qtips(value, cellmeta, record, rowIndex, colIndex, store){
 function upload() {
 	var f = $("#uploadFile").val();
 	if (f == "") {// 先判断是否已选择了文件
-		alert("请选择文件！");
+		alert("请选择模板结构(Excel)文件！");
 		return false;
 	}
+	var f2 = $("#uploadFile2").val();
+	if (f2 == "") {// 先判断是否已选择了文件
+		alert("请选择单病种模板(Excel)文件！");
+		return false;
+	}
+	
+	//获取file的全部id  
+    var fileslist = $("input[name^=files]");  
+    var filesId = [];  
+    for (var i=0; i< fileslist.length; i++){  
+	    if(fileslist[i].value){  
+	    	filesId[i] = fileslist[i].id;  
+	    }  
+    }
+	//也可以直接写死id的数组
+    //var filesId=['uploadFile','uploadFile2'];
+	
 	$.ajaxFileUpload({
-		url : rootPath + '/linkagePathController/uploadFile',
+		url : rootPath + '/linkagePathController/uploadFiles',
 		type : 'post',
 		dataType : 'text',
 		// 对应file标签的id
-		fileElementId : "uploadFile",
-		data : {
-			
-		},
-		success : function(data) {
-			alert("上传成功！");
-		},
-		error : function(data) {
-			alert("上传失败");
-		}
-	});
-}
-/*=======================*/
-/**
- * 文件上传2
- * @returns {Boolean}
- */
-function upload() {
-	var f = $("#uploadFile2").val();
-	if (f == "") {// 先判断是否已选择了文件
-		alert("请选择文件！");
-		return false;
-	}
-	$.ajaxFileUpload({
-		url : rootPath + '/linkagePathController/uploadFile',
-		type : 'post',
-		dataType : 'text',
-		// 对应file标签的id
-		fileElementId : "uploadFile2",
+		//若多个，写成数组
+		fileElementId : filesId,
 		data : {
 			
 		},

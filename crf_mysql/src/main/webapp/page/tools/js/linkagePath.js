@@ -13,7 +13,7 @@ Ext.require([
 
 var data, store, columns, queryGrid,pager;
 Ext.onReady(function(){
-	initCombo();
+	//initCombo();
     onfocus();
     //initButton();
     //initCombo("simpleCombo");
@@ -21,6 +21,7 @@ Ext.onReady(function(){
 });
 
 //初始化下拉框
+/*
 function initCombo(){
 	// 生成下拉框数据源
     var store = Ext.create('Ext.data.Store', {
@@ -71,48 +72,22 @@ function initCombo(){
         
     });
 }
+*/
 
+ //开始处理按钮
+function dealFile(){
+	url = rootPath + "/linkagePathController/dealFile";
+	$.ajax({
+        type : "get",// 请求方式
+        url : "url",// 发送请求地址
+        
+        // 请求成功后的回调函数
+		success : function(data) {
+			alert("处理成功！");
+		}
+    });
 
- //点击保存按钮
-function saveUser(){
-	
-	// 判断  新增 / 修改
-	var type = $("#type").val();
-	// 声明要提交的url
-	var url = "";
-	/*
-	if(type == "add"){
-		url = rootPath + "/user/addUser";
-		$("#userMesForm").attr("action",url);
-	}else{
-		url = rootPath + "/user/modifyUser";
-		$("#userMesForm").attr("action",url);
-	}
-	$("#userMesForm").submit();*/
-
-	if(type == "add"){
-		url = rootPath + "/user/addUser";
-	}else{
-		url = rootPath + "/user/modifyUser";
-	}
-	
-	// ajax 方式提交表单
-	//1、获取表单参数
-	var data = $("#userMesForm").serialize();
-	var type = "json";
-	$.post(url,data,function(result){
-		alert("新增成功");
-		//手动跳转页面
-		window.location.href = rootPath + "/page/user/userMgnt.jsp";
-	},type);
-	
-	alert("修改成功");
-	//手动跳转页面
-	window.location.href = rootPath + "/page/user/userMgnt.jsp";
-	
 }
-
-
 
 /*
 * 提示文字
@@ -126,24 +101,35 @@ function qtips(value, cellmeta, record, rowIndex, colIndex, store){
  * @returns {Boolean}
  */
 function upload() {
-	var ext = '.jpg.jpeg.gif.bmp.png.';
 	var f = $("#uploadFile").val();
 	if (f == "") {// 先判断是否已选择了文件
-		alert("请选择文件！");
+		alert("请选择模板结构(Excel)文件！");
 		return false;
 	}
-	f = f.substr(f.lastIndexOf('.') + 1).toLowerCase();
-	if (ext.indexOf('.' + f + '.') == -1) {
-		alert("图片格式不正确！");
+	var f2 = $("#uploadFile2").val();
+	if (f2 == "") {// 先判断是否已选择了文件
+		alert("请选择单病种模板(Excel)文件！");
 		return false;
 	}
-
+	
+	//获取file的全部id  
+    var fileslist = $("input[name^=files]");  
+    var filesId = [];  
+    for (var i=0; i< fileslist.length; i++){  
+	    if(fileslist[i].value){  
+	    	filesId[i] = fileslist[i].id;  
+	    }  
+    }
+	//也可以直接写死id的数组
+    //var filesId=['uploadFile','uploadFile2'];
+	
 	$.ajaxFileUpload({
-		url : rootPath + '/user/uploadFile',
+		url : rootPath + '/crfLinkagePathController/uploadFiles',
 		type : 'post',
 		dataType : 'text',
 		// 对应file标签的id
-		fileElementId : "uploadFile",
+		//若多个，写成数组
+		fileElementId : filesId,
 		data : {
 			
 		},

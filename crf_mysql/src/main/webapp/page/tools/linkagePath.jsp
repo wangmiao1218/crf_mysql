@@ -97,8 +97,8 @@
         </div>
     </div>
 	<!--上传  -->
-    <script src="<%=rootPath %>/page/tools/js/linkagePath.js"></script>
-    
+    <script type="text/javascript" src="<%=rootPath %>/res/jquery/plugins/jquery.ajaxfileupload.js"></script>
+	<script src="<%=rootPath %>/page/tools/js/linkagePath.js"></script>
 </body>
 
 </html>

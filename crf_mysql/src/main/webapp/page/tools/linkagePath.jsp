@@ -75,6 +75,10 @@
 	</script>
 </head>
 <body>
+	<!-- 遮蔽罩-->
+	<div id="myShow" style="position:absolute; top:2%; left:2%; display: none;" >  
+       <img style="width:310px; height:310px;" src="<%=rootPath %>/theme/gray/images/loading.gif"/>
+    </div> 
     <div class="asideR-cont">
         <div class="add-cnt">
 	        <form action="" method="post" enctype="multipart/form-data">  
@@ -90,9 +94,6 @@
 			   		</li>
 	        	</ul>
 	    	</form> 
-	    	<%-- <div id="myShow" style="display:none;">
-       	 		<img alt="loading" src="<%=rootPath %>/theme/gray/images/loading.gif"/>
-    		</div> --%>
 	        <div class="form-aciton" style="margin-left:40px">
 	        	<button class="upload-btn" id="upload-btn" onclick="upload()" >上传文件</button>
 	            <button class="submit-btn" id="dealButton" onclick="dealFile()">开始处理</button>

@@ -83,7 +83,7 @@ function dealFile(){
         dataType : 'json',
         //加遮蔽罩
         beforeSend: function () {
-        	 $("#vvv").append('<img src="<%=rootPath %>/theme/gray/images/loading.gif"');
+        	$("#myShow").show();
         },
         
         // 请求成功后的回调函数
@@ -91,7 +91,7 @@ function dealFile(){
 			alert(data.msg);
 		},
 		complete: function () {
-			$("#vvv").remove();
+			$("#myShow").hide();
         },
 		error : function(data) {
 			alert("处理失败！");

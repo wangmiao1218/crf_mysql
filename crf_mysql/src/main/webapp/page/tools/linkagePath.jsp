@@ -97,6 +97,7 @@
 	        <div class="form-aciton" style="margin-left:40px">
 	        	<button class="upload-btn" id="upload-btn" onclick="upload()" >上传文件</button>
 	            <button class="submit-btn" id="dealButton" onclick="dealFile()">开始处理</button>
+	            <button class="download-btn" id="downloadButton" onclick="download()">下载</button>
 	        </div>
         </div>
     </div>

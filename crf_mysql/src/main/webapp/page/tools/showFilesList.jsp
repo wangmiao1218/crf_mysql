@@ -16,66 +16,12 @@
 	<script type="text/javascript" src="<%=rootPath %>/res/jquery/plugins/jquery.validate.min.js"></script>
 	<script type="text/javascript" src="<%=rootPath %>/res/jquery/plugins/jquery.validate.message_cn.js"></script>
 	<script type="text/javascript">
-		$.validator.setDefaults({
-			// 当表单提交时，验证通过，重新绑定提交方法
-			submitHandler:function(form){
-				// 提交表单
-				//form.submit();
-			}
-		});
-		
-		// 表单验证
-		$().ready(function(){
-			$("#userMesForm").validate({
-				rules:{
-					opName:{
-						required:true,
-						minlength:2
-					},
-					opCode:{
-						required:true
-					},
-					loginCode:{
-						required:true,
-						minlength:5
-					},
-					mobileNo:{
-						required:true,
-						rangelength:[11,11]
-					},
-					emailAdress:{
-						required:true,
-						email:true
-					}
-				},
-				messages:{
-					opName:{
-						required:"请输入操作员名称",
-						minlength:"操作员名称长度需大于2"
-					},
-					opCode:{
-						required:"请输入操作员编码"
-					},
-					loginCode:{
-						required:"请输入登录名",
-						minlength:"登录名必须大于5位"
-					},
-					mobileNo:{
-						required:"请输入手机号",
-						rangelength:"手机号格式不正确"
-					},
-					emailAdress:{
-						required:"请输入邮箱地址",
-						email:"邮箱地址格式不正确"
-					}
-				}
-			});	
-		});
 			
 	</script>
 
 </head>
 <body>
+<h>test</h>
     <div class="asideR-cont">
         <div class="add-cnt">
 	        <!-- 遍历Map集合 -->  

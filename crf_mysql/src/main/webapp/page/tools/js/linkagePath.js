@@ -89,6 +89,8 @@ function dealFile(){
         // 请求成功后的回调函数
 		success : function(data) {
 			alert(data.msg);
+			//手动跳转页面
+			//window.location.href = rootPath + "/crfLinkagePathController/showFilesList";
 		},
 		complete: function () {
 			$("#myShow").hide();
@@ -99,6 +101,23 @@ function dealFile(){
     });
 
 }
+
+/*//下载
+function download(){
+	url = rootPath + "/crfLinkagePathController/showFilesList";
+	$.ajax({
+        type : "get",// 请求方式
+        url : url,// 发送请求地址
+        //dataType : 'json',
+        // 请求成功后的回调函数
+		success : function(data) {
+			alert("ok");
+		},
+		error : function(data) {
+			alert("error");
+		}
+    });
+}*/
 
 /*
 * 提示文字
@@ -159,6 +178,7 @@ function upload() {
 		}
 	});
 }
+
 /*=======================*/
 function onfocus(){
     $("input[type='text']").focus(function(){

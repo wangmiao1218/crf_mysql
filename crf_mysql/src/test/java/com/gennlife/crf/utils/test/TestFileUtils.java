@@ -1,6 +1,8 @@
 package com.gennlife.crf.utils.test;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Test;
 
@@ -9,6 +11,26 @@ import com.gennlife.crf.utils.FileUtils;
 public class TestFileUtils {
 
 	@Test
+	public void getFileNameList(){
+		String delpath="F:\\uploadFile\\1\\";
+		List<String> files = FileUtils.getFileNameList(delpath);
+		System.out.println(files);
+		for (int i = 0; i < files.size(); i++) {
+			System.out.println(files.get(i));
+		}
+	}
+	
+	@Test
+	public void getFilesArrayList(){
+		String delpath="F:\\uploadFile\\out\\";
+		ArrayList<File> files = FileUtils.getFilesArrayList(delpath);
+		System.out.println(files);
+		for (int i = 0; i < files.size(); i++) {
+			System.out.println(files.get(i));
+		}
+	}
+	
+	@Test
 	public void deleteFile() throws Exception {
 		String delpath="F:\\uploadFile\\test\\";
 		FileUtils.deleteFile(delpath);
@@ -16,8 +38,8 @@ public class TestFileUtils {
 	
 	@Test
 	public void copyFile() throws Exception {
-		String oldfile="E:\\yujie\\2\\模板结构-乳腺癌.xlsx";
-		String newfile="E:\\yujie\\2\\out\\模板结构-乳腺癌.xlsx";
+		String oldfile="F:\\uploadFile\\2\\3333.xlsx";
+		String newfile="F:\\uploadFile\\out\\new_3333.xlsx";
 		FileUtils.copyFile(oldfile, newfile);
 	}
 	

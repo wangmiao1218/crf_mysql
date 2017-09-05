@@ -16,7 +16,7 @@
 	<script type="text/javascript" src="<%=rootPath %>/res/jquery/plugins/jquery.validate.min.js"></script>
 	<script type="text/javascript" src="<%=rootPath %>/res/jquery/plugins/jquery.validate.message_cn.js"></script>
 	<script type="text/javascript">
-		$.validator.setDefaults({
+		/* $.validator.setDefaults({
 			// 当表单提交时，验证通过，重新绑定提交方法
 			submitHandler:function(form){
 				// 提交表单
@@ -71,13 +71,13 @@
 				}
 			});	
 		});
-			
+			 */
 	</script>
 </head>
 <body>
     <div class="asideR-cont">
         <div class="add-cnt">
-	        <form action="<%=rootPath %>/linkagePathController/uploadFiles" method="post" enctype="multipart/form-data">  
+	        <form action="" method="post" enctype="multipart/form-data">  
 	    		<ul class="add-lst">
 	     			<li>
 				        <label class="lbl-txt">模板结构(Excel):</label>
@@ -90,9 +90,12 @@
 			   		</li>
 	        	</ul>
 	    	</form> 
+	    	<%-- <div id="myShow" style="display:none;">
+       	 		<img alt="loading" src="<%=rootPath %>/theme/gray/images/loading.gif"/>
+    		</div> --%>
 	        <div class="form-aciton" style="margin-left:40px">
 	        	<button class="upload-btn" id="upload-btn" onclick="upload()" >上传文件</button>
-	            <button class="submit-btn" onclick="dealFile()">开始处理</button>
+	            <button class="submit-btn" id="dealButton" onclick="dealFile()">开始处理</button>
 	        </div>
         </div>
     </div>

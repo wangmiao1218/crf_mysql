@@ -1,12 +1,11 @@
 package com.gennlife.crf.utils;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 import org.openqa.selenium.WebElement;
-
-import com.alibaba.druid.util.StringUtils;
 
 /**
  * @Description: 字符串处理的工具集
@@ -103,7 +102,7 @@ public class ListAndStringUtils {
 	}
 	
 	/** 
-	* @Title: StringToSubstring 
+	* @Title: stringReplaceReturnValue 
 	* @Description: 将\变成\\后，再将路径中去掉最后一个\\之后，返回filePath
 	* @param: @param value
 	* @return: String
@@ -114,7 +113,7 @@ public class ListAndStringUtils {
 	}
 	
 	/** 
-	 * @Title: StringToSubstring 
+	 * @Title: stringToSubstringReturnFilePath 
 	 * @Description: 将\变成\\后，再将路径中去掉最后一个\\之后，返回filePath
 	 * @param: @param value
 	 * @return: String
@@ -129,10 +128,10 @@ public class ListAndStringUtils {
 	}
 	
 	/** 
-	 * @Title: strToSubstr 
-	 * @Description: 将\变成\\后，再将路径中去掉最后一个\\之前，只剩下文件名,返回filename
+	 * @Title: stringToSubstringReturnFileName 
+	 * @Description: 将\变成\\后，再将路径中去掉最后一个\\之前，只剩下文件名及后缀名,返回filename.后缀
 	 * @param: @param value
-	 * @return: String:只剩下文件名,返回filename
+	 * @return: String:只剩下文件名及后缀名,返回filename.后缀
 	 * @throws 
 	 */
 	public static String stringToSubstringReturnFileName(String value) {
@@ -140,5 +139,35 @@ public class ListAndStringUtils {
 		return value.substring(value.lastIndexOf("\\")+1);
 	}
 	
+	
+	/** 
+	* @Title: arrayListFilesToStringList 
+	* @Description: 将ArrayFiles中\变成\\后，存到数组中去
+	* @param: @param files
+	* @param: @return :
+	* @return: List<String> 返回String类型的list
+	* @throws 
+	*/
+	public static List<String> arrayListFilesToStringList(ArrayList<File> files){
+		// 用来保存数据
+		List<String> list = new ArrayList<String>();
+
+		for (int i = 0; i < files.size(); i++) {
+	       String str= files.get(i).toString().replaceAll("\\\\","\\\\\\\\");
+	       list.add(str);
+		}
+		return list;
+	}
+	
+	/** 
+	* @Title: stringToSubstring 
+	* @Description: 将路径中去掉最后一个\\之前，以及后缀名，只剩下纯文件名
+	* @param: @param value
+	* @return: String
+	* @throws 
+	*/
+	public static String stringToSubstring(String value) {
+		return value.substring(value.lastIndexOf("\\")+1, value.lastIndexOf("."));
+	}
 	
 }

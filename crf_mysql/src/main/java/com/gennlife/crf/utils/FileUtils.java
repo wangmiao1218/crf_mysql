@@ -3,12 +3,13 @@ package com.gennlife.crf.utils;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @Description: 文件的处理工具集
@@ -88,8 +89,7 @@ public class FileUtils {
 			StringBuffer buf = new StringBuffer();
 
 			// 保存该行前面的内容
-			for (int i = 1; (str = br.readLine()) != null
-					&& !str.contains(oldStr); i++) {
+			for (int i = 1; (str = br.readLine()) != null && !str.contains(oldStr); i++) {
 				buf = buf.append(str);
 				buf = buf.append(System.getProperty("line.separator"));
 			}
@@ -141,16 +141,14 @@ public class FileUtils {
 	/**
 	 * @Title: copyFile
 	 * @Description: 拷贝文件到另一个目录
-	 * @param: @param oldPath
-	 * @param: @param newPath
+	 * @param: @param oldPath：E:\\yujie\\2\\模板结构-乳腺癌.xlsx
+	 * @param: @param newPath: E:\\yujie\\2\\new_模板结构-乳腺癌.xlsx
 	 * @return: void
 	 * @throws
 	 */
-	public static void copyFile(String oldfile, String newfile)
-			throws Exception {
+	public static void copyFile(String oldfile, String newfile)throws Exception {
 		FileInputStream fis = new FileInputStream(oldfile);
-		String path = ListAndStringUtils
-				.stringToSubstringReturnFilePath(newfile);
+		String path = ListAndStringUtils.stringToSubstringReturnFilePath(newfile);
 		if (!new File(path).exists()) {
 			new File(path).mkdirs();
 		}
@@ -188,7 +186,7 @@ public class FileUtils {
 						deleteFile(fileList[i].getPath());
 					}
 				}
-				//不删文件夹
+				//不删本身文件夹
 				//file.delete();
 			}
 		} catch (Exception e) {
@@ -197,4 +195,56 @@ public class FileUtils {
 		return true;
 	}
 
+	/** 
+	* @Title: getFilesArrayList 
+	* @Description: 获取指定目录下的所有的文件（不包括文件夹），采用了递归
+	* @param: @param obj  文件路径
+	* @param: @return :
+	* @return: ArrayList<File>:例如：F:\\uploadFile\\1\\模板结构-乳腺癌.xlsx形式的文件数组
+	* @throws 
+	*/
+	public static ArrayList<File> getFilesArrayList(Object obj) {
+		File directory = null;
+		if (obj instanceof File) {
+			directory = (File) obj;
+		} else {
+			directory = new File(obj.toString());
+		}
+		ArrayList<File> files = new ArrayList<File>();
+		if (directory.isFile()) {
+			files.add(directory);
+			return files;
+		} else if (directory.isDirectory()) {
+			File[] fileArr = directory.listFiles();
+			for (int i = 0; i < fileArr.length; i++) {
+				File fileOne = fileArr[i];
+				files.addAll(getFilesArrayList(fileOne));
+			}
+		}
+		return files;
+	}
+	
+	/**
+	 * @Title: getFileNameList
+	 * @Description: 查询路径下所有文件，并返回纯文件名的list，使用上面getFilesArrayList方法
+	 * @param: @param filePath: F:\\DRGs\\newadd
+	 * @param: @return :
+	 * @return: List<String>
+	 * @throws
+	 */
+	public static List<String> getFileNameList(String filePath) {
+		List<String> fileNameListList = new ArrayList<String>();
+		// 获取目录下所有文件
+		ArrayList<File> files = FileUtils.getFilesArrayList(filePath);
+		// 将其转成\\返回list
+		List<String> list = ListAndStringUtils.arrayListFilesToStringList(files);
+
+		// 处理路径返回文件名
+		for (int i = 0; i < list.size(); i++) {
+			String fileName = ListAndStringUtils.stringToSubstringReturnFileName(list.get(i));
+			fileNameListList.add(fileName);
+		}
+		return fileNameListList;
+	}
+	
 }

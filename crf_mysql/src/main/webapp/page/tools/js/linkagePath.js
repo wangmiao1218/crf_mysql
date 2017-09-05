@@ -76,14 +76,25 @@ function initCombo(){
 
  //开始处理按钮
 function dealFile(){
-	url = rootPath + "/linkagePathController/dealFile";
+	url = rootPath + "/crfLinkagePathController/dealFile";
 	$.ajax({
         type : "get",// 请求方式
-        url : "url",// 发送请求地址
+        url : url,// 发送请求地址
+        dataType : 'json',
+        //加遮蔽罩
+        beforeSend: function () {
+        	 $("#vvv").append('<img src="<%=rootPath %>/theme/gray/images/loading.gif"');
+        },
         
         // 请求成功后的回调函数
 		success : function(data) {
-			alert("处理成功！");
+			alert(data.msg);
+		},
+		complete: function () {
+			$("#vvv").remove();
+        },
+		error : function(data) {
+			alert("处理失败！");
 		}
     });
 
@@ -122,11 +133,15 @@ function upload() {
     }
 	//也可以直接写死id的数组
     //var filesId=['uploadFile','uploadFile2'];
-	
+    
 	$.ajaxFileUpload({
 		url : rootPath + '/crfLinkagePathController/uploadFiles',
+		beforeSend: function () {  
+		  // 禁用按钮防止重复提交  
+		  $("#upload-btn").attr({disabled:"disabled" });  
+		}, 
 		type : 'post',
-		dataType : 'text',
+		dataType : 'json',
 		// 对应file标签的id
 		//若多个，写成数组
 		fileElementId : filesId,
@@ -134,8 +149,11 @@ function upload() {
 			
 		},
 		success : function(data) {
-			alert("上传成功！");
+			alert(data.msg);
 		},
+		complete: function () {  
+	        $("#upload-btn").removeAttr("disabled");  
+	    },  
 		error : function(data) {
 			alert("上传失败");
 		}

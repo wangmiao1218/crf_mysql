@@ -87,18 +87,16 @@ public class CrfLinkagePathController {
         	String path=null;
             //循环获取file数组中得文件  
             for(int i = 0;i<files.length;i++){  
-                MultipartFile uploadFile = files[i];  
+                MultipartFile uploadFile = files[i]; 
                 //保存文件  
                 if (i==0) {
                 	path="F:\\uploadFile\\1\\";
 				}
-                
                 if (i==1) {
                 	path="F:\\uploadFile\\2\\";
                 }
                 // 3、新建一个文件对象
-        		File newfile = new File(path , uploadFile.getOriginalFilename());
-        		
+        		File newfile = new File(path,uploadFile.getOriginalFilename());
         		// 4、通过MultipartFile的transferTo方法传输文件
         		try {
         			uploadFile.transferTo(newfile);

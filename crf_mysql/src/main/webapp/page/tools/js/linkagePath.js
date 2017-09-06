@@ -80,7 +80,7 @@ function dealFile(){
 	$.ajax({
         type : "get",// 请求方式
         url : url,// 发送请求地址
-        dataType : 'json',
+        dataType : 'JSON',
         //加遮蔽罩
         beforeSend: function () {
         	$("#myShow").show();
@@ -155,24 +155,17 @@ function upload() {
     
 	$.ajaxFileUpload({
 		url : rootPath + '/crfLinkagePathController/uploadFiles',
-		beforeSend: function () {  
-		  // 禁用按钮防止重复提交  
-		  $("#upload-btn").attr({disabled:"disabled" });  
-		}, 
 		type : 'post',
-		dataType : 'json',
-		// 对应file标签的id
-		//若多个，写成数组
+		dataType : 'JSON',
+		// 对应file标签的id,若多个，写成数组
 		fileElementId : filesId,
 		data : {
 			
 		},
 		success : function(data) {
-			alert(data.msg);
+			alert("上传成功");
+			alert(data);
 		},
-		complete: function () {  
-	        $("#upload-btn").removeAttr("disabled");  
-	    },  
 		error : function(data) {
 			alert("上传失败");
 		}

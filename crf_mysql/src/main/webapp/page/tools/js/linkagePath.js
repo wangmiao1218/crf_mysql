@@ -90,7 +90,9 @@ function dealFile(){
 		success : function(data) {
 			alert(data.msg);
 			//成功后才跳转，请求controller，跳转到文件列表页面，以便下载
-			window.location.href = rootPath+"/crfLinkagePathController/showFilesList";
+			//window.location.href = rootPath+"/crfLinkagePathController/showFilesList";
+			//改成成功后显示下载按钮
+			$("#downloadButton").show();
 		},
 		complete: function () {
 			$("#myShow").hide();
@@ -102,22 +104,24 @@ function dealFile(){
 
 }
 
-/*//下载
+//下载
 function download(){
-	url = rootPath + "/crfLinkagePathController/showFilesList";
+	url = rootPath + "/crfLinkagePathController/downloadFile";
 	$.ajax({
         type : "get",// 请求方式
         url : url,// 发送请求地址
-        //dataType : 'json',
+        dataType : 'JSON',
         // 请求成功后的回调函数
 		success : function(data) {
-			alert("ok");
+			alert(data.msg);
+			//下载成功后隐藏下载按钮,防止多次下载，在成服务器压力
+			$("#downloadButton").hide();
 		},
 		error : function(data) {
-			alert("error");
+			alert("下载失败");
 		}
     });
-}*/
+}
 
 /*
 * 提示文字
@@ -153,6 +157,8 @@ function upload() {
 	//也可以直接写死id的数组
     //var filesId=['uploadFile','uploadFile2'];
     
+    //!!!!!!又是一坑：ajaxFileUpload是不解析json的,需要用：
+    //data = $.parseJSON(data.replace(/<.*?>/ig,""));
 	$.ajaxFileUpload({
 		url : rootPath + '/crfLinkagePathController/uploadFiles',
 		type : 'post',
@@ -163,8 +169,8 @@ function upload() {
 			
 		},
 		success : function(data) {
-			alert("上传成功");
-			alert(data);
+			data = $.parseJSON(data.replace(/<.*?>/ig,""));
+			alert(data.msg);
 		},
 		error : function(data) {
 			alert("上传失败");

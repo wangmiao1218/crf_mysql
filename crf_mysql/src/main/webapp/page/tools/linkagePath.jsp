@@ -94,10 +94,10 @@
 			   		</li>
 	        	</ul>
 	    	</form> 
-	        <div class="form-aciton" style="margin-left:40px">
+	        <div class="form-aciton" style="margin-left:25px">
 	        	<button class="upload-btn" id="upload-btn" onclick="upload()" >上传文件</button>
 	            <button class="submit-btn" id="dealButton" onclick="dealFile()">开始处理</button>
-	            <a href="<%=rootPath %>/crfLinkagePathController/showFilesList">下载</a>
+	            <button style="display: none" class="upload-btn" id="downloadButton" onclick="download()">下载</button>
 	        </div>
         </div>
     </div>

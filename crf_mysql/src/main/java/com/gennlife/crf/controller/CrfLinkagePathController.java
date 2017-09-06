@@ -4,8 +4,9 @@ import java.io.File;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -102,10 +103,10 @@ public class CrfLinkagePathController {
         			uploadFile.transferTo(newfile);
         		} catch (Exception e) {
         			result.setResult(ResultBean.RESULT_FAILED);
-        			result.setMsg("上传文件失败");
+        			result.setMsg("上传文件失败！");
         		}
 				result.setResult(ResultBean.RESULT_SUCCESS);
-				result.setMsg("上传文件成功");
+				result.setMsg("上传文件成功！");
             }  
         }  
         return result;
@@ -124,7 +125,7 @@ public class CrfLinkagePathController {
 		List<String> list2 = FileUtils.getFileNameList("F:\\uploadFile\\2\\");
 		if (list1.size()==0 || list2.size()==0) {
 			result.setResult(ResultBean.RESULT_FAILED);
-			result.setMsg("处理文件失败!");
+			result.setMsg("处理文件失败！");
 			return result;
 		}
 		
@@ -139,7 +140,7 @@ public class CrfLinkagePathController {
     		FileUtils.copyFile("F:\\uploadFile\\2\\"+fileName2, "F:\\uploadFile\\out\\"+"new_"+fileName2);
         } catch (Exception e) {
 			result.setResult(ResultBean.RESULT_FAILED);
-			result.setMsg("上传文件失败");
+			result.setMsg("上传文件失败！");
 		}
         
         Excel excelmb = new Excel("F:\\uploadFile\\1\\",fileName1,"总体结构");
@@ -148,11 +149,53 @@ public class CrfLinkagePathController {
         WriteSchemaCrfTemplateOfMyj.writeSchema(excelmb, excel);
         //调用方法结束
 		result.setResult(ResultBean.RESULT_SUCCESS);
-		result.setMsg("处理文件成功!");
+		result.setMsg("处理文件成功！");
 		
         return result;
 	}
 
+    //文件下载
+    @RequestMapping("downloadFile")
+	@ResponseBody
+	public ResultBean downloadFile(HttpServletRequest request) throws Exception{
+		ResultBean result = new ResultBean();
+		//获取下载文件名称
+		String fileName=null;
+		List<String> list = FileUtils.getFileNameList("F:\\uploadFile\\out\\");
+		if (list.size()==0) {
+			result.setResult(ResultBean.RESULT_FAILED);
+			result.setMsg("下载文件失败！");
+			return result;
+		}
+		
+		fileName=list.get(0);
+		
+		// 新建一个文件对象
+		File file = new File("F:\\uploadFile\\out\\"+fileName);
+		
+		
+        //下载文件路径
+        //String path = request.getServletContext().getRealPath("/images/");
+        //File file = new File(path + File.separator + filename);
+        HttpHeaders headers = new HttpHeaders();  
+        //下载显示的文件名，解决中文名称乱码问题  
+        String downloadFielName = new String(fileName.getBytes("UTF-8"),"iso-8859-1");
+        //通知浏览器以attachment（下载方式）打开图片
+        headers.setContentDispositionFormData("attachment", downloadFielName); 
+        //application/octet-stream ： 二进制流数据（最常见的文件下载）。
+        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+		
+		result.setResult(ResultBean.RESULT_FAILED);
+		result.setMsg("下载文件失败！");
+		
+		result.setResult(ResultBean.RESULT_SUCCESS);
+		result.setMsg("下载文件成功！");
+		
+        return result;
+	}
+    
+    
+	/*暂时用不到，直接处理完成后，显示下载按钮，点击直接请求下载的controller
 	//列出所有文件
     @RequestMapping("showFilesList")
     public String showFilesList(HttpServletRequest request, HttpServletResponse response) { 
@@ -165,9 +208,7 @@ public class CrfLinkagePathController {
     	
     	//跳转到文件列表页面，以便下载
         return "redirect:/page/tools/showFilesList.jsp";
-        
-    }  
-	
-    
+    } 
+     */
     
 }

@@ -89,8 +89,8 @@ function dealFile(){
         // 请求成功后的回调函数
 		success : function(data) {
 			alert(data.msg);
-			//手动跳转页面
-			//window.location.href = rootPath + "/crfLinkagePathController/showFilesList";
+			//成功后才跳转，请求controller，跳转到文件列表页面，以便下载
+			window.location.href = rootPath+"/crfLinkagePathController/showFilesList";
 		},
 		complete: function () {
 			$("#myShow").hide();

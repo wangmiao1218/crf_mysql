@@ -41,7 +41,14 @@ jQuery.extend({
 		jQuery(oldElement).before(newElement);
 		jQuery(oldElement).appendTo(form);
 
-
+		//批量上传
+		for(var i in fileElementId){    
+	      var oldElement = jQuery('#' + fileElementId[i]);    
+	      var newElement = jQuery(oldElement).clone();    
+	      jQuery(oldElement).attr('id', fileId);    
+	      jQuery(oldElement).before(newElement);    
+	      jQuery(oldElement).appendTo(form);    
+		}  
 		
 		// set attributes
 		jQuery(form).css('position', 'absolute');

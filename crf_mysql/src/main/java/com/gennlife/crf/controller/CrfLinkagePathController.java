@@ -134,17 +134,17 @@ public class CrfLinkagePathController {
 		fileName2=list2.get(0);
 		
 		//调用方法开始
-        //先把文件copy到输出路径
+        //只copy要修改的文件，到输出路径,并重命名为前缀加new_
 		String outFilePathString = "F:\\uploadFile\\out\\";
         try {
-        	FileUtils.copyFile("F:\\uploadFile\\1\\"+fileName1, "F:\\uploadFile\\out\\"+fileName1);
+        	//FileUtils.copyFile("F:\\uploadFile\\1\\"+fileName1, "F:\\uploadFile\\out\\"+fileName1);
     		FileUtils.copyFile("F:\\uploadFile\\2\\"+fileName2, "F:\\uploadFile\\out\\"+"new_"+fileName2);
         } catch (Exception e) {
 			result.setResult(ResultBean.RESULT_FAILED);
 			result.setMsg("上传文件失败");
 		}
         
-        Excel excelmb = new Excel(outFilePathString,fileName1,"总体结构");
+        Excel excelmb = new Excel("F:\\uploadFile\\1\\",fileName1,"总体结构");
         Excel excel = new Excel(outFilePathString,"new_"+fileName2,"总体结构");
         
         WriteSchemaCrfTemplateOfMyj.writeSchema(excelmb, excel);

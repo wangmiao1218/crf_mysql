@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../common/common.jsp" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <head>
     <meta charset="utf-8">
@@ -24,14 +24,9 @@
 <h>test</h>
     <div class="asideR-cont">
         <div class="add-cnt">
-	        <!-- 遍历Map集合 -->  
-		   <c:forEach var="listFiles" items="${list}">  
-		       <%-- <c:url value="/file/downFile" var="downurl">  
-		           <c:param name="filename" value="${fileNameMap.key}"></c:param>  
-		       </c:url>  --%> 
-		       <h>${listFiles}</h>
-		       <br/>  
-		   </c:forEach>   
+        <c:forEach var="list" items="${list}">
+          ${list}
+        </c:forEach>
         </div>
     </div>
     

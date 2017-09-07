@@ -19,7 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.gennlife.crf.bean.Excel;
 import com.gennlife.crf.bean.ResultBean;
-import com.gennlife.crf.utils.FilesUtils;
+import com.gennlife.crf.utils.FileUtils;
 import com.gennlife.mengyujie.WriteSchemaCrfTemplateOfMyj;
 
 
@@ -47,7 +47,7 @@ public class CrfLinkagePathController {
 		}
 		// 如果存在该文件夹，就清空文件夹
 		if(filePath.exists()){
-			FilesUtils.deleteFile(path);
+			FileUtils.deleteFile(path);
 		}
 		
 		// 3、新建一个文件对象
@@ -83,7 +83,7 @@ public class CrfLinkagePathController {
 			}
 			// 如果存在该文件夹，就清空文件夹
 			if(filePath.exists()){
-				FilesUtils.deleteFile(paths[i]);
+				FileUtils.deleteFile(paths[i]);
 			}
 		}
 		
@@ -124,9 +124,9 @@ public class CrfLinkagePathController {
 		String fileName1=null;
 		String fileName2=null;
 		//获取模板的文件名称
-		List<String> list1 = FilesUtils.getFileNameList("F:\\uploadFile\\1\\");
+		List<String> list1 = FileUtils.getFileNameList("F:\\uploadFile\\1\\");
 		//获取crf的文件名称
-		List<String> list2 = FilesUtils.getFileNameList("F:\\uploadFile\\2\\");
+		List<String> list2 = FileUtils.getFileNameList("F:\\uploadFile\\2\\");
 		if (list1.size()==0 || list2.size()==0) {
 			result.setResult(ResultBean.RESULT_FAILED);
 			result.setMsg("处理文件失败！");
@@ -141,7 +141,7 @@ public class CrfLinkagePathController {
 		String outFilePathString = "F:\\uploadFile\\out\\";
         try {
         	//FileUtils.copyFile("F:\\uploadFile\\1\\"+fileName1, "F:\\uploadFile\\out\\"+fileName1);
-    		FilesUtils.copyFile("F:\\uploadFile\\2\\"+fileName2, "F:\\uploadFile\\out\\"+"new_"+fileName2);
+    		FileUtils.copyFile("F:\\uploadFile\\2\\"+fileName2, "F:\\uploadFile\\out\\"+"new_"+fileName2);
         } catch (Exception e) {
 			result.setResult(ResultBean.RESULT_FAILED);
 			result.setMsg("上传文件失败！");
@@ -164,7 +164,7 @@ public class CrfLinkagePathController {
         response.setCharacterEncoding("utf-8");
         response.setContentType("multipart/form-data");
 
-        List<String> list = FilesUtils.getFileNameList("F:\\uploadFile\\out\\");
+        List<String> list = FileUtils.getFileNameList("F:\\uploadFile\\out\\");
 		String fileName=list.get(0);
 		
         response.setHeader("Content-Disposition", "attachment;fileName="+fileName);

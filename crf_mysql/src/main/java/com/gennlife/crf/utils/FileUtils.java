@@ -16,7 +16,7 @@ import java.util.List;
  * @author: wangmiao
  * @Date: 2017年8月21日 上午11:39:18
  */
-public class FilesUtils {
+public class FileUtils {
 
 	/**
 	 * @Title: readFileAndReturnValue
@@ -235,7 +235,7 @@ public class FilesUtils {
 	public static List<String> getFileNameList(String filePath) {
 		List<String> fileNameListList = new ArrayList<String>();
 		// 获取目录下所有文件
-		ArrayList<File> files = FilesUtils.getFilesArrayList(filePath);
+		ArrayList<File> files = FileUtils.getFilesArrayList(filePath);
 		// 将其转成\\返回list
 		List<String> list = ListAndStringUtils.arrayListFilesToStringList(files);
 

@@ -104,7 +104,8 @@ function dealFile(){
 
 }
 
-//下载
+//下载：暂不使用此方法！
+/*
 function download(){
 	url = rootPath + "/crfLinkagePathController/downloadFile";
 	$.ajax({
@@ -122,6 +123,7 @@ function download(){
 		}
     });
 }
+*/
 
 /*
 * 提示文字

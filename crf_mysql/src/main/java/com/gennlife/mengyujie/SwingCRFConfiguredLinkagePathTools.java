@@ -27,7 +27,7 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.PatternLayout;
 
 import com.gennlife.crf.bean.Excel;
-import com.gennlife.crf.utils.FileUtils;
+import com.gennlife.crf.utils.FilesUtils;
 import com.gennlife.crf.utils.ListAndStringUtils;
 
 
@@ -184,13 +184,13 @@ public class SwingCRFConfiguredLinkagePathTools extends JFrame implements Action
             	
             	 //先把文件copy到输出路径
                 try {
-					FileUtils.copyFile(ListAndStringUtils.stringReplaceReturnValue(infilepath), filePath+"\\\\"+fileName1);
+					FilesUtils.copyFile(ListAndStringUtils.stringReplaceReturnValue(infilepath), filePath+"\\\\"+fileName1);
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
                 
                 try {
-                	FileUtils.copyFile(ListAndStringUtils.stringReplaceReturnValue(infilepath2),filePath+"\\\\"+fileName2);
+                	FilesUtils.copyFile(ListAndStringUtils.stringReplaceReturnValue(infilepath2),filePath+"\\\\"+fileName2);
                 } catch (Exception e1) {
                 	e1.printStackTrace();
                 }

@@ -20,7 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.gennlife.crf.bean.Excel;
 import com.gennlife.crf.bean.ResultBean;
 import com.gennlife.crf.utils.FileUtils;
-import com.gennlife.mengyujie.WriteSchemaCrfTemplateOfMyj;
+import com.gennlife.mengyujie.ConfiguredLinkagePath;
 
 
 @Controller
@@ -150,7 +150,7 @@ public class CrfLinkagePathController {
         Excel excelmb = new Excel("F:\\uploadFile\\1\\",fileName1,"总体结构");
         Excel excel = new Excel(outFilePathString,"new_"+fileName2,"总体结构");
         
-        WriteSchemaCrfTemplateOfMyj.writeSchema(excelmb, excel);
+        ConfiguredLinkagePath.writeLinkagePath(excelmb, excel);
         //调用方法结束
 		result.setResult(ResultBean.RESULT_SUCCESS);
 		result.setMsg("处理文件成功！");

@@ -10,10 +10,10 @@ import com.gennlife.crf.utils.CreateWebDriver;
 import com.gennlife.crf.utils.ExcelUtils;
 import com.gennlife.crf.utils.ListAndStringUtils;
 import com.gennlife.crf.utils.QuitWebDriver;
-import com.gennlife.mengyujie.TranslateToEnglishTools;
-import com.gennlife.mengyujie.WriteSchemaCrfTemplateOfMyj;
+import com.gennlife.mengyujie.TranslateToEnglish;
+import com.gennlife.mengyujie.ConfiguredLinkagePath;
 
-public class TestTranslateToEnglishTools {
+public class TestTranslateToEnglish {
 
 	private String filePath = "E:\\yujie\\3";
 	
@@ -38,7 +38,7 @@ public class TestTranslateToEnglishTools {
 	public void writeEnNames() throws Exception{
 		Excel excelmb = new Excel(filePath, fileName, sheetName);
 		Excel excel = new Excel(filePath, fileName2, sheetName);
-		TranslateToEnglishTools.writeEnNames(excelmb, excel);
+		TranslateToEnglish.writeEnNames(excelmb, excel);
 		
 		System.out.println("ok");
 	}
@@ -89,7 +89,7 @@ public class TestTranslateToEnglishTools {
 		System.out.println(chNamesList.size());
 		System.out.println("=============");
 		
-		List<String> enNamesList = TranslateToEnglishTools.translateChNamesListToEnNamesList(chNamesList);
+		List<String> enNamesList = TranslateToEnglish.translateChNamesListToEnNamesList(chNamesList);
 		for (int i = 0; i < enNamesList.size(); i++) {
 			System.out.println(enNamesList.get(i));
 		}

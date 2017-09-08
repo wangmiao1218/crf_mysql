@@ -16,7 +16,7 @@ import com.gennlife.crf.utils.QuitWebDriver;
  * @author: wangmiao
  * @Date: 2017年9月7日 下午2:37:08 
  */
-public class TranslateToEnglishTools{
+public class TranslateToEnglish{
 
 	/**
 	* @Title: writeEnNames 

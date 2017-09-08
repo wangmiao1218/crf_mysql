@@ -3,9 +3,9 @@ package com.gennlife.mengyujie.test;
 import org.junit.Test;
 
 import com.gennlife.crf.bean.Excel;
-import com.gennlife.mengyujie.WriteSchemaCrfTemplateOfMyj;
+import com.gennlife.mengyujie.ConfiguredLinkagePath;
 
-public class TestWriteSchemaCrfTemplateOfMyj {
+public class TestConfiguredLinkagePath {
 
 private String filePath = "E:\\yujie\\3";
 	
@@ -16,24 +16,24 @@ private String filePath = "E:\\yujie\\3";
 	private String sheetName2 = "就诊－院内药物治疗";
 	
 	@Test
-	public void writeSchema(){
+	public void writeLinkagePath(){
 		Excel excelmb = new Excel(filePath, fileName, sheetName);
 		Excel excel = new Excel(filePath, fileName2, sheetName);
-		WriteSchemaCrfTemplateOfMyj.writeSchema(excelmb,excel);
+		ConfiguredLinkagePath.writeLinkagePath(excelmb,excel);
 		System.out.println("ok");
 	}
 	
 	@Test
 	public void writeSchemaOfThreeGroups(){
 		Excel excel = new Excel(filePath, fileName2, sheetName2);
-		WriteSchemaCrfTemplateOfMyj.writeSchemaOfThreeGroups(excel,"Imageological_examination");
+		ConfiguredLinkagePath.writeSchemaOfThreeGroups(excel,"Imageological_examination");
 		System.out.println("ok");
 	}
 	
 	@Test
 	public void writeSchemaOfTwoGroups(){
 		Excel excel = new Excel(filePath, fileName2, sheetName2);
-		WriteSchemaCrfTemplateOfMyj.writeSchemaOfTwoGroups(excel,"patient_info");
+		ConfiguredLinkagePath.writeSchemaOfTwoGroups(excel,"patient_info");
 		System.out.println("ok");
 	}
 	

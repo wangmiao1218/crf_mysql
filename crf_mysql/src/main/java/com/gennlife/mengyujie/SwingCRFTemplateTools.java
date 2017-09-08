@@ -30,11 +30,15 @@ import com.gennlife.crf.bean.Excel;
 import com.gennlife.crf.utils.FileUtils;
 import com.gennlife.crf.utils.ListAndStringUtils;
 
-
-public class SwingCRFConfiguredLinkagePathTools extends JFrame implements ActionListener {
+/**
+ * @Description: CRF模板工具-2.0
+ * @author: wangmiao
+ * @Date: 2017年9月1日 上午8:45:38 
+ */
+public class SwingCRFTemplateTools extends JFrame implements ActionListener {
 	
     private static final long serialVersionUID = -1189035634361220261L;
-    private static Logger logger = Logger.getLogger(SwingCRFConfiguredLinkagePathTools.class);   
+    private static Logger logger = Logger.getLogger(SwingCRFTemplateTools.class);   
     
     JFrame mainframe;
     JPanel panel;
@@ -59,7 +63,7 @@ public class SwingCRFConfiguredLinkagePathTools extends JFrame implements Action
     JButton start_button = new JButton("开始");
 
     public void show(){
-        mainframe = new JFrame("标题ver-1.0");
+        mainframe = new JFrame("CRF模板工具-2.0");
         // Setting the width and height of frame
         mainframe.setSize(575, 550);
         mainframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -198,7 +202,7 @@ public class SwingCRFConfiguredLinkagePathTools extends JFrame implements Action
                 Excel excelmb = new Excel(filePath,fileName1, "总体结构");
                 Excel excel = new Excel(filePath,fileName2, "总体结构");
                 
-                WriteSchemaCrfTemplateOfMyj.writeSchema(excelmb, excel);
+                ConfiguredLinkagePath.writeLinkagePath(excelmb, excel);
                 
                 //调用方法结束
                 logger.debug("end..."); 
@@ -281,7 +285,7 @@ public class SwingCRFConfiguredLinkagePathTools extends JFrame implements Action
     
    
     public static void main(String []args){
-    	SwingCRFConfiguredLinkagePathTools f = new SwingCRFConfiguredLinkagePathTools();
+    	SwingCRFTemplateTools f = new SwingCRFTemplateTools();
         f.show();
     }
     

@@ -7,20 +7,20 @@ import com.gennlife.crf.utils.ExcelUtils;
 import com.gennlife.crf.utils.ListAndStringUtils;
 
 /**
- * @Description:
+ * @Description:配置联动路径
  * @author: wangmiao
  * @Date: 2017年8月30日 上午9:16:08
  */
-public class WriteSchemaCrfTemplateOfMyj {
+public class ConfiguredLinkagePath {
 
 	/** 
-	* @Title: writeSchema 
+	* @Title: writeLinkagePath 
 	* @Description: 根据结构，在crf模板中，写入schema路径
 	* @param: @param excelmb 结构的excel
 	* @param: @param excel :要写入的excel
 	* @throws 
 	*/
-	public static void writeSchema(Excel excelmb,Excel excel) {
+	public static void writeLinkagePath(Excel excelmb,Excel excel) {
 		//System.out.println("start。。。");
 		Integer chNameCellNum = ExcelUtils.searchKeyWordOfOneLine(excelmb, 0, "中文名称");
 		Integer enNameCellNum = ExcelUtils.searchKeyWordOfOneLine(excelmb, 0, "英文名称");

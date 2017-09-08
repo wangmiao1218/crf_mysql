@@ -2,7 +2,6 @@ package com.gennlife.mengyujie;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 
@@ -19,15 +18,14 @@ import com.gennlife.crf.utils.QuitWebDriver;
  */
 public class TranslateToEnglishTools{
 
-	/** 
-	* @Title: getChNamesList 
-	* @Description: 根据结构，在crf模板中，获取中文列表
+	/**
+	* @Title: writeEnNames 
+	* @Description: 根据结构，在crf模板中，写入英文名称
 	* @param: @param excelmb 结构的excel
 	* @param: @param excel 要获取的excel
-	* @return: List<String> 中文名称的列表
 	* @throws 
 	*/
-	public static void getChNamesList(Excel excelmb,Excel excel) {
+	public static void writeEnNames(Excel excelmb,Excel excel) throws Exception {
 		Integer chNameCellNum = ExcelUtils.searchKeyWordOfOneLine(excelmb, 0, "中文名称");
 		Integer groupInfoCellNum = ExcelUtils.searchKeyWordOfOneLine(excelmb, 0, "组结构信息");
 		
@@ -45,16 +43,13 @@ public class TranslateToEnglishTools{
 				String groupInfo = ExcelUtils.readContent(excelmb, rowNum, groupInfoCellNum);
 				
 				if ("两组".equals(groupInfo)) {
-					//转到第二组的逻辑,获取中文名称
-					//getChNamesListOfTwoGroups(excel);
-					//转换
-					
-					//写入
+					//转到第二组的逻辑,写入英文名称
+					writeEnNamesOfTwoGroups(excel);
 				}
 				
 				if ("三组".equals(groupInfo)) {
-					//转到第三组的逻辑
-					//getChNamesListOfThreeGroups(excel);
+					//转到第三组的逻辑，写入英文名称
+					writeEnNamesOfThreeGroups(excel);
 				}
 			}
 			
@@ -65,136 +60,80 @@ public class TranslateToEnglishTools{
 		}
 	}
 	
-	/** 
-	* @Title: getChNamesListOfTwoGroups 
+	
+	/**
+	* @Title: writeEnNamesOfTwoGroups 
 	* @Description: 两组的情况，在crf模板中，获取中文列表
 	* @param: @param excel 传入excel
-	* @return: List<String> 中文名称的列表
 	* @throws 
 	*/
-	public static List<String> getChNamesListOfTwoGroups(Excel excel) {
+	public static void writeEnNamesOfTwoGroups(Excel excel) throws Exception {
 		Integer twoGroupCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "第二组");
 		Integer chNameCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "中文名");
 		Integer enNameCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "英文名");
 		
-		//获取中文名称一列（用readExcelOfListReturnListMap，因为有重复值）(除表头)
-		List<Map<Integer,String>> list = ExcelUtils.readExcelOfListReturnListMap(excel, linkageCellNum);
-		for (int i = 1; i < list.size(); i++) {
-			Map<Integer, String> map = list.get(i);
-			//定义“联动”列的行号和内容（即：写入值时对应的行号）
-			Integer writeContentRowNum=null;
-			String allString=null;
-			for (Map.Entry<Integer, String> entry : map.entrySet()) {  
-				writeContentRowNum=entry.getKey();
-				allString=entry.getValue();
-			}
-			
-			//分割
-			String[] strings = ListAndStringUtils.trimStringOfEqualSign(allString);
-			if (strings.length==1 || strings.length==0) {
-				continue;
-			}
-			//获取=前字段名的行号及英文名(由于有重复值，所以使用searchKeyWordOfListByOrderDescReturnRowNum，逆序查找离着最近的值)
-			Integer chNameRowNum = ExcelUtils.searchKeyWordOfListByOrderDescReturnRowNum(excel, writeContentRowNum, chNameCellNum, strings[0]);
-			if (chNameRowNum==null) {
-				continue;
-			}
-			String fieldEnName = ExcelUtils.readContent(excel, chNameRowNum, enNameCellNum);
-			
-			//获取对应第二组的行号英文名(从上面字段名所在行号，往上查找，查最近一个有值的)
-			Integer twoGroupRowNum = ExcelUtils.searchValueOfListByOrderDescReturnRowNum(excel, chNameRowNum, twoGroupCellNum);
-			if (twoGroupRowNum==null) {
-				continue;
-			}
-			String twoGroupEnName = ExcelUtils.readContent(excel,twoGroupRowNum,enNameCellNum);
-			
-			//最终内容
-			String newContent="schema."+tableName+"."+twoGroupEnName+"."+fieldEnName;
-			
-			ExcelUtils.writeAndSaveContent(excel, newContent, writeContentRowNum, mainKeyCellNum);
-			ExcelUtils.writeAndSaveContent(excel, strings[1], writeContentRowNum, mainValueCellNum);
-		}
+		//获取中文名称(2列的情况)
+		List<String> chNamesList = ExcelUtils.readExcelOfTwoList(excel, twoGroupCellNum, chNameCellNum);
+		//中文过滤
+		List<String> chNamesListFilter = ListAndStringUtils.chNamesListFilter(chNamesList);
 		
+		//转换成英文
+		List<String> enNamesList = translateChNamesListToEnNamesList(chNamesListFilter);
+		//英文过滤
+		List<String> enNamesListFilter = ListAndStringUtils.enNamesListFilter(enNamesList);
+		//加序号
+		List<String> sequenceList = ListAndStringUtils.sameListTransferToSequenceList(enNamesListFilter);
+		
+		//写入
+		for (int i = 0; i < sequenceList.size(); i++) {
+			ExcelUtils.writeAndSaveContent(excel, sequenceList.get(i), i+1, enNameCellNum);
+		}
 	}
 	
 
-	/** 
-	* @Title: getChNamesListOfThreeGroups 
+	/**
+	* @Title: writeEnNamesOfThreeGroups 
 	* @Description: 两组的情况，在crf模板中，获取中文列表
 	* @param: @param excel 传入excel
 	* @return: List<String> 中文名称的列表
 	* @throws 
 	*/
-	public static void getChNamesListOfThreeGroups(Excel excel) {
+	public static void writeEnNamesOfThreeGroups(Excel excel) throws Exception {
 		Integer twoGroupCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "第二组");
 		Integer threeGroupCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "第三组");
 		Integer chNameCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "中文名");
 		Integer enNameCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "英文名");
 		
-		//获取中文名称一列（用readExcelOfListReturnListMap，因为有重复值）(除表头)
-		List<Map<Integer,String>> list = ExcelUtils.readExcelOfListReturnListMap(excel, linkageCellNum);
-		for (int i = 1; i < list.size(); i++) {
-			Map<Integer, String> map = list.get(i);
-			//定义“联动”列的行号和内容（即：写入值时对应的行号）
-			Integer writeContentRowNum=null;
-			String allString=null;
-			for (Map.Entry<Integer, String> entry : map.entrySet()) {  
-				writeContentRowNum=entry.getKey();
-				allString=entry.getValue();
-			}
-			
-			//分割
-			String[] strings = ListAndStringUtils.trimStringOfEqualSign(allString);
-			if (strings.length==1 || strings.length==0) {
-				continue;
-			}
-			
-			//获取=前字段名的行号及英文名(由于有重复值，所以使用searchKeyWordOfListByOrderDescReturnRowNum，逆序查找离着最近的值)
-			Integer chNameRowNum = ExcelUtils.searchKeyWordOfListByOrderDescReturnRowNum(excel, writeContentRowNum, chNameCellNum, strings[0]);
-			if (chNameRowNum==null) {
-				continue;
-			}
-			String fieldEnName = ExcelUtils.readContent(excel, chNameRowNum, enNameCellNum);
-			
-			//获取对应第二组的行号、英文名(从上面字段名所在行号，往上查找，查最近一个有值的)
-			Integer twoGroupRowNum = ExcelUtils.searchValueOfListByOrderDescReturnRowNum(excel, chNameRowNum, twoGroupCellNum);
-			if (twoGroupRowNum==null) {
-				continue;
-			}
-			String twoGroupEnName = ExcelUtils.readContent(excel,twoGroupRowNum,enNameCellNum);
-			
-			//获取对应第三组的行号、英文名(从上面字段名所在行号，往上查找，查最近一个有值的，直到到第二组名称的行号)
-			Integer threeGroupRowNum = ExcelUtils.searchValueOfListBetweenTwoRowNumByOrderDescReturnRowNum(excel, twoGroupRowNum, chNameRowNum, threeGroupCellNum);
-			
-			//最终内容
-			String newContent=null;
-			//可能没有第三组情况
-			if (threeGroupRowNum==null) {
-				newContent="schema."+tableName+"."+twoGroupEnName+"."+fieldEnName;
-			}else {
-				String threeGroupEnName = ExcelUtils.readContent(excel,threeGroupRowNum,enNameCellNum);
-				newContent="schema."+tableName+"."+twoGroupEnName+"."+threeGroupEnName+"."+fieldEnName;
-			}
-			
-			ExcelUtils.writeAndSaveContent(excel, newContent, writeContentRowNum, mainKeyCellNum);
-			ExcelUtils.writeAndSaveContent(excel, strings[1], writeContentRowNum, mainValueCellNum);
-		}
+		//获取中文名称(3列的情况)
+		List<String> chNamesList = ExcelUtils.readExcelOfThreeList(excel,twoGroupCellNum,threeGroupCellNum,chNameCellNum);
+		//中文过滤
+		List<String> chNamesListFilter = ListAndStringUtils.chNamesListFilter(chNamesList);
 		
+		//转换成英文
+		List<String> enNamesList = translateChNamesListToEnNamesList(chNamesListFilter);
+		//英文过滤
+		List<String> enNamesListFilter = ListAndStringUtils.enNamesListFilter(enNamesList);
+		//加序号
+		List<String> sequenceList = ListAndStringUtils.sameListTransferToSequenceList(enNamesListFilter);
+		
+		//写入
+		for (int i = 0; i < sequenceList.size(); i++) {
+			ExcelUtils.writeAndSaveContent(excel, sequenceList.get(i), i+1, enNameCellNum);
+		}
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	public static String translateToEnglish(Excel excel) throws Exception{
+	/** 
+	* @Title: translatechNamesListToEnNamesList 
+	* @Description: 将list中每个中文，转换成英文的list
+	* @param: @param chNamesList 传入的中文list
+	* @param: @return
+	* @return: List<String> 返回英文list
+	* @throws 
+	*/
+	public static List<String> translateChNamesListToEnNamesList(List<String> chNamesList) throws Exception{
 		//先定义两个list，分别存放中文、翻译后的英文
-		List<String> inputList = new ArrayList<String>();
-		List<String> outputList = new ArrayList<String>();
+		List<String> enNamesList = new ArrayList<String>();
 		
 		// 登录并到add页面
 		PhantomJSDriver driver = CreateWebDriver.createWebDriverByPhantomJSDriver();
@@ -202,27 +141,19 @@ public class TranslateToEnglishTools{
 		
 		String output=null;
 		//开始处理翻译，并返回list
-		for (int i = 0; i < inputList.size(); i++) {
+		for (int i = 0; i < chNamesList.size(); i++) {
 			driver.findElementById("baidu_translate_input").clear();
-			driver.findElementById("baidu_translate_input").sendKeys(inputList.get(i));
+			driver.findElementById("baidu_translate_input").sendKeys(chNamesList.get(i));
 			driver.findElementById("translate-button").click();
-			Thread.sleep(500);
+			Thread.sleep(1800);
 			//获取翻译后的值
 			output=driver.findElementByXPath("//div[@class='output-bd']//p//span").getText();
-			
-			outputList.add(output);
+			enNamesList.add(output);
 		}
 		QuitWebDriver.quitWebDriverByPhantomJSDriver(driver);
 		
-		//循环插入到excel中
-		for (int i = 0; i < inputList.size(); i++) {
-			
-		}
-		
-		return "OK";
-		
+		return enNamesList;
 	}
-	
-	
+
 	
 }

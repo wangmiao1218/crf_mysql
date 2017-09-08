@@ -7,6 +7,53 @@ import com.gennlife.crf.utils.ListAndStringUtils;
 public class TestListAndStringUtils {
 	
 	@Test
+	public void chNamesListFilter(){
+		String value=" 剂  量（mg/天）a，d ff,d sdf,dfdsf，fsf、bc：1.2.3.bcd？";
+		//去掉中英文（）之间
+		if (value.indexOf("（")!=-1) {
+			value=value.replaceAll(value.substring(value.indexOf("（"),value.indexOf("）")+1),"");
+		}
+		if (value.indexOf("(")!=-1) {
+			value=value.replaceAll(value.substring(value.indexOf("("),value.indexOf(")")+1),"");
+		}
+		//去掉中英文:之后
+		if (value.indexOf("：")!=-1) {
+			value = value.substring(0, value.indexOf("："));
+		}
+		if (value.indexOf(":")!=-1) {
+			value = value.substring(0, value.indexOf(":"));
+		}
+		
+		//去掉中英文？之后
+		if (value.indexOf("？")!=-1) {
+			value = value.substring(0, value.indexOf("？"));
+		}
+		if (value.indexOf("?")!=-1) {
+			value = value.substring(0, value.indexOf("?"));
+		}
+		
+		//删掉、
+		if (value.indexOf("、")!=-1) {
+			value = value.replace("、",""); 
+		}
+		
+		//删掉空格
+		if (value.indexOf(" ")!=-1) {
+			value = value.replace(" ",""); 
+		}
+		
+		//删掉中引文，
+		if (value.indexOf("，")!=-1) {
+			value = value.replace("，","");
+		}
+		if (value.indexOf(",")!=-1) {
+			value = value.replace(",","");
+		}
+		
+		System.out.println(value);
+	}
+	
+	@Test
 	public void trimStringOfEqualSign(){
 		String value="有无疾病史=有";
 		String[] strings = ListAndStringUtils.trimStringOfEqualSign(value);

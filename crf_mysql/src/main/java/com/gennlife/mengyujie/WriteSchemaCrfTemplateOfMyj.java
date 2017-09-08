@@ -70,7 +70,7 @@ public class WriteSchemaCrfTemplateOfMyj {
 	*/
 	public static void writeSchemaOfTwoGroups(Excel excel,String tableName) {
 		Integer twoGroupCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "第二组");
-		Integer chNameCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "属性中文名");
+		Integer chNameCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "中文名");
 		Integer enNameCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "英文名");
 		Integer mainKeyCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "__displayMainKey");
 		Integer mainValueCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "__displayMainValue");
@@ -127,7 +127,7 @@ public class WriteSchemaCrfTemplateOfMyj {
 	public static void writeSchemaOfThreeGroups(Excel excel,String tableName) {
 		Integer twoGroupCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "第二组");
 		Integer threeGroupCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "第三组");
-		Integer chNameCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "属性中文名");
+		Integer chNameCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "中文名");
 		Integer enNameCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "英文名");
 		Integer mainKeyCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "__displayMainKey");
 		Integer mainValueCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "__displayMainValue");

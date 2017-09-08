@@ -144,6 +144,129 @@ public class ExcelUtils {
     
 	
     /** 
+     * @Title: readExcelOfTwoList 
+     * @Description: 搜索某一个文件中，指定2列所有数值，并顺序添加到list中，返回list
+     * @param: Excel excel：传入excel
+     * @param: Integer oneCell：列号（从0 开始）
+     * @param: Integer twoCell：列号2（从0 开始）
+     * @return: List<String>
+     * @throws 
+     */
+    public static List<String> readExcelOfTwoList(Excel excel,Integer oneCell,Integer twoCell) {  
+    	// 构造Workbook
+    	Workbook workbook = excel.getWorkbook();  
+    	if (workbook == null){
+    		return null;  //不存在
+    	}  
+    	//获取sheet
+    	Sheet sheet = workbook.getSheet(excel.getSheetName());
+    	
+    	List<String> chNameslist = new ArrayList<String>();
+    	// 循环读取指定列数据(从第二行开始，除去表头)
+    	for ( int rowNum= 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
+    		Row row = sheet.getRow(rowNum);
+    		
+    		Cell cell1 = null;
+    		Cell cell2 = null;
+    		//判断是否为空
+    		if (row!=null) {
+    			//指定 列oneCell,twoCell的cell
+    			cell1 = row.getCell(oneCell);
+    			cell2 = row.getCell(twoCell);
+    		}
+    		
+    		String value=null;
+    		//判断第一列是否为空,不为空则获取值，为空则判断第二列
+    		if (cell1!=null) {
+    			value = cell1.getStringCellValue();
+	    		//将值放入list中
+	    		if (value!=null && !"".equals(value)) {  
+	    			chNameslist.add(value);
+	    		}
+    		}else {
+    			if (cell2!=null) {
+					value = cell2.getStringCellValue();
+		    		//将值放入list中
+		    		if (value!=null && !"".equals(value)) {  
+		    			chNameslist.add(value);
+		    		}
+    			}
+    		}
+    	}
+    	return chNameslist;
+    	
+    }  
+    
+    
+    /** 
+     * @Title: readExcelOfThreeList 
+     * @Description: 搜索某一个文件中，指定3列所有数值，并顺序添加到list中，返回list
+     * @param: Excel excel：传入excel
+     * @param: Integer oneCell：列号（从0 开始）
+     * @param: Integer twoCell：列号2（从0 开始）
+     * @param: Integer threeCell：列号3（从0 开始）
+     * @return: List<String>
+     * @throws 
+     */
+    public static List<String> readExcelOfThreeList(Excel excel,Integer oneCell,Integer twoCell,Integer threeCell) {  
+    	// 构造Workbook
+    	Workbook workbook = excel.getWorkbook();  
+    	if (workbook == null){
+    		return null;  //不存在
+    	}  
+    	//获取sheet
+    	Sheet sheet = workbook.getSheet(excel.getSheetName());
+    	
+    	List<String> chNameslist = new ArrayList<String>();
+    	// 循环读取指定列数据(从第二行开始，除去表头)
+    	for ( int rowNum= 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
+    		Row row = sheet.getRow(rowNum);
+    		
+    		Cell cell1 = null;
+    		Cell cell2 = null;
+    		Cell cell3 = null;
+    		//判断是否为空
+    		if (row!=null) {
+    			//指定 列oneCell,twoCell的cell
+    			cell1 = row.getCell(oneCell);
+    			cell2 = row.getCell(twoCell);
+    			cell3 = row.getCell(threeCell);
+    		}
+    		
+    		String value=null;
+    		//判断第一列是否为空,不为空则获取值，为空则判断第二列
+    		if (cell1!=null) {
+    			value = cell1.getStringCellValue();
+	    		//将值放入list中
+	    		if (value!=null && !"".equals(value)) {  
+	    			chNameslist.add(value);
+	    		}
+    		}else if(cell1==null){
+    			if (cell2!=null) {
+					value = cell2.getStringCellValue();
+		    		//将值放入list中
+		    		if (value!=null && !"".equals(value)) {  
+		    			chNameslist.add(value);
+		    		}
+    			}else {
+    				if (cell3!=null) {
+    					value = cell3.getStringCellValue();
+    		    		//将值放入list中
+    		    		if (value!=null && !"".equals(value)) {  
+    		    			chNameslist.add(value);
+    		    		}
+        			}
+				}
+    		}
+    	}
+    	return chNameslist;
+    	
+    }  
+    
+    
+    
+    
+    /** 
     * @Title: searchKeyWordOfOneLine 
     * @Description: 搜索某一个文件中，指定行，是否包含某个关键字 ,存在返回列号，不存在返回null(若重复，则返回最后一个)
     * @param: Excel excel：传入excel

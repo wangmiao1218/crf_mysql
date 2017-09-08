@@ -7,12 +7,13 @@ import com.gennlife.mengyujie.WriteSchemaCrfTemplateOfMyj;
 
 public class TestWriteSchemaCrfTemplateOfMyj {
 
-	private String filePath = "E:\\yujie\\2";
-	private String fileName = "模板结构-乳腺癌.xlsx";
-	private String sheetName = "总体结构";
+private String filePath = "E:\\yujie\\3";
 	
+	private String fileName = "模板结构.xlsx";
 	private String fileName2 = "test.xlsx";
-	private String sheetName2 = "影像学检查";
+	
+	private String sheetName = "总体结构";
+	private String sheetName2 = "就诊－院内药物治疗";
 	
 	@Test
 	public void writeSchema(){

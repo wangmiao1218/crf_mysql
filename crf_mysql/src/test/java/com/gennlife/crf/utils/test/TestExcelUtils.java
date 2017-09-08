@@ -7,13 +7,34 @@ import org.junit.Test;
 
 import com.gennlife.crf.bean.Excel;
 import com.gennlife.crf.utils.ExcelUtils;
+import com.gennlife.mengyujie.TranslateToEnglishTools;
 
 public class TestExcelUtils {
 	
-	private String filePath = "E:\\yujie\\2";
+	private String filePath = "E:\\yujie\\3";
 	private String fileName = "test.xlsx";
-	private String sheetName = "影像学检查";
+	private String sheetName = "随访";
 	
+	
+	@Test
+	public void readExcelOfThreeList(){
+		Excel excel = new Excel(filePath, fileName, sheetName);
+		List<String> chNamesList = ExcelUtils.readExcelOfThreeList(excel, 0, 1,2);
+		for (int i = 0; i < chNamesList.size(); i++) {
+			System.out.println(chNamesList.get(i));
+		}
+		System.out.println(chNamesList.size());
+	}
+	
+	@Test
+	public void readExcelOfTwoList(){
+		Excel excel = new Excel(filePath, fileName, sheetName);
+		List<String> list = ExcelUtils.readExcelOfTwoList(excel, 0, 1);
+		for (int i = 0; i < list.size(); i++) {
+			System.out.println(list.get(i));
+		}
+		System.out.println(list.size());
+	}
 	
 	@Test
 	public void searchKeyWordOfListByOrderDescReturnRowNum(){

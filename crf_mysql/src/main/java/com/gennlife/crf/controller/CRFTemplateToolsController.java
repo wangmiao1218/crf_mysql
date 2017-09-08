@@ -21,11 +21,12 @@ import com.gennlife.crf.bean.Excel;
 import com.gennlife.crf.bean.ResultBean;
 import com.gennlife.crf.utils.FileUtils;
 import com.gennlife.mengyujie.ConfiguredLinkagePath;
+import com.gennlife.mengyujie.TranslateToEnglish;
 
 
 @Controller
-@RequestMapping("crfLinkagePathController")
-public class CrfLinkagePathController {
+@RequestMapping("CRFTemplateToolsController")
+public class CRFTemplateToolsController {
 	
 	//上传单个文件
 	@RequestMapping("uploadFile")
@@ -116,10 +117,10 @@ public class CrfLinkagePathController {
         return result;
 	}
 
-	//处理文件
-    @RequestMapping(value="dealFile",method = RequestMethod.GET)
+	//配置联动路径
+    @RequestMapping(value="configuredLinkagePath",method = RequestMethod.GET)
 	@ResponseBody
-	public ResultBean dealFile() throws Exception{
+	public ResultBean configuredLinkagePath() throws Exception{
 		ResultBean result = new ResultBean();
 		String fileName1=null;
 		String fileName2=null;
@@ -129,7 +130,7 @@ public class CrfLinkagePathController {
 		List<String> list2 = FileUtils.getFileNameList("F:\\uploadFile\\2\\");
 		if (list1.size()==0 || list2.size()==0) {
 			result.setResult(ResultBean.RESULT_FAILED);
-			result.setMsg("处理文件失败！");
+			result.setMsg("配置联动路径失败！");
 			return result;
 		}
 		
@@ -141,23 +142,67 @@ public class CrfLinkagePathController {
 		String outFilePathString = "F:\\uploadFile\\out\\";
         try {
         	//FileUtils.copyFile("F:\\uploadFile\\1\\"+fileName1, "F:\\uploadFile\\out\\"+fileName1);
-    		FileUtils.copyFile("F:\\uploadFile\\2\\"+fileName2, "F:\\uploadFile\\out\\"+"new_"+fileName2);
+    		FileUtils.copyFile("F:\\uploadFile\\2\\"+fileName2, "F:\\uploadFile\\out\\"+"LinkagePath_"+fileName2);
         } catch (Exception e) {
 			result.setResult(ResultBean.RESULT_FAILED);
-			result.setMsg("上传文件失败！");
+			result.setMsg("配置联动路径失败！");
 		}
         
         Excel excelmb = new Excel("F:\\uploadFile\\1\\",fileName1,"总体结构");
-        Excel excel = new Excel(outFilePathString,"new_"+fileName2,"总体结构");
+        Excel excel = new Excel(outFilePathString,"LinkagePath_"+fileName2,"总体结构");
         
         ConfiguredLinkagePath.writeLinkagePath(excelmb, excel);
         //调用方法结束
 		result.setResult(ResultBean.RESULT_SUCCESS);
-		result.setMsg("处理文件成功！");
+		result.setMsg("配置联动路径成功！");
 		
         return result;
 	}
 
+    
+    //配置英文名称
+    @RequestMapping(value="translateToEnglish",method = RequestMethod.GET)
+    @ResponseBody
+    public ResultBean translateToEnglish() throws Exception{
+    	ResultBean result = new ResultBean();
+    	String fileName1=null;
+    	String fileName2=null;
+    	//获取模板的文件名称
+    	List<String> list1 = FileUtils.getFileNameList("F:\\uploadFile\\1\\");
+    	//获取crf的文件名称
+    	List<String> list2 = FileUtils.getFileNameList("F:\\uploadFile\\2\\");
+    	if (list1.size()==0 || list2.size()==0) {
+    		result.setResult(ResultBean.RESULT_FAILED);
+    		result.setMsg("配置英文名称失败！");
+    		return result;
+    	}
+    	
+    	fileName1=list1.get(0);
+    	fileName2=list2.get(0);
+    	
+    	//调用方法开始
+    	//只copy要修改的文件，到输出路径,并重命名为前缀加new_
+    	String outFilePathString = "F:\\uploadFile\\out\\";
+    	try {
+    		//FileUtils.copyFile("F:\\uploadFile\\1\\"+fileName1, "F:\\uploadFile\\out\\"+fileName1);
+    		FileUtils.copyFile("F:\\uploadFile\\2\\"+fileName2, "F:\\uploadFile\\out\\"+"English_"+fileName2);
+    	} catch (Exception e) {
+    		result.setResult(ResultBean.RESULT_FAILED);
+    		result.setMsg("配置英文名称失败！");
+    	}
+    	
+    	Excel excelmb = new Excel("F:\\uploadFile\\1\\",fileName1,"总体结构");
+    	Excel excel = new Excel(outFilePathString,"English_"+fileName2,"总体结构");
+    	
+    	TranslateToEnglish.writeEnNames(excelmb, excel);
+    	//调用方法结束
+    	result.setResult(ResultBean.RESULT_SUCCESS);
+    	result.setMsg("配置英文名称成功！");
+    	
+    	return result;
+    }
+    
+    
     //文件下载:固定路径
     @RequestMapping("downloadFile")
     public void downloadFile(HttpServletResponse response){

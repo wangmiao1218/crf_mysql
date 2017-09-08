@@ -74,9 +74,9 @@ function initCombo(){
 }
 */
 
- //开始处理按钮
-function dealFile(){
-	url = rootPath + "/crfLinkagePathController/dealFile";
+ //配置联动路径
+function configuredLinkagePath(){
+	url = rootPath + "/CRFTemplateToolsController/configuredLinkagePath";
 	$.ajax({
         type : "get",// 请求方式
         url : url,// 发送请求地址
@@ -102,6 +102,36 @@ function dealFile(){
 		}
     });
 
+}
+
+//配置英文名称
+function translateToEnglish(){
+	url = rootPath + "/CRFTemplateToolsController/translateToEnglish";
+	$.ajax({
+		type : "get",// 请求方式
+		url : url,// 发送请求地址
+		dataType : 'JSON',
+		//加遮蔽罩
+		beforeSend: function () {
+			$("#myShow").show();
+		},
+		
+		// 请求成功后的回调函数
+		success : function(data) {
+			alert(data.msg);
+			//成功后才跳转，请求controller，跳转到文件列表页面，以便下载
+			//window.location.href = rootPath+"/crfLinkagePathController/showFilesList";
+			//改成成功后显示下载按钮
+			$("#downloadButton").show();
+		},
+		complete: function () {
+			$("#myShow").hide();
+		},
+		error : function(data) {
+			alert("处理失败！");
+		}
+	});
+	
 }
 
 //下载：暂不使用此方法！
@@ -162,7 +192,7 @@ function upload() {
     //!!!!!!又是一坑：ajaxFileUpload是不解析json的,需要用：
     //data = $.parseJSON(data.replace(/<.*?>/ig,""));
 	$.ajaxFileUpload({
-		url : rootPath + '/crfLinkagePathController/uploadFiles',
+		url : rootPath + '/CRFTemplateToolsController/uploadFiles',
 		type : 'post',
 		dataType : 'JSON',
 		// 对应file标签的id,若多个，写成数组
@@ -173,6 +203,8 @@ function upload() {
 		success : function(data) {
 			data = $.parseJSON(data.replace(/<.*?>/ig,""));
 			alert(data.msg);
+			$("#dealEnNamesButton").show();
+			$("#dealPathButton").show();
 		},
 		error : function(data) {
 			alert("上传失败");

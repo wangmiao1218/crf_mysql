@@ -69,7 +69,7 @@ public class TestTranslateToEnglish {
 	
 	@Test
 	public void chNamesListFilter() throws Exception{
-		Excel excel = new Excel(filePath, fileName, sheetName);
+		Excel excel = new Excel(filePath, fileName2, sheetName2);
 		List<String> chNamesList = ExcelUtils.readExcelOfThreeList(excel, 0, 1,2);
 		
 		List<String> chNamesListFilter = ListAndStringUtils.chNamesListFilter(chNamesList);

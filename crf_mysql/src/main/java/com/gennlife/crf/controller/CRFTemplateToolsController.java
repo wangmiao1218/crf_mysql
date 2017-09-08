@@ -75,6 +75,9 @@ public class CRFTemplateToolsController {
 		
 		// windows上运行
 		//1、指定一个文件夹用来存放上传的文件
+		//先清空"F:\\uploadFile\\"
+		FileUtils.deleteFile("F:\\uploadFile\\");
+		
 		String[] paths = {"F:\\uploadFile\\1\\","F:\\uploadFile\\2\\"};
 		for (int i = 0; i < paths.length; i++) {
 			File filePath = new File(paths[i]);
@@ -82,10 +85,11 @@ public class CRFTemplateToolsController {
 			if(!filePath.exists()){
 				filePath.mkdirs();
 			}
+			//之前已经清空
 			// 如果存在该文件夹，就清空文件夹
-			if(filePath.exists()){
+			/*if(filePath.exists()){
 				FileUtils.deleteFile(paths[i]);
-			}
+			}*/
 		}
 		
 		//判断file数组不能为空并且长度大于0  
@@ -159,7 +163,6 @@ public class CRFTemplateToolsController {
         return result;
 	}
 
-    
     //配置英文名称
     @RequestMapping(value="translateToEnglish",method = RequestMethod.GET)
     @ResponseBody
@@ -205,7 +208,7 @@ public class CRFTemplateToolsController {
     
     //文件下载:固定路径
     @RequestMapping("downloadFile")
-    public void downloadFile(HttpServletResponse response){
+    public void downloadFile(HttpServletResponse response) throws Exception{
         response.setCharacterEncoding("utf-8");
         response.setContentType("multipart/form-data");
 
@@ -231,6 +234,8 @@ public class CRFTemplateToolsController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        //下载后则清空"F:\\uploadFile\\"
+      	FileUtils.deleteFile("F:\\uploadFile\\");
     }
     
     

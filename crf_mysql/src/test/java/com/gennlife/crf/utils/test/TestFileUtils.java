@@ -32,7 +32,7 @@ public class TestFileUtils {
 	
 	@Test
 	public void deleteFile() throws Exception {
-		String delpath="F:\\uploadFile\\test\\";
+		String delpath="F:\\uploadFile\\";
 		FileUtils.deleteFile(delpath);
 	}
 	

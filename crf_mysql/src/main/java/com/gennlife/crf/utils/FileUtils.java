@@ -185,8 +185,11 @@ public class FileUtils {
 					} else if (delfile.isDirectory()) {
 						deleteFile(fileList[i].getPath());
 					}
+					//删除子文件夹
+					fileList[i].delete();
 				}
-				//不删本身文件夹
+				//不删本身文件夹(根文件夹会保留)
+				//若放这，则会包括根文件夹也全部删除
 				//file.delete();
 			}
 		} catch (Exception e) {

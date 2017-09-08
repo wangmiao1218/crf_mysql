@@ -34,7 +34,8 @@
 				    	<label class="lbl-txt">单病种模板(Excel):</label>
 				    	<input type="file" id="uploadFile2" name="files"> 
 				    	<br><br>
-				    	<p style="color:red;margin-left:20px">若传错，则重新选择新文件，点击上传即可。</p>
+				    	<p style="color:red;margin-left:20px">注意：若传错，则重新选择新文件，点击上传。</p>
+				    	<p style="color:red;margin-left:20px">下载成功后，则删除服务器上文件。</p>
 			   		</li>
 	        	</ul>
 	    	</form> 

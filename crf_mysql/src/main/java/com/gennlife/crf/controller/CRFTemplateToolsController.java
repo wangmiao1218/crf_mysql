@@ -237,41 +237,10 @@ public class CRFTemplateToolsController {
         //下载后则清空"F:\\uploadFile\\"
       	FileUtils.deleteFile("F:\\uploadFile\\");
     }
-    
-    
-	/*public ResponseEntity<byte[]> downloadFile(HttpServletRequest request) throws Exception{
-		ResultBean result = new ResultBean();
-		//获取下载文件名称
-		String fileName=null;
-		List<String> list = FilesUtils.getFileNameList("F:\\uploadFile\\out\\");
-		if (list.size()==0) {
 
-		}
-		
-		fileName=list.get(0);
-		
-		// 下载的文件对象
-		File file = new File("F:\\uploadFile\\out\\"+fileName);
-		
-        HttpHeaders headers = new HttpHeaders();  
-        //下载显示的文件名，解决中文名称乱码问题  ，少了这句，可能导致下载中文文件名的文档，只有后缀名的情况
-        String downloadFielName = new String(fileName.getBytes("UTF-8"),"iso-8859-1");
-        
-        //通知浏览器以attachment（下载方式）打开
-        headers.setContentDispositionFormData("attachment", downloadFielName); 
-        
-        //设置MIME类型：application/octet-stream ： 二进制流数据（最常见的文件下载）。
-        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-		
-        //用FileUpload组件的FileUtils读取文件，并构建成ResponseEntity<byte[]>返回给浏览器
-        //HttpStatus.CREATED是HTTP的状态码201
-        //new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(file),headers,HttpStatus.CREATED);
-        return new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(file),headers,HttpStatus.CREATED);
-       
-	}
-    */
     
-	/*暂时用不到，直接处理完成后，显示下载按钮，点击直接请求下载的controller
+	/*
+	 //暂时用不到，直接处理完成后，显示下载按钮，点击直接请求下载的controller
 	//列出所有文件
     @RequestMapping("showFilesList")
     public String showFilesList(HttpServletRequest request, HttpServletResponse response) { 

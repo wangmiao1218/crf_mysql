@@ -144,12 +144,13 @@ public class TranslateToEnglish{
 		for (int i = 0; i < chNamesList.size(); i++) {
 			driver.findElementById("baidu_translate_input").clear();
 			driver.findElementById("baidu_translate_input").sendKeys(chNamesList.get(i));
+			Thread.sleep(500);
 			driver.findElementById("translate-button").click();
 			Thread.sleep(1800);
 			//获取翻译后的值
 			output=driver.findElementByXPath("//div[@class='output-bd']//p//span").getText();
 			enNamesList.add(output);
-			Thread.sleep(800);
+			//Thread.sleep(800);
 		}
 		QuitWebDriver.quitWebDriverByPhantomJSDriver(driver);
 		

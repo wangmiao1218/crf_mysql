@@ -45,7 +45,6 @@ public class TestMongoDBJDBC {
             e.printStackTrace();  
         }  
 	  
-		
 	}
 	
 	

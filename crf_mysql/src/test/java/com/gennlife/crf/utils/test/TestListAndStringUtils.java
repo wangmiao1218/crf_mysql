@@ -1,10 +1,21 @@
 package com.gennlife.crf.utils.test;
 
+import java.util.List;
+
 import org.junit.Test;
 
 import com.gennlife.crf.utils.ListAndStringUtils;
 
 public class TestListAndStringUtils {
+
+	@Test
+	public void valueSpiltToStringList(){
+		String value="就诊.就诊基本信息.入院（就诊）时间；就诊.就诊基本信息.挂号日期";
+		List<String> list = ListAndStringUtils.valueSpiltToStringList(value);
+		for (int i = 0; i < list.size(); i++) {
+			System.out.println(list.get(i));
+		}
+	}
 	
 	@Test
 	public void chNamesListFilter(){

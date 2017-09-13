@@ -6,11 +6,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.gennlife.crf.bean.Excel;
-import com.gennlife.mengyujie.Yujie;
+import com.gennlife.mengyujie.EnglishToEnglish;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:spring.xml")
-public class Testyujie {
+public class TestEnglishToEnglish {
 
 	private String filePath = "E:\\yujie";
 	private String fileName = "英文版乳腺癌2.xlsx";
@@ -24,7 +22,7 @@ public class Testyujie {
 		
 		Excel exceldc = new Excel(filePath, fileName2, sheetName);
 		
-		String str = Yujie.testYujie(excelrx, 2, exceldc, 2);
+		String str = EnglishToEnglish.testYujie(excelrx, 2, exceldc, 2);
 		
 		System.out.println(str);
 	}

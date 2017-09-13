@@ -11,7 +11,7 @@ import com.gennlife.crf.utils.ExcelUtils;
  * @author: wangmiao
  * @Date: 2017年8月17日 下午5:44:20 
  */
-public class Yujie{
+public class EnglishToEnglish{
 
 	public static String testYujie(Excel excelrx,Integer beginCellrx,Excel exceldc,Integer beginCelldc){
 		List<String> list = ExcelUtils.readExcelOfList(excelrx,beginCellrx);

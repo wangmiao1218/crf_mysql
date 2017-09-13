@@ -264,8 +264,6 @@ public class ExcelUtils {
     }  
     
     
-    
-    
     /** 
     * @Title: searchKeyWordOfOneLine 
     * @Description: 搜索某一个文件中，指定行，是否包含某个关键字 ,存在返回列号，不存在返回null(若重复，则返回最后一个)
@@ -320,11 +318,11 @@ public class ExcelUtils {
     
     /** 
      * @Title: searchKeyWordOfListReturnRowNum 
-     * @Description: 搜索某一个文件中，指定列，是否包含某个关键字 ,存在返回行号，不存在返回null(若重复，则返回最后一个)
+     * @Description: 搜索某一个文件中，指定列，是否包含某个关键字 ,存在返回行号，不存在返回null(若重复，则返回最后一个,就是顺序找的)
      * @param: Excel excel：传入excel
      * @param: Integer beginCell：列号（从0 开始）
      * @param: String keyWord：要搜索的关键字
-     * @return: Integer：存在返回行号，不存在返回null(若重复，则返回最后一个)
+     * @return: Integer：存在返回行号，不存在返回null(若重复，则返回最后一个,就是顺序找的)
      * @throws 
      */
     public static Integer searchKeyWordOfListReturnRowNum(Excel excel,Integer beginCell,String keyWord) {  

@@ -198,7 +198,7 @@ public class ListAndStringUtils {
 	 */
 	public static String listToString(List<WebElement> list) {
 		StringBuilder sb = new StringBuilder();
-		// 天假"；"
+		// 添加"；"
 		for (int i = 1; i < list.size(); i++) {
 			String attribute = list.get(i).getAttribute("value");
 			sb.append(attribute + "；");
@@ -207,6 +207,24 @@ public class ListAndStringUtils {
 		sb.deleteCharAt(sb.length() - 1);
 		return sb.toString();
 	}
+	
+	
+	/** 
+	* @Title: valueSpiltToStringList 
+	* @Description: 将value用“；”分割,转成list 
+	* @param: @param value
+	* @return: List<String>
+	* @throws 
+	*/
+	public static List<String> valueSpiltToStringList(String value) {
+		List<String> list = new ArrayList<String>();
+		String[] strings = value.split("；");
+		for (int i = 0; i < strings.length; i++) {
+			list.add(strings[i]);
+		}
+		return list;
+	}
+	
 
 	/**
 	 * @Title: trimString

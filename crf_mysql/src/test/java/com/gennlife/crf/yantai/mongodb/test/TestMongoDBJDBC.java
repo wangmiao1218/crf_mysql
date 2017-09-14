@@ -35,6 +35,13 @@ public class TestMongoDBJDBC {
 		
 		//query.put("visits", 1);
 
+		/*//条件  
+	    BasicDBObject condition=new BasicDBObject();
+        condition.append("createTime",new BasicDBObject("$gt",Long.valueOf("1365492600111")).append("$lt","1367119800803"));  
+        //指定需要显示列  
+        BasicDBObject key=new BasicDBObject("vid",1);//指定需要显示列  
+        DBCursor cursor=video_info.find(condition,key);  
+		*/
 		
 		FindIterable<Document> iterable = collection.find(query);
 		iterable.forEach(new Block<Document>() { 

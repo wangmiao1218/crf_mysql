@@ -7,13 +7,45 @@ import org.junit.Test;
 
 import com.gennlife.crf.bean.Excel;
 import com.gennlife.crf.utils.ExcelUtils;
+import com.gennlife.crf.utils.ListAndStringUtils;
 import com.gennlife.mengyujie.TranslateToEnglish;
 
 public class TestExcelUtils {
 	
-	private String filePath = "E:\\yujie\\3";
-	private String fileName = "test.xlsx";
-	private String sheetName = "随访";
+	private String filePath = "E:\\yujie";
+	private String fileName = "英文名联动.xls";
+	private String sheetName = "就诊－超声检查";
+	
+
+	@Test
+	public void a(){
+		String value="RV5（mV）";
+		if (value.indexOf("（") != -1) {
+			value = value.replaceAll(value.substring(value.indexOf("（"),
+					value.indexOf("）") + 1), "");
+		}
+		if (value.indexOf("(") != -1) {
+			value = value.replaceAll(value.substring(value.indexOf("("),
+					value.indexOf(")") + 1), "");
+		}
+		System.out.println(value);
+	}
+	
+	
+	@Test
+	public void readExcelOfOneList(){
+		Excel excel = new Excel(filePath, fileName, sheetName);
+		List<String> enNamesList = ExcelUtils.readExcelOfList(excel, 3);
+		//英文过滤
+		List<String> enNamesListFilter = ListAndStringUtils.enNamesListFilter(enNamesList);
+		//加序号
+		List<String> sequenceList = ListAndStringUtils.sameListTransferToSequenceList(enNamesListFilter);
+		
+		//写入
+		for (int i = 1; i < sequenceList.size(); i++) {
+			ExcelUtils.writeAndSaveContent(excel, sequenceList.get(i), i, 3);
+		}
+	}
 	
 	
 	@Test

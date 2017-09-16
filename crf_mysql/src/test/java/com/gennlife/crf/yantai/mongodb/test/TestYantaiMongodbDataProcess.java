@@ -8,13 +8,13 @@ import com.gennlife.crf.yantai.mongodb.YantaiMongodbDataProcess;
 
 public class TestYantaiMongodbDataProcess {
 
-	private String patient_sn = "pat_a171d95221c466284743f72c62957edd";
-	private String rydate = "2015-06-01 12:08:00";
+	private String patient_sn = "pat_019a52f2f08aa7a837fdf52cb5dbb58c";
+	private String rydate = "2014-10-13 10:51:00";
 	
 	@Test
 	public void search() {
 		String str = YantaiMongodbDataProcess.RysqkYongyaoqkReturnDataSources(patient_sn, rydate);
-		
+		//System.out.println(str);
         //读取excel药一列
         String filePath = "E:\\烟台升级\\crf数据测试";
     	String fileName = "神内脑血管药物.xlsx";
@@ -26,14 +26,9 @@ public class TestYantaiMongodbDataProcess {
     	Excel excel = new Excel(filePath, fileName, sheetName);
         List<String> list = ExcelUtils.readExcelOfList(excel, 1);
         for (int i = 0; i < list.size(); i++) {
-        	//str.contains(list.get(i) != null) ? System.out.println("存在的_"+sheetName+"："+list.get(i)):System.out.println("存在的_"+sheetName+"："+null);
-        	
-        	//str.contains(list.get(i));
-        	/*if (str.contains(list.get(i))) {
+        	if (str.contains(list.get(i))) {
 				System.out.println("存在的_"+sheetName+"："+list.get(i));
-			}else {
-				System.out.println("存在的_"+sheetName+"："+null);
-			}*/
+			}
 		}
         
         //精神科药物
@@ -42,8 +37,6 @@ public class TestYantaiMongodbDataProcess {
         for (int i = 0; i < list2.size(); i++) {
         	if (str.contains(list2.get(i))) {
 				System.out.println("存在的_"+sheetName2+"："+list2.get(i));
-			}else {
-				System.out.println("存在的_"+sheetName2+"："+null);
 			}
 		}
 		
@@ -53,13 +46,20 @@ public class TestYantaiMongodbDataProcess {
         for (int i = 0; i < list3.size(); i++) {
         	if (str.contains(list3.get(i))) {
 				System.out.println("存在的_"+sheetName3+"："+list3.get(i));
-			}else {
-				System.out.println("存在的_"+sheetName3+"："+null);
 			}
 		}
         
+        //胰岛素 来得时
+        if (str.contains("来得时")) {
+			System.out.println("存在的_胰岛素：来得时");
+		}
+        //胰岛素 诺和灵
+        if (str.contains("诺和灵")) {
+        	System.out.println("存在的_胰岛素：诺和灵");
+        }
+        
+        
 	}
-	
 	
 	
 }

@@ -176,13 +176,22 @@ public class ExcelUtils {
     		}
     		
     		String value=null;
+    		//==============此处有坑，不要轻易改！！！！！================
     		//判断第一列是否为空,不为空则获取值，为空则判断第二列
     		if (cell1!=null) {
     			value = cell1.getStringCellValue();
 	    		//将值放入list中
 	    		if (value!=null && !"".equals(value)) {  
 	    			chNameslist.add(value);
-	    		}
+	    		}else {//若等于""时，则继续判断
+	    			if (cell2!=null) {
+						value = cell2.getStringCellValue();
+			    		//将值放入list中
+			    		if (value!=null && !"".equals(value)) {  
+			    			chNameslist.add(value);
+			    		}
+	    			}
+				}
     		}else {
     			if (cell2!=null) {
 					value = cell2.getStringCellValue();
@@ -234,22 +243,56 @@ public class ExcelUtils {
     		}
     		
     		String value=null;
+    		//==============此处有坑，不要轻易改！！！！！================
     		//判断第一列是否为空,不为空则获取值，为空则判断第二列
+    		//第一列为空时：
     		if (cell1!=null) {
     			value = cell1.getStringCellValue();
 	    		//将值放入list中
 	    		if (value!=null && !"".equals(value)) {  
 	    			chNameslist.add(value);
-	    		}
-    		}else if(cell1==null){
+	    		}else {//若等于""时，则继续判断
+	    			if (cell2!=null) {
+						value = cell2.getStringCellValue();
+			    		//将值放入list中
+			    		if (value!=null && !"".equals(value)) {  
+			    			chNameslist.add(value);
+			    		}else {
+			    			if (cell3!=null && !"".equals(cell3)) {
+		    					value = cell3.getStringCellValue();
+		    		    		//将值放入list中
+		    		    		if (value!=null && !"".equals(value)) {  
+		    		    			chNameslist.add(value);
+		    		    		}
+		        			}
+						}
+	    			}else {
+	    				if (cell3!=null && !"".equals(cell3)) {
+	    					value = cell3.getStringCellValue();
+	    		    		//将值放入list中
+	    		    		if (value!=null && !"".equals(value)) {  
+	    		    			chNameslist.add(value);
+	    		    		}
+	        			}
+					}
+				}
+    		}else {
     			if (cell2!=null) {
 					value = cell2.getStringCellValue();
 		    		//将值放入list中
 		    		if (value!=null && !"".equals(value)) {  
 		    			chNameslist.add(value);
-		    		}
+		    		}else {
+		    			if (cell3!=null && !"".equals(cell3)) {
+	    					value = cell3.getStringCellValue();
+	    		    		//将值放入list中
+	    		    		if (value!=null && !"".equals(value)) {  
+	    		    			chNameslist.add(value);
+	    		    		}
+	        			}
+					}
     			}else {
-    				if (cell3!=null) {
+    				if (cell3!=null && !"".equals(cell3)) {
     					value = cell3.getStringCellValue();
     		    		//将值放入list中
     		    		if (value!=null && !"".equals(value)) {  

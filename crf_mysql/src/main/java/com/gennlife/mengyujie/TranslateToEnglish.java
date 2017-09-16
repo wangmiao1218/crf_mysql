@@ -149,7 +149,12 @@ public class TranslateToEnglish{
 			Thread.sleep(1800);
 			//获取翻译后的值
 			output=driver.findElementByXPath("//div[@class='output-bd']//p//span").getText();
-			enNamesList.add(output);
+			if (output==null) {
+				enNamesList.add("a");
+			}else {
+				enNamesList.add(output);
+			}
+			
 			//Thread.sleep(800);
 		}
 		QuitWebDriver.quitWebDriverByPhantomJSDriver(driver);

@@ -19,7 +19,15 @@ import com.mongodb.DBCursor;
  */
 public class YantaiMongodbDataProcess {
 
-	public static String RysqkYongyaoqk(String patient_sn,String rydate) {
+	/** 
+	* @Title: RysqkYongyaoqk 
+	* @Description: 烟台入院时情况_用药情况，返回数据来源相关的字段值
+	* @param: @param patient_sn 传入patient_sn
+	* @param: @param rydate 传入入院时间
+	* @return: String 返回y用药情况的数据来源相关的字段值
+	* @throws 
+	*/
+	public static String RysqkYongyaoqkReturnDataSources(String patient_sn,String rydate) {
 		List<String> list = new ArrayList<String>();
 		
 		//连接烟台数据库
@@ -47,11 +55,8 @@ public class YantaiMongodbDataProcess {
             cursor.close();
         }
         
-        //定义jsonObject
-        JSONObject jsonObject=null;
-        
         //将returnStr字符串转换成json对象:JSONObject
-        jsonObject=(JSONObject) JSON.parse(returnStr);
+        JSONObject jsonObject=(JSONObject) JSON.parse(returnStr);
         JSONArray jsonArray = jsonObject.getJSONArray("visits");
         
         //返回visits的JSONObject

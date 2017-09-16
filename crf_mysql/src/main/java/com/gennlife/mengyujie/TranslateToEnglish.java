@@ -144,7 +144,7 @@ public class TranslateToEnglish{
 		for (int i = 0; i < chNamesList.size(); i++) {
 			driver.findElementById("baidu_translate_input").clear();
 			driver.findElementById("baidu_translate_input").sendKeys(chNamesList.get(i));
-			Thread.sleep(500);
+			Thread.sleep(1000);
 			driver.findElementById("translate-button").click();
 			Thread.sleep(1800);
 			//获取翻译后的值

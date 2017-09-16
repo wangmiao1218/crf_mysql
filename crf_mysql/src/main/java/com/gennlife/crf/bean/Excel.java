@@ -68,7 +68,7 @@ public class Excel {
 		}
 
 		// 获取文件名参数的扩展名，判断是.xlsx文件还是.xls文件
-		String fileExtensionName = getFileName().substring(getFileName().indexOf("."));
+		String fileExtensionName = getFileName().substring(getFileName().lastIndexOf("."));
 		
 		Workbook workbook = null;
 		

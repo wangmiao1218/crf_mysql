@@ -1,4 +1,4 @@
-package com.gennlife.crf.anzhen.add;
+package com.gennlife.crf.anzhen.add.gaoxueya;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.gennlife.crf.anzhen.add.test;
+package com.gennlife.crf.anzhen.add.gaoxueya.test;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.gennlife.crf.anzhen.add.WriteExcelCrfTemplateAnzhen;
+import com.gennlife.crf.anzhen.add.gaoxueya.WriteExcelCrfTemplateAnzhen;
 import com.gennlife.crf.bean.CrfTemplateAnzhen;
 import com.gennlife.crf.bean.Excel;
 import com.gennlife.crf.service.CrfTemplateAnzhenService;

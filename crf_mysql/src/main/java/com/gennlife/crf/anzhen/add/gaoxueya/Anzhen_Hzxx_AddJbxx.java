@@ -1,4 +1,4 @@
-package com.gennlife.crf.anzhen.add;
+package com.gennlife.crf.anzhen.add.gaoxueya;
 
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.support.ui.Select;

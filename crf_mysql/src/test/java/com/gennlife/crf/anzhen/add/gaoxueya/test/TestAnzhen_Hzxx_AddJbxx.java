@@ -1,4 +1,4 @@
-package com.gennlife.crf.anzhen.add.test;
+package com.gennlife.crf.anzhen.add.gaoxueya.test;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -6,7 +6,7 @@ import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.gennlife.crf.anzhen.add.Anzhen_Hzxx_AddJbxx;
+import com.gennlife.crf.anzhen.add.gaoxueya.Anzhen_Hzxx_AddJbxx;
 import com.gennlife.crf.utils.CreateWebDriver;
 import com.gennlife.crf.utils.LoginCrfOfAnzhen;
 import com.gennlife.crf.utils.QuitWebDriver;

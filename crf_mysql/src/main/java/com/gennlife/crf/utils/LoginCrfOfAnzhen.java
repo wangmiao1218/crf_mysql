@@ -21,6 +21,7 @@ public class LoginCrfOfAnzhen {
 	public static final String xpathOfTiJian=".//*[@id='modal-container']/div/div/div/div[2]/a[3]";
 	public static final String xpathOfSheQu=".//*[@id='modal-container']/div/div/div/div[2]/a[4]";
 	
+	//
 	public static final String danbingzhongUrl="http://10.0.2.157/uranus/crf_case.html";
 
 	public static final String loginName ="wangmiao@gennlife.com";

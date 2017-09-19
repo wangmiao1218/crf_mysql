@@ -20,13 +20,15 @@ import com.gennlife.crf.bean.CrfTemplateAnzhenXinXueguan;
  */
 public class ListAndStringUtils {
 	
-	/**
-	 * @Title: displayMainKeyStringToSubstring
-	 * @Description: 将路径中去掉最后一个.之前，返回字段名称,若没有.，则直接返回传入的值
-	 * @param: @param value
-	 * @return: String
-	 * @throws
-	 */
+	/** 
+	* @Title: searchCrfListReturnOneCrf 
+	* @Description: 再list中搜索符合条件的对象
+	* @param: @param crfList
+	* @param: @param linkageEnglishName
+	* @param: @return :
+	* @return: CrfTemplateAnzhenXinXueguan
+	* @throws 
+	*/
 	public static CrfTemplateAnzhenXinXueguan searchCrfListReturnOneCrf(
 			List<CrfTemplateAnzhenXinXueguan> crfList,String linkageEnglishName) {
 		CrfTemplateAnzhenXinXueguan crfTemplateAnzhenXinXueguan = new CrfTemplateAnzhenXinXueguan();
@@ -41,7 +43,24 @@ public class ListAndStringUtils {
 	
 	
 	/**
-	 * @Title: displayMainKeyStringToSubstring
+	 * @Title: displayMainValueToSelectByValue
+	 * @Description: 若displayMainValueToSelectByValue有分号，则选择最后一个，没有直接返回值
+	 * @param: @param value
+	 * @return: String
+	 * @throws
+	 */
+	public static String displayMainValueToSelectByValue(String displayMainValue) {
+		if (displayMainValue.indexOf(";") != -1) {
+			return displayMainValue.substring(displayMainValue.lastIndexOf(".")+1).trim();
+		}else if (displayMainValue.indexOf("；") != -1) {
+			return displayMainValue.substring(displayMainValue.lastIndexOf("；")+1).trim();
+		}else{
+			return displayMainValue.trim();
+		}
+	}
+	
+	/**
+	 * @Title: displayMainKeyToEnglishName
 	 * @Description: 将路径中去掉最后一个.之前，返回字段名称,若没有.，则直接返回传入的值
 	 * @param: @param value
 	 * @return: String

@@ -60,11 +60,6 @@ public class CrfTemplateAnzhenXinXueguanController {
 			driver.findElementById("").click();
 			Thread.sleep(2000);
 			crfTemplateAnzhenXinXueguanService
-					.verifyLinkageFieldGeneralServiceMethod(driver,"就诊－体格检查");
-			
-			driver.findElementById("").click();
-			Thread.sleep(2000);
-			crfTemplateAnzhenXinXueguanService
 					.verifyLinkageFieldGeneralServiceMethod(driver,"就诊－实验室检验");
 			
 			driver.findElementById("").click();
@@ -76,11 +71,6 @@ public class CrfTemplateAnzhenXinXueguanController {
 			Thread.sleep(2000);
 			crfTemplateAnzhenXinXueguanService
 					.verifyLinkageFieldGeneralServiceMethod(driver,"就诊－其他诊断方法");
-			
-			driver.findElementById("").click();
-			Thread.sleep(2000);
-			crfTemplateAnzhenXinXueguanService
-					.verifyLinkageFieldGeneralServiceMethod(driver,"就诊－生活质量");
 			
 			driver.findElementById("").click();
 			Thread.sleep(2000);

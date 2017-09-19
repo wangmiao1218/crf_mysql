@@ -10,12 +10,51 @@ import java.util.Random;
 
 import org.openqa.selenium.WebElement;
 
+import com.gennlife.crf.bean.CrfTemplateAnzhenXinXueguan;
+
+
 /**
- * @Description: 字符串处理的工具集
+ * @Description: 字符串及集合的处理的工具集
  * @author: wangmiao
  * @Date: 2017年6月9日 上午9:58:00
  */
 public class ListAndStringUtils {
+	
+	/**
+	 * @Title: displayMainKeyStringToSubstring
+	 * @Description: 将路径中去掉最后一个.之前，返回字段名称,若没有.，则直接返回传入的值
+	 * @param: @param value
+	 * @return: String
+	 * @throws
+	 */
+	public static CrfTemplateAnzhenXinXueguan searchCrfListReturnOneCrf(
+			List<CrfTemplateAnzhenXinXueguan> crfList,String linkageEnglishName) {
+		CrfTemplateAnzhenXinXueguan crfTemplateAnzhenXinXueguan = new CrfTemplateAnzhenXinXueguan();
+		for (int i = 0; i < crfList.size(); i++) {
+			if (linkageEnglishName.equals(crfList.get(i).getEnglishName())) {
+				crfTemplateAnzhenXinXueguan = crfList.get(i);
+				break;
+			}
+		}
+		return crfTemplateAnzhenXinXueguan;
+	}
+	
+	
+	/**
+	 * @Title: displayMainKeyStringToSubstring
+	 * @Description: 将路径中去掉最后一个.之前，返回字段名称,若没有.，则直接返回传入的值
+	 * @param: @param value
+	 * @return: String
+	 * @throws
+	 */
+	public static String displayMainKeyToEnglishName(String displayMainKey) {
+		if (displayMainKey.indexOf(".") != -1) {
+			return displayMainKey.substring(displayMainKey.lastIndexOf(".")+1).trim();
+		}else{
+			return displayMainKey.trim();
+		}
+	}
+	
 
 	/** 
 	* @Title: sameListTransferToSequenceList 
@@ -122,7 +161,7 @@ public class ListAndStringUtils {
 	}
 
 	/**
-	 * @Title: chNamesListFilter
+	 * @Title: enNamesListFilter
 	 * @Description: 将enNamesList每个元素：1.去掉中英文 ？之后 2.去掉.之后 3.去掉中英文()之内 4.去掉-
 	 *               5.中英文，和、变成空格 6.空格变为_ 7.转为大写 8.trim
 	 * @param: List<String> enNamesList：英文list

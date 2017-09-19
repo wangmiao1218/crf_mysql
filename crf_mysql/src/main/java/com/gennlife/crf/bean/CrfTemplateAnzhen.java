@@ -1,7 +1,8 @@
 package com.gennlife.crf.bean;
 
 /**
- * @Description: 安贞环境：CrfTemplateAnzhen表的实体类，与数据库表对应（数据库crf_template_anzhen）
+ * @Description: 安贞环境：表的实体类，与数据库表对应（数据库crf_template_anzhen：安贞高血压疾病）
+ * 功能：验证导出功能，指定输入数据
  * @author: wangmiao
  * @Date: 2017年7月27日 下午6:34:35
  */

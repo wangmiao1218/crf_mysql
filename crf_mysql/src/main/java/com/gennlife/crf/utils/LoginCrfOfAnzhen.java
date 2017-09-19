@@ -21,7 +21,7 @@ public class LoginCrfOfAnzhen {
 	public static final String xpathOfTiJian=".//*[@id='modal-container']/div/div/div/div[2]/a[3]";
 	public static final String xpathOfSheQu=".//*[@id='modal-container']/div/div/div/div[2]/a[4]";
 	
-	//
+	//安贞高血压地址（若换成心血管的直接改ip即可）
 	public static final String danbingzhongUrl="http://10.0.2.157/uranus/crf_case.html";
 
 	public static final String loginName ="wangmiao@gennlife.com";
@@ -157,7 +157,7 @@ public class LoginCrfOfAnzhen {
 			e.printStackTrace();
 		}
 		
-		//切换医院
+		//切换医院（或切换科室：具体看页面对应的下拉框）
 		Select sel = new Select(driver.findElementByXPath(".//*[@id='crf-lab']/select"));
 		//北京清华长庚医院
         //sel.selectByValue("anzhen-beijingqinghuazhanggengyiyuan"); 
@@ -186,13 +186,13 @@ public class LoginCrfOfAnzhen {
 
 	
 	/**
-	 * @Title: loginAndToAddOfMenZhenAndBasicInfoByPhantomJSDriver
-	 * @Description: 登录并到添加页面,基本信息页面（门诊），通过PhantomJSDriver，无页面显示的方式
+	 * @Title: loginAndToAddOfXinxueguanByPhantomJSDriver
+	 * @Description: 登录到心血管的环境，不用选择基线，直接点添加到相关页面，通过PhantomJSDriver，无页面显示的方式
 	 * @param: PhantomJSDriver driver :传入driver
 	 * @return: String：返回，登录并到添加页面，成功返回“添加页面”
 	 * @throws
 	 */
-	public static String loginAndToAddOfMenZhenAndBasicInfoByPhantomJSDriver(PhantomJSDriver driver) {
+	public static String loginAndToAddOfXinxueguanByPhantomJSDriver(PhantomJSDriver driver) {
 		String returnString = loginByPhantomJSDriver(driver);
 
 		if ("登陆成功".equals(returnString)) {
@@ -201,15 +201,6 @@ public class LoginCrfOfAnzhen {
 						
 			try {
 				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-
-			// 获取基线_门诊
-			driver.findElementByXPath(xpathOfMenZhen).click();
-
-			try {
-				Thread.sleep(500);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -223,7 +214,7 @@ public class LoginCrfOfAnzhen {
 		}
 		
 		try {
-			Thread.sleep(2000);
+			Thread.sleep(1500);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -239,6 +230,65 @@ public class LoginCrfOfAnzhen {
 		
 		return value;
 	}
+	
+	
+	
+	
+	/**
+	 * @Title: loginAndToAddOfMenZhenAndBasicInfoByPhantomJSDriver
+	 * @Description: 登录并到添加页面,基本信息页面（门诊），通过PhantomJSDriver，无页面显示的方式
+	 * @param: PhantomJSDriver driver :传入driver
+	 * @return: String：返回，登录并到添加页面，成功返回“添加页面”
+	 * @throws
+	 */
+	public static String loginAndToAddOfMenZhenAndBasicInfoByPhantomJSDriver(PhantomJSDriver driver) {
+		String returnString = loginByPhantomJSDriver(driver);
+		
+		if ("登陆成功".equals(returnString)) {
+			// 获取添加按钮
+			driver.findElementByXPath(".//*[@id='action-container']/div[1]/button[1]").click();
+			
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			
+			// 获取基线_门诊
+			driver.findElementByXPath(xpathOfMenZhen).click();
+			
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			
+			// 得到当前窗口的set集合
+			Set<String> winHandels = driver.getWindowHandles();
+			// 将set集合存入list对象
+			List<String> it = new ArrayList<String>(winHandels);
+			// 切换到弹出的新窗口
+			driver.switchTo().window(it.get(1));
+		}
+		
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		String value = null;
+		
+		// 获取保存按钮，若存在则在添加页面
+		String text = driver.findElementById("input-save").getText();
+		
+		if ("保存".equals(text)) {
+			value = "添加页面";
+		}
+		
+		return value;
+	}
+	
 	
 	/**
 	 * @Title: loginAndToAddOfZhuYuanAndBasicInfoByPhantomJSDriver

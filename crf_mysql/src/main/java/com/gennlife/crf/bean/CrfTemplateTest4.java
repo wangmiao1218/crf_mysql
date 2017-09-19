@@ -1,7 +1,8 @@
 package com.gennlife.crf.bean;
 
 /**
- * @Description: 烟台环境：CrfTemplateTest4表的实体类，与数据库表对应（数据库crf_yantai_test4）
+ * @Description: 烟台环境：表的实体类，与数据库表对应（数据库crf_yantai_test4）
+ * 功能：自动录入单病种数据
  * @author: wangmiao
  * @Date: 2017年7月12日 下午1:45:53
  */

@@ -9,6 +9,13 @@ import com.gennlife.crf.utils.ListAndStringUtils;
 public class TestListAndStringUtils {
 
 	@Test
+	public void displayMainKeyToEnglishName(){
+		String displayMainKey="schema.Hospitalization.GENERAL_SITUATION.CONSOLIDATION";
+		String value = ListAndStringUtils.displayMainKeyToEnglishName(displayMainKey);
+			System.out.println(value);
+	}
+	
+	@Test
 	public void valueSpiltToStringList(){
 		String value="就诊.就诊基本信息.入院（就诊）时间；就诊.就诊基本信息.挂号日期";
 		List<String> list = ListAndStringUtils.valueSpiltToStringList(value);

@@ -1,22 +1,13 @@
 package com.gennlife.info.controller;
 
-import java.util.List;
-
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
-import org.openqa.selenium.support.ui.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import com.gennlife.crf.bean.CrfTemplateAnzhenXinXueguan;
 import com.gennlife.crf.service.CrfTemplateAnzhenXinXueguanService;
-import com.gennlife.crf.utils.AnzhenInputValueMethod;
 import com.gennlife.crf.utils.CreateWebDriver;
-import com.gennlife.crf.utils.ListAndStringUtils;
 import com.gennlife.crf.utils.LoginCrfOfAnzhen;
 import com.gennlife.crf.utils.QuitWebDriver;
-import com.gennlife.crf.utils.SeleniumUtils;
 
 /**
  * @Description: 安贞环境，心血管单病种，相关controller

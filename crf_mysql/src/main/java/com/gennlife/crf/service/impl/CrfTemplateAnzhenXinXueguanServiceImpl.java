@@ -13,7 +13,6 @@ import com.gennlife.crf.mapper.CrfTemplateAnzhenXinXueguanMapper;
 import com.gennlife.crf.service.CrfTemplateAnzhenXinXueguanService;
 import com.gennlife.crf.utils.ListAndStringUtils;
 import com.gennlife.crf.utils.SeleniumUtils;
-import com.sun.tools.classfile.Annotation.element_value;
 
 /**
  * @Description: 获取CrfTemplateAnzhenXinXueguan的impl

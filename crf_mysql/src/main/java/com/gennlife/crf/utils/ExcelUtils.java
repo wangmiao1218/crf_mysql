@@ -95,9 +95,58 @@ public class ExcelUtils {
     	
     }  
     
+    
+    /** 
+     * @Title: readExcelOfListReturnMap（有重复值时使用）(已经除去表头)
+     * @Description: 搜索某一个文件中，指定列所有数值，并添加到map中(k为行号，v为值)，返回map
+     * @param: Excel excel：传入excel
+     * @param: Integer beginCell：列号（从0 开始）
+     * @return:添加到map中(k为行号，v为值)，返回map
+     * @throws 
+     */
+    public static Map<Integer, String> readExcelOfListReturnMap(Excel excel,Integer beginCell) {  
+    	// 构造Workbook
+    	Workbook workbook = excel.getWorkbook();  
+    	
+    	if (workbook == null){
+    		return null;  //不存在
+    	}  
+    	
+    	//获取sheet
+    	Sheet sheet = workbook.getSheet(excel.getSheetName());
+    	
+    	Map<Integer, String> map = new HashedMap<Integer, String>();
+    	// 循环读取指定列数据(已经除去表头)
+    	for ( int rowNum= 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
+    		Row row = sheet.getRow(rowNum);
+    		
+    		Cell cell = null;
+    		//判断是否为空
+    		if (row!=null) {
+    			//指定 列beginCell
+    			cell = row.getCell(beginCell);
+    		}
+    		
+    		String value=null;
+    		//判断是否为空
+    		if (cell!=null) {
+    			value = cell.getStringCellValue();
+    		}
+    		
+    		//将值放入list中
+    		if (value!=null && !"".equals(value)) { 
+    			map.put(rowNum, value);
+    		}
+    		
+    	}
+    	return map;
+    	
+    }  
+    
+    
     /** 
      * @Title: readExcelOfList 
-     * @Description: 搜索某一个文件中，指定列所有数值，并添加到list中，返回list
+     * @Description: 搜索某一个文件中，指定列所有数值，有值则添加到list中，返回list
      * @param: Excel excel：传入excel
      * @param: Integer beginCell：列号（从0 开始）
      * @return: List<String>

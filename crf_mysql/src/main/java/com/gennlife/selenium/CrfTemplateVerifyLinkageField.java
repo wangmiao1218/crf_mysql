@@ -3,8 +3,10 @@ package com.gennlife.selenium;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.support.ui.Select;
+
 import com.gennlife.crf.bean.Excel;
 import com.gennlife.crf.utils.CreateWebDriver;
 import com.gennlife.crf.utils.ExcelUtils;
@@ -102,7 +104,7 @@ public class CrfTemplateVerifyLinkageField{
 		Integer linkageResultCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "linkageResult");
 		
 		//防止没有联动字段的情况
-		if (displayMainKeyCellNum!=null && displayMainValueCellNum!=null && linkageResultCellNum==null ) {
+		if (displayMainKeyCellNum!=null && displayMainValueCellNum!=null && linkageResultCellNum!=null ) {
 
 			//获取displayMainKeyCellNum列
 			Map<Integer, String> displayMainKeyMap = ExcelUtils.readExcelOfListReturnMap(excel, displayMainKeyCellNum);
@@ -178,7 +180,9 @@ public class CrfTemplateVerifyLinkageField{
 					Integer linkageFieldRowNum2 = ExcelUtils.searchKeyWordOfListReturnRowNum(excel, enNameCellNum, linkageFieldEnglishName2);
 					//联动字段配置的idXpath
 					String linkageFieldIdXpath2 = ExcelUtils.readContent(excel, linkageFieldRowNum2, idXpathCellNum);
-	
+					//联动字段配置的idXpath
+					String linkageFieldDisplayMainValue2 = ExcelUtils.readContent(excel, linkageFieldRowNum2, displayMainValueCellNum);
+					
 					//获取联动字段的DisplayMainKey
 					String linkageFieldDisplayMainKey2 =null;
 					if (linkageFieldRowNum2 != null) {
@@ -236,8 +240,100 @@ public class CrfTemplateVerifyLinkageField{
 								ExcelUtils.writeAndSaveContent(excel, "no", fieldRowNum, linkageResultCellNum);
 							}
 						}
-					}else {//若不为空，则直接写"大于三层，请人工测试"
-						ExcelUtils.writeAndSaveContent(excel, "大于三层，请人工测试", fieldRowNum, linkageResultCellNum);
+					}
+					//三层中嵌套四层逻辑
+					//===================四层逻辑开始============================
+					else if (linkageFieldDisplayMainKey2!=null && !"".equals(linkageFieldDisplayMainKey2) && !" ".equals(linkageFieldDisplayMainKey2)) {
+						//已知二级联动的：linkageFieldDisplayMainKey2
+						
+						//继续获取第三层的联动
+						//获取联动的英文字段
+						String linkageFieldEnglishName3 = ListAndStringUtils.displayMainKeyToEnglishName(linkageFieldDisplayMainKey2);
+						//获取联动字段所在的行
+						Integer linkageFieldRowNum3 = ExcelUtils.searchKeyWordOfListReturnRowNum(excel,enNameCellNum,linkageFieldEnglishName3);
+						//联动字段配置的idXpath
+						String linkageFieldIdXpath3 = ExcelUtils.readContent(excel, linkageFieldRowNum3, idXpathCellNum);
+		
+						//获取联动字段的DisplayMainKey
+						String linkageFieldDisplayMainKey3 =null;
+						if (linkageFieldRowNum3 != null) {
+							//判断是否为空，为空则为两层结构，不为空为多层结构
+							linkageFieldDisplayMainKey3 = ExcelUtils.readContent(excel, linkageFieldRowNum3, displayMainKeyCellNum);
+						}else {
+							ExcelUtils.writeAndSaveContent(excel, "没有联动字段的行号", fieldRowNum, linkageResultCellNum);
+							continue;
+						}
+						//四层结构
+						if (linkageFieldDisplayMainKey3==null || "".equals(linkageFieldDisplayMainKey3) || " ".equals(linkageFieldDisplayMainKey3)) {
+							//不为空，去页面查看是否存在
+							//存在,则结果直接为no
+							if (SeleniumUtils.isElementPresent(driver,idXpath)) {
+								ExcelUtils.writeAndSaveContent(excel, "no", fieldRowNum, linkageResultCellNum);
+							}else {//不存在 ，则开启联动的字段
+								//即：开启linkageFieldDisplayMainKey3，linkageFieldDisplayMainKey2，再开启linkageFieldDisplayMainKey1（关闭则逆序）
+								//1.先判断linkageFieldDisplayMainKey3是否能选择
+								//页面中设置联动字段为对应选项值,不能则直接no
+								Boolean b = SeleniumUtils.isSelectByValuePresent(driver, linkageFieldDisplayMainKey3,
+										ListAndStringUtils.displayMainValueToSelectByValue(linkageFieldDisplayMainValue2));
+								if (b) {
+									//2.开启linkageFieldRowNum3
+									new Select(driver.findElementById(linkageFieldIdXpath3)).
+											selectByValue(ListAndStringUtils.displayMainValueToSelectByValue(linkageFieldDisplayMainValue2));
+									//3.检查linkageFieldRowNum2是否存在
+									if (SeleniumUtils.isElementPresent(driver,linkageFieldIdXpath2)) {
+										//4.存在，则判断linkageFieldRowNum2能否设置联动字段
+										//页面中设置联动字段为对应选项值
+										Boolean bb = SeleniumUtils.isSelectByValuePresent(driver,linkageFieldIdXpath2, 
+												ListAndStringUtils.displayMainValueToSelectByValue(linkageFieldDisplayMainValue1));
+										if (bb) {
+											new Select(driver.findElementById(linkageFieldIdXpath2)).
+													selectByValue(ListAndStringUtils.displayMainValueToSelectByValue(linkageFieldDisplayMainValue1));
+											//5.检查是否存在linkageFieldRowNum1
+											if (SeleniumUtils.isElementPresent(driver,linkageFieldIdXpath1)) {
+												//6.存在，则判断linkageFieldRowNum1能否设置联动字段
+												Boolean bbb = SeleniumUtils.isSelectByValuePresent(driver,linkageFieldIdXpath1, 
+														ListAndStringUtils.displayMainValueToSelectByValue(displayMainValue));
+												//7.能设置，去判断是否存在要判断的元素
+												if (bbb) {
+													new Select(driver.findElementById(linkageFieldIdXpath1)).
+															selectByValue(ListAndStringUtils.displayMainValueToSelectByValue(displayMainValue));
+													//检查是否存在字段
+													//存在,则结果直接为pass
+													if (SeleniumUtils.isElementPresent(driver,idXpath)) {
+														ExcelUtils.writeAndSaveContent(excel, "pass", fieldRowNum, linkageResultCellNum);
+													}else {//不存在,则结果直接no
+														ExcelUtils.writeAndSaveContent(excel, "no", fieldRowNum, linkageResultCellNum);
+													}
+													//8.判断之后跟选项归位，以防影响后面元素判断(需要逆序关闭，则关闭linkageFieldIdXpath1,linkageFieldIdXpath2，再关闭linkageFieldIdXpath3)
+													new Select(driver.findElementById(linkageFieldIdXpath1)).selectByIndex(0);
+												}else {
+													ExcelUtils.writeAndSaveContent(excel, "no", fieldRowNum, linkageResultCellNum);
+												}	
+											}else {
+												ExcelUtils.writeAndSaveContent(excel, "no", fieldRowNum, linkageResultCellNum);
+											}
+											//9.判断之后跟选项归位，以防影响后面元素判断(需要逆序关闭，则关闭linkageFieldIdXpath1,linkageFieldIdXpath2，再关闭linkageFieldIdXpath3)
+											new Select(driver.findElementById(linkageFieldIdXpath2)).selectByIndex(0);
+										}else {
+											ExcelUtils.writeAndSaveContent(excel, "no", fieldRowNum, linkageResultCellNum);
+										}
+									}else {//不存在,则结果直接no
+										ExcelUtils.writeAndSaveContent(excel, "no", fieldRowNum, linkageResultCellNum);
+									}
+									
+									//判断之后跟选项归位，以防影响后面元素判断(需要逆序关闭，则关闭linkageFieldIdXpath1,linkageFieldIdXpath2，再关闭linkageFieldIdXpath3)
+									new Select(driver.findElementById(linkageFieldIdXpath3)).selectByIndex(0);
+								}else {
+									ExcelUtils.writeAndSaveContent(excel, "no", fieldRowNum, linkageResultCellNum);
+								}
+							}
+						}else {
+							ExcelUtils.writeAndSaveContent(excel, "超过四层", fieldRowNum, linkageResultCellNum);
+						}
+					}
+					//===================四层逻辑结束============================
+					else {
+						ExcelUtils.writeAndSaveContent(excel, "超过四层", fieldRowNum, linkageResultCellNum);
 					}
 					//继续循环，不进入下面操作
 					continue;

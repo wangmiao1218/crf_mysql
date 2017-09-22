@@ -1,6 +1,7 @@
 package com.gennlife.crf.utils;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -158,21 +159,21 @@ public class LoginCrfOfAnzhen {
 		}
 		
 		//切换医院（或切换科室：具体看页面对应的下拉框）
-		Select sel = new Select(driver.findElementByXPath(".//*[@id='crf-lab']/select"));
+		//Select sel = new Select(driver.findElementByXPath(".//*[@id='crf-lab']/select"));
 		//北京清华长庚医院
         //sel.selectByValue("anzhen-beijingqinghuazhanggengyiyuan"); 
-        sel.selectByValue("anzhen-nanfangyikedaxuenanfangyiyuan"); 
+        //sel.selectByValue("anzhen-nanfangyikedaxuenanfangyiyuan"); 
         //sel.selectByValue("anzhen-zhongguorenminjiefangjundisanjunyidaxue"); 
         //sel.selectByValue("anzhen-shoudouyikedaxuefushubeijingtiantanyiyuan"); 
 		//sel.selectByValue("anzhen-beijingshixinfeixueguanjibingyanjiusuo"); 
 		
-		// 等待
+		/*// 等待
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-
+		 */
 		String returnString=null;
 		String text = driver.findElementByXPath(".//*[@id='action-container']/div[1]/button[1]").getText();
 		
@@ -249,7 +250,7 @@ public class LoginCrfOfAnzhen {
 			driver.findElementByXPath(".//*[@id='action-container']/div[1]/button[1]").click();
 			
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(1500);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -258,17 +259,26 @@ public class LoginCrfOfAnzhen {
 			driver.findElementByXPath(xpathOfMenZhen).click();
 			
 			try {
-				Thread.sleep(500);
+				Thread.sleep(1500);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 			
-			// 得到当前窗口的set集合
+			String currentWindow = driver.getWindowHandle();// 获取当前窗口句柄
+		    Set<String> handles = driver.getWindowHandles();// 获取所有窗口句柄
+		    Iterator<String> it = handles.iterator();
+		    while (it.hasNext()) {
+		        if (currentWindow == it.next()) {
+		            continue;
+		        }
+		        driver = (PhantomJSDriver) driver.switchTo().window(it.next());// 切换到新窗口
+		    }
+			/*// 得到当前窗口的set集合
 			Set<String> winHandels = driver.getWindowHandles();
 			// 将set集合存入list对象
 			List<String> it = new ArrayList<String>(winHandels);
 			// 切换到弹出的新窗口
-			driver.switchTo().window(it.get(1));
+			driver.switchTo().window(it.get(1));*/
 		}
 		
 		try {
@@ -305,8 +315,8 @@ public class LoginCrfOfAnzhen {
 			driver.findElementByXPath(".//*[@id='action-container']/div[1]/button[1]").click();
 						
 			try {
-				Thread.sleep(500);
-			} catch (InterruptedException e) {
+				Thread.sleep(1000);
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 
@@ -315,7 +325,7 @@ public class LoginCrfOfAnzhen {
 
 			try {
 				Thread.sleep(500);
-			} catch (InterruptedException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 
@@ -329,7 +339,7 @@ public class LoginCrfOfAnzhen {
 		
 		try {
 			Thread.sleep(2000);
-		} catch (InterruptedException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		

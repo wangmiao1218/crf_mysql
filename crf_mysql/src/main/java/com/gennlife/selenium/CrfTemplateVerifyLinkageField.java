@@ -73,7 +73,7 @@ public class CrfTemplateVerifyLinkageField{
 		//使用安贞高血压进行测试
 		String value = LoginCrfOfAnzhen.loginAndToAddOfMenZhenAndBasicInfoByPhantomJSDriver(driver);
 
-		if ("添加页面".contains(value)) {
+		if ("添加页面".equals(value)) {
 			//测试
 			driver.findElementById(idXpath).click();
 			Thread.sleep(1500);
@@ -240,7 +240,10 @@ public class CrfTemplateVerifyLinkageField{
 								ExcelUtils.writeAndSaveContent(excel, "no", fieldRowNum, linkageResultCellNum);
 							}
 						}
+						//继续循环
+						continue;
 					}
+					/*
 					//三层中嵌套四层逻辑
 					//===================四层逻辑开始============================
 					else if (linkageFieldDisplayMainKey2!=null && !"".equals(linkageFieldDisplayMainKey2) && !" ".equals(linkageFieldDisplayMainKey2)) {
@@ -261,21 +264,21 @@ public class CrfTemplateVerifyLinkageField{
 							linkageFieldDisplayMainKey3 = ExcelUtils.readContent(excel, linkageFieldRowNum3, displayMainKeyCellNum);
 						}else {
 							ExcelUtils.writeAndSaveContent(excel, "没有联动字段的行号", fieldRowNum, linkageResultCellNum);
-							continue;
+							//continue;
 						}
 						//四层结构
 						if (linkageFieldDisplayMainKey3==null || "".equals(linkageFieldDisplayMainKey3) || " ".equals(linkageFieldDisplayMainKey3)) {
 							//不为空，去页面查看是否存在
 							//存在,则结果直接为no
 							if (SeleniumUtils.isElementPresent(driver,idXpath)) {
-								ExcelUtils.writeAndSaveContent(excel, "no", fieldRowNum, linkageResultCellNum);
+								ExcelUtils.writeAndSaveContent(excel, "no1", fieldRowNum, linkageResultCellNum);
 							}else {//不存在 ，则开启联动的字段
 								//即：开启linkageFieldDisplayMainKey3，linkageFieldDisplayMainKey2，再开启linkageFieldDisplayMainKey1（关闭则逆序）
 								//1.先判断linkageFieldDisplayMainKey3是否能选择
 								//页面中设置联动字段为对应选项值,不能则直接no
-								Boolean b = SeleniumUtils.isSelectByValuePresent(driver, linkageFieldDisplayMainKey3,
+								Boolean bbbb = SeleniumUtils.isSelectByValuePresent(driver, linkageFieldDisplayMainKey3,
 										ListAndStringUtils.displayMainValueToSelectByValue(linkageFieldDisplayMainValue2));
-								if (b) {
+								if (bbbb) {
 									//2.开启linkageFieldRowNum3
 									new Select(driver.findElementById(linkageFieldIdXpath3)).
 											selectByValue(ListAndStringUtils.displayMainValueToSelectByValue(linkageFieldDisplayMainValue2));
@@ -283,18 +286,18 @@ public class CrfTemplateVerifyLinkageField{
 									if (SeleniumUtils.isElementPresent(driver,linkageFieldIdXpath2)) {
 										//4.存在，则判断linkageFieldRowNum2能否设置联动字段
 										//页面中设置联动字段为对应选项值
-										Boolean bb = SeleniumUtils.isSelectByValuePresent(driver,linkageFieldIdXpath2, 
+										Boolean bbbbb = SeleniumUtils.isSelectByValuePresent(driver,linkageFieldIdXpath2, 
 												ListAndStringUtils.displayMainValueToSelectByValue(linkageFieldDisplayMainValue1));
-										if (bb) {
+										if (bbbbb) {
 											new Select(driver.findElementById(linkageFieldIdXpath2)).
 													selectByValue(ListAndStringUtils.displayMainValueToSelectByValue(linkageFieldDisplayMainValue1));
 											//5.检查是否存在linkageFieldRowNum1
 											if (SeleniumUtils.isElementPresent(driver,linkageFieldIdXpath1)) {
 												//6.存在，则判断linkageFieldRowNum1能否设置联动字段
-												Boolean bbb = SeleniumUtils.isSelectByValuePresent(driver,linkageFieldIdXpath1, 
+												Boolean bbbbbb = SeleniumUtils.isSelectByValuePresent(driver,linkageFieldIdXpath1, 
 														ListAndStringUtils.displayMainValueToSelectByValue(displayMainValue));
 												//7.能设置，去判断是否存在要判断的元素
-												if (bbb) {
+												if (bbbbbb) {
 													new Select(driver.findElementById(linkageFieldIdXpath1)).
 															selectByValue(ListAndStringUtils.displayMainValueToSelectByValue(displayMainValue));
 													//检查是否存在字段
@@ -302,29 +305,29 @@ public class CrfTemplateVerifyLinkageField{
 													if (SeleniumUtils.isElementPresent(driver,idXpath)) {
 														ExcelUtils.writeAndSaveContent(excel, "pass", fieldRowNum, linkageResultCellNum);
 													}else {//不存在,则结果直接no
-														ExcelUtils.writeAndSaveContent(excel, "no", fieldRowNum, linkageResultCellNum);
+														ExcelUtils.writeAndSaveContent(excel, "no2", fieldRowNum, linkageResultCellNum);
 													}
 													//8.判断之后跟选项归位，以防影响后面元素判断(需要逆序关闭，则关闭linkageFieldIdXpath1,linkageFieldIdXpath2，再关闭linkageFieldIdXpath3)
 													new Select(driver.findElementById(linkageFieldIdXpath1)).selectByIndex(0);
 												}else {
-													ExcelUtils.writeAndSaveContent(excel, "no", fieldRowNum, linkageResultCellNum);
+													ExcelUtils.writeAndSaveContent(excel, "no3", fieldRowNum, linkageResultCellNum);
 												}	
 											}else {
-												ExcelUtils.writeAndSaveContent(excel, "no", fieldRowNum, linkageResultCellNum);
+												ExcelUtils.writeAndSaveContent(excel, "no4", fieldRowNum, linkageResultCellNum);
 											}
 											//9.判断之后跟选项归位，以防影响后面元素判断(需要逆序关闭，则关闭linkageFieldIdXpath1,linkageFieldIdXpath2，再关闭linkageFieldIdXpath3)
 											new Select(driver.findElementById(linkageFieldIdXpath2)).selectByIndex(0);
 										}else {
-											ExcelUtils.writeAndSaveContent(excel, "no", fieldRowNum, linkageResultCellNum);
+											ExcelUtils.writeAndSaveContent(excel, "no5", fieldRowNum, linkageResultCellNum);
 										}
 									}else {//不存在,则结果直接no
-										ExcelUtils.writeAndSaveContent(excel, "no", fieldRowNum, linkageResultCellNum);
+										ExcelUtils.writeAndSaveContent(excel, "no6", fieldRowNum, linkageResultCellNum);
 									}
 									
 									//判断之后跟选项归位，以防影响后面元素判断(需要逆序关闭，则关闭linkageFieldIdXpath1,linkageFieldIdXpath2，再关闭linkageFieldIdXpath3)
 									new Select(driver.findElementById(linkageFieldIdXpath3)).selectByIndex(0);
 								}else {
-									ExcelUtils.writeAndSaveContent(excel, "no", fieldRowNum, linkageResultCellNum);
+									ExcelUtils.writeAndSaveContent(excel, "no7", fieldRowNum, linkageResultCellNum);
 								}
 							}
 						}else {
@@ -335,11 +338,11 @@ public class CrfTemplateVerifyLinkageField{
 					else {
 						ExcelUtils.writeAndSaveContent(excel, "超过四层", fieldRowNum, linkageResultCellNum);
 					}
+					*/
 					//继续循环，不进入下面操作
-					continue;
+					//continue;
 				}
 				//===================三层逻辑结束============================
-			
 			}
 		}
 	}

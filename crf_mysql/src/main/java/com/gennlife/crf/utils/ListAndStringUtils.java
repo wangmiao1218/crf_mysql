@@ -76,6 +76,24 @@ public class ListAndStringUtils {
 	
 	
 	/**
+	 * @Title: rangeDataReturnNeededRangeData
+	 * @Description: 将rangeData处理，都换成中文分号
+	 * @param: @param value
+	 * @return: String
+	 * @throws
+	 */
+	public static String rangeDataReturnNeededRangeData(String rangeData) {
+		if (rangeData.indexOf(" ") != -1) {
+			return rangeData.replaceAll(" ", "").trim();
+		}else if (rangeData.indexOf(";") != -1) {
+			return rangeData.replaceAll(";", "；").trim();
+		}else{
+			return rangeData.trim();
+		}
+	}
+	
+	
+	/**
 	 * @Title: displayMainValueToSelectByValue
 	 * @Description: 若displayMainValueToSelectByValue有分号，则选择最后一个，没有直接返回值
 	 * @param: @param value
@@ -91,6 +109,8 @@ public class ListAndStringUtils {
 			return displayMainValue.trim();
 		}
 	}
+	
+	
 	
 	/**
 	 * @Title: displayMainKeyToEnglishName
@@ -281,13 +301,13 @@ public class ListAndStringUtils {
 	}
 
 	/**
-	 * @Title: listToString
+	 * @Title: listWebElementToSelectString
 	 * @Description: 将List<WebElement> 转换成string，并用“；”分割
 	 * @param: List<WebElement> list 下拉框内容
 	 * @return: String
 	 * @throws
 	 */
-	public static String listToString(List<WebElement> list) {
+	public static String listWebElementToSelectString(List<WebElement> list) {
 		StringBuilder sb = new StringBuilder();
 		// 添加"；"
 		for (int i = 1; i < list.size(); i++) {

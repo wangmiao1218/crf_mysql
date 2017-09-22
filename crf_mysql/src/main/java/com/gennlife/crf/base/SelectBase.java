@@ -52,7 +52,7 @@ public class SelectBase {
 				List<WebElement> lw= selall.getOptions();
 				
 				//将list转为string
-				listToString = ListAndStringUtils.listToString(lw);
+				listToString = ListAndStringUtils.listWebElementToSelectString(lw);
 			}else {
 				logger.debug("页面加载失败...");
 			}

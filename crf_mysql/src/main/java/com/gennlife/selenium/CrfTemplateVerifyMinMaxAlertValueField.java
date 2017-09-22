@@ -6,36 +6,32 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
-import org.openqa.selenium.support.ui.Select;
 
 import com.gennlife.crf.bean.Excel;
 import com.gennlife.crf.utils.CreateWebDriver;
 import com.gennlife.crf.utils.ExcelUtils;
-import com.gennlife.crf.utils.ListAndStringUtils;
 import com.gennlife.crf.utils.LoginCrfOfAnzhen;
 import com.gennlife.crf.utils.QuitWebDriver;
 import com.gennlife.crf.utils.SeleniumUtils;
 
 /**
- * @Description: 验证页面枚举字段
+ * @Description: 验证页面允许最大值最小值
  * （注意：因为有联动，所以在页面创建时候，需要传入一个全字段的病例。后期会把联动加上，只需要填写必填字段）
  * @author: wangmiao
  * @Date: 2017年9月22日 上午10:24:13 
  */
-public class CrfTemplateVerifySelectField{
+public class CrfTemplateVerifyMinMaxAlertValueField{
 
 	/** 
-	* @Title: verifySelectField 
-	* @Description: 验证下拉框字段
+	* @Title: verifyMinMaxAlertValueField 
+	* @Description: 验证页面允许最大值最小值
 	* @param: @param excelmb
 	* @param: @param excel
 	* @return: void
 	* @throws 
 	*/
-	public static void verifySelectField(Excel excelmb,Excel excel) throws Exception {
+	public static void verifyMinMaxAlertValueField(Excel excelmb,Excel excel) throws Exception {
 		Integer chNameCellNum = ExcelUtils.searchKeyWordOfOneLine(excelmb, 0, "中文名称");
 		Integer idXpathCellNum = ExcelUtils.searchKeyWordOfOneLine(excelmb, 0, "idXpath");
 		//获取中文名称一列
@@ -51,7 +47,7 @@ public class CrfTemplateVerifySelectField{
 				Integer rowNum = ExcelUtils.searchKeyWordOfListReturnRowNum(excelmb, chNameCellNum, list.get(i));
 				String idXpath = ExcelUtils.readContent(excelmb, rowNum, idXpathCellNum);
 				//存在则进行去验证
-				verifySelectFieldOfWebDriver(excel,idXpath);
+				verifyMinMaxAlertValueFieldOfWebDriver(excel,idXpath);
 			}
 			
 			//如果对应的sheet不存在则继续
@@ -63,15 +59,15 @@ public class CrfTemplateVerifySelectField{
 	
 	
 	/** 
-	* @Title: verifySelectFieldOfWebDriver 
-	* @Description: 验证下拉框字段，去页面创建webDriver，相当于每个页面创建一个连接
+	* @Title: verifyMinMaxAlertValueFieldOfWebDriver 
+	* @Description: 验证页面允许最大值最小值，去页面创建webDriver，相当于每个页面创建一个连接
 	* @param: @param excel
 	* @param: @param idXpath
 	* @param: @throws Exception :
 	* @return: void
 	* @throws 
 	*/
-	public static void verifySelectFieldOfWebDriver(Excel excel,String idXpath) throws Exception {
+	public static void verifyMinMaxAlertValueFieldOfWebDriver(Excel excel,String idXpath) throws Exception {
 		// 登录并到add页面
 		PhantomJSDriver driver = CreateWebDriver.createWebDriverByPhantomJSDriver();
 		//
@@ -98,7 +94,7 @@ public class CrfTemplateVerifySelectField{
 			driver.findElementById(idXpath).click();
 			Thread.sleep(1500);
 			//验证
-			verifySelectFieldOfExcel(driver, excel);		
+			verifyMinMaxAlertValueFieldOfExcel(driver, excel);		
 		}
 
 		// 关闭driver
@@ -108,68 +104,60 @@ public class CrfTemplateVerifySelectField{
 
 	
 	/** 
-	* @Title: verifySelectFieldOfExcel 
-	* @Description: 验证下拉框字段，去excel遍历所有字段
+	* @Title: verifyMinMaxAlertValueFieldOfExcel 
+	* @Description: 验证页面允许最大值最小值，去excel遍历所有字段
 	* @param: @param driver
 	* @param: @param excel
 	* @param: @throws Exception :
 	* @return: void
 	* @throws 
 	*/
-	public static void verifySelectFieldOfExcel(PhantomJSDriver driver,Excel excel) throws Exception {
-		Integer variableTypeCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "变量类型");
-		Integer rangeDataCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "取值范围");
+	public static void verifyMinMaxAlertValueFieldOfExcel(PhantomJSDriver driver,Excel excel) throws Exception {
+		Integer minAlertValueCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "__minAlertValue");
+		Integer maxAlertValueCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "__maxAlertValue");
 		Integer idXpathCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "idXpath");
-		Integer selectOutputValueCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "selectOutputValue");
-		Integer selectResultCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "selectResult");
+		Integer minMaxAlertOutputValueCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "minMaxAlertOutputValue");
+		Integer minMaxAlertResultCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "minMaxAlertResult");
 		
 		//防止没有写字段的情况
-		if (selectOutputValueCellNum!=null && selectResultCellNum!=null) {
-			//获取variableTypeCellNum列
-			Map<Integer, String> variableTypeMap = ExcelUtils.readExcelOfListReturnMap(excel, variableTypeCellNum);
+		if (minAlertValueCellNum!=null && maxAlertValueCellNum!=null 
+					&& minMaxAlertOutputValueCellNum!=null && minMaxAlertResultCellNum!=null) {
+			//获取minAlertValueCellNum列
+			Map<Integer, String> variableTypeMap = ExcelUtils.readExcelOfListReturnMap(excel, minAlertValueCellNum);
 			for (Entry<Integer, String> entry: variableTypeMap.entrySet()) {
 				//遍历
 				Integer fieldRowNum = entry.getKey();
-				String variableType = entry.getValue();
+				String minAlertValue = entry.getValue();
 				//当前的idXpath
 				String idXpath = ExcelUtils.readContent(excel, fieldRowNum, idXpathCellNum);
+				//当前的maxAlertValue
+				String maxAlertValue = ExcelUtils.readContent(excel, fieldRowNum, maxAlertValueCellNum);
+				//System.out.println(minAlertValue+"~"+maxAlertValue);
 				
-				//获取枚举值
-				if ("枚举型".equals(variableType)) {
-					//System.out.println(fieldRowNum+"======"+variableType);
-					//获取取值范围的值
-					String rangeData = ExcelUtils.readContent(excel,fieldRowNum,rangeDataCellNum);
-					//将其；;等进行处理，统一用中文分号；，返回string
-					String neededRangeData = ListAndStringUtils.rangeDataReturnNeededRangeData(rangeData);
-					
-					//判断元素是否存在
-					//不存在,则结果直接为：页面中没找到对应的id
+				//判断最小值和最大值，是否都有值，没值则直接写:模板中缺少最大值
+				if (maxAlertValue!=null && !"".equals(maxAlertValue) && !" ".equals(maxAlertValue)) {
+					//若都不为空，则取页面判断
 					if (SeleniumUtils.isElementPresent(driver,idXpath)) {
-						//去页面 遍历下拉列表所有选项
-						Select selall = new Select(driver.findElement(By.id(idXpath)));
-						//封装成List<WebElement>
-						List<WebElement> lw= selall.getOptions();
-						//将list转为string
-						String selectRangeData = ListAndStringUtils.listWebElementToSelectString(lw);
+						//存在，则继续获取：属性placeholder="110～210"
 						//处理页面中的范围的
-						String neededSelectRangeData = ListAndStringUtils.rangeDataReturnNeededRangeData(selectRangeData);
+						String webMinMaxAlertValue =driver.findElementById(idXpath).getAttribute("placeholder");
 						
 						//处理页面结果，写入到excel中
-						ExcelUtils.writeAndSaveContent(excel,neededSelectRangeData,fieldRowNum, selectOutputValueCellNum);
+						ExcelUtils.writeAndSaveContent(excel,webMinMaxAlertValue,fieldRowNum, minMaxAlertOutputValueCellNum);
 						
 						//比较后写入结果
-						if (neededSelectRangeData.equals(neededRangeData)) {
-							ExcelUtils.writeAndSaveContent(excel,"pass",fieldRowNum, selectResultCellNum);
+						if (webMinMaxAlertValue.equals(minAlertValue+"～"+maxAlertValue)) {
+							ExcelUtils.writeAndSaveContent(excel,"pass",fieldRowNum, minMaxAlertResultCellNum);
 						}else {
-							ExcelUtils.writeAndSaveContent(excel,"no",fieldRowNum, selectResultCellNum);
+							ExcelUtils.writeAndSaveContent(excel,"no",fieldRowNum, minMaxAlertResultCellNum);
 						}
 						
 					}else {//不存在直接：页面中没找到对应的id
-						ExcelUtils.writeAndSaveContent(excel,"页面中没找到对应的id",fieldRowNum, selectResultCellNum);
+						ExcelUtils.writeAndSaveContent(excel,"页面中没找到对应的id",fieldRowNum, minMaxAlertResultCellNum);
 					}
 					
 				}else {
-					continue;
+					ExcelUtils.writeAndSaveContent(excel,"模板中缺少最大值",fieldRowNum, minMaxAlertResultCellNum);
 				}
 				
 			}

@@ -80,11 +80,12 @@ public class ExcelUtils {
     		String value=null;
     		//判断是否为空
     		if (cell!=null) {
+    			cell.setCellType(HSSFCell.CELL_TYPE_STRING);
     			value = cell.getStringCellValue();
     		}
     		
     		//将值放入list中
-    		if (value!=null && !"".equals(value)) { 
+    		if (value!=null && !"".equals(value) && !" ".equals(value)) { 
     			Map<Integer, String> map =new HashMap<Integer, String>();
     			map.put(rowNum, value);
     			list.add(map);
@@ -130,11 +131,12 @@ public class ExcelUtils {
     		String value=null;
     		//判断是否为空
     		if (cell!=null) {
-    			value = cell.getStringCellValue();
+    			cell.setCellType(HSSFCell.CELL_TYPE_STRING);
+				value = cell.getStringCellValue();
     		}
     		
     		//将值放入list中
-    		if (value!=null && !"".equals(value)) { 
+    		if (value!=null && !"".equals(value) && !" ".equals(value)) { 
     			map.put(rowNum, value);
     		}
     		
@@ -178,11 +180,12 @@ public class ExcelUtils {
     		String value=null;
     		//判断是否为空
     		if (cell!=null) {
+    			cell.setCellType(HSSFCell.CELL_TYPE_STRING);
     			value = cell.getStringCellValue();
     		}
     		
     		//将值放入list中
-    		if (value!=null && !"".equals(value)) {  
+    		if (value!=null && !"".equals(value) && !" ".equals(value)) {  
     			list.add(value);
     		}
     		
@@ -228,24 +231,27 @@ public class ExcelUtils {
     		//==============此处有坑，不要轻易改！！！！！================
     		//判断第一列是否为空,不为空则获取值，为空则判断第二列
     		if (cell1!=null) {
+    			cell1.setCellType(HSSFCell.CELL_TYPE_STRING);
     			value = cell1.getStringCellValue();
 	    		//将值放入list中
-	    		if (value!=null && !"".equals(value)) {  
+	    		if (value!=null && !"".equals(value) && !" ".equals(value)) {  
 	    			chNameslist.add(value);
 	    		}else {//若等于""时，则继续判断
 	    			if (cell2!=null) {
+	    				cell2.setCellType(HSSFCell.CELL_TYPE_STRING);
 						value = cell2.getStringCellValue();
 			    		//将值放入list中
-			    		if (value!=null && !"".equals(value)) {  
+			    		if (value!=null && !"".equals(value) && !" ".equals(value)) {  
 			    			chNameslist.add(value);
 			    		}
 	    			}
 				}
     		}else {
     			if (cell2!=null) {
+    				cell2.setCellType(HSSFCell.CELL_TYPE_STRING);
 					value = cell2.getStringCellValue();
 		    		//将值放入list中
-		    		if (value!=null && !"".equals(value)) {  
+		    		if (value!=null && !"".equals(value) && !" ".equals(value)) {  
 		    			chNameslist.add(value);
 		    		}
     			}
@@ -296,30 +302,34 @@ public class ExcelUtils {
     		//判断第一列是否为空,不为空则获取值，为空则判断第二列
     		//第一列为空时：
     		if (cell1!=null) {
+    			cell1.setCellType(HSSFCell.CELL_TYPE_STRING);
     			value = cell1.getStringCellValue();
 	    		//将值放入list中
-	    		if (value!=null && !"".equals(value)) {  
+	    		if (value!=null && !"".equals(value) && !" ".equals(value)) {  
 	    			chNameslist.add(value);
 	    		}else {//若等于""时，则继续判断
 	    			if (cell2!=null) {
+	    				cell2.setCellType(HSSFCell.CELL_TYPE_STRING);
 						value = cell2.getStringCellValue();
 			    		//将值放入list中
-			    		if (value!=null && !"".equals(value)) {  
+			    		if (value!=null && !"".equals(value) && !" ".equals(value)) {  
 			    			chNameslist.add(value);
 			    		}else {
 			    			if (cell3!=null && !"".equals(cell3)) {
+			    				cell3.setCellType(HSSFCell.CELL_TYPE_STRING);
 		    					value = cell3.getStringCellValue();
 		    		    		//将值放入list中
-		    		    		if (value!=null && !"".equals(value)) {  
+		    		    		if (value!=null && !"".equals(value) && !" ".equals(value)) {  
 		    		    			chNameslist.add(value);
 		    		    		}
 		        			}
 						}
 	    			}else {
 	    				if (cell3!=null && !"".equals(cell3)) {
+	    					cell3.setCellType(HSSFCell.CELL_TYPE_STRING);
 	    					value = cell3.getStringCellValue();
 	    		    		//将值放入list中
-	    		    		if (value!=null && !"".equals(value)) {  
+	    		    		if (value!=null && !"".equals(value) && !" ".equals(value)) {  
 	    		    			chNameslist.add(value);
 	    		    		}
 	        			}
@@ -327,24 +337,27 @@ public class ExcelUtils {
 				}
     		}else {
     			if (cell2!=null) {
+    				cell2.setCellType(HSSFCell.CELL_TYPE_STRING);
 					value = cell2.getStringCellValue();
 		    		//将值放入list中
-		    		if (value!=null && !"".equals(value)) {  
+		    		if (value!=null && !"".equals(value) && !" ".equals(value)) {  
 		    			chNameslist.add(value);
 		    		}else {
 		    			if (cell3!=null && !"".equals(cell3)) {
+		    				cell3.setCellType(HSSFCell.CELL_TYPE_STRING);
 	    					value = cell3.getStringCellValue();
 	    		    		//将值放入list中
-	    		    		if (value!=null && !"".equals(value)) {  
+	    		    		if (value!=null && !"".equals(value) && !" ".equals(value)) {  
 	    		    			chNameslist.add(value);
 	    		    		}
 	        			}
 					}
     			}else {
     				if (cell3!=null && !"".equals(cell3)) {
+    					cell3.setCellType(HSSFCell.CELL_TYPE_STRING);
     					value = cell3.getStringCellValue();
     		    		//将值放入list中
-    		    		if (value!=null && !"".equals(value)) {  
+    		    		if (value!=null && !"".equals(value) && !" ".equals(value)) {  
     		    			chNameslist.add(value);
     		    		}
         			}
@@ -396,6 +409,7 @@ public class ExcelUtils {
  			String value=null;
  			//判断是否为空
  			if (cell!=null) {
+ 				cell.setCellType(HSSFCell.CELL_TYPE_STRING);
  				value = cell.getStringCellValue();
 			}
  			
@@ -448,6 +462,7 @@ public class ExcelUtils {
     		String value=null;
     		//判断是否为空
     		if (cell!=null) {
+    			cell.setCellType(HSSFCell.CELL_TYPE_STRING);
     			value = cell.getStringCellValue();
     		}
     		
@@ -501,6 +516,7 @@ public class ExcelUtils {
     		String value=null;
     		//判断是否为空
     		if (cell!=null) {
+    			cell.setCellType(HSSFCell.CELL_TYPE_STRING);
     			value = cell.getStringCellValue();
     		}
     		
@@ -557,6 +573,7 @@ public class ExcelUtils {
     		String value =null;
     		//判断是否为空
     		if (cell!=null) {
+    			cell.setCellType(HSSFCell.CELL_TYPE_STRING);
     			value = cell.getStringCellValue();
     		}
     		
@@ -566,7 +583,7 @@ public class ExcelUtils {
 			}
     		
     		//获取第一个有值，停止
-    		if (value!=null && !"".equals(value)) {
+    		if (value!=null && !"".equals(value) && !" ".equals(value)) {
     			map.put(rowNum, value);
 				break;
 			}
@@ -612,11 +629,12 @@ public class ExcelUtils {
     		String value=null;
     		//判断是否为空
     		if (cell!=null) {
+    			cell.setCellType(HSSFCell.CELL_TYPE_STRING);
     			value = cell.getStringCellValue();
     		}
     		
     		//逆序获取第一个有值，停止
-    		if (value!=null && !"".equals(value)) {
+    		if (value!=null && !"".equals(value) && !" ".equals(value)) {
     			map.put(rowNum, value);
 				break;
 			}
@@ -660,11 +678,12 @@ public class ExcelUtils {
     		String value=null;
     		//判断是否为空
     		if (cell!=null) {
+    			cell.setCellType(HSSFCell.CELL_TYPE_STRING);
     			value = cell.getStringCellValue();
     		}
     		
     		//逆序获取第一个有值，停止
-    		if (value!=null && !"".equals(value)) {
+    		if (value!=null && !"".equals(value) && !" ".equals(value)) {
     			rowNumInteger=rowNum;
     			break;
     		}
@@ -710,11 +729,12 @@ public class ExcelUtils {
     		String value=null;
     		//判断是否为空
     		if (cell!=null) {
+    			cell.setCellType(HSSFCell.CELL_TYPE_STRING);
     			value = cell.getStringCellValue();
     		}
     		
     		//逆序获取第一个有值，停止
-    		if (value!=null && !"".equals(value)) {
+    		if (value!=null && !"".equals(value) && !" ".equals(value)) {
     			rowNumInteger=rowNum;
     			break;
     		}
@@ -760,6 +780,7 @@ public class ExcelUtils {
 		String value=null;
 		//判断是否为空
 		if (cell!=null) {
+			cell.setCellType(HSSFCell.CELL_TYPE_STRING);
 			value = cell.getStringCellValue();
 		}
 		

@@ -16,7 +16,7 @@ import com.gennlife.crf.utils.QuitWebDriver;
 import com.gennlife.crf.utils.SeleniumUtils;
 
 /**
- * @Description: 验证页面联动字段
+ * @Description: 验证页面联动字段(注意：联动只有三层逻辑)
  * @author: wangmiao
  * @Date: 2017年9月20日 下午5:57:54 
  */
@@ -45,8 +45,10 @@ public class CrfTemplateVerifyLinkageField{
 				//获取模板中对应的idXpath，传入下方
 				Integer rowNum = ExcelUtils.searchKeyWordOfListReturnRowNum(excelmb, chNameCellNum, list.get(i));
 				String idXpath = ExcelUtils.readContent(excelmb, rowNum, idXpathCellNum);
-				//存在则进行去验证
-				verifyLinkageOfWebDriver(excel,idXpath);
+				if (idXpath!=null && !"".equals(idXpath) && !" ".equals(idXpath)) {
+					//存在则进行去验证
+					verifyLinkageOfWebDriver(excel,idXpath);
+				}
 			}
 			
 			//如果对应的sheet不存在则继续
@@ -69,9 +71,8 @@ public class CrfTemplateVerifyLinkageField{
 	public static void verifyLinkageOfWebDriver(Excel excel,String idXpath) throws Exception {
 		// 登录并到add页面
 		PhantomJSDriver driver = CreateWebDriver.createWebDriverByPhantomJSDriver();
-		//String value = LoginCrfOfAnzhen.loginAndToAddOfXinxueguanByPhantomJSDriver(driver);
 		//使用安贞高血压进行测试
-		String value = LoginCrfOfAnzhen.loginAndToAddOfMenZhenAndBasicInfoByPhantomJSDriver(driver);
+		String value = LoginCrfOfAnzhen.loginAndToAddOfXinxueguanByPhantomJSDriver(driver);
 
 		if ("添加页面".equals(value)) {
 			//测试

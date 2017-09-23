@@ -78,6 +78,11 @@ public class CrfTemplateVerifySelectField{
 
 		//使用安贞高血压进行测试
 		if ("添加页面".equals(value)) {
+			//随访需要
+			driver.findElementByClassName("dropdown-toggle").click();
+			driver.findElementById("add-followup").click();
+			Thread.sleep(1500);
+			
 			//测试
 			driver.findElementById(idXpath).click();
 			Thread.sleep(2000);
@@ -152,7 +157,7 @@ public class CrfTemplateVerifySelectField{
 						}
 						
 					}else {//不存在直接：页面中没找到对应的id
-						ExcelUtils.writeAndSaveContent(excel,"页面中没找到对应的id",fieldRowNum, selectResultCellNum);
+						ExcelUtils.writeAndSaveContent(excel,"超过三层或页面中没找到对应的id",fieldRowNum, selectResultCellNum);
 					}
 					
 				}else {
@@ -266,8 +271,14 @@ public class CrfTemplateVerifySelectField{
 								if (bbb) {
 									new Select(driver.findElementById(linkageFieldIdXpath1)).
 											selectByValue(ListAndStringUtils.displayMainValueToSelectByValue(displayMainValue));
+								}else {
+									continue;
 								}
+							}else {
+								continue;
 							}
+						}else {
+							continue;
 						}
 					}
 					/*

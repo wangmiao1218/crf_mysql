@@ -26,7 +26,8 @@ public class SeleniumUtils {
 			//System.out.println(idXpath + " is appeard!");
 			status = true;
 		//注意坑：是否为org.openqa.selenium.NoSuchElementException
-		} catch (NoSuchElementException e) {
+		//} catch (NoSuchElementException e) {
+		} catch (Exception e) {
 			status = false;
 			//System.out.println("'" + idXpath + "' doesn't exist!");
 		}
@@ -46,7 +47,7 @@ public class SeleniumUtils {
 		try {
 			new Select(driver.findElementById(idXpath)).selectByValue(selectValue);
 			status = true;
-		} catch (IllegalArgumentException e) {
+		} catch (Exception e) {
 			status = false;
 		}
 		return status;

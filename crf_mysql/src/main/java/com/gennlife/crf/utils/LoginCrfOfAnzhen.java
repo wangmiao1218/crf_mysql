@@ -23,10 +23,10 @@ public class LoginCrfOfAnzhen {
 	public static final String xpathOfSheQu=".//*[@id='modal-container']/div/div/div/div[2]/a[4]";
 	
 	//安贞高血压地址（若换成心血管的直接改ip即可）
-	public static final String danbingzhongUrl="http://10.0.2.157/uranus/crf_case.html";
+	public static final String danbingzhongUrl="http://10.0.2.190/uranus/crf_case.html";
 
 	public static final String loginName ="wangmiao@gennlife.com";
-	public static final String pwd ="ls123456";
+	public static final String pwd ="123456";
 	
 	/**
 	 * @Title: loginByPhantomJSDriver
@@ -96,27 +96,18 @@ public class LoginCrfOfAnzhen {
 	 * @throws
 	 */
 	public static String loginAndToAddOfXinxueguanByPhantomJSDriver(PhantomJSDriver driver) {
-String returnString = loginByPhantomJSDriver(driver);
+		String returnString = loginByPhantomJSDriver(driver);
 		
 		if ("登陆成功".equals(returnString)) {
 			// 获取添加按钮
 			driver.findElementByXPath(".//*[@id='action-container']/div[1]/button[1]").click();
 			
 			try {
-				Thread.sleep(1500);
+				Thread.sleep(2000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			
-			// 获取基线_门诊
-			driver.findElementByXPath(xpathOfMenZhen).click();
-			
-			try {
-				Thread.sleep(1500);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			
+
 			String currentWindow = driver.getWindowHandle();// 获取当前窗口句柄
 		    Set<String> handles = driver.getWindowHandles();// 获取所有窗口句柄
 		    Iterator<String> it = handles.iterator();
@@ -126,12 +117,6 @@ String returnString = loginByPhantomJSDriver(driver);
 		        }
 		        driver = (PhantomJSDriver) driver.switchTo().window(it.next());// 切换到新窗口
 		    }
-			/*// 得到当前窗口的set集合
-			Set<String> winHandels = driver.getWindowHandles();
-			// 将set集合存入list对象
-			List<String> it = new ArrayList<String>(winHandels);
-			// 切换到弹出的新窗口
-			driver.switchTo().window(it.get(1));*/
 		}
 		
 		try {

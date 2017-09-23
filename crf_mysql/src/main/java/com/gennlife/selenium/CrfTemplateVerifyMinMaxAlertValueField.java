@@ -76,6 +76,11 @@ public class CrfTemplateVerifyMinMaxAlertValueField{
 
 		//使用安贞高血压进行测试
 		if ("添加页面".equals(value)) {
+			//随访需要
+			driver.findElementByClassName("dropdown-toggle").click();
+			driver.findElementById("add-followup").click();
+			Thread.sleep(1500);
+			
 			//测试
 			driver.findElementById(idXpath).click();
 			Thread.sleep(2000);
@@ -142,7 +147,7 @@ public class CrfTemplateVerifyMinMaxAlertValueField{
 						}
 						
 					}else {//不存在直接：页面中没找到对应的id
-						ExcelUtils.writeAndSaveContent(excel,"页面中没找到对应的id",fieldRowNum, minMaxAlertResultCellNum);
+						ExcelUtils.writeAndSaveContent(excel,"超过三层或页面中没找到对应的id",fieldRowNum, minMaxAlertResultCellNum);
 					}
 					
 				}else {
@@ -264,15 +269,14 @@ public class CrfTemplateVerifyMinMaxAlertValueField{
 								}else {
 									continue;
 								}
-							}else {//不存在,则结果直接no
+							}else {
 								continue;
 							}
-							
 						}else {
 							continue;
 						}
 					}
-/*
+					/*
 					//三层中嵌套四层逻辑
 					//===================四层逻辑开始============================
 					else if (linkageFieldDisplayMainKey2!=null && !"".equals(linkageFieldDisplayMainKey2) && !" ".equals(linkageFieldDisplayMainKey2)) {
@@ -294,36 +298,47 @@ public class CrfTemplateVerifyMinMaxAlertValueField{
 						
 						//四层结构
 						if (linkageFieldDisplayMainKey3==null || "".equals(linkageFieldDisplayMainKey3) || " ".equals(linkageFieldDisplayMainKey3)) {
-							Boolean bbbb = SeleniumUtils.isSelectByValuePresent(driver, linkageFieldDisplayMainKey3,
-									ListAndStringUtils.displayMainValueToSelectByValue(linkageFieldDisplayMainValue2));
-							if (bbbb) {
-								//2.开启linkageFieldRowNum3
+							//即：开启returnlist.get(3)，returnlist.get(2)，再开启returnlist.get(1)（关闭则逆序）
+							//1.先判断returnlist.get(3)是否能选择
+							//页面中设置联动字段为对应选项值,不能则直接no
+							Boolean b = SeleniumUtils.isSelectByValuePresent(driver,linkageFieldIdXpath3,
+											ListAndStringUtils.displayMainValueToSelectByValue(linkageFieldDisplayMainValue2));
+							if (b) {
+								//2.开启最根级节点returnlist.get(3)
 								new Select(driver.findElementById(linkageFieldIdXpath3)).
 										selectByValue(ListAndStringUtils.displayMainValueToSelectByValue(linkageFieldDisplayMainValue2));
-								//3.检查linkageFieldRowNum2是否存在
+								//3.检查次级节点returnlist.get(2)是否存在
 								if (SeleniumUtils.isElementPresent(driver,linkageFieldIdXpath2)) {
-									//4.存在，则判断linkageFieldRowNum2能否设置联动字段
+									//4.存在，则判断returnlist.get(2)能否设置联动字段
 									//页面中设置联动字段为对应选项值
-									Boolean bbbbb = SeleniumUtils.isSelectByValuePresent(driver,linkageFieldIdXpath2, 
+									Boolean bb = SeleniumUtils.isSelectByValuePresent(driver, linkageFieldIdXpath2, 
 											ListAndStringUtils.displayMainValueToSelectByValue(linkageFieldDisplayMainValue1));
-									if (bbbbb) {
+									if (bb) {
 										new Select(driver.findElementById(linkageFieldIdXpath2)).
 												selectByValue(ListAndStringUtils.displayMainValueToSelectByValue(linkageFieldDisplayMainValue1));
-										//5.检查是否存在linkageFieldRowNum1
+										//5.检查次次级节点returnlist.get(1)是否存在
 										if (SeleniumUtils.isElementPresent(driver,linkageFieldIdXpath1)) {
-											//6.存在，则判断linkageFieldRowNum1能否设置联动字段
-											Boolean bbbbbb = SeleniumUtils.isSelectByValuePresent(driver,linkageFieldIdXpath1, 
+											//6.存在，则判断returnlist.get(1)能否设置联动字段
+											Boolean bbb = SeleniumUtils.isSelectByValuePresent(driver, linkageFieldIdXpath1, 
 													ListAndStringUtils.displayMainValueToSelectByValue(displayMainValue));
-											//7.能设置，去判断是否存在要判断的元素
-											if (bbbbbb) {
+											if (bbb) {
 												new Select(driver.findElementById(linkageFieldIdXpath1)).
 														selectByValue(ListAndStringUtils.displayMainValueToSelectByValue(displayMainValue));
-											}//bbbbbb
+											}else {
+												//list.get(i).setLinkageResult("no");
+											}
+										}else{
+											//list.get(i).setLinkageResult("no");
 										}
-									}//bbbbb
+									}else {
+										//list.get(i).setLinkageResult("no");
+									}
+								}else {//不存在,则结果直接no
+									//list.get(i).setLinkageResult("no");
 								}
+							}else {
+								//list.get(i).setLinkageResult("no");
 							}
-							//bbbb
 						}
 					}*/
 				}

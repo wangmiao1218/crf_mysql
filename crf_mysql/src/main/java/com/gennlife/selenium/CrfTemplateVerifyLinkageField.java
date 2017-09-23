@@ -35,7 +35,7 @@ public class CrfTemplateVerifyLinkageField{
 		Integer idXpathCellNum = ExcelUtils.searchKeyWordOfOneLine(excelmb, 0, "idXpath");
 		//获取中文名称一列
 		List<String> list = ExcelUtils.readExcelOfList(excelmb, chNameCellNum);
-		
+		System.out.println(list.size());
 		//除去表头开始遍历
 		for (int i = 1; i < list.size(); i++) {
 			//设置excel的sheet值
@@ -75,9 +75,14 @@ public class CrfTemplateVerifyLinkageField{
 		String value = LoginCrfOfAnzhen.loginAndToAddOfXinxueguanByPhantomJSDriver(driver);
 
 		if ("添加页面".equals(value)) {
+			//随访需要
+			driver.findElementByClassName("dropdown-toggle").click();
+			driver.findElementById("add-followup").click();
+			Thread.sleep(1500);
+			
 			//测试
 			driver.findElementById(idXpath).click();
-			Thread.sleep(1500);
+			Thread.sleep(2000);
 			//验证
 			verifyLinkageOfExcel(driver, excel);		
 		}
@@ -243,6 +248,8 @@ public class CrfTemplateVerifyLinkageField{
 						}
 						//继续循环
 						continue;
+					}else {
+						ExcelUtils.writeAndSaveContent(excel, "超过三层，人工验证", fieldRowNum, linkageResultCellNum);
 					}
 					/*
 					//三层中嵌套四层逻辑
@@ -334,16 +341,20 @@ public class CrfTemplateVerifyLinkageField{
 						}else {
 							ExcelUtils.writeAndSaveContent(excel, "超过四层", fieldRowNum, linkageResultCellNum);
 						}
-					}
+					}*/
 					//===================四层逻辑结束============================
-					else {
-						ExcelUtils.writeAndSaveContent(excel, "超过四层", fieldRowNum, linkageResultCellNum);
-					}
-					*/
+					/*else {
+						ExcelUtils.writeAndSaveContent(excel, "超过三层，人工验证", fieldRowNum, linkageResultCellNum);
+					}*/
+					
 					//继续循环，不进入下面操作
 					//continue;
 				}
 				//===================三层逻辑结束============================
+				
+				else {
+					ExcelUtils.writeAndSaveContent(excel, "超过三层，人工验证", fieldRowNum, linkageResultCellNum);
+				}
 			}
 		}
 	}

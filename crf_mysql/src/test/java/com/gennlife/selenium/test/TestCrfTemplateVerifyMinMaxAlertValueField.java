@@ -15,9 +15,9 @@ import com.gennlife.selenium.CrfTemplateVerifyMinMaxAlertValueField;
 public class TestCrfTemplateVerifyMinMaxAlertValueField {
 
 	private String filePath = "E:\\安贞\\！安贞心血管\\test\\excel";
-	private String fileName = "test-模板结构-安贞高血压.xlsx";
+	private String fileName = "测试-模板结构-安贞心血管-自动.xlsx";
 	
-	private String fileName2 = "test-安贞高血压CRF模版1.1.22-2017-07-17.xls";
+	private String fileName2 = "安贞心血管CRF1.0.8-2017_09_21_for研发 - 自动.xls";
 	private String sheetName = "总体结构";
 	
 	@Test
@@ -29,7 +29,7 @@ public class TestCrfTemplateVerifyMinMaxAlertValueField {
 	}
 	
 	
-	
+	/*
 	@Test
 	public void placeholder() throws Exception{
 		// 登录并到add页面
@@ -66,5 +66,5 @@ public class TestCrfTemplateVerifyMinMaxAlertValueField {
 
 		System.out.println("ok");
 	}
-	
+	*/
 }

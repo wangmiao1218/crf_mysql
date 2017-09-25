@@ -1,10 +1,15 @@
 package com.gennlife.info.controller;
 
+import java.util.List;
+
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.gennlife.crf.bean.CrfTemplateStructure;
 import com.gennlife.crf.service.CrfTemplateAnzhenXinXueguanService;
+import com.gennlife.crf.service.CrfTemplateStructureService;
 import com.gennlife.crf.utils.CreateWebDriver;
 import com.gennlife.crf.utils.LoginCrfOfAnzhen;
 import com.gennlife.crf.utils.QuitWebDriver;
@@ -20,6 +25,9 @@ public class CrfTemplateAnzhenXinXueguanController {
 
 	@Autowired
 	private CrfTemplateAnzhenXinXueguanService crfTemplateAnzhenXinXueguanService;
+	
+	@Autowired
+	private CrfTemplateStructureService crfTemplateStructureService;
 
 	/**
 	 * @Title: verifyLinkageField
@@ -30,6 +38,9 @@ public class CrfTemplateAnzhenXinXueguanController {
 	 */
 	@RequestMapping("verifyLinkageField")
 	public String verifyLinkageField() throws Exception {
+		//获取CrfTemplateStructure
+		List<CrfTemplateStructure> list = crfTemplateStructureService.getCrfTemplateStructureListByHospitalDepartment("安贞心血管");
+		
 		// 登录并到add页面
 		PhantomJSDriver driver = CreateWebDriver.createWebDriverByPhantomJSDriver();
 		//String value = LoginCrfOfAnzhen.loginAndToAddOfXinxueguanByPhantomJSDriver(driver);
@@ -38,53 +49,20 @@ public class CrfTemplateAnzhenXinXueguanController {
 
 		if ("添加页面".contains(value)) {
 			//测试
-			driver.findElementById("crf-data-tree_3_span").click();
-			Thread.sleep(2000);
-			crfTemplateAnzhenXinXueguanService
-					.verifyLinkageFieldGeneralServiceMethod(driver,"个人病史");
-			/*
-			driver.findElementById("").click();
-			Thread.sleep(2000);
-			crfTemplateAnzhenXinXueguanService
-					.verifyLinkageFieldGeneralServiceMethod(driver,"就诊－住院与诊断");
-			
-			driver.findElementById("").click();
-			Thread.sleep(2000);
-			crfTemplateAnzhenXinXueguanService
-					.verifyLinkageFieldGeneralServiceMethod(driver,"就诊－实验室检验");
-			
-			driver.findElementById("").click();
-			Thread.sleep(2000);
-			crfTemplateAnzhenXinXueguanService
-					.verifyLinkageFieldGeneralServiceMethod(driver,"就诊－超声检查");
-			
-			driver.findElementById("").click();
-			Thread.sleep(2000);
-			crfTemplateAnzhenXinXueguanService
-					.verifyLinkageFieldGeneralServiceMethod(driver,"就诊－其他诊断方法");
-			
-			driver.findElementById("").click();
-			Thread.sleep(2000);
-			crfTemplateAnzhenXinXueguanService
-					.verifyLinkageFieldGeneralServiceMethod(driver,"就诊－院内药物治疗");
-			
-			driver.findElementById("").click();
-			Thread.sleep(2000);
-			crfTemplateAnzhenXinXueguanService
-					.verifyLinkageFieldGeneralServiceMethod(driver,"就诊－入院期间治疗");
-			
-			driver.findElementById("").click();
-			Thread.sleep(2000);
-			crfTemplateAnzhenXinXueguanService
-					.verifyLinkageFieldGeneralServiceMethod(driver,"就诊－出院药物治疗");
-			
-			//随访
-			driver.findElementByClassName("dropdown-toggle").click();
-			driver.findElementById("add-followup").click();
-			Thread.sleep(2000);
-			crfTemplateAnzhenXinXueguanService
-					.verifyLinkageFieldGeneralServiceMethod(driver,"随访");
-			*/
+			for (int i = 0; i < list.size(); i++) {
+				if ("随访".equals(list.get(i).getBaseName())) {
+					driver.findElementByClassName("dropdown-toggle").click();
+					driver.findElementById("add-followup").click();
+					Thread.sleep(2000);
+					crfTemplateAnzhenXinXueguanService
+							.verifyLinkageFieldGeneralServiceMethod(driver,list.get(i).getBaseName());
+				}else {
+					driver.findElementById(list.get(i).getIdXpath()).click();
+					Thread.sleep(2000);
+					crfTemplateAnzhenXinXueguanService
+							.verifyLinkageFieldGeneralServiceMethod(driver,list.get(i).getBaseName());
+				}
+			}
 		}
 
 		// 关闭driver

@@ -50,7 +50,8 @@ public class CrfTemplateAnzhenXinXueguanController {
 		if ("添加页面".contains(value)) {
 			//测试
 			for (int i = 0; i < list.size(); i++) {
-				if ("随访".equals(list.get(i).getBaseName())) {
+				if (!"".equals(list.get(i).getBaseName()) && !" ".equals(list.get(i).getBaseName()) 
+						&& "随访".equals(list.get(i).getBaseName())) {
 					driver.findElementByClassName("dropdown-toggle").click();
 					driver.findElementById("add-followup").click();
 					Thread.sleep(2000);

@@ -2,9 +2,9 @@ package com.gennlife.crf.bean;
 
 /**
  * @Description: 实体类，与数据库表对应(crf_template_anzhen_xinxueguan:安贞心血管疾病)
- * 功能：验证联动字段、枚举值下拉框
+ *               功能：验证联动字段、枚举值下拉框
  * @author: wangmiao
- * @Date: 2017年9月19日 上午9:28:26 
+ * @Date: 2017年9月19日 上午9:28:26
  */
 public class CrfTemplateAnzhenXinXueguan {
 	private int id;
@@ -13,43 +13,60 @@ public class CrfTemplateAnzhenXinXueguan {
 	private String thirdGroup;
 	private String chineseName;
 	private String englishName;
-	private String idXpath;
 	private String displayMainKey;
 	private String displayMainValue;
 	private String dataType;
 	private String variableType;
 	private String rangeData;
-
-	private String inputValue;
+	private String dateFormat;
+	private String idXpath;
+	private String linkageResult;
 	private String selectOutputValue;
 	private String selectResult;
-	private String linkageResult;
+	private String inputValue;
+	private String minMaxAlertOutputValue;
+	private String minMaxAlertResult;
+	private String minValue;
+	private String maxValue;
+	private String minAlertValue;
+	private String maxAlertValue;
 
 	public CrfTemplateAnzhenXinXueguan() {
 	}
 
 	public CrfTemplateAnzhenXinXueguan(int id, String baseName,
 			String secondGroup, String thirdGroup, String chineseName,
-			String englishName, String idXpath, String displayMainKey,
-			String displayMainValue, String dataType, String variableType,
-			String rangeData, String inputValue, String selectOutputValue,
-			String selectResult, String linkageResult) {
+			String englishName, String displayMainKey, String displayMainValue,
+			String dataType, String variableType, String rangeData,
+			String dateFormat, String idXpath, String linkageResult,
+			String selectOutputValue, String selectResult, String inputValue,
+			String minMaxAlertOutputValue, String minMaxAlertResult,
+			String minValue, String maxValue, String minAlertValue,
+			String maxAlertValue) {
+		super();
 		this.id = id;
 		this.baseName = baseName;
 		this.secondGroup = secondGroup;
 		this.thirdGroup = thirdGroup;
 		this.chineseName = chineseName;
 		this.englishName = englishName;
-		this.idXpath = idXpath;
 		this.displayMainKey = displayMainKey;
 		this.displayMainValue = displayMainValue;
 		this.dataType = dataType;
 		this.variableType = variableType;
 		this.rangeData = rangeData;
-		this.inputValue = inputValue;
+		this.dateFormat = dateFormat;
+		this.idXpath = idXpath;
+		this.linkageResult = linkageResult;
 		this.selectOutputValue = selectOutputValue;
 		this.selectResult = selectResult;
-		this.linkageResult = linkageResult;
+		this.inputValue = inputValue;
+		this.minMaxAlertOutputValue = minMaxAlertOutputValue;
+		this.minMaxAlertResult = minMaxAlertResult;
+		this.minValue = minValue;
+		this.maxValue = maxValue;
+		this.minAlertValue = minAlertValue;
+		this.maxAlertValue = maxAlertValue;
 	}
 
 	public int getId() {
@@ -66,6 +83,62 @@ public class CrfTemplateAnzhenXinXueguan {
 
 	public void setBaseName(String baseName) {
 		this.baseName = baseName;
+	}
+
+	public String getDateFormat() {
+		return dateFormat;
+	}
+
+	public void setDateFormat(String dateFormat) {
+		this.dateFormat = dateFormat;
+	}
+
+	public String getMinMaxAlertOutputValue() {
+		return minMaxAlertOutputValue;
+	}
+
+	public void setMinMaxAlertOutputValue(String minMaxAlertOutputValue) {
+		this.minMaxAlertOutputValue = minMaxAlertOutputValue;
+	}
+
+	public String getMinMaxAlertResult() {
+		return minMaxAlertResult;
+	}
+
+	public void setMinMaxAlertResult(String minMaxAlertResult) {
+		this.minMaxAlertResult = minMaxAlertResult;
+	}
+
+	public String getMinValue() {
+		return minValue;
+	}
+
+	public void setMinValue(String minValue) {
+		this.minValue = minValue;
+	}
+
+	public String getMaxValue() {
+		return maxValue;
+	}
+
+	public void setMaxValue(String maxValue) {
+		this.maxValue = maxValue;
+	}
+
+	public String getMinAlertValue() {
+		return minAlertValue;
+	}
+
+	public void setMinAlertValue(String minAlertValue) {
+		this.minAlertValue = minAlertValue;
+	}
+
+	public String getMaxAlertValue() {
+		return maxAlertValue;
+	}
+
+	public void setMaxAlertValue(String maxAlertValue) {
+		this.maxAlertValue = maxAlertValue;
 	}
 
 	public String getSecondGroup() {

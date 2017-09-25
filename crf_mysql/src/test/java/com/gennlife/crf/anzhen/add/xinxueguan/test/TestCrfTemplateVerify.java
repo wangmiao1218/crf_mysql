@@ -1,18 +1,18 @@
-package com.gennlife.selenium.test;
+package com.gennlife.crf.anzhen.add.xinxueguan.test;
 
 import org.junit.Test;
 
+import com.gennlife.crf.anzhen.add.xinxueguan.CrfTemplateVerifyLinkageField;
+import com.gennlife.crf.anzhen.add.xinxueguan.CrfTemplateVerifyMinMaxAlertValueField;
+import com.gennlife.crf.anzhen.add.xinxueguan.CrfTemplateVerifySelectField;
 import com.gennlife.crf.bean.Excel;
-import com.gennlife.selenium.CrfTemplateVerifyLinkageField;
-import com.gennlife.selenium.CrfTemplateVerifyMinMaxAlertValueField;
-import com.gennlife.selenium.CrfTemplateVerifySelectField;
 
 public class TestCrfTemplateVerify {
 
 	private String filePath = "E:\\安贞\\！安贞心血管\\test\\excel";
 	private String fileName = "测试-模板结构-安贞心血管-自动.xlsx";
 	
-	private String fileName2 = "安贞心血管CRF1.0.8-2017_09_21_for研发 - 自动.xls";
+	private String fileName2 = "安贞心血管CRF1.0.8-2017_09_23_for研发-自动.xls";
 	private String sheetName = "总体结构";
 	
 	@Test

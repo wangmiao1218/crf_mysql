@@ -26,8 +26,8 @@ public class SeleniumUtils {
 			//System.out.println(idXpath + " is appeard!");
 			status = true;
 		//注意坑：是否为org.openqa.selenium.NoSuchElementException
-		//} catch (NoSuchElementException e) {
-		} catch (Exception e) {
+		} catch (NoSuchElementException e) {
+		//} catch (Exception e) {
 			status = false;
 			//System.out.println("'" + idXpath + "' doesn't exist!");
 		}

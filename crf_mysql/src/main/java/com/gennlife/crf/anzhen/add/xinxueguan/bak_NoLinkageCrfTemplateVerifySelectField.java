@@ -1,4 +1,4 @@
-package com.gennlife.selenium;
+package com.gennlife.crf.anzhen.add.xinxueguan;
 
 import java.util.Iterator;
 import java.util.List;

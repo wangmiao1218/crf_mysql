@@ -138,10 +138,20 @@
 				minAlertValue = #{minAlertValue,jdbcType=VARCHAR},
 			</if>
 			<if test="maxAlertValue != null">
-				maxAlertValue = #{maxAlertValue,jdbcType=VARCHAR},
+				maxAlertValue = #{maxAlertValue,jdbcType=VARCHAR}
 			</if>
 		</set>
 		where id=#{id}
+	</update>
+	
+	
+	<!-- 根据BaseName，清空linkageResult结果 -->
+	<update id="updateCrfTemplateAnzhenXinXueguanListLinkageResultByBaseName" parameterType="java.lang.String">
+		update crf_template_anzhen_xinxueguan
+		<set>
+			linkageResult=null
+		</set>
+		where baseName=#{baseName}
 	</update>
 
 </mapper>

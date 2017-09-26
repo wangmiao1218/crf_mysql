@@ -27,6 +27,16 @@ public class TestAnzhenXinxueguan {
 	private CrfTemplateAnzhenXinXueguanMapper crfTemplateAnzhenXinXueguanMapper;
 
 	@Test
+	public void test03() throws Exception {
+		// 获取所有就诊－住院与诊断list
+		int a = crfTemplateAnzhenXinXueguanMapper.
+				updateCrfTemplateAnzhenXinXueguanListLinkageResultByBaseName("就诊－超声检查");
+		System.out.println(a);
+	}
+	
+	
+	
+	@Test
 	public void test02() throws Exception {
 		// 获取所有就诊－住院与诊断list
 		List<CrfTemplateAnzhenXinXueguan> list = crfTemplateAnzhenXinXueguanMapper

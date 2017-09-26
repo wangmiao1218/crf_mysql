@@ -64,5 +64,15 @@ public interface CrfTemplateAnzhenXinXueguanMapper {
      */
     public int updateCrfTemplateAnzhenXinXueguan(CrfTemplateAnzhenXinXueguan CrfTemplateAnzhenXinXueguan) throws Exception;
     
+    /** 
+     * @Title: updateCrfTemplateAnzhenXinXueguanListLinkageResultByBaseName 
+     * @Description: 根据BaseName，清空linkageResult结果
+     * @param: String baseName
+     * @param: @throws Exception :
+     * @return: int
+     * @throws 
+     */
+    public int updateCrfTemplateAnzhenXinXueguanListLinkageResultByBaseName(String baseName) throws Exception;
+    
 
 }

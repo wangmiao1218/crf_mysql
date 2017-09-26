@@ -35,154 +35,169 @@ public class CrfTemplateAnzhenXinXueguanServiceImpl implements CrfTemplateAnzhen
 		// 获取所有就诊－住院与诊断list
 		List<CrfTemplateAnzhenXinXueguan> list = crfTemplateAnzhenXinXueguanMapper
 				.getCrfTemplateAnzhenXinXueguanListByBaseName(baseName);
-		// 循环list
-		for (int i = 0; i < list.size(); i++) {
-			//新建list，便于接受递归返回的结果，每次循环则变化
-			List<CrfTemplateAnzhenXinXueguan> listcrf=new ArrayList<CrfTemplateAnzhenXinXueguan>();
-			
-			List<CrfTemplateAnzhenXinXueguan> returnlist = ListAndStringUtils.
-							searchCrfListReturnAllLinkageFieldsList(list, list.get(i),listcrf);
-			//判断返回的returnlist个数，即联动的层级结构
-			//个数==0或==1,一层逻辑暂时不做判断
-			if (returnlist.size()==0 || returnlist.size()==1) {
+		if (list.size()>0) {
+			// 循环list
+			for (int i = 0; i < list.size(); i++) {
+				//新建list，便于接受递归返回的结果，每次循环则变化
+				List<CrfTemplateAnzhenXinXueguan> listcrf=new ArrayList<CrfTemplateAnzhenXinXueguan>();
 				
-			}
-			//两层逻辑	
-			else if (returnlist.size()==2){
-				//先判断元素没有联动时，是否存在，存在直接no，不存在再继续判断（list.get(i)==returnlist.get(0)）
-				if (SeleniumUtils.isElementPresent(driver,list.get(i).getIdXpath())) {
-					returnlist.get(0).setLinkageResult("no");
-				}else {//不存在 
-					Boolean b = SeleniumUtils.isSelectByValuePresent(driver, returnlist.get(1).getIdXpath(), 
-							ListAndStringUtils.displayMainValueToSelectByValue(list.get(i).getDisplayMainValue()));
-					//先判断联动的下拉框是否能选择对应的值，能则继续判断，不能则no
-					if (b) {
-						new Select(driver.findElementById(returnlist.get(1).getIdXpath())).
-								selectByValue(ListAndStringUtils.displayMainValueToSelectByValue(list.get(i).getDisplayMainValue()));
-						//检查是否存在字段
-						//存在,则结果直接为pass
-						if (SeleniumUtils.isElementPresent(driver,list.get(i).getIdXpath())) {
-							list.get(i).setLinkageResult("pass");
-						}else {//不存在,则结果直接no
-							list.get(i).setLinkageResult("no");
-						}
-						//判断之后跟选项归位，以防影响后面元素判断
-						new Select(driver.findElementById(returnlist.get(1).getIdXpath())).selectByIndex(0);
-					}else {
-						list.get(i).setLinkageResult("no");
-					}
+				List<CrfTemplateAnzhenXinXueguan> returnlist = ListAndStringUtils.
+								searchCrfListReturnAllLinkageFieldsList(list, list.get(i),listcrf);
+				//判断返回的returnlist个数，即联动的层级结构
+				//个数==0或==1,一层逻辑暂时不做判断
+				if (returnlist.size()==0 || returnlist.size()==1) {
+					
 				}
-			}	
-				
-			//三层逻辑		
-			else if (returnlist.size()==3){
-				//即：开启returnlist.get(2)，再开启returnlist.get(1)（关闭则逆序）
-				//1.先判断returnlist.get(2)是否能选择
-				//页面中设置联动字段为对应选项值,不能则直接no
-				Boolean bb = SeleniumUtils.isSelectByValuePresent(driver, returnlist.get(2).getIdXpath(),
-								ListAndStringUtils.displayMainValueToSelectByValue(returnlist.get(1).getDisplayMainValue()));
-				if (bb) {
-					//2.开启最根级节点returnlist.get(2)
-					new Select(driver.findElementById(returnlist.get(2).getIdXpath())).
-							selectByValue(ListAndStringUtils.displayMainValueToSelectByValue(returnlist.get(1).getDisplayMainValue()));
-					//3.检查次级节点returnlist.get(1)是否存在
-					if (SeleniumUtils.isElementPresent(driver,returnlist.get(1).getIdXpath())) {
-						//4.存在，则判断returnlist.get(1)能否设置联动字段
-						//页面中设置联动字段为对应选项值
-						Boolean bbb = SeleniumUtils.isSelectByValuePresent(driver, returnlist.get(1).getIdXpath(), 
+				//两层逻辑	
+				else if (returnlist.size()==2){
+					//先判断元素没有联动时，是否存在，存在直接no，不存在再继续判断（list.get(i)==returnlist.get(0)）
+					if (SeleniumUtils.isElementPresent(driver,list.get(i).getIdXpath())) {
+						list.get(i).setLinkageResult("no");
+					}else {//不存在 
+						Boolean b = SeleniumUtils.isSelectByValuePresent(driver, returnlist.get(1).getIdXpath(), 
 								ListAndStringUtils.displayMainValueToSelectByValue(list.get(i).getDisplayMainValue()));
-						if (bbb) {
+						//先判断联动的下拉框是否能选择对应的值，能则继续判断，不能则no
+						if (b) {
 							new Select(driver.findElementById(returnlist.get(1).getIdXpath())).
 									selectByValue(ListAndStringUtils.displayMainValueToSelectByValue(list.get(i).getDisplayMainValue()));
-							//5.检查是否存在字段
+							//检查是否存在字段
 							//存在,则结果直接为pass
 							if (SeleniumUtils.isElementPresent(driver,list.get(i).getIdXpath())) {
 								list.get(i).setLinkageResult("pass");
 							}else {//不存在,则结果直接no
 								list.get(i).setLinkageResult("no");
 							}
-							//6.判断之后跟选项归位，以防影响后面元素判断(需要逆序关闭，则关闭returnlist.get(1)，再关闭returnlist.get(2))
+							//判断之后跟选项归位，以防影响后面元素判断
 							new Select(driver.findElementById(returnlist.get(1).getIdXpath())).selectByIndex(0);
 						}else {
 							list.get(i).setLinkageResult("no");
 						}
-					}else {//不存在,则结果直接no
-						list.get(i).setLinkageResult("no");
 					}
-					//判断之后跟选项归位，以防影响后面元素判断(需要逆序关闭，则关闭returnlist.get(1)，再关闭returnlist.get(2))
-					new Select(driver.findElementById(returnlist.get(2).getIdXpath())).selectByIndex(0);
-				}else {
-					list.get(i).setLinkageResult("no");
-				}
-			}	
-				
-			//四层逻辑		
-			else if (returnlist.size()==4){
-				//即：开启returnlist.get(3)，returnlist.get(2)，再开启returnlist.get(1)（关闭则逆序）
-				//1.先判断returnlist.get(3)是否能选择
-				//页面中设置联动字段为对应选项值,不能则直接no
-				Boolean b = SeleniumUtils.isSelectByValuePresent(driver, returnlist.get(3).getIdXpath(),
-								ListAndStringUtils.displayMainValueToSelectByValue(returnlist.get(2).getDisplayMainValue()));
-				if (b) {
-					//2.开启最根级节点returnlist.get(3)
-					new Select(driver.findElementById(returnlist.get(3).getIdXpath())).
-							selectByValue(ListAndStringUtils.displayMainValueToSelectByValue(returnlist.get(2).getDisplayMainValue()));
-					//3.检查次级节点returnlist.get(2)是否存在
-					if (SeleniumUtils.isElementPresent(driver,returnlist.get(2).getIdXpath())) {
-						//4.存在，则判断returnlist.get(2)能否设置联动字段
-						//页面中设置联动字段为对应选项值
-						Boolean bb = SeleniumUtils.isSelectByValuePresent(driver, returnlist.get(2).getIdXpath(), 
-								ListAndStringUtils.displayMainValueToSelectByValue(returnlist.get(1).getDisplayMainValue()));
+				}	
+					
+				//三层逻辑		
+				else if (returnlist.size()==3){
+					//先判断元素没有联动时，是否存在，存在直接no，不存在再继续判断（list.get(i)==returnlist.get(0)）
+					if (SeleniumUtils.isElementPresent(driver,list.get(i).getIdXpath())) {
+						list.get(i).setLinkageResult("no");
+					}else {//不存在 
+						
+						//即：开启returnlist.get(2)，再开启returnlist.get(1)（关闭则逆序）
+						//1.先判断returnlist.get(2)是否能选择
+						//页面中设置联动字段为对应选项值,不能则直接no
+						Boolean bb = SeleniumUtils.isSelectByValuePresent(driver, returnlist.get(2).getIdXpath(),
+										ListAndStringUtils.displayMainValueToSelectByValue(returnlist.get(1).getDisplayMainValue()));
 						if (bb) {
+							//2.开启最根级节点returnlist.get(2)
 							new Select(driver.findElementById(returnlist.get(2).getIdXpath())).
 									selectByValue(ListAndStringUtils.displayMainValueToSelectByValue(returnlist.get(1).getDisplayMainValue()));
-							//5.检查次次级节点returnlist.get(1)是否存在
+							//3.检查次级节点returnlist.get(1)是否存在
 							if (SeleniumUtils.isElementPresent(driver,returnlist.get(1).getIdXpath())) {
-								//6.存在，则判断returnlist.get(1)能否设置联动字段
+								//4.存在，则判断returnlist.get(1)能否设置联动字段
+								//页面中设置联动字段为对应选项值
 								Boolean bbb = SeleniumUtils.isSelectByValuePresent(driver, returnlist.get(1).getIdXpath(), 
 										ListAndStringUtils.displayMainValueToSelectByValue(list.get(i).getDisplayMainValue()));
 								if (bbb) {
 									new Select(driver.findElementById(returnlist.get(1).getIdXpath())).
 											selectByValue(ListAndStringUtils.displayMainValueToSelectByValue(list.get(i).getDisplayMainValue()));
-									//7.检查元素list.get(i)是否存在
+									//5.检查是否存在字段
+									//存在,则结果直接为pass
 									if (SeleniumUtils.isElementPresent(driver,list.get(i).getIdXpath())) {
 										list.get(i).setLinkageResult("pass");
 									}else {//不存在,则结果直接no
 										list.get(i).setLinkageResult("no");
-									}		
-									//判断之后跟选项归位，以防影响后面元素判断(需要逆序关闭，则关闭returnlist.get(1)，再关闭returnlist.get(2)，returnlist.get(3))
+									}
+									//6.判断之后跟选项归位，以防影响后面元素判断(需要逆序关闭，则关闭returnlist.get(1)，再关闭returnlist.get(2))
 									new Select(driver.findElementById(returnlist.get(1).getIdXpath())).selectByIndex(0);
 								}else {
 									list.get(i).setLinkageResult("no");
 								}
-							}else{
+							}else {//不存在,则结果直接no
 								list.get(i).setLinkageResult("no");
 							}
-							//判断之后跟选项归位，以防影响后面元素判断(需要逆序关闭，则关闭returnlist.get(1)，再关闭returnlist.get(2)，returnlist.get(3))
+							//判断之后跟选项归位，以防影响后面元素判断(需要逆序关闭，则关闭returnlist.get(1)，再关闭returnlist.get(2))
 							new Select(driver.findElementById(returnlist.get(2).getIdXpath())).selectByIndex(0);
 						}else {
 							list.get(i).setLinkageResult("no");
 						}
-					}else {//不存在,则结果直接no
-						list.get(i).setLinkageResult("no");
-					}
-					//判断之后跟选项归位，以防影响后面元素判断(需要逆序关闭，则关闭returnlist.get(1)，再关闭returnlist.get(2)，returnlist.get(3))
-					new Select(driver.findElementById(returnlist.get(3).getIdXpath())).selectByIndex(0);
-				}else {
-					list.get(i).setLinkageResult("no");
+					}	
 				}
-			}
-			
-			//每次循环完，更新数据库
-			crfTemplateAnzhenXinXueguanMapper.updateCrfTemplateAnzhenXinXueguan(list.get(i));
-		}		
-		Thread.sleep(500);
+				
+				//四层逻辑		
+				else if (returnlist.size()==4){
+					//先判断元素没有联动时，是否存在，存在直接no，不存在再继续判断（list.get(i)==returnlist.get(0)）
+					if (SeleniumUtils.isElementPresent(driver,list.get(i).getIdXpath())) {
+						list.get(i).setLinkageResult("no");
+					}else {//不存在 
+						
+						//即：开启returnlist.get(3)，returnlist.get(2)，再开启returnlist.get(1)（关闭则逆序）
+						//1.先判断returnlist.get(3)是否能选择
+						//页面中设置联动字段为对应选项值,不能则直接no
+						Boolean b = SeleniumUtils.isSelectByValuePresent(driver, returnlist.get(3).getIdXpath(),
+										ListAndStringUtils.displayMainValueToSelectByValue(returnlist.get(2).getDisplayMainValue()));
+						if (b) {
+							//2.开启最根级节点returnlist.get(3)
+							new Select(driver.findElementById(returnlist.get(3).getIdXpath())).
+									selectByValue(ListAndStringUtils.displayMainValueToSelectByValue(returnlist.get(2).getDisplayMainValue()));
+							//3.检查次级节点returnlist.get(2)是否存在
+							if (SeleniumUtils.isElementPresent(driver,returnlist.get(2).getIdXpath())) {
+								//4.存在，则判断returnlist.get(2)能否设置联动字段
+								//页面中设置联动字段为对应选项值
+								Boolean bb = SeleniumUtils.isSelectByValuePresent(driver, returnlist.get(2).getIdXpath(), 
+										ListAndStringUtils.displayMainValueToSelectByValue(returnlist.get(1).getDisplayMainValue()));
+								if (bb) {
+									new Select(driver.findElementById(returnlist.get(2).getIdXpath())).
+											selectByValue(ListAndStringUtils.displayMainValueToSelectByValue(returnlist.get(1).getDisplayMainValue()));
+									//5.检查次次级节点returnlist.get(1)是否存在
+									if (SeleniumUtils.isElementPresent(driver,returnlist.get(1).getIdXpath())) {
+										//6.存在，则判断returnlist.get(1)能否设置联动字段
+										Boolean bbb = SeleniumUtils.isSelectByValuePresent(driver, returnlist.get(1).getIdXpath(), 
+												ListAndStringUtils.displayMainValueToSelectByValue(list.get(i).getDisplayMainValue()));
+										if (bbb) {
+											new Select(driver.findElementById(returnlist.get(1).getIdXpath())).
+													selectByValue(ListAndStringUtils.displayMainValueToSelectByValue(list.get(i).getDisplayMainValue()));
+											//7.检查元素list.get(i)是否存在
+											if (SeleniumUtils.isElementPresent(driver,list.get(i).getIdXpath())) {
+												list.get(i).setLinkageResult("pass");
+											}else {//不存在,则结果直接no
+												list.get(i).setLinkageResult("no");
+											}		
+											//判断之后跟选项归位，以防影响后面元素判断(需要逆序关闭，则关闭returnlist.get(1)，再关闭returnlist.get(2)，returnlist.get(3))
+											new Select(driver.findElementById(returnlist.get(1).getIdXpath())).selectByIndex(0);
+										}else {
+											list.get(i).setLinkageResult("no");
+										}
+									}else{
+										list.get(i).setLinkageResult("no");
+									}
+									//判断之后跟选项归位，以防影响后面元素判断(需要逆序关闭，则关闭returnlist.get(1)，再关闭returnlist.get(2)，returnlist.get(3))
+									new Select(driver.findElementById(returnlist.get(2).getIdXpath())).selectByIndex(0);
+								}else {
+									list.get(i).setLinkageResult("no");
+								}
+							}else {//不存在,则结果直接no
+								list.get(i).setLinkageResult("no");
+							}
+							//判断之后跟选项归位，以防影响后面元素判断(需要逆序关闭，则关闭returnlist.get(1)，再关闭returnlist.get(2)，returnlist.get(3))
+							new Select(driver.findElementById(returnlist.get(3).getIdXpath())).selectByIndex(0);
+						}else {
+							list.get(i).setLinkageResult("no");
+						}
+					}
+				}
+				//每次循环完，更新数据库
+				crfTemplateAnzhenXinXueguanMapper.updateCrfTemplateAnzhenXinXueguan(list.get(i));
+			}//for
+		}//if
+		
+		Thread.sleep(1000);
 	}
 	
 	
 	/**
 	 * 注意：巨大坑(直接判断逻辑，没有递归，建议使用上面递归，逻辑清晰)
 	 */
+	/*
 	//@Override
 	//通用service验证联动字段
 	public void verifyLinkageFieldGeneralServiceMethod_bak(PhantomJSDriver driver,String baseName) throws Exception{
@@ -293,7 +308,7 @@ public class CrfTemplateAnzhenXinXueguanServiceImpl implements CrfTemplateAnzhen
 		}
 		Thread.sleep(500);
 	}
-	
+	*/
 	
 	
 	@Override
@@ -325,6 +340,13 @@ public class CrfTemplateAnzhenXinXueguanServiceImpl implements CrfTemplateAnzhen
 			CrfTemplateAnzhenXinXueguan CrfTemplateAnzhenXinXueguan)
 			throws Exception {
 		return crfTemplateAnzhenXinXueguanMapper.updateCrfTemplateAnzhenXinXueguan(CrfTemplateAnzhenXinXueguan);
+	}
+
+
+	@Override
+	public int updateCrfTemplateAnzhenXinXueguanListLinkageResultByBaseName(
+			String baseName) throws Exception {
+		return crfTemplateAnzhenXinXueguanMapper.updateCrfTemplateAnzhenXinXueguanListLinkageResultByBaseName(baseName);
 	}
 
 	

@@ -43,7 +43,6 @@ public class CrfTemplateAnzhenXinXueguan {
 			String minMaxAlertOutputValue, String minMaxAlertResult,
 			String minValue, String maxValue, String minAlertValue,
 			String maxAlertValue) {
-		super();
 		this.id = id;
 		this.baseName = baseName;
 		this.secondGroup = secondGroup;

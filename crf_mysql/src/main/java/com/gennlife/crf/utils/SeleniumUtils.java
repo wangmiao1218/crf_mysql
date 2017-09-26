@@ -23,13 +23,14 @@ public class SeleniumUtils {
 		Boolean status = false;
 		try {
 			driver.findElementById(idXpath);
-			//System.out.println(idXpath + " is appeard!");
 			status = true;
 		//注意坑：是否为org.openqa.selenium.NoSuchElementException
-		} catch (NoSuchElementException e) {
-		//} catch (Exception e) {
+		} catch (org.openqa.selenium.NoSuchElementException e) {
 			status = false;
-			//System.out.println("'" + idXpath + "' doesn't exist!");
+			//我以为是这个新打开的页面加载的时间太慢了，selenium 执行太快，所以检测不到这个页面上的一些元素
+			//或者页面缺少id属性
+		} catch (org.openqa.selenium.NoSuchWindowException e) {
+			status = false;
 		}
 		return status;
 	}

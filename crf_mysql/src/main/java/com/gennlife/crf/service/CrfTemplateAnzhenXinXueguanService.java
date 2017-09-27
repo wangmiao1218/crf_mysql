@@ -84,9 +84,31 @@ public interface CrfTemplateAnzhenXinXueguanService{
     * @Description:  验证联动字段通用service方法
     * @param: @param driver
     * @param: @param baseName
-    * @return: void
+    * @return: String
     * @throws 
     */
     public void verifyLinkageFieldGeneralServiceMethod(PhantomJSDriver driver,String baseName) throws Exception;
+   
+    
+    /** 
+     * @Title: verifyLinkageFieldGeneralServiceMethodWithGroupLinkage 
+     * @Description:  验证联动字段通用service方法
+     * @param: @param driver
+     * @param: @param baseName
+     * @return: String
+     * @throws 
+     */
+    public void verifyLinkageFieldGeneralServiceMethodWithGroupLinkage(String baseName) throws Exception;
 
+    
+    /** 
+     * @Title: getVerifyLinkageFieldResultList 
+     * @Description: 获取linkageResult验证结果列表
+     * @param: @throws Exception :
+     * @return: List<CrfTemplateAnzhenXinXueguan>
+     * @throws 
+     */
+    public List<CrfTemplateAnzhenXinXueguan> getVerifyLinkageFieldResultList() throws Exception;
+    
+    
 }

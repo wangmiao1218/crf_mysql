@@ -69,7 +69,7 @@
 		from crf_template_anzhen_xinxueguan
 		where baseName=#{baseName}
 	</select>
-
+	
 	<!-- 更新CrfTemplate -->
 	<update id="updateCrfTemplateAnzhenXinXueguan" parameterType="com.gennlife.crf.bean.CrfTemplateAnzhenXinXueguan">
 		update crf_template_anzhen_xinxueguan
@@ -153,5 +153,14 @@
 		</set>
 		where baseName=#{baseName}
 	</update>
+
+	<!-- 获取linkageResult验证结果列表 -->
+	<select id="getVerifyLinkageFieldResultList" resultMap="BaseResultMap">
+		SELECT
+		<include refid="CrfTemplateAnzhenXinXueguan_Column_List"></include>
+		from crf_template_anzhen_xinxueguan
+		where linkageResult="no" or linkageResult="整组存在组联动情况，请人工判断"
+	</select>
+
 
 </mapper>

@@ -27,6 +27,44 @@ public class TestAnzhenXinxueguan {
 	private CrfTemplateAnzhenXinXueguanMapper crfTemplateAnzhenXinXueguanMapper;
 
 	@Test
+	public void test05() throws Exception {
+		List<CrfTemplateAnzhenXinXueguan> list = crfTemplateAnzhenXinXueguanMapper.getVerifyLinkageFieldResultList();
+		System.out.println(list.size());
+		for (int i = 0; i < list.size(); i++) {
+			System.out.println(list.get(i));
+			System.out.println("======================");
+		}
+	}	
+	
+	
+	@Test
+	public void test04() throws Exception {
+		// 获取所有就诊－住院与诊断list
+		List<CrfTemplateAnzhenXinXueguan> listAll = crfTemplateAnzhenXinXueguanMapper
+				.getCrfTemplateAnzhenXinXueguanListByBaseName("就诊－超声检查");
+		System.out.println(listAll.size());
+		
+		//新建list，便于接受递归返回的结果，每次循环则变化
+		List<CrfTemplateAnzhenXinXueguan> listcrf=new ArrayList<CrfTemplateAnzhenXinXueguan>();
+		//for (int i = 0; i < listAll.size(); i++) {
+		List<CrfTemplateAnzhenXinXueguan> returnlist = ListAndStringUtils.
+				searchCrfListReturnAllLinkageFieldsList(listAll, listAll.get(29),listcrf);
+		
+		System.out.println(listAll.get(29));
+		
+		System.out.println(returnlist.size());
+		for (int i = 0; i < returnlist.size(); i++) {
+			System.out.println(returnlist.get(i));
+		}
+		
+		System.out.println("======================");
+		
+		//}
+		
+	}	
+	
+	
+	@Test
 	public void test03() throws Exception {
 		// 获取所有就诊－住院与诊断list
 		int a = crfTemplateAnzhenXinXueguanMapper.

@@ -15,6 +15,7 @@ import com.gennlife.crf.bean.CrfTemplateStructure;
 import com.gennlife.crf.service.CrfTemplateAnzhenXinXueguanService;
 import com.gennlife.crf.service.CrfTemplateStructureService;
 import com.gennlife.crf.utils.CreateWebDriver;
+import com.gennlife.crf.utils.ListAndStringUtils;
 import com.gennlife.crf.utils.LoginCrfOfAnzhen;
 import com.gennlife.crf.utils.QuitWebDriver;
 
@@ -36,7 +37,7 @@ public class CrfTemplateAnzhenXinXueguanController {
 	
 	/**
 	 * @Title: verifyLinkageField
-	 * @Description: 验证安贞心血管，联动字段
+	 * @Description: 验证安贞心血管，联动字段(适用于界面的方式，页面直接展示)
 	 * @param: @throws Exception :
 	 * @return: String
 	 * @throws
@@ -44,43 +45,125 @@ public class CrfTemplateAnzhenXinXueguanController {
 	@RequestMapping("verifyLinkageField")
 	public String verifyLinkageField() throws Exception {
 		//获取CrfTemplateStructure
-		List<CrfTemplateStructure> list = crfTemplateStructureService.getCrfTemplateStructureListByHospitalDepartment("安贞心血管");
-		System.out.println(list);
+		List<CrfTemplateStructure> list = crfTemplateStructureService
+					.getCrfTemplateStructureListByHospitalDepartment("安贞心血管");
 		
 		// 登录并到add页面
 		PhantomJSDriver driver = CreateWebDriver.createWebDriverByPhantomJSDriver();
-		//String value = LoginCrfOfAnzhen.loginAndToAddOfXinxueguanByPhantomJSDriver(driver);
-		//使用安贞高血压进行测试
-		String value = LoginCrfOfAnzhen.loginAndToAddOfMenZhenAndBasicInfoByPhantomJSDriver(driver);
-
-		if ("添加页面".contains(value) && list.size()>1 ) {
-			//测试
-			for (int i = 0; i < list.size(); i++) {
-				//测试
-				if (!"".equals(list.get(i).getBaseName()) && !" ".equals(list.get(i).getBaseName())) {
-					driver.findElementById(list.get(i).getIdXpath()).click();
-					Thread.sleep(2000);
+		String value = LoginCrfOfAnzhen.loginAndToAddOfXinxueguanByPhantomJSDriver(driver);
+		
+		if ("添加页面".contains(value) && list.size()>0) {
+			//判断是否为组联动
+			for (int i= 0; i< list.size(); i++) {
+				//根据baseNamen，获取对应的list
+				List<CrfTemplateAnzhenXinXueguan> listByBaseName = crfTemplateAnzhenXinXueguanService
+						.getCrfTemplateAnzhenXinXueguanListByBaseName(list.get(i).getBaseName());
+				//判断是否为组联动
+				Boolean b = ListAndStringUtils.isCRFListLGroupLinkage(listByBaseName);
+				if (b) {
+					//System.out.println("组联动，人工测试");
+					//测试前先清空联动字段：update 表 set 字段=null（不用delete）
 					crfTemplateAnzhenXinXueguanService
-							.verifyLinkageFieldGeneralServiceMethod(driver,list.get(i).getBaseName());
-				}else if (!"".equals(list.get(i).getBaseName()) && !" ".equals(list.get(i).getBaseName()) 
-						&& "随访".equals(list.get(i).getBaseName())) {
-					driver.findElementByClassName("dropdown-toggle").click();
-					driver.findElementById("add-followup").click();
-					Thread.sleep(2000);
+							.updateCrfTemplateAnzhenXinXueguanListLinkageResultByBaseName(list.get(i).getBaseName());
 					crfTemplateAnzhenXinXueguanService
-							.verifyLinkageFieldGeneralServiceMethod(driver,list.get(i).getBaseName());
+							.verifyLinkageFieldGeneralServiceMethodWithGroupLinkage(list.get(i).getBaseName());
 				}else {
-					continue;
+					if (!"".equals(list.get(i).getBaseName().trim())
+							&& "随访".equals(list.get(i).getBaseName())) {
+						//随访
+						driver.findElementByClassName("dropdown-toggle").click();
+						driver.findElementById("add-followup").click();
+						Thread.sleep(2000);
+						//System.out.println("1:"+list.get(i).getBaseName());
+					}else {
+						driver.findElementById(list.get(i).getIdXpath()).click();
+						Thread.sleep(2000);
+						//System.out.println("2:"+list.get(i).getBaseName());
+					}
+					//测试前先清空联动字段：update 表 set 字段=null（不用delete）
+					crfTemplateAnzhenXinXueguanService
+							.updateCrfTemplateAnzhenXinXueguanListLinkageResultByBaseName(list.get(i).getBaseName());
+					
+					crfTemplateAnzhenXinXueguanService
+							.verifyLinkageFieldGeneralServiceMethod(driver,list.get(i).getBaseName());
 				}
-			}
-		}
-
+			}//for
+		}//if	
+		
 		// 关闭driver
 		QuitWebDriver.quitWebDriverByPhantomJSDriver(driver);
-
+		
 		return "redirect:/page/ok.html";
 	}
 
+	
+	/**
+	 * @Title: verifyLinkageFieldReturnJSON
+	 * @Description: 验证安贞心血管，联动字段(适用于接口测试方式，直接刚返回不成功的json)
+	 * @param: @throws Exception :
+	 * @return: List<CrfTemplateAnzhenXinXueguan>
+	 * @throws
+	 */
+	@RequestMapping("verifyLinkageFieldReturnJSON")
+	public List<CrfTemplateAnzhenXinXueguan> verifyLinkageFieldReturnJSON() throws Exception {
+		//获取CrfTemplateStructure
+		List<CrfTemplateStructure> list = crfTemplateStructureService
+					.getCrfTemplateStructureListByHospitalDepartment("安贞心血管");
+		
+		// 登录并到add页面
+		PhantomJSDriver driver = CreateWebDriver.createWebDriverByPhantomJSDriver();
+		String value = LoginCrfOfAnzhen.loginAndToAddOfXinxueguanByPhantomJSDriver(driver);
+		
+		if ("添加页面".contains(value) && list.size()>0) {
+			//判断是否为组联动
+			for (int i= 0; i< list.size(); i++) {
+				//根据baseNamen，获取对应的list
+				List<CrfTemplateAnzhenXinXueguan> listByBaseName = crfTemplateAnzhenXinXueguanService
+						.getCrfTemplateAnzhenXinXueguanListByBaseName(list.get(i).getBaseName());
+				//判断是否为组联动
+				Boolean b = ListAndStringUtils.isCRFListLGroupLinkage(listByBaseName);
+				if (b) {
+					//System.out.println("组联动，人工测试");
+					//测试前先清空联动字段：update 表 set 字段=null（不用delete）
+					crfTemplateAnzhenXinXueguanService
+							.updateCrfTemplateAnzhenXinXueguanListLinkageResultByBaseName(list.get(i).getBaseName());
+					crfTemplateAnzhenXinXueguanService
+							.verifyLinkageFieldGeneralServiceMethodWithGroupLinkage(list.get(i).getBaseName());
+				}else {
+					if (!"".equals(list.get(i).getBaseName().trim())
+							&& "随访".equals(list.get(i).getBaseName())) {
+						//随访
+						driver.findElementByClassName("dropdown-toggle").click();
+						driver.findElementById("add-followup").click();
+						Thread.sleep(2000);
+						//System.out.println("1:"+list.get(i).getBaseName());
+					}else {
+						driver.findElementById(list.get(i).getIdXpath()).click();
+						Thread.sleep(2000);
+						//System.out.println("2:"+list.get(i).getBaseName());
+					}
+					//测试前先清空联动字段：update 表 set 字段=null（不用delete）
+					crfTemplateAnzhenXinXueguanService
+							.updateCrfTemplateAnzhenXinXueguanListLinkageResultByBaseName(list.get(i).getBaseName());
+					
+					crfTemplateAnzhenXinXueguanService
+							.verifyLinkageFieldGeneralServiceMethod(driver,list.get(i).getBaseName());
+				}
+			}//for
+		}//if	
+		
+		// 关闭driver
+		QuitWebDriver.quitWebDriverByPhantomJSDriver(driver);
+		
+		List<CrfTemplateAnzhenXinXueguan> linkageFieldResultList = crfTemplateAnzhenXinXueguanService
+						.getVerifyLinkageFieldResultList();
+		
+		System.out.println(linkageFieldResultList.size());
+		
+		return linkageFieldResultList;
+
+	}
+	
 	
 	
 	/**
@@ -94,52 +177,68 @@ public class CrfTemplateAnzhenXinXueguanController {
 	@RequestMapping("verifyLinkageField_test")
 	public List<CrfTemplateAnzhenXinXueguan> verifyLinkageField_test() throws Exception {
 		//获取CrfTemplateStructure
-		List<CrfTemplateStructure> list = crfTemplateStructureService.getCrfTemplateStructureListByHospitalDepartment("安贞心血管");
+		List<CrfTemplateStructure> list = crfTemplateStructureService
+					.getCrfTemplateStructureListByHospitalDepartment("安贞心血管");
 		
 		// 登录并到add页面
 		PhantomJSDriver driver = CreateWebDriver.createWebDriverByPhantomJSDriver();
 		String value = LoginCrfOfAnzhen.loginAndToAddOfXinxueguanByPhantomJSDriver(driver);
 		
-		if ("添加页面".contains(value) && list.size()>1 ) {
-			//测试
-			for (int i = 0; i < list.size(); i++) {
-				//测试
-				if (!"".equals(list.get(i).getBaseName()) && !" ".equals(list.get(i).getBaseName())
-						&& "就诊－超声检查".equals(list.get(i).getBaseName())) {
-					driver.findElementById(list.get(i).getIdXpath()).click();
-					Thread.sleep(2000);
-					
-					System.out.println(list.get(i).getBaseName());
+		if ("添加页面".contains(value) && list.size()>0) {
+			//判断是否为组联动
+			for (int i= 0; i< list.size(); i++) {
+				//根据baseNamen，获取对应的list
+				List<CrfTemplateAnzhenXinXueguan> listByBaseName = crfTemplateAnzhenXinXueguanService
+						.getCrfTemplateAnzhenXinXueguanListByBaseName(list.get(i).getBaseName());
+				//判断是否为组联动
+				Boolean b = ListAndStringUtils.isCRFListLGroupLinkage(listByBaseName);
+				if (b) {
+					System.out.println("组联动，人工测试");
+					//测试前先清空联动字段：update 表 set 字段=null（不用delete）
+					crfTemplateAnzhenXinXueguanService
+							.updateCrfTemplateAnzhenXinXueguanListLinkageResultByBaseName(list.get(i).getBaseName());
+					crfTemplateAnzhenXinXueguanService
+							.verifyLinkageFieldGeneralServiceMethodWithGroupLinkage(list.get(i).getBaseName());
+				}else {
+					if (!"".equals(list.get(i).getBaseName().trim())
+							&& "随访".equals(list.get(i).getBaseName())) {
+						//随访
+						driver.findElementByClassName("dropdown-toggle").click();
+						driver.findElementById("add-followup").click();
+						Thread.sleep(2000);
+						System.out.println("1:"+list.get(i).getBaseName());
+					}else {
+						driver.findElementById(list.get(i).getIdXpath()).click();
+						Thread.sleep(2000);
+						System.out.println("2:"+list.get(i).getBaseName());
+					}
+					System.out.println("ok");
 					
 					//测试前先清空联动字段：update 表 set 字段=null（不用delete）
-					crfTemplateAnzhenXinXueguanService.
-							updateCrfTemplateAnzhenXinXueguanListLinkageResultByBaseName(list.get(i).getBaseName());
+					crfTemplateAnzhenXinXueguanService
+							.updateCrfTemplateAnzhenXinXueguanListLinkageResultByBaseName(list.get(i).getBaseName());
 					
 					crfTemplateAnzhenXinXueguanService
 							.verifyLinkageFieldGeneralServiceMethod(driver,list.get(i).getBaseName());
-				}else {
-					continue;
+				
 				}
-			}
-		}
+			}//for
+		}//if	
 		
 		// 关闭driver
 		QuitWebDriver.quitWebDriverByPhantomJSDriver(driver);
+			
+		List<CrfTemplateAnzhenXinXueguan> linkageFieldResultList = crfTemplateAnzhenXinXueguanService
+						.getVerifyLinkageFieldResultList();
 		
-		List<CrfTemplateAnzhenXinXueguan> listByBaseName = crfTemplateAnzhenXinXueguanService.
-					getCrfTemplateAnzhenXinXueguanListByBaseName("就诊－超声检查");
+		System.out.println(linkageFieldResultList.size());
 		
-		for (int i = 0; i < listByBaseName.size(); i++) {
-			System.out.println(listByBaseName.get(i).getLinkageResult());
-		}
-		
-		return listByBaseName;
-		
+		return linkageFieldResultList;
 	}
 	
 	
 	
-	/**失败   总是填no
+	/**失败   总是填no???????
 	 * @Title: verifyLinkageFieldWithBaseName
 	 * @Description: 带baseName参数的，验证安贞心血管，联动字段验证(测试返回json:直接加@ResponseBody注解，返回json格式的list)
 	 * @param: @throws Exception :
@@ -169,7 +268,6 @@ public class CrfTemplateAnzhenXinXueguanController {
 			System.out.println(list.get(i).getLinkageResult());
 		}
 		return list;
-		
 	}
 	*/
 	

@@ -26,6 +26,18 @@ public class CrfTemplateAnzhenXinXueguanServiceImpl implements CrfTemplateAnzhen
 	@Autowired
 	private CrfTemplateAnzhenXinXueguanMapper crfTemplateAnzhenXinXueguanMapper;
 
+
+	/**
+	 * 通用打开所有联动字段
+	 */
+	@Override
+	public void openAllLinkageFieldGeneralServiceMethod() throws Exception {
+		
+		
+		
+	}
+	
+	
 	/**
 	 * 使用递归：只写了四层逻辑判断(组联动)
 	 * 注意：没有判断 组联动的情况，只要有组联动，整组都没有判断，需要人工判断。组联动目前结果：“存在组联动情况，请人工判断”
@@ -372,14 +384,11 @@ public class CrfTemplateAnzhenXinXueguanServiceImpl implements CrfTemplateAnzhen
 		return crfTemplateAnzhenXinXueguanMapper.updateCrfTemplateAnzhenXinXueguanListLinkageResultByBaseName(baseName);
 	}
 
-
-
 	@Override
 	public List<CrfTemplateAnzhenXinXueguan> getVerifyLinkageFieldResultList()
 			throws Exception {
 		return crfTemplateAnzhenXinXueguanMapper.getVerifyLinkageFieldResultList();
 	}
-
 
 	@Override
 	public List<CrfTemplateAnzhenXinXueguan> getVerifyLinkageFieldResultListByBaseName(
@@ -387,5 +396,4 @@ public class CrfTemplateAnzhenXinXueguanServiceImpl implements CrfTemplateAnzhen
 		return crfTemplateAnzhenXinXueguanMapper.getVerifyLinkageFieldResultListByBaseName(baseName);
 	}
 
-	
 }

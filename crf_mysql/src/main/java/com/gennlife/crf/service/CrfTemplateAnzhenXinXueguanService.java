@@ -94,7 +94,7 @@ public interface CrfTemplateAnzhenXinXueguanService {
 
 	/**
 	 * @Title: verifyLinkageFieldGeneralServiceMethodWithGroupLinkage
-	 * @Description: 验证联动字段通用service方法
+	 * @Description: 验证联动字段通用service方法(组联动)
 	 * @param: @param driver
 	 * @param: @param baseName
 	 * @return: String
@@ -102,6 +102,15 @@ public interface CrfTemplateAnzhenXinXueguanService {
 	 */
 	public void verifyLinkageFieldGeneralServiceMethodWithGroupLinkage(
 			String baseName) throws Exception;
+	
+	/**
+	 * @Title: openAllLinkageFieldGeneralServiceMethod
+	 * @Description: 打开所有联动字段，通用service方法
+	 * @param: @param driver
+	 * @return: String
+	 * @throws
+	 */
+	public void openAllLinkageFieldGeneralServiceMethod() throws Exception;
 
 	/**
 	 * @Title: getVerifyLinkageFieldResultList

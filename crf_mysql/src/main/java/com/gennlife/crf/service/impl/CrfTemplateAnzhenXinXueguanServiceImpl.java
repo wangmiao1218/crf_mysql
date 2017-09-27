@@ -380,5 +380,12 @@ public class CrfTemplateAnzhenXinXueguanServiceImpl implements CrfTemplateAnzhen
 		return crfTemplateAnzhenXinXueguanMapper.getVerifyLinkageFieldResultList();
 	}
 
+
+	@Override
+	public List<CrfTemplateAnzhenXinXueguan> getVerifyLinkageFieldResultListByBaseName(
+			String baseName) throws Exception {
+		return crfTemplateAnzhenXinXueguanMapper.getVerifyLinkageFieldResultListByBaseName(baseName);
+	}
+
 	
 }

@@ -27,5 +27,11 @@ public class CrfTemplateStructureServiceImpl implements CrfTemplateStructureServ
 		return crfTemplateStructureMapper.getCrfTemplateStructureListByHospitalDepartment(hospitalDepartment);
 	}
 
+	@Override
+	public CrfTemplateStructure getCrfTemplateStructureByBaseName(
+			String baseName) throws Exception {
+		return crfTemplateStructureMapper.getCrfTemplateStructureByBaseName(baseName);
+	}
+
 	
 }

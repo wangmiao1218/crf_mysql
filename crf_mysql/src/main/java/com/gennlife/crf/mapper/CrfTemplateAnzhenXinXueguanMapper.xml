@@ -146,7 +146,8 @@
 	
 	
 	<!-- 根据BaseName，清空linkageResult结果 -->
-	<update id="updateCrfTemplateAnzhenXinXueguanListLinkageResultByBaseName" parameterType="java.lang.String">
+	<update id="updateCrfTemplateAnzhenXinXueguanListLinkageResultByBaseName" 
+			parameterType="java.lang.String">
 		update crf_template_anzhen_xinxueguan
 		<set>
 			linkageResult=null
@@ -160,6 +161,16 @@
 		<include refid="CrfTemplateAnzhenXinXueguan_Column_List"></include>
 		from crf_template_anzhen_xinxueguan
 		where linkageResult="no" or linkageResult="整组存在组联动情况，请人工判断"
+	</select>
+
+	<!-- 根据baseName，获取linkageResult验证结果列表 -->
+	<select id="getVerifyLinkageFieldResultListByBaseName" resultMap="BaseResultMap" 
+			parameterType="java.lang.String">
+		SELECT
+		<include refid="CrfTemplateAnzhenXinXueguan_Column_List"></include>
+		from crf_template_anzhen_xinxueguan
+		where baseName=#{baseName}
+		and (linkageResult="no" or linkageResult="整组存在组联动情况，请人工判断")
 	</select>
 
 

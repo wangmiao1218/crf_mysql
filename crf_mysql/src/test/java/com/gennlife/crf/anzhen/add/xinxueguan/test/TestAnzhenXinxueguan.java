@@ -27,8 +27,21 @@ public class TestAnzhenXinxueguan {
 	private CrfTemplateAnzhenXinXueguanMapper crfTemplateAnzhenXinXueguanMapper;
 
 	@Test
+	public void test06() throws Exception {
+		List<CrfTemplateAnzhenXinXueguan> list = crfTemplateAnzhenXinXueguanMapper
+						.getVerifyLinkageFieldResultListByBaseName("就诊－超声检查");
+		System.out.println(list.size());
+		for (int i = 0; i < list.size(); i++) {
+			System.out.println(list.get(i));
+			System.out.println("======================");
+		}
+	}	
+	
+	
+	@Test
 	public void test05() throws Exception {
-		List<CrfTemplateAnzhenXinXueguan> list = crfTemplateAnzhenXinXueguanMapper.getVerifyLinkageFieldResultList();
+		List<CrfTemplateAnzhenXinXueguan> list = crfTemplateAnzhenXinXueguanMapper
+						.getVerifyLinkageFieldResultList();
 		System.out.println(list.size());
 		for (int i = 0; i < list.size(); i++) {
 			System.out.println(list.get(i));

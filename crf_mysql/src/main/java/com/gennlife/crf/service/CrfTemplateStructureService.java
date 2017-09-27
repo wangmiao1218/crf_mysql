@@ -22,4 +22,15 @@ public interface CrfTemplateStructureService{
      */
     public List<CrfTemplateStructure> getCrfTemplateStructureListByHospitalDepartment(String hospitalDepartment) throws Exception;
     
+    /** 
+     * @Title: getCrfTemplateStructureByBaseName 
+     * @Description: 通过baseName查询CrfTemplateStructure
+     * @param: String baseName
+     * @param: @throws Exception :
+     * @return: CrfTemplateStructure
+     * @throws 
+     */
+     public CrfTemplateStructure getCrfTemplateStructureByBaseName(String baseName) throws Exception;
+     
+    
 }

@@ -20,5 +20,15 @@
 		from crf_template_structure
 		where hospitalDepartment=#{hospitalDepartment}
 	</select>
+	
+	<!--通过baseName查询CrfTemplateStructure-->
+	<select id="getCrfTemplateStructureByBaseName" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		SELECT
+		<include refid="CrfTemplateStructure_Column_List"></include>
+		from crf_template_structure
+		where baseName=#{baseName}
+	</select>
+	
 
 </mapper>

@@ -64,6 +64,18 @@ public interface CrfTemplateAnzhenXinXueguanMapper {
      public List<CrfTemplateAnzhenXinXueguan> getVerifyLinkageFieldResultList() throws Exception;
      
      
+     /** 
+    * @Title: getVerifyLinkageFieldResultListByBaseName 
+    * @Description: 根据baseName，获取linkageResult验证结果列表
+    * @param: @param baseName
+    * @param: @return
+    * @param: @throws Exception :
+    * @return: List<CrfTemplateAnzhenXinXueguan>
+    * @throws 
+    */
+    public List<CrfTemplateAnzhenXinXueguan> getVerifyLinkageFieldResultListByBaseName(String baseName) throws Exception;
+     
+     
     /** 
      * @Title: updateCrfTemplateAnzhenXinXueguan 
      * @Description: 更新CrfTemplateAnzhenXinXueguan

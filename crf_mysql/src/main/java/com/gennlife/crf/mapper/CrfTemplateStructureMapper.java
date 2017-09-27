@@ -2,6 +2,7 @@ package com.gennlife.crf.mapper;
 
 import java.util.List;
 
+import com.gennlife.crf.bean.CrfTemplateAnzhenXinXueguan;
 import com.gennlife.crf.bean.CrfTemplateStructure;
 
 /**
@@ -21,6 +22,18 @@ public interface CrfTemplateStructureMapper {
      * @throws 
      */
     public List<CrfTemplateStructure> getCrfTemplateStructureListByHospitalDepartment(String hospitalDepartment) throws Exception;
+    
+    
+    /** 
+    * @Title: getCrfTemplateStructureByBaseName 
+    * @Description: 通过baseName查询CrfTemplateStructure
+    * @param: String baseName
+    * @param: @throws Exception :
+    * @return: CrfTemplateStructure
+    * @throws 
+    */
+    public CrfTemplateStructure getCrfTemplateStructureByBaseName(String baseName) throws Exception;
+    
     
 
 }

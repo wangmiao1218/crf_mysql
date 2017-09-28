@@ -30,12 +30,17 @@ public class TestAnzhenXinxueguan {
 	public void test06() throws Exception {
 		List<CrfTemplateAnzhenXinXueguan> list = crfTemplateAnzhenXinXueguanMapper
 						.getVerifyLinkageFieldResultListByBaseName("就诊－超声检查");
+		
+		
 		System.out.println(list.size());
 		for (int i = 0; i < list.size(); i++) {
 			System.out.println(list.get(i));
-			System.out.println("======================");
+			
 		}
-	}	
+		System.out.println("======================");
+	}
+	
+	
 	
 	
 	@Test

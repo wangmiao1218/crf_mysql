@@ -23,7 +23,9 @@ public class LoginCrfOfAnzhen {
 	public static final String xpathOfSheQu=".//*[@id='modal-container']/div/div/div/div[2]/a[4]";
 	
 	//安贞高血压地址（若换成心血管的直接改ip即可）
-	public static final String danbingzhongUrl="http://10.0.2.190/uranus/crf_case.html";
+	//public static final String danbingzhongUrl="http://10.0.2.190/uranus/crf_case.html";
+	//安贞心血管线上
+	public static final String danbingzhongUrl="http://hero.vitark.gennlife.com/uranus/crf_case.html";
 
 	public static final String loginName ="wangmiao@gennlife.com";
 	public static final String pwd ="123456";

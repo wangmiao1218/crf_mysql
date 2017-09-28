@@ -34,6 +34,7 @@ public class ListAndStringUtils {
     public static List<String> compareTwoListReturnDiffrent(List<String> list1, List<String> list2) {  
         long st = System.nanoTime();  
         Map<String,Integer> map = new HashMap<String,Integer>(list1.size()+list2.size());  
+
         List<String> diff = new ArrayList<String>();  
         List<String> maxList = list1;  
         List<String> minList = list2;  
@@ -48,7 +49,7 @@ public class ListAndStringUtils {
         
         for (String string : minList) {  
             Integer cc = map.get(string);  
-            if(cc!=null) {  
+            if(map.get(string)!=null) {  
                 map.put(string, ++cc);  
                 continue;  
             }  

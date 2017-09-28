@@ -24,24 +24,20 @@ public class TestListAndStringUtils {
 		List<String> list = ExcelUtils.readExcelOfList(excel, 0);
 		List<String> listExcel = list.subList(1, list.size());
 		
-		
 		System.out.println(listExcel.size());
 		for (int i = 0; i < listExcel.size(); i++) {
 			System.out.println(listExcel.get(i));
 		}
 		System.out.println("===============");
 		
-		
 		// 登录并到add页面
 		PhantomJSDriver driver = CreateWebDriver.createWebDriverByPhantomJSDriver();
 		LoginCrfOfAnzhen.loginByPhantomJSDriver(driver);
-		Thread.sleep(5000);
+		Thread.sleep(10000);
 		//去页面 遍历下拉列表所有选项
 		Select selall = new Select(driver.findElementByXPath(".//*[@id='crf-lab']/select"));
 		//封装成List<WebElement>
 		List<WebElement> lw= selall.getOptions();
-		// 关闭driver
-		//QuitWebDriver.quitWebDriverByPhantomJSDriver(driver);
 		
 		List<String> listWeb= ListAndStringUtils.listWebElementToListString(lw);
 		System.out.println(listWeb.size());
@@ -50,7 +46,11 @@ public class TestListAndStringUtils {
 		}
 		System.out.println("===============");
 		
-		List<String> returnDiffrent = ListAndStringUtils.compareTwoListReturnDiffrent(listExcel, listWeb);
+		// 关闭driver
+		QuitWebDriver.quitWebDriverByPhantomJSDriver(driver);
+				
+		List<String> returnDiffrent = ListAndStringUtils
+				.compareTwoListReturnDiffrent(listExcel,listWeb);
 		System.out.println(returnDiffrent.size());
 		for (int i = 0; i < returnDiffrent.size(); i++) {
 			System.out.println(returnDiffrent.get(i));

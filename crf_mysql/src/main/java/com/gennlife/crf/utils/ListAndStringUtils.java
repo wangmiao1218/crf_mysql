@@ -11,7 +11,6 @@ import java.util.Random;
 import org.openqa.selenium.WebElement;
 
 import com.gennlife.crf.bean.CrfTemplateAnzhenXinXueguan;
-import com.sun.tools.classfile.Annotation.element_value;
 
 
 /**
@@ -20,6 +19,52 @@ import com.sun.tools.classfile.Annotation.element_value;
  * @Date: 2017年6月9日 上午9:58:00
  */
 public class ListAndStringUtils {
+	
+    /** 
+    * @Title: compareTwoListReturnDiffrent 
+    * @Description: 获取两个List的不同元素
+    * 用一个map存放lsit的所有元素，其中的key为lsit1的各个元素，value为该元素出现的次数,
+    * 接着把list2的所有元素也放到map里，如果已经存在则value加1，
+    * 最后我们只要取出map里value为1的元素即可，这样我们只需循环m+n次，大大减少了循环的次数。
+    * @param: List<String> list1
+    * @param: List<String> list2
+    * @return: List<String>
+    * @throws 
+    */
+    public static List<String> compareTwoListReturnDiffrent(List<String> list1, List<String> list2) {  
+        long st = System.nanoTime();  
+        Map<String,Integer> map = new HashMap<String,Integer>(list1.size()+list2.size());  
+        List<String> diff = new ArrayList<String>();  
+        List<String> maxList = list1;  
+        List<String> minList = list2;  
+        if(list2.size()>list1.size()) { 
+            maxList = list2;  
+            minList = list1;  
+        } 
+        
+        for (String string : maxList) {  
+            map.put(string, 1);  
+        }  
+        
+        for (String string : minList) {  
+            Integer cc = map.get(string);  
+            if(cc!=null) {  
+                map.put(string, ++cc);  
+                continue;  
+            }  
+            map.put(string, 1);  
+        }  
+        
+        for(Map.Entry<String, Integer> entry:map.entrySet()){   
+            if(entry.getValue()==1) {  
+                diff.add(entry.getKey());  
+            }  
+        }  
+        
+        System.out.println("getDiffrent4 total times "+(System.nanoTime()-st));  
+        
+        return diff;  
+    }  
 	
 	
 	/** 
@@ -340,14 +385,44 @@ public class ListAndStringUtils {
 	 */
 	public static String listWebElementToSelectString(List<WebElement> list) {
 		StringBuilder sb = new StringBuilder();
-		// 添加"；"
-		for (int i = 1; i < list.size(); i++) {
-			String attribute = list.get(i).getAttribute("value");
-			sb.append(attribute + "；");
+		
+		if (list.get(0)==null || "".equals(list.get(0)) || " ".equals(list.get(0))) {
+			// 添加"；"
+			for (int i = 1; i < list.size(); i++) {//一般下拉框第一个为空，所以从1开始
+				String attribute = list.get(i).getAttribute("value");
+				sb.append(attribute + "；");
+			}
+			// 去掉最后的“；”,与excel中“取值范围”一致，方便后续校验
+			sb.deleteCharAt(sb.length() - 1);
+		}else {
+			// 添加"；"
+			for (int i = 0; i < list.size(); i++) {//一般下拉框第一个为空，所以从1开始
+				String attribute = list.get(i).getAttribute("value");
+				sb.append(attribute + "；");
+			}
+			// 去掉最后的“；”,与excel中“取值范围”一致，方便后续校验
+			sb.deleteCharAt(sb.length() - 1);
 		}
-		// 去掉最后的“；”,与excel中“取值范围”一致，方便后续校验
-		sb.deleteCharAt(sb.length() - 1);
+		
 		return sb.toString();
+	}
+	
+	
+	/**
+	 * @Title: listWebElementToListString
+	 * @Description: 将List<WebElement> 转换成string类型的List
+	 * @param: List<WebElement> list 下拉框内容
+	 * @return: List<String>
+	 * @throws
+	 */
+	public static List<String> listWebElementToListString(List<WebElement> list) {
+		List<String> arrayList = new ArrayList<String>();
+		// 添加"；"
+		for (int i = 0; i < list.size(); i++) {
+			String attribute = list.get(i).getText();
+			arrayList.add(attribute);
+		}
+		return arrayList;
 	}
 	
 	

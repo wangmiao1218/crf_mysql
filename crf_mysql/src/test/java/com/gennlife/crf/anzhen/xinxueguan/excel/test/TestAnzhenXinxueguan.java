@@ -1,4 +1,4 @@
-package com.gennlife.crf.anzhen.add.xinxueguan.test;
+package com.gennlife.crf.anzhen.xinxueguan.excel.test;
 
 import java.util.ArrayList;
 import java.util.List;

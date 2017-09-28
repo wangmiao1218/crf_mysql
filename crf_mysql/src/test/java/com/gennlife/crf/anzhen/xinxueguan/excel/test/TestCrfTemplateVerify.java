@@ -1,10 +1,10 @@
-package com.gennlife.crf.anzhen.add.xinxueguan.test;
+package com.gennlife.crf.anzhen.xinxueguan.excel.test;
 
 import org.junit.Test;
 
-import com.gennlife.crf.anzhen.add.xinxueguan.CrfTemplateVerifyLinkageField;
-import com.gennlife.crf.anzhen.add.xinxueguan.CrfTemplateVerifyMinMaxAlertValueField;
-import com.gennlife.crf.anzhen.add.xinxueguan.CrfTemplateVerifySelectField;
+import com.gennlife.crf.anzhen.xinxueguan.excel.CrfTemplateVerifyLinkageField;
+import com.gennlife.crf.anzhen.xinxueguan.excel.CrfTemplateVerifyMinMaxAlertValueField;
+import com.gennlife.crf.anzhen.xinxueguan.excel.CrfTemplateVerifySelectField;
 import com.gennlife.crf.bean.Excel;
 
 public class TestCrfTemplateVerify {

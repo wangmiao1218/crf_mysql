@@ -118,7 +118,7 @@ public class CrfTemplateAnzhenXinXueguanController {
 		String value = LoginCrfOfAnzhen.loginAndToAddOfXinxueguanByPhantomJSDriver(driver);
 
 		if ("添加页面".contains(value) && list.size()>0) {
-			//判断是否为组联动
+			//判断是否为组联动`
 			for (int i= 0; i< list.size(); i++) {
 				//根据baseNamen，获取对应的list
 				List<CrfTemplateAnzhenXinXueguan> listByBaseName = crfTemplateAnzhenXinXueguanService

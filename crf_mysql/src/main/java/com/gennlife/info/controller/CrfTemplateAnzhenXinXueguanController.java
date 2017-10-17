@@ -92,15 +92,6 @@ public class CrfTemplateAnzhenXinXueguanController {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	/**
 	 * @Title: verifyLinkageField
 	 * @Description: 验证安贞心血管，联动字段(适用于界面的方式，页面直接展示)

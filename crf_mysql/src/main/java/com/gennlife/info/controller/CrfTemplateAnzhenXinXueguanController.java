@@ -84,6 +84,7 @@ public class CrfTemplateAnzhenXinXueguanController {
 			}//for
 		}//if	
 		
+		
 		// 关闭driver
 		QuitWebDriver.quitWebDriverByPhantomJSDriver(driver);
 

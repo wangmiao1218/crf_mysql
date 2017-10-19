@@ -200,7 +200,6 @@ public class CrfTemplateAnzhenXinXueguanController {
 		QuitWebDriver.quitWebDriverByPhantomJSDriver(driver);
 		
 		return crfTemplateAnzhenXinXueguanService.getVerifyLinkageFieldResultList();
-
 	}
 	
 	

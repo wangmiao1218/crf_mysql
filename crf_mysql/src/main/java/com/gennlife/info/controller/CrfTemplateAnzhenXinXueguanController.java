@@ -145,7 +145,6 @@ public class CrfTemplateAnzhenXinXueguanController {
 		
 		return "redirect:/page/ok.html";
 	}
-
 	
 	
 	/**

@@ -147,7 +147,6 @@ public class CrfTemplateAnzhenXinXueguanController {
 	}
 	
 	
-	
 	/**
 	 * @Title: verifyLinkageFieldReturnJSON
 	 * @Description: 验证安贞心血管，联动字段(适用于接口测试方式，直接刚返回不成功的json)

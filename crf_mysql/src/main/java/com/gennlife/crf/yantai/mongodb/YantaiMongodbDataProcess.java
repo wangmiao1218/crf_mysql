@@ -117,5 +117,4 @@ public class YantaiMongodbDataProcess {
 		return JSON.toJSON(list).toString();  
 	}
 	
-	
 }

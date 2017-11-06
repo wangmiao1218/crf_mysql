@@ -5,7 +5,7 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>RWS测试</title>
+<title>RWS测试_非引用类型</title>
 
 <%
 	String rootPath = request.getContextPath();
@@ -16,8 +16,49 @@
 <script language="javascript" type="text/javascript"
 	src="<%=rootPath%>/res/My97DatePicker/WdatePicker.js"></script>
 <body>
-	<h4>RWS测试</h4>
-	<h5>非引用类型——测试数据：pat_testrws001.txt(pat_testrws001_1.txt)</h5>
+	<h4>RWS测试_直接比较_事件</h4>
+	<h5>直接比较——测试数据：pat_testrws001.txt(pat_testrws001_1.txt)</h5>
+	<p/>
+	<a href="<%=rootPath %>/page/testRWS_2.jsp">RWS测试_引用比较_事件</a>
+	<p/>
+	<div>
+		<span>一、定义事件</span><br/>
+		<input type="text" placeholder="事件名称" />
+		检索结果：
+		<select>
+		    <option value="">就诊.病案首页</option>  
+		</select> 
+		结果处理函数：
+		<select>
+			<option value="">第一个</option>  
+			<option value="">全部</option>  
+			<option value="">最后一个</option>  
+			<option value="">第N个</option>   
+		</select> 
+	</div>
+	<p/>
+	<div>
+		<span>二、定义指标</span><br/>
+		<input type="text" placeholder="指标名称" />
+		指标类型：
+		<select>
+		    <option value="">默认类型</option>  
+		    <option value="">枚举类型</option>  
+		</select> 
+		检索结果：
+		<select>
+		    <option value="">就诊.病案首页</option>  
+		</select>
+		结果处理函数： 
+		<select>
+			<option value="">第一个</option>  
+			<option value="">全部</option>  
+			<option value="">最后一个</option>  
+			<option value="">第N个</option>  
+		</select> 
+	</div>
+	<p/>
+	
 	<div>
 		<span>1.字符类型:精确匹配（完整词）</span><br/>
 		<select>
@@ -138,9 +179,8 @@
 			<option value="">等于</option>  
 		</select> 
 		<input type="text" placeholder="265" />
-		
-		
 		<p/>
+		
 		
 		
 	</div>	

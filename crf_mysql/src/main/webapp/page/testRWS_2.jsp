@@ -10,7 +10,17 @@
 #box {
 	position: absolute;
 	left: 900px;
-	top: 300px;
+	top: 250px;
+	padding: 5px;
+	background: #f0f3f9;
+	font-size: 12px;
+	-moz-box-shadow: 2px 2px 4px #666666;
+	-webkit-box-shadow: 2px 2px 4px #666666;
+}
+#box2 {
+	position: absolute;
+	left: 900px;
+	top: 550px;
 	padding: 5px;
 	background: #f0f3f9;
 	font-size: 12px;
@@ -51,11 +61,56 @@
 
 	<div id="box">
 		<div id="main">
-			<div id="bar">所引用的指标</div>
-			<div id="content">内容……</div>
+			<div id="bar">所引用的指标：数值字段</div>
+			<div id="content">
+				<span>1.自定义的指标</span><p/>
+				<input type="text" placeholder="指标名称" /><p/>
+				指标类型：
+				<select>
+				    <option value="">默认类型</option>  
+				    <option value="">枚举类型</option>  
+				</select><p/> 
+				检索结果：
+				<select>
+				    <option value="">就诊.病案首页</option>  
+				</select><p/>
+				结果处理函数： 
+				<select>
+					<option value="">第一个</option>  
+					<option value="">全部</option>  
+					<option value="">最后一个</option>  
+					<option value="">第N个</option>  
+				</select><p/>
+			</div>
 		</div>
 	</div>
 
+ 	<div id="box2">
+		<div id="main">
+			<div id="bar">所引用的指标:日期字段</div>
+			<div id="content">
+				<span>1.自定义的指标</span><p/>
+				<input type="text" placeholder="指标名称" /><p/>
+				指标类型：
+				<select>
+				    <option value="">默认类型</option>  
+				    <option value="">枚举类型</option>  
+				</select><p/> 
+				检索结果：
+				<select>
+				    <option value="">就诊.病案首页</option>  
+				</select><p/>
+				结果处理函数： 
+				<select>
+					<option value="">第一个</option>  
+					<option value="">全部</option>  
+					<option value="">最后一个</option>  
+					<option value="">第N个</option>  
+				</select><p/>
+			</div>
+		</div>
+	</div>
+ 
 
 
 

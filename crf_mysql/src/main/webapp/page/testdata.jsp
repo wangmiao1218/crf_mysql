@@ -16,6 +16,7 @@
 <script language="javascript" type="text/javascript"
 	src="<%=rootPath%>/res/My97DatePicker/WdatePicker.js"></script>
 <body>
+
 	<div>
 		<h5>测试日期</h5>
 		<input class="Wdate" id="d1" onclick="WdatePicker()" />
@@ -37,10 +38,6 @@
 	{d:1,H:1} 表示一天多1小时
 	
 	-->
-
-
-
-
 
 
 	<!-- 
@@ -85,6 +82,7 @@
 		<h5>禁用 周六 周日 所对应的日期</h5>
 		<input type="text" onFocus="WdatePicker({disabledDays:[0,6]})" />
 	</div> -->
+
 
 </body>
 </html>

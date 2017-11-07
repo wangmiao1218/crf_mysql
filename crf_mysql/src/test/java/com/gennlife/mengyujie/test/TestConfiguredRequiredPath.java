@@ -9,10 +9,10 @@ import com.gennlife.mengyujie.ConfiguredRequiredPath;
 
 public class TestConfiguredRequiredPath {
 
-private String filePath = "E:\\yujie\\5\\test";
+private String filePath = "E:\\yujie\\7";
 	
-	private String fileName = "test-模板结构-安贞心血管.xlsx";
-	private String fileName2 = "test-安贞心血管CRF1.1.0-2017_09_29_for研发.xls";
+	private String fileName = "模板结构-安贞心血管(1).xlsx";
+	private String fileName2 = "安贞心血管CRF1.1.7-20171107.xls";
 	
 	private String sheetName = "总体结构";
 	private String sheetName2 = "患者信息";
@@ -24,7 +24,7 @@ private String filePath = "E:\\yujie\\5\\test";
 		ConfiguredRequiredPath.writeRequiredPath(excelmb, excel);
 		System.out.println("ok");
 	}
-	
+	/*
 	@Test
 	public void test1(){
 		Excel excel = new Excel(filePath, fileName2, sheetName2);
@@ -45,6 +45,6 @@ private String filePath = "E:\\yujie\\5\\test";
 		}
 		System.out.println("ok");
 	}
-	
+	*/
 	
 }

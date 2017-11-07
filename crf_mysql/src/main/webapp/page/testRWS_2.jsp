@@ -140,10 +140,12 @@
 	<div>
 		<span>一、定义事件</span><br /> <input type="text" placeholder="事件名称" />
 		检索结果： <select>
-			<option value="">就诊.病案首页</option>
-		</select> 结果处理函数： <select>
-			<option value="">第一个</option>
+			<option value="">就诊.检验报告.检验子项</option>
+		</select> 
+		结果处理函数：
+		 <select>
 			<option value="">全部</option>
+			<option value="">第一个</option>
 			<option value="">最后一个</option>
 			<option value="">第N个</option>
 		</select>
@@ -155,10 +157,10 @@
 			<option value="">默认类型</option>
 			<option value="">枚举类型</option>
 		</select> 检索结果： <select>
-			<option value="">就诊.病案首页</option>
+			<option value="">就诊.检验报告.检验子项</option>
 		</select> 结果处理函数： <select>
-			<option value="">第一个</option>
 			<option value="">全部</option>
+			<option value="">第一个</option>
 			<option value="">最后一个</option>
 			<option value="">第N个</option>
 		</select>
@@ -166,9 +168,9 @@
 	<p />
 
 	<div>
-		<span>1.数值类型:大于指标值</span><br /> 
+		<span>1.数值类型:大于指标值（第一次检验全血的血小板总数：166）（平均血红蛋白浓度：328）</span><br /> 
 		<select>
-			<option value=""></option>
+		    <option value="">就诊.检验报告.检验子项.检验子项结果数值</option>  
 		</select> 
 		<select>
 			<option value="">大于指标值</option>
@@ -176,13 +178,13 @@
 		<select>
 			<option value="">第一次检验全血的血小板总数</option>
 		</select> 
-		<input type="text" placeholder="" /> 至
-		<input type="text" placeholder="" />之间（%）
+		<input type="text" placeholder="100" /> 至
+		<input type="text" placeholder="200" />之间
 		<p />
 
-		<span>2.数值类型:大于等于指标值</span><br /> 
+		<span>2.数值类型:大于等于指标值（第一次检验全血的血小板总数：166）（平均血红蛋白浓度：328）</span><br /> 
 		<select>
-			<option value=""></option>
+			<option value="">就诊.检验报告.检验子项.检验子项结果数值</option>
 		</select> 
 		<select>
 			<option value="">大于等于指标值</option>
@@ -190,14 +192,13 @@
 		<select>
 			<option value="">第一次检验全血的血小板总数</option>
 		</select> 
-		<input type="text" placeholder="" /> 至
-		<input type="text" placeholder="" />之间（%）
-		<p />
+		<input type="text" placeholder="162" /> 至
+		<input type="text" placeholder="162" />之间
+		<p/>
 
-
-		<span>3.数值类型:小于指标值</span><br /> 
+		<span>3.数值类型:小于指标值（第一次检验全血的血小板总数：166）（实际住院天数：26）</span><br /> 
 		<select>
-			<option value=""></option>
+		    <option value="">就诊.病案首页.实际住院天数</option>  
 		</select> 
 		<select>
 			<option value="">小于指标值</option>
@@ -205,14 +206,14 @@
 		<select>
 			<option value="">第一次检验全血的血小板总数</option>
 		</select> 	
-		<input type="text" placeholder="" /> 至
-		<input type="text" placeholder="" />之间（%）
+		<input type="text" placeholder="150" /> 至
+		<input type="text" placeholder="120" />之间
 		<p />
 
 
-		<span>4.数值类型:小于等于指标值</span><br /> 
+		<span>4.数值类型:小于等于指标值（第一次检验全血的血小板总数：166）（就诊次数：数据1是1，数据1_1中改是5）</span><br /> 
 		<select>
-			<option value=""></option>
+			<option value="">就诊.病案首页.就诊次数</option>
 		</select> 
 		<select>
 			<option value="">小于等于指标值</option>
@@ -220,8 +221,8 @@
 		<select>
 			<option value="">第一次检验全血的血小板总数</option>
 		</select> 	
-		<input type="text" placeholder="" /> 至
-		<input type="text" placeholder="" />之间（%）
+		<input type="text" placeholder="166" /> 至
+		<input type="text" placeholder="165" />之间
 		<p />
 
 

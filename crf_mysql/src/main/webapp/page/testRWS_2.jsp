@@ -221,7 +221,6 @@
 		<input type="text" placeholder="165" />之间
 		<p />
 
-
 		<span>5.数值类型:大于指标百分比</span><br /> 
 		<select>
 			<option value=""></option>

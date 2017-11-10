@@ -84,6 +84,7 @@ public class YantaiMongodbDataProcess {
  			}
         }
         
+        
         //获取discharge_record的JSONObject
         //discharge_records_hospital_admission_condition
         //discharge_records_hospital_admission_diagnose

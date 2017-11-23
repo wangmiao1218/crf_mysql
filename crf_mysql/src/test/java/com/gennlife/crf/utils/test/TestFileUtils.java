@@ -8,8 +8,41 @@ import org.junit.Test;
 
 import com.gennlife.crf.utils.FileUtils;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class TestFileUtils {
 
+	@Test
+	public void readFileAndPrintAllDateStr(){
+		String fileName="C:\\Users\\www\\Desktop\\1.txt";
+		File oldfile = new File(fileName);
+		
+		FileUtils.readFileAndPrintAllDateStr(oldfile);
+		
+	
+	}
+	
+	@Test
+	public void testDate(){
+		//日期正则表达式
+		String reg = "[0-9]{4}[-][0-9]{1,2}[-][0-9]{1,2}[ ][0-9]{1,2}[:][0-9]{1,2}[:][0-9]{1,2}";
+		String str = "某年某月某日过生日，在2011-11-11 08:08:00时间2012-11-11 08:08:00";
+		Pattern pattern = Pattern.compile (reg);
+		//使用正则表达式判断日期
+		Matcher matcher = pattern.matcher (str);
+		while (matcher.find ()){
+			System.out.println (matcher.group ());//打印找到的日期
+		}
+		String dateStr="2014-";
+		String substring = dateStr.substring(0, 4);
+		int i = Integer.parseInt(substring);
+		//System.out.println(substring);
+		System.out.println(i-1);
+		
+	}
+	
+	
 	@Test
 	public void getFileNameList(){
 		String delpath="F:\\uploadFile\\1\\";

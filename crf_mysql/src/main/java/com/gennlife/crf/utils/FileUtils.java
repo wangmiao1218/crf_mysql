@@ -10,6 +10,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import oracle.jrockit.jfr.events.DataStructureDescriptor;
 
 /**
  * @Description: 文件的处理工具集
@@ -18,6 +22,174 @@ import java.util.List;
  */
 public class FileUtils {
 
+
+	/**
+	 * @Title: readFileAndReplaceDateStrToNewFile
+	 * @Description: 按行读取文件，读取日期格式内容，并自动减一年,保存新文件
+	 * @param: File file：文件
+	 * @return: void
+	 * @throws
+	 */
+	/*
+	public static void readFileAndReplaceDateStr(File oldFile,File newFile) {
+		//日期正则表达式
+		String reg = "[0-9]{4}[-][0-9]{1,2}[-][0-9]{1,2}[ ][0-9]{1,2}[:][0-9]{1,2}[:][0-9]{1,2}";
+		Pattern pattern = Pattern.compile (reg);
+		
+		String str = null;
+		// 读取文件
+		FileReader fr = null;
+		BufferedReader br = null;
+
+		// 写入文件
+		FileWriter fw = null;
+		try {
+			fr = new FileReader(oldFile);
+			br = new BufferedReader(fr);
+
+			// 定义StringBuffer
+			StringBuffer buf = new StringBuffer();
+
+			// 保存该行前面的内容
+			for (int i = 1; (str = br.readLine()) != null && !str.contains(oldStr); i++) {
+				buf = buf.append(str);
+				buf = buf.append(System.getProperty("line.separator"));
+			}
+
+			// 将内容插入
+			buf = buf.append(replaceStr);
+
+			// 保存该行后面的内容
+			while ((str = br.readLine()) != null) {
+				buf = buf.append(System.getProperty("line.separator"));
+				buf = buf.append(str);
+			}
+			
+			
+			while ((str = br.readLine()) != null) {
+				//使用正则表达式判断日期
+				Matcher matcher = pattern.matcher (str);
+				if (!matcher.find()) {
+					//不包含则保存
+					buf = buf.append(str);
+					buf = buf.append(System.getProperty("line.separator"));
+				}
+				else if(matcher.find()){
+					System.out.println(str);
+				
+					String dateStr = matcher.group();
+					//打印找到的日期
+					System.out.println(dateStr);
+					//替换
+					String substring = dateStr.substring(0, 4);
+					String newStr = String.valueOf(Integer.parseInt(substring)-1);
+					System.out.println(newStr);
+					
+					str.replaceAll(substring, newStr);
+					
+					System.out.println(str);
+		        }  
+			}
+			
+
+			// 将内容插入
+			//buf = buf.append(replaceStr);
+
+			// 保存该行后面的内容
+			while ((str = br.readLine()) != null) {
+				buf = buf.append(System.getProperty("line.separator"));
+				buf = buf.append(str);
+			}
+
+			// 保存另一个文件
+			fw = new FileWriter(newFile);
+			PrintWriter pw = new PrintWriter(fw);
+			pw.write(buf.toString().toCharArray());
+			pw.flush();
+			pw.close();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (br != null) {
+					br.close();
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			try {
+				if (fr != null) {
+					fr.close();
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			try {
+				if (fw != null) {
+					fw.close();
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+	}
+*/
+	
+	/**
+	 * @Title: readFileAndPrintAllDateStr
+	 * @Description: 按行读取文件，读取所有日期格式的字符串
+	 * @param: File file：文件
+	 * @return: void
+	 * @throws
+	 */
+	public static void readFileAndPrintAllDateStr(File file) {
+		//日期正则表达式
+		String reg = "[0-9]{4}[-][0-9]{1,2}[-][0-9]{1,2}[ ][0-9]{1,2}[:][0-9]{1,2}[:][0-9]{1,2}";
+		Pattern pattern = Pattern.compile (reg);
+		
+		String str = null;
+		//String returnValue = null;
+		// 读取文件
+		FileReader fr = null;
+		BufferedReader br = null;
+		try {
+			fr = new FileReader(file);
+			br = new BufferedReader(fr);
+
+			while ((str = br.readLine()) != null) {
+				//使用正则表达式判断日期
+				Matcher matcher = pattern.matcher (str);
+				
+		        if(matcher.find()){  
+		          String group = matcher.group();
+		          //打印找到的日期
+		          System.out.println(group);
+		        }  
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (br != null) {
+					br.close();
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			try {
+				if (fr != null) {
+					fr.close();
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		//return returnValue;
+	}
+	
+	
 	/**
 	 * @Title: readFileAndReturnValue
 	 * @Description: 按行读取文件，返回含有value的整行字符串

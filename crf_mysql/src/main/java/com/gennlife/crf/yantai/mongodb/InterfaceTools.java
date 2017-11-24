@@ -8,11 +8,6 @@ import java.net.URL;
 
 public class InterfaceTools {
 
-	public static void main(String[] args) {
-		//post(url, patStr);
-	}
-	
-
 	//final static String url = "http://10.0.2.162:8113/EMPI-Server/PatientDetailsInfo";
 	//final static String params = "{\"id\":\"12345\"}";
 	//final static String params = "{\"UserId\":\"\",\"Uuids\":[\"pat_80984333786fed39043eba14de206d9b\"],\"Source\":[\"PatiName\",\"IDCard\",\"InPatientSn\"]}";

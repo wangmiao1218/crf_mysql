@@ -15,7 +15,7 @@ import com.gennlife.crf.yantai.mongodb.InterfaceTools;
 public class TestInterfaceTools {
 
 	private String filePath = "C:\\Users\\www\\Desktop\\编号";
-	private String fileName = "22.xlsx";
+	private String fileName = "333.xlsx";
 	private String sheetName = "Sheet1";
 	
 	

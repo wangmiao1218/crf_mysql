@@ -47,7 +47,7 @@ public class ExcelUtils {
     }  
     
     /** 
-     * @Title: readExcelOfListReturnListMap（有重复值时使用）
+     * @Title: readExcelOfListReturnListMap（有重复值时使用）(适合一行行的读取及应用)
      * @Description: 搜索某一个文件中，指定列所有数值，并添加到list中(list中为map，k为行号，v为值)，返回list
      * @param: Excel excel：传入excel
      * @param: Integer beginCell：列号（从0 开始）
@@ -147,7 +147,8 @@ public class ExcelUtils {
     
     
     /** 
-     * @Title: readExcelOfList 
+     * @Title: readExcelOfList （适合整体使用，不用一行行验证行数，
+     * 			例如:获取整个list，请求接口返回一个大json再解析）(已经除去表头)
      * @Description: 搜索某一个文件中，指定列所有数值，有值则添加到list中，返回list
      * @param: Excel excel：传入excel
      * @param: Integer beginCell：列号（从0 开始）
@@ -166,8 +167,8 @@ public class ExcelUtils {
     	Sheet sheet = workbook.getSheet(excel.getSheetName());
     	
     	List<String> list = new ArrayList<String>();
-    	// 循环读取指定列数据
-    	for ( int rowNum= 0; rowNum <= sheet.getLastRowNum(); rowNum++) {
+    	// 循环读取指定列数据(已经除去表头:rowNum=1)
+    	for ( int rowNum= 1; rowNum <= sheet.getLastRowNum(); rowNum++) {
     		Row row = sheet.getRow(rowNum);
     		
     		Cell cell = null;
@@ -874,6 +875,72 @@ public class ExcelUtils {
 		// 向单元格中放入值
 		cell.setCellValue(newContent);
 
+		// 保存
+		// 根据参数传入的数据文件路径和文件名称，组合出Excel数据文件的绝对路径，声明一个File文件对象
+		File file = new File(excel.getFilePath() + "\\" + excel.getFileName());
+		
+		//建立输出流
+		FileOutputStream fos=null;
+		try {
+			fos = new FileOutputStream(file);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			workbook.write(fos);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		if (fos != null) {
+			try {
+				fos.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	
+	}
+
+
+	/** 
+	* @Title: writeOneListAndSaveContent (除表头)
+	* @Description: 用于操作Excel，在任意一列写入数据并保存
+	* @param: @param excel:传入excel
+	* @param: @param newContentList
+	* @param: @param beginCell :列号（从 0 算起）
+	* @return: void
+	* @throws 
+	*/
+	public static void writeOneListAndSaveContent(Excel excel,List<String> newContentList, int beginCell) {
+		//获取行
+		Workbook workbook = excel.getWorkbook();
+		
+		
+		for (int i =0; i < newContentList.size(); i++) {
+			Sheet sheet = workbook.getSheet(excel.getSheetName());
+			//设置行（除去表头）
+			Row row = sheet.getRow(i+1);
+
+			if (null == row) {
+				// 如果不做空判断，你必须让你的模板文件画好边框，beginRow和beginCell必须在边框最大值以内
+				// 否则会出现空指针异常
+				row = sheet.createRow(newContentList.size());
+			}
+			
+			Cell cell = row.getCell(beginCell);
+			if (null == cell) {
+				cell = row.createCell(beginCell);
+			}
+			
+			// 设置存入内容为字符串
+			cell.setCellType(HSSFCell.CELL_TYPE_STRING);
+	
+			// 向单元格中放入值
+			cell.setCellValue(newContentList.get(i));
+		}
+		
 		// 保存
 		// 根据参数传入的数据文件路径和文件名称，组合出Excel数据文件的绝对路径，声明一个File文件对象
 		File file = new File(excel.getFilePath() + "\\" + excel.getFileName());

@@ -20,6 +20,31 @@ import com.gennlife.crf.bean.CrfTemplateAnzhenXinXueguan;
  */
 public class ListAndStringUtils {
 	
+
+	/** 
+	* @Title: dealPatListAddDoubleQuotationMarksReturnPatStrs 
+	* @Description: 处理从excel读取的patlist,将每个元素加双引号及每个末尾加逗号，返回一个处理后的String
+	* @param: @param patList
+	* @param: @return :
+	* @return: String
+	* @throws 
+	*/
+	public static String dealPatListAddDoubleQuotationMarksReturnPatStrs(List<String> patList) {
+		if (patList.size()>0) {
+			StringBuilder sb = new StringBuilder();
+			for (int i = 0; i < patList.size(); i++) {
+				String str = "\""+patList.get(i)+"\"";
+				sb.append(str.trim()).append(",");
+			}
+			sb.deleteCharAt(sb.length() - 1);
+			return sb.toString();
+		}else{
+			return null;
+		}
+		
+	}
+	
+	
     /** 
     * @Title: compareTwoListReturnDiffrent 
     * @Description: 获取两个List的不同元素

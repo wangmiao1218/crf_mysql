@@ -917,7 +917,6 @@ public class ExcelUtils {
 		//获取行
 		Workbook workbook = excel.getWorkbook();
 		
-		
 		for (int i =0; i < newContentList.size(); i++) {
 			Sheet sheet = workbook.getSheet(excel.getSheetName());
 			//设置行（除去表头）
@@ -966,7 +965,6 @@ public class ExcelUtils {
 				e.printStackTrace();
 			}
 		}
-	
 	}
 
 	

@@ -15,7 +15,7 @@ import com.gennlife.empiServer.interfaces.PatientDetailsInfoOfInterfaceTools;
 public class TestPatientDetailsInfoOfInterfaceTools {
 
 	private String filePath = "C:\\Users\\www\\Desktop";
-	private String fileName = "33.xlsx";
+	private String fileName = "22.xlsx";
 	private String sheetName = "Sheet1";
 	
 	
@@ -59,52 +59,56 @@ public class TestPatientDetailsInfoOfInterfaceTools {
 				JSONObject oneJsonObject = (JSONObject) resultsArray.get(i);
 				//处理oneJsonObject为map,遍历后将对应值添加到对应的三个list中
 		        Map oneMap = (Map) oneJsonObject;
+		        //判断是否存在某key：IDCard
+		        if (oneMap.containsKey("IDCard")) {
+		        	for (Object map : oneMap.entrySet()){ 
+			        	if ("IDCard"==((Map.Entry)map).getKey()) {
+			        		idCardList.add(((Map.Entry)map).getValue().toString());
+			        		break;
+						}
+		        	}
+				}else if (!oneMap.containsKey("IDCard")) {
+					idCardList.add("");
+				}
 		        
-		        for (Object map : oneMap.entrySet()){ 
-		        	if (((JSONObject) map).containsKey("IDCard")) {
-		        		idCardList.add(((Map.Entry)map).getValue().toString());
-					}
-		        	if (!((JSONObject) map).containsKey("IDCard")) {
-		        		idCardList.add("");
+		        //判断是否存在某key：InPatientSn
+		        if (oneMap.containsKey("InPatientSn")) {
+		        	for (Object map : oneMap.entrySet()){ 
+			        	if ("InPatientSn"==((Map.Entry)map).getKey()) {
+			        		inPatientList.add(((Map.Entry)map).getValue().toString());
+			        		break;
+						}
 		        	}
-		        	if (((JSONObject) map).containsKey("InPatientSn")) {
-		        		idCardList.add(((Map.Entry)map).getValue().toString());
+				}else if (!oneMap.containsKey("InPatientSn")) {
+					inPatientList.add("");
+				}
+		        
+		        //判断是否存在某key：PatiName
+		        if (oneMap.containsKey("PatiName")) {
+		        	for (Object map : oneMap.entrySet()){ 
+			        	if ("PatiName"==((Map.Entry)map).getKey()) {
+			        		patiNameList.add(((Map.Entry)map).getValue().toString());
+			        		break;
+						}
 		        	}
-		        	if (!((JSONObject) map).containsKey("InPatientSn")) {
-		        		inPatientList.add("");
-		        	}
-		        	if (((JSONObject) map).containsKey("PatiName")) {
-		        		idCardList.add(((Map.Entry)map).getValue().toString());
-		        	}
-		        	if (!((JSONObject) map).containsKey("PatiName")) {
-		        		patiNameList.add("");
-		        	}
-		        	
-		        	
-		        	if ("IDCard"==((Map.Entry)map).getKey()) {
-		        		idCardList.add(((Map.Entry)map).getValue().toString());
-		        	}
-		        	if ("InPatientSn"==((Map.Entry)map).getKey()) {
-		         		inPatientList.add(((Map.Entry)map).getValue().toString());
-		        	}
-		        	if ("PatiName"==((Map.Entry)map).getKey()) {
-		         		patiNameList.add(((Map.Entry)map).getValue().toString());
-		        	}
-		        	
-		        }
+				}else if (!oneMap.containsKey("PatiName")) {
+					patiNameList.add("");
+				}
 			}
+			
 			System.out.println("idCardList："+idCardList.size());
 			System.out.println("inPatientList："+inPatientList.size());
 			System.out.println("patiNameList："+patiNameList.size());
 			
-			/*
-			//写入对应excel
-			for (int i = 0; i <resultsArray.size(); i++) {
+			//三个list相等才写入excel
+			if (idCardList.size()==inPatientList.size() && 
+					inPatientList.size()==patiNameList.size()) {
+				//写入对应excel
 				ExcelUtils.writeOneListAndSaveContent(excel, idCardList, idCardCellNum);
 				ExcelUtils.writeOneListAndSaveContent(excel, inPatientList, inPatientSnCellNum);
 				ExcelUtils.writeOneListAndSaveContent(excel, patiNameList, patiNameCellNum);
 			}
-			*/
+			
 		}else {
 			System.out.println("errors");
 		}
@@ -206,9 +210,6 @@ public class TestPatientDetailsInfoOfInterfaceTools {
 		//输出程序运行时间
 		System.out.println("程序运行时间：" + (endTime - startTime) + "ms");    
 	}
-	
-	
-	
 	
 	
 }

@@ -1,16 +1,18 @@
-package com.gennlife.empiServer.interfaces.test;
+package com.gennlife.empiServerInterfaces.test;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
 import org.junit.Test;
+
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.gennlife.crf.bean.Excel;
 import com.gennlife.crf.utils.ExcelUtils;
 import com.gennlife.crf.utils.ListAndStringUtils;
-import com.gennlife.empiServer.interfaces.PatientDetailsInfoOfInterfaceTools;
+import com.gennlife.empiServerInterfaces.PatientDetailsInfoOfInterfaceTools;
 
 public class TestPatientDetailsInfoOfInterfaceTools {
 

@@ -1,4 +1,4 @@
-package com.gennlife.empiServer.interfaces;
+package com.gennlife.empiServerInterfaces;
 
 import java.io.IOException;
 import java.io.InputStream;

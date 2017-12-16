@@ -7,13 +7,12 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import oracle.jrockit.jfr.events.DataStructureDescriptor;
 
 /**
  * @Description: 文件的处理工具集
@@ -23,6 +22,46 @@ import oracle.jrockit.jfr.events.DataStructureDescriptor;
 public class FileUtils {
 
 
+	/** 
+	* @Title: readFileContent 
+	* @Description: 读取文件内容，返回String
+	* @param: @param Path
+	* @param: @return :
+	* @return: String
+	* @throws 
+	*/
+	public static String readFileContent(String Path){
+		String laststr = "";
+		FileInputStream fileInputStream = null;
+		InputStreamReader inputStreamReader = null;
+		BufferedReader reader = null;
+		try{
+			fileInputStream = new FileInputStream(Path);
+			inputStreamReader = new InputStreamReader(fileInputStream, "UTF-8");
+			reader = new BufferedReader(inputStreamReader);
+			String tempString = null;
+			
+			while((tempString = reader.readLine()) != null){
+				laststr += tempString;
+			}
+			reader.close();
+		}catch(IOException e){
+			e.printStackTrace();
+		}finally{
+			if(reader != null){
+				try {
+					reader.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return laststr;
+	}
+	
+	
+	
+	
 	/**
 	 * @Title: readFileAndReplaceDateStrToNewFile
 	 * @Description: 按行读取文件，读取日期格式内容，并自动减一年,保存新文件

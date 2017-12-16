@@ -1,10 +1,8 @@
-package com.gennlife.empiServerInterfaces.test;
+package com.gennlife.empiServerInterfaces;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import org.junit.Test;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
@@ -12,22 +10,24 @@ import com.alibaba.fastjson.JSONObject;
 import com.gennlife.crf.bean.Excel;
 import com.gennlife.crf.utils.ExcelUtils;
 import com.gennlife.crf.utils.ListAndStringUtils;
-import com.gennlife.empiServerInterfaces.PatientDetailsInfoOfInterfaceTools;
 
-public class TestPatientDetailsInfoOfInterfaceTools {
-
-	private String filePath = "C:\\Users\\www\\Desktop";
-	private String fileName = "22.xlsx";
-	private String sheetName = "Sheet1";
+/**
+ * @Description: 通过请求empi接口，pat返回信息
+ * @author: wangmiao
+ * @Date: 2017年12月16日 下午3:40:33 
+ */
+public class GetInformationByEMPIInterface {
 	
-	
-	//测试传入多个pat
-	@Test
-	public void getResultsByPostMethod() {
+	/** 
+	* @Title: getResultsByPostMethod 
+	* @Description: 通过读取excel相关列，统一请求接口，传入多个patID，返回一个大json后，解析对应json，填入对应excel的列
+	* @param: Excel excel :传入文件
+	* @return: String
+	* @throws 
+	*/
+	public static String getResultsByPostMethod(Excel excel) {
 		//获取开始时间
 		long startTime = System.currentTimeMillis();    
-		
-		Excel excel = new Excel(filePath, fileName, sheetName);
 		
 		Integer patCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "编号");
 		Integer patiNameCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "PatiName");
@@ -36,7 +36,7 @@ public class TestPatientDetailsInfoOfInterfaceTools {
 		
 		//获取excel中的patList
 		List<String> patList = ExcelUtils.readExcelOfList(excel, patCellNum);
-		System.out.println("patList："+patList.size());
+		//System.out.println("patList："+patList.size());
 		
 		//处理patList
 		String patStrs = ListAndStringUtils.dealPatListAddDoubleQuotationMarksReturnPatStrs(patList);
@@ -48,7 +48,7 @@ public class TestPatientDetailsInfoOfInterfaceTools {
 		//将returnStr字符串转换成json对象:JSONObject
 		JSONObject jsonObject=(JSONObject) JSON.parse(allJsons);
 		JSONArray resultsArray = jsonObject.getJSONArray("Results");
-		System.out.println("resultsArray："+resultsArray.size());
+		//System.out.println("resultsArray："+resultsArray.size());
 		
 		//判断patList与返回结果allJsons中resultsArray的大小，相等证明结构正确
 		if (patList.size()==resultsArray.size()) {
@@ -97,11 +97,11 @@ public class TestPatientDetailsInfoOfInterfaceTools {
 					patiNameList.add("");
 				}
 			}
-			
+			/*验证
 			System.out.println("idCardList："+idCardList.size());
 			System.out.println("inPatientList："+inPatientList.size());
 			System.out.println("patiNameList："+patiNameList.size());
-			
+			*/
 			//三个list相等才写入excel
 			if (idCardList.size()==inPatientList.size() && 
 					inPatientList.size()==patiNameList.size()) {
@@ -110,34 +110,33 @@ public class TestPatientDetailsInfoOfInterfaceTools {
 				ExcelUtils.writeOneListAndSaveContent(excel, inPatientList, inPatientSnCellNum);
 				ExcelUtils.writeOneListAndSaveContent(excel, patiNameList, patiNameCellNum);
 			}
-			
 		}else {
 			System.out.println("errors");
 		}
-		
-		System.out.println("OK");
-		
+		//System.out.println("OK");
 		//获取结束时间
 		long endTime = System.currentTimeMillis();
-		//输出程序运行时间
-		System.out.println("程序运行时间：" + (endTime - startTime) + "ms");    
+		//返回程序运行时间
+		//System.out.println("程序运行时间：" + (endTime - startTime) + "ms");
+		return "完成！程序运行时间：" + (endTime - startTime) + "ms";    
 	}
 	
 	
-	
-	//测试传入一个pat
-	@Test
-	public void getOneResultByPostMethod() {
+	/** 
+	* @Title: getOneResultByPostMethod 
+	* @Description: 通过读取excel相关列，请求接口，一个一个传入1个patID，返回json后，解析对应json，填入对应excel的列
+	* @param: @param excel
+	* @return: String
+	* @throws 
+	*/
+	public static String getOneResultByPostMethod(Excel excel) {
 		//获取开始时间
 		long startTime = System.currentTimeMillis();    
-				
-		Excel excel = new Excel(filePath, fileName, sheetName);
-		
+
 		Integer patCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "编号");
 		Integer patiNameCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "PatiName");
 		Integer idCardCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "IDCard");
 		Integer inPatientSnCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "InPatientSn");
-		
 		
 		//获取中文名称一列（用readExcelOfListReturnListMap，因为有重复值）(除表头)
 		List<Map<Integer,String>> list = ExcelUtils.readExcelOfListReturnListMap(excel, patCellNum);
@@ -151,12 +150,11 @@ public class TestPatientDetailsInfoOfInterfaceTools {
 				writeContentRowNum=entry.getKey();
 				//pat
 				patStr=entry.getValue();
-				System.out.println(writeContentRowNum+"--"+patStr);
+				//System.out.println(writeContentRowNum+"--"+patStr);
 				
 				//获取pat，并请求接口
 				String allString = PatientDetailsInfoOfInterfaceTools.getOneResultByPostMethod(patStr);
 				//System.out.println("返回jsonStr："+allString);
-				
 				
 				//返回String的json，并解析json，获取对应三个数值
 				String patiNameString=null;
@@ -194,24 +192,20 @@ public class TestPatientDetailsInfoOfInterfaceTools {
 		         		//System.out.println(((Map.Entry)map1).getKey()+":"+((Map.Entry)map1).getValue());
 		         		patiNameString=((Map.Entry)map1).getValue().toString();
 		        	}
-		        	
 		        }
 		        
-				
 				//写入对应excel
 		        ExcelUtils.writeAndSaveContent(excel, idCardString, writeContentRowNum, idCardCellNum);
 		        ExcelUtils.writeAndSaveContent(excel, inPatientString, writeContentRowNum, inPatientSnCellNum);
 				ExcelUtils.writeAndSaveContent(excel, patiNameString, writeContentRowNum, patiNameCellNum);
 			}
 		}
-		
-		System.out.println("OK");
-		
+		//System.out.println("OK");
 		//获取结束时间
 		long endTime = System.currentTimeMillis();
-		//输出程序运行时间
-		System.out.println("程序运行时间：" + (endTime - startTime) + "ms");    
+		
+		//返回程序运行时间
+		return "完成！程序运行时间：" + (endTime - startTime) + "ms"; 
 	}
-	
 	
 }

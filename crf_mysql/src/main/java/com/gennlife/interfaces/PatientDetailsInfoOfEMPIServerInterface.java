@@ -1,4 +1,4 @@
-package com.gennlife.empiServerInterfaces;
+package com.gennlife.interfaces;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,7 +12,7 @@ import java.net.URL;
  * @author: wangmiao
  * @Date: 2017年11月27日 上午11:37:33
  */
-public class PatientDetailsInfoOfInterfaceTools {
+public class PatientDetailsInfoOfEMPIServerInterface {
 
 	// final static String url ="http://10.0.2.162:8113/EMPI-Server/PatientDetailsInfo";
 	// final static String params = "{\"id\":\"12345\"}";

@@ -6,7 +6,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.gennlife.crf.bean.Excel;
-import com.gennlife.mengyujie.EnglishToEnglish;
+import com.gennlife.myujie.EnglishToEnglish;
 
 public class TestEnglishToEnglish {
 

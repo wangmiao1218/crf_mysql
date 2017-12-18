@@ -10,8 +10,8 @@ import com.gennlife.crf.utils.CreateWebDriver;
 import com.gennlife.crf.utils.ExcelUtils;
 import com.gennlife.crf.utils.ListAndStringUtils;
 import com.gennlife.crf.utils.QuitWebDriver;
-import com.gennlife.mengyujie.TranslateToEnglish;
-import com.gennlife.mengyujie.ConfiguredLinkagePath;
+import com.gennlife.myujie.ConfiguredLinkagePath;
+import com.gennlife.myujie.TranslateToEnglish;
 
 public class TestTranslateToEnglish {
 

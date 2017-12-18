@@ -2,10 +2,12 @@ package com.gennlife.mengyujie.test;
 
 import java.util.List;
 import java.util.Map;
+
 import org.junit.Test;
+
 import com.gennlife.crf.bean.Excel;
 import com.gennlife.crf.utils.ExcelUtils;
-import com.gennlife.mengyujie.ConfiguredRequiredPath;
+import com.gennlife.myujie.ConfiguredRequiredPath;
 
 public class TestConfiguredRequiredPath {
 

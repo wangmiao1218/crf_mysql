@@ -1,4 +1,4 @@
-package com.gennlife.mengyujie;
+package com.gennlife.myujie;
 
 import java.awt.Dimension;
 import java.awt.Font;
@@ -20,38 +20,29 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import org.apache.log4j.Appender;
-import org.apache.log4j.FileAppender;
-import org.apache.log4j.Layout;
-import org.apache.log4j.Logger;
-import org.apache.log4j.PatternLayout;
-
 import com.gennlife.crf.bean.Excel;
 import com.gennlife.crf.utils.FileUtils;
 import com.gennlife.crf.utils.ListAndStringUtils;
+
 
 /**
  * @Description: CRF模板工具-2.0
  * @author: wangmiao
  * @Date: 2017年9月1日 上午8:45:38 
  */
-public class SwingConfiguredLinkagePathTools extends JFrame implements ActionListener {
+public class SwingCRFTemplateTools extends JFrame implements ActionListener {
+	private static final long serialVersionUID = 1L;
 	
-    private static final long serialVersionUID = -1189035634361220261L;
-    private static Logger logger = Logger.getLogger(SwingConfiguredLinkagePathTools.class);   
-    
-    JFrame mainframe;
+	JFrame mainframe;
     JPanel panel;
     //创建相关的Label标签
     JLabel infilepath_label = new JLabel("模板结构(Excel):");
     JLabel infilepath_label2 = new JLabel("单病种模板(Excel):");
     JLabel outfilepath_label = new JLabel("导出文件路径:");
-    JLabel outlogpath_label = new JLabel("过程日志路径:");    
     //创建相关的文本域
     JTextField infilepath_textfield = new JTextField(20);
     JTextField infilepath_textfield2 = new JTextField(20);
     JTextField outfilepath_textfield = new JTextField(20);
-    JTextField outlogpath_textfield = new JTextField(20);
     //创建滚动条以及输出文本域
     JScrollPane jscrollPane;
     JTextArea outtext_textarea = new JTextArea();
@@ -59,13 +50,13 @@ public class SwingConfiguredLinkagePathTools extends JFrame implements ActionLis
     JButton infilepath_button = new JButton("...");
     JButton infilepath_button2 = new JButton("...");
     JButton outfilepath_button = new JButton("...");
-    JButton outlogpath_button = new JButton("..."); 
-    JButton start_button = new JButton("开始");
+    JButton start_button = new JButton("配置英文名称");
+    JButton start_button2 = new JButton("配置联动路径");
 
     public void show(){
         mainframe = new JFrame("CRF模板工具-2.0");
         // Setting the width and height of frame
-        mainframe.setSize(575, 550);
+        mainframe.setSize(575, 380);
         mainframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainframe.setResizable(false);//固定窗体大小
 
@@ -118,28 +109,24 @@ public class SwingConfiguredLinkagePathTools extends JFrame implements ActionLis
         this.panel.add(outfilepath_label);
         this.panel.add(outfilepath_textfield);
         this.panel.add(outfilepath_button);
-
-        outlogpath_label.setBounds(10,110,120,25);
-        outlogpath_textfield.setBounds(120,110,400,25);
-        outlogpath_button.setBounds(520,110,30,25);
-        this.panel.add(outlogpath_label);
-        this.panel.add(outlogpath_textfield);
-        this.panel.add(outlogpath_button);
-
-        start_button.setBounds(10,140,80,25);
+        //英文名称
+        start_button.setBounds(10,110,115,25);
         this.panel.add(start_button);
+        //联动路径
+        start_button2.setBounds(160,110,115,25);
+        this.panel.add(start_button2);
 
         outtext_textarea.setEditable(false);
         outtext_textarea.setFont(new Font("标楷体", Font.BOLD, 16));
         jscrollPane = new JScrollPane(outtext_textarea);
-        jscrollPane.setBounds(10,170,550,330);
+        jscrollPane.setBounds(10,140,550,200);
         this.panel.add(jscrollPane);
         //增加动作监听
         infilepath_button.addActionListener(this);
         infilepath_button2.addActionListener(this);
         outfilepath_button.addActionListener(this);
-        outlogpath_button.addActionListener(this);
         start_button.addActionListener(this);
+        start_button2.addActionListener(this);
     }
     /**
      * 单击动作触发方法
@@ -147,8 +134,68 @@ public class SwingConfiguredLinkagePathTools extends JFrame implements ActionLis
      */
     @Override
     public void actionPerformed(ActionEvent event) {
-        System.out.println(event.getActionCommand());
-        if(event.getSource() == start_button){
+    	//配置英文名
+    	if (event.getSource() == start_button) {
+    		//页面显示
+            outtext_textarea.setText("请稍后...");
+            //确认对话框弹出       
+            int result = JOptionPane.showConfirmDialog(null, "请确认文件处于关闭状态，是否开始执行?", "确认", 0);//YES_NO_OPTION
+            if (result == 1) {//是：0，否：1，取消：2
+                return;
+            }
+            if (infilepath_textfield.getText().equals("") ||infilepath_textfield2.getText().equals("") || outfilepath_textfield.getText().equals("")) {
+                JOptionPane.showMessageDialog(null, "路径不能为空", "提示", 2);//弹出提示对话框，warning
+                return;
+            }else{
+                String infilepath = infilepath_textfield.getText();
+                String infilepath2 = infilepath_textfield2.getText();
+                String outfilepath = outfilepath_textfield.getText();
+                //调用方法开始
+                //先把文件copy到输出路径
+                //然后执行方法
+            	String filePath = ListAndStringUtils.stringReplaceReturnValue(outfilepath);
+            			
+            	String fileName1 = ListAndStringUtils.stringToSubstringReturnFileName(infilepath);
+            	String fileName2 = ListAndStringUtils.stringToSubstringReturnFileName(infilepath2);
+            	
+            	 //先把文件copy到输出路径
+                try {
+					FileUtils.copyFile(ListAndStringUtils.stringReplaceReturnValue(infilepath), filePath+"\\\\"+fileName1);
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+                try {
+                	FileUtils.copyFile(ListAndStringUtils.stringReplaceReturnValue(infilepath2),filePath+"\\\\"+fileName2);
+                } catch (Exception e1) {
+                	e1.printStackTrace();
+                }
+               
+                Excel excelmb = new Excel(filePath,fileName1, "总体结构");
+                Excel excel = new Excel(filePath,fileName2, "总体结构");
+                try {
+					TranslateToEnglish.writeEnNames(excelmb, excel);
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+                
+                //调用方法结束
+                //打开输出文件所在文件夹
+                result = JOptionPane.showConfirmDialog(null, "已完成！是否打开输出文件所在文件夹?", "确认", 0);//YES_NO_OPTION
+                if (result == 0) {//是：0，否：1，取消：2
+                    try {
+                        @SuppressWarnings("unused")
+                        //调用cmd方法打开文件夹
+                        Process process = Runtime.getRuntime().exec("cmd.exe  /c start "+filePath);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }   
+                }
+                //页面显示
+                outtext_textarea.setText("ok...");
+            }
+		}
+    	//配置联动路径
+    	else if(event.getSource() == start_button2){
         	//页面显示
             outtext_textarea.setText("请稍后...");
             //确认对话框弹出       
@@ -156,28 +203,13 @@ public class SwingConfiguredLinkagePathTools extends JFrame implements ActionLis
             if (result == 1) {//是：0，否：1，取消：2
                 return;
             }
-            System.out.println(infilepath_textfield.getText());
-            if (infilepath_textfield.getText().equals("") ||infilepath_textfield2.getText().equals("") || outfilepath_textfield.getText().equals("")
-                    || outlogpath_textfield.getText().equals("")) {
+            if (infilepath_textfield.getText().equals("") ||infilepath_textfield2.getText().equals("") || outfilepath_textfield.getText().equals("")) {
                 JOptionPane.showMessageDialog(null, "路径不能为空", "提示", 2);//弹出提示对话框，warning
                 return;
             }else{
                 String infilepath = infilepath_textfield.getText();
                 String infilepath2 = infilepath_textfield2.getText();
                 String outfilepath = outfilepath_textfield.getText();
-                String outlogpath = outlogpath_textfield.getText();
-                //设置log4j日志输出格式以及路径
-                Layout layout = new PatternLayout("%-d{yyyy-MM-dd HH:mm:ss}  [ %C{1}--%M:%L行 ] - [ %p ]  %m%n");          
-                Appender appender = null;
-                try {
-                    appender = new FileAppender(layout,outlogpath+"\\log.log");
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }         
-                logger.addAppender(appender); 
-                //System.out.println(outlogpath+"\\log.log");
-                logger.debug("start..."); 
-                
                 //调用方法开始
                 //先把文件copy到输出路径
                 //然后执行方法
@@ -201,12 +233,9 @@ public class SwingConfiguredLinkagePathTools extends JFrame implements ActionLis
                
                 Excel excelmb = new Excel(filePath,fileName1, "总体结构");
                 Excel excel = new Excel(filePath,fileName2, "总体结构");
-                
                 ConfiguredLinkagePath.writeLinkagePath(excelmb, excel);
                 
                 //调用方法结束
-                logger.debug("end..."); 
-               
                 //打开输出文件所在文件夹
                 result = JOptionPane.showConfirmDialog(null, "已完成！是否打开输出文件所在文件夹?", "确认", 0);//YES_NO_OPTION
                 if (result == 0) {//是：0，否：1，取消：2
@@ -218,19 +247,6 @@ public class SwingConfiguredLinkagePathTools extends JFrame implements ActionLis
                         e.printStackTrace();
                     }   
                 }
-                
-                //打开日志
-               /* 
-                result = JOptionPane.showConfirmDialog(null, "已完成！是否打开日志文件?", "确认", 0);//YES_NO_OPTION
-                if (result == 0) {//是：0，否：1，取消：2
-                    try {
-                        @SuppressWarnings("unused")
-                        Process process = Runtime.getRuntime().exec("cmd.exe  /c notepad "+outlogpath+"\\log.log");//调用cmd方法使用记事本打开文件
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }   
-                }
-                */
                 //页面显示
                 outtext_textarea.setText("ok...");
             }       
@@ -242,7 +258,6 @@ public class SwingConfiguredLinkagePathTools extends JFrame implements ActionLis
                     return;
                 infilepath_textfield.setText(file.getAbsolutePath());
                 outfilepath_textfield.setText(file.getParent()+"\\out");
-                outlogpath_textfield.setText(file.getParent()+"\\log");
             }else if(event.getSource() == infilepath_button2) {
                 File file = openChoseWindow(JFileChooser.FILES_ONLY);
                 if(file == null)
@@ -253,12 +268,7 @@ public class SwingConfiguredLinkagePathTools extends JFrame implements ActionLis
                 if(file == null)
                     return;
                 outfilepath_textfield.setText(file.getAbsolutePath()+"\\out");
-            }else if(event.getSource() == outlogpath_button){
-                File file = openChoseWindow(JFileChooser.DIRECTORIES_ONLY);
-                if(file == null)
-                    return;
-                outlogpath_textfield.setText(file.getAbsolutePath()+"\\log");
-            }           
+            }        
         }
     }
     /**
@@ -280,14 +290,10 @@ public class SwingConfiguredLinkagePathTools extends JFrame implements ActionLis
         System.exit(0);
     }
     
-    
-    
-    
    
     public static void main(String []args){
-    	SwingConfiguredLinkagePathTools f = new SwingConfiguredLinkagePathTools();
+    	SwingCRFTemplateTools f = new SwingCRFTemplateTools();
         f.show();
     }
-    
     
 }

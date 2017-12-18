@@ -1,4 +1,4 @@
-package com.gennlife.crf.yantai.mongodb;
+package com.gennlife.crf.mysql;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,12 +13,11 @@ import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 
 /**
- * @Description: 烟台mongodb的数据处理
+ * @Description: 天津的mysql的数据处理
  * @author: wangmiao
- * @Date: 2017年9月15日 下午5:44:47 
+ * @Date: 2017年12月18日 下午2:38:10 
  */
-
-public class YantaiMongodbDataProcess {
+public class TianjinMysqlDataProcess {
 
 	/** 
 	* @Title: RysqkYongyaoqk 

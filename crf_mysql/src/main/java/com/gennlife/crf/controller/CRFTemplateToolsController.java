@@ -20,8 +20,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.gennlife.crf.bean.Excel;
 import com.gennlife.crf.bean.ResultBean;
 import com.gennlife.crf.utils.FileUtils;
-import com.gennlife.mengyujie.ConfiguredLinkagePath;
-import com.gennlife.mengyujie.TranslateToEnglish;
+import com.gennlife.myujie.ConfiguredLinkagePath;
+import com.gennlife.myujie.TranslateToEnglish;
 
 
 @Controller

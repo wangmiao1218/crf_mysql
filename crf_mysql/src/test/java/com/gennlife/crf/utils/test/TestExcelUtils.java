@@ -8,7 +8,7 @@ import org.junit.Test;
 import com.gennlife.crf.bean.Excel;
 import com.gennlife.crf.utils.ExcelUtils;
 import com.gennlife.crf.utils.ListAndStringUtils;
-import com.gennlife.mengyujie.TranslateToEnglish;
+import com.gennlife.myujie.TranslateToEnglish;
 
 public class TestExcelUtils {
 	

@@ -1,10 +1,12 @@
-package com.gennlife.crf.yantai.mongodb.test;
+package com.gennlife.crf.mongodb.test;
 
 import java.util.List;
+
 import org.junit.Test;
+
 import com.gennlife.crf.bean.Excel;
+import com.gennlife.crf.mongodb.YantaiMongodbDataProcess;
 import com.gennlife.crf.utils.ExcelUtils;
-import com.gennlife.crf.yantai.mongodb.YantaiMongodbDataProcess;
 
 public class TestYantaiMongodbDataProcess {
 

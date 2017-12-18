@@ -21,6 +21,37 @@ import com.mongodb.client.MongoDatabase;
  */
 public class MongodbJDBCUtils {
 
+
+	/** 
+	* @Title: connectTianjinMongodbReturnDBCollection （crf库）
+	* @Description: 连接天津测试环境mongodb数据库,返回DBCollection
+	* (官方文档和源代码均建议使用MongoClient类，而且，在不久的将来，会废弃Mongo类。)
+	* @param: @return :
+	* @return: DBCollection
+	* @throws 
+	*/
+	public static DBCollection connectTianjinMongodbReturnDBCollection() {
+		DBCollection dbCollection =null;
+		try {
+			MongoCredential credential = MongoCredential.createCredential("Wangmiao", "CRF_Model", "@Wangmiao2015".toCharArray()); 
+			ServerAddress serverAddress = new ServerAddress("10.0.2.176", 27017);
+			MongoClient mongoClient = new MongoClient(serverAddress, Arrays.asList(credential)); 
+	
+			// 连接到数据库
+			DB db = mongoClient.getDB("CRF_Model");
+			System.out.println("Connect to database successfully");
+			
+			//获取crfdata集合
+			dbCollection = db.getCollection("crfdata");
+			
+		}catch (Exception e) {
+			System.err.println(e.getClass().getName() + ": " + e.getMessage());
+		}
+
+		return dbCollection;
+	}
+	
+	
 	/** 
 	* @Title: connectYantaiMongodbReturnMongoCollection 
 	* @Description: 连接烟台测试环境mongodb数据库,返回MongoCollection<Document>
@@ -60,7 +91,6 @@ public class MongodbJDBCUtils {
 
 	}
 	
-	
 	/** 
 	* @Title: connectYantaiMongodbReturnDBCollection 
 	* @Description: 连接烟台测试环境mongodb数据库,返回DBCollection
@@ -89,7 +119,5 @@ public class MongodbJDBCUtils {
 
 		return dbCollection;
 	}
-
-	
 	
 }

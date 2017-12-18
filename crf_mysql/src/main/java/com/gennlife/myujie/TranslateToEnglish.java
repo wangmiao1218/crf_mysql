@@ -1,4 +1,4 @@
-package com.gennlife.mengyujie;
+package com.gennlife.myujie;
 
 import java.util.ArrayList;
 import java.util.List;

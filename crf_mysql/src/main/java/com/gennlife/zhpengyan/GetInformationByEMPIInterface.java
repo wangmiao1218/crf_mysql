@@ -1,4 +1,4 @@
-package com.gennlife.empiServerInterfaces;
+package com.gennlife.zhpengyan;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +10,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.gennlife.crf.bean.Excel;
 import com.gennlife.crf.utils.ExcelUtils;
 import com.gennlife.crf.utils.ListAndStringUtils;
+import com.gennlife.interfaces.PatientDetailsInfoOfEMPIServerInterface;
 
 /**
  * @Description: 通过请求empi接口，pat返回信息
@@ -42,7 +43,7 @@ public class GetInformationByEMPIInterface {
 		String patStrs = ListAndStringUtils.dealPatListAddDoubleQuotationMarksReturnPatStrs(patList);
 		//返回结果大的json
 		//请求接口
-		String allJsons = PatientDetailsInfoOfInterfaceTools.getResultsByPostMethod(patStrs);
+		String allJsons = PatientDetailsInfoOfEMPIServerInterface.getResultsByPostMethod(patStrs);
 		
 		//获取json中Results的数组
 		//将returnStr字符串转换成json对象:JSONObject
@@ -153,7 +154,7 @@ public class GetInformationByEMPIInterface {
 				//System.out.println(writeContentRowNum+"--"+patStr);
 				
 				//获取pat，并请求接口
-				String allString = PatientDetailsInfoOfInterfaceTools.getOneResultByPostMethod(patStr);
+				String allString = PatientDetailsInfoOfEMPIServerInterface.getOneResultByPostMethod(patStr);
 				//System.out.println("返回jsonStr："+allString);
 				
 				//返回String的json，并解析json，获取对应三个数值

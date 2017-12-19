@@ -34,7 +34,7 @@ public class GetInformationByEMPIInterface {
 		Integer patiNameCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "PatiName");
 		Integer idCardCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "IDCard");
 		Integer inPatientSnCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "InPatientSn");
-		
+			
 		//获取excel中的patList
 		List<String> patList = ExcelUtils.readExcelOfList(excel, patCellNum);
 		//System.out.println("patList："+patList.size());

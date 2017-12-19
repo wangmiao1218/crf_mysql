@@ -54,7 +54,6 @@ public class YantaiMongodbDataProcess {
             }
         } finally {
             cursor.close();
-            
         }
         
         //将returnStr字符串转换成json对象:JSONObject

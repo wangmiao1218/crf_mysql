@@ -23,7 +23,7 @@ public class MongodbJDBCUtils {
 
 
 	/** 
-	* @Title: connectTianjinMongodbReturnDBCollection （crf库）
+	* @Title: connectTianjinMongodbReturnDBCollection （crfdata库）
 	* @Description: 连接天津测试环境mongodb数据库,返回DBCollection
 	* (官方文档和源代码均建议使用MongoClient类，而且，在不久的将来，会废弃Mongo类。)
 	* @param: @return :

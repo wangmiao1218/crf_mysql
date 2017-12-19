@@ -4,7 +4,6 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Arrays;
-
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.MongoClient;
@@ -50,9 +49,11 @@ public class MysqlJDBCUtils {
             // Statement里面带有很多方法，比如executeUpdate可以实现插入，更新和删除等
             Statement stmt = (Statement) conn.createStatement();
             
-            sql = "select PATIENT_SN,DISCUSSION_CONTENT from operation_pre_conference_records where PATIENT_SN=\"4200108167133570555\"";
+            //sql = "select PATIENT_SN,DISCUSSION_CONTENT from operation_pre_conference_records where PATIENT_SN=\"4200108167133570555\"";
+            sql = "select PATIENT_SN,DISCUSSION_CONTENT from operation_pre_conference_records "
+            		+ "where DISCUSSION_CONTENT like \"%RENAL%\" limit 0,1";
             ResultSet rs = stmt.executeQuery(sql);// executeQuery会返回结果的集合，否则返回空值
-            System.out.println(rs);
+            
             while (rs.next()) {
                 System.out.println(rs.getString(1));// 入如果返回的是int类型可以用getInt()
                 System.out.println(rs.getString(2));// 入如果返回的是int类型可以用getInt()

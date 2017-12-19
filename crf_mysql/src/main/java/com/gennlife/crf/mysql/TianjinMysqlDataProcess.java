@@ -30,7 +30,7 @@ public class TianjinMysqlDataProcess {
 	public static String RysqkYongyaoqkReturnDataSources(String patient_sn,String rydate) {
 		List<String> list = new ArrayList<String>();
 		
-		//连接烟台数据库
+		//连接天津数据库
 		DBCollection dbCollection = MongodbJDBCUtils.connectYantaiMongodbReturnDBCollection();
 		
 		//大的查询条件

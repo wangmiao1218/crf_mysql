@@ -7,7 +7,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.gennlife.crf.utils.CreateWebDriver;
-import com.gennlife.crf.utils.JsonUtils;
+import com.gennlife.crf.utils.JsonUtil;
 import com.gennlife.crf.utils.LoginCrfOfYantai;
 import com.gennlife.crf.utils.QuitWebDriver;
 import com.gennlife.crf.yantai.add.zhongliuneiyike.Yantai_SearchCrfMuban;
@@ -26,7 +26,7 @@ public class TestJsonCompareJson {
 		//String string2 = SearchCrfMuban.SearchCrfMuban_Hzxx_Level1and2and3_Json(driver, value);
 		String string2 = Yantai_SearchCrfMuban.SearchCrfMuban_Level1and2_Json(driver, value);
 		
-		boolean b = JsonUtils.JsonCompareJson(string, string2);
+		boolean b = JsonUtil.JsonCompareJson(string, string2);
 		System.out.println(b);
 		
 		// 关闭driver

@@ -1,8 +1,14 @@
 package com.gennlife.crf.utils.test;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+
 import org.json.JSONObject;
 import org.junit.Test;
+
 import com.gennlife.crf.utils.FileUtils;
+import com.gennlife.crf.utils.JsonUtil;
 
 public class TestJsonlUtils {
 	
@@ -10,7 +16,17 @@ public class TestJsonlUtils {
 	public void getJSONObjectAllKeys() throws Exception {
 		String strs = FileUtils.readFileContent("C:\\Users\\www\\Desktop\\test.json");
 		JSONObject obj=new JSONObject(strs);
-		System.out.println(obj.get("OP_LESION").toString());
+		Map<String,Object> map=new HashMap<String,Object>();  
+		map.put("OP_LESION",null);  
+		
+		JsonUtil.test2(obj, map);
+		
+		for (Entry entry : map.entrySet()) {
+			System.out.println(entry.getKey() + "--" + entry.getValue());
+		}
+
+		
+		//System.out.println(obj.get("OP_LESION").toString());
 		
 		//obj.g
 		

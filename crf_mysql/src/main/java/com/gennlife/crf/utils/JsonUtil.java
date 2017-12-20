@@ -2,9 +2,11 @@ package com.gennlife.crf.utils;
 
 import java.util.Iterator;
 import java.util.Map;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONException;
+import net.sf.json.JSONObject;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
@@ -14,61 +16,78 @@ import com.google.gson.JsonElement;
  * @author: wangmiao
  * @Date: 2017年11月27日 下午4:32:42
  */
-public class JsonUtils {
+public class JsonUtil {
 
-	public void test2(Object o, Map<String, Object> m) {
-		if (o.getClass().equals(JSONObject.class)) {
-			JSONObject temp = (JSONObject) o;
-			for (String keyMap : m.keySet()) {
-				if (m.get(keyMap) == null) {
-					if (temp.containsKey(keyMap)) {
-						System.out.println("find out.....................");
-						// System.out.println(temp.get(keyCondition));
-						result = temp.get(keyMap);
-						m.put(keyMap, temp.get(keyMap));
-						// System.out.println(result);
-					} else {
-						Iterator it = temp.keySet().iterator();
-						while (it.hasNext()) {
-							String key;
-
-							key = it.next().toString();
-							Object v = temp.get(key);
-							if (v.getClass().equals(JSONObject.class)
-									|| v.getClass().equals(JSONArray.class)) {
-								test2(v, m);
-							}
-						}
-					}
-				}
-			}
-
-		} else if (o.getClass().equals(JSONArray.class)) {
-			JSONArray tempArray = (JSONArray) o;
-			for (Object ob : tempArray) {
-				if (ob.getClass().equals(JSONObject.class)) {
-					JSONObject tempJb = (JSONObject) ob;
-					for (String keyMap : m.keySet()) {
-						if (m.get(keyMap) == null) {
-							if (tempJb.containsKey(keyMap)) {
-								System.out
-										.println("find out....2222.................");
-								// System.out.println(tempJb.get(keyCondition));
-								result = tempJb.get(keyMap);
-								m.put(keyMap, tempJb.get(keyMap));
-							} else {
-								test2(tempJb, m);
-							}
-						}
-
-					}
-
-				} else if (ob.getClass().equals(JSONArray.class)) {
-					test2(ob, m);
-				}
-			}
-		}
-	}
+	public static void test2(Object o,Map<String,Object> m)  
+    {  
+        if(o.getClass().equals(JSONObject.class))  
+        {  
+           JSONObject temp= (JSONObject)o;  
+           for(String keyMap:m.keySet())  
+           {  
+               if(m.get(keyMap)==null)  
+               {  
+                    if(temp.containsKey(keyMap))  
+                    {  
+                        System.out.println("find out.....................");  
+                       // System.out.println(temp.get(keyCondition));  
+                        //Object result = temp.get(keyMap);  
+                        m.put(keyMap, temp.get(keyMap));  
+                        //System.out.println(result);  
+                    }  
+                    else  
+                    {  
+                        Iterator it=temp.keySet().iterator();    
+                         while(it.hasNext()){      
+                               String key;      
+  
+                               key=it.next().toString();      
+                               Object v=temp.get(key);   
+                              if(v.getClass().equals(JSONObject.class)||v.getClass().equals(JSONArray.class))  
+                              {  
+                                  test2(v,m);  
+                              }  
+                          }     
+                    }  
+               }  
+           }  
+            
+        }  
+        else if(o.getClass().equals(JSONArray.class))  
+        {  
+            JSONArray tempArray=(JSONArray) o;  
+            for(Object ob:tempArray)  
+            {  
+                if(ob.getClass().equals(JSONObject.class))  
+                {  
+                    JSONObject tempJb=(JSONObject) ob;  
+                     for(String keyMap:m.keySet())  
+                     {  
+                        if(m.get(keyMap)==null)  
+                        {  
+                            if(tempJb.containsKey(keyMap))  
+                            {  
+                                System.out.println("find out....2222.................");  
+                                // System.out.println(tempJb.get(keyCondition));  
+                               // Object result=tempJb.get(keyMap);  
+                                  m.put(keyMap, tempJb.get(keyMap));  
+                            }  
+                            else  
+                            {  
+                                test2(tempJb,m);  
+                            }  
+                        }  
+                        
+                     }  
+                   
+                }  
+                else if(ob.getClass().equals(JSONArray.class))  
+                {  
+                    test2(ob,m);  
+                }  
+            }  
+        }  
+    }  
 
 	/**
 	 * @Title: getJSONObjectAllKeys
@@ -79,7 +98,7 @@ public class JsonUtils {
 	 * @throws
 	 */
 	// public static List<String> getJSONObjectAllKeysList(JSONObject jsonObj){
-	public static String getJSONObjectAllKeys(JSONObject jsonObj) {
+	/*public static String getJSONObjectAllKeys(JSONObject jsonObj) {
 		// List<String> list = new ArrayList<String>();
 		String result = null;
 		Iterator keys = jsonObj.keys();
@@ -151,7 +170,7 @@ public class JsonUtils {
 		// return list;
 		return result;
 	}
-
+*/
 	/**
 	 * @Title: stringIsArrayORObject
 	 * @Description: 判断一个字符串是array类型还是object
@@ -160,7 +179,7 @@ public class JsonUtils {
 	 * @return: int
 	 * @throws
 	 */
-	public static int stringIsArrayORObject(String jsonStr) {
+	/*public static int stringIsArrayORObject(String jsonStr) {
 		try {
 			JSONArray array = new JSONArray(jsonStr);
 			return 2;
@@ -174,7 +193,9 @@ public class JsonUtils {
 			}
 		}
 	}
-
+*/
+	
+	
 	/**
 	 * @Title: JsonCompareJson
 	 * @Description: 比较两个json字符串是否相等

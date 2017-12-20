@@ -114,7 +114,6 @@ public class YantaiMongodbDataProcess {
          		//System.out.println(((Map.Entry)map).getKey()+":"+((Map.Entry)map).getValue());
  			}
         }
-        
 		return JSON.toJSON(list).toString();  
 	}
 	

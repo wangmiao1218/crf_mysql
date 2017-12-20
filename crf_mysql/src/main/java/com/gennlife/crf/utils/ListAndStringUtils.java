@@ -213,7 +213,6 @@ public class ListAndStringUtils {
 	}
 	
 	
-	
 	/**
 	 * @Title: displayMainKeyToEnglishName
 	 * @Description: 将路径中去掉最后一个.之前，返回字段名称,若没有.，则直接返回传入的值
@@ -453,17 +452,26 @@ public class ListAndStringUtils {
 	
 	
 	/** 
-	* @Title: valueSpiltToStringList 
+	* @Title: valueSpiltBySemicolonToStringList 
 	* @Description: 将value用“；”分割,转成list 
 	* @param: @param value
 	* @return: List<String>
 	* @throws 
 	*/
-	public static List<String> valueSpiltToStringList(String value) {
+	public static List<String> valueSpiltBySemicolonToStringList(String value) {
 		List<String> list = new ArrayList<String>();
-		String[] strings = value.split("；");
-		for (int i = 0; i < strings.length; i++) {
-			list.add(strings[i]);
+		if (value.contains(";")) {
+			String[] strings = value.split(";");
+			for (int i = 0; i < strings.length; i++) {
+				list.add(strings[i]);
+			}
+		}else if (value.contains("；")) {
+			String[] strings = value.split("；");
+			for (int i = 0; i < strings.length; i++) {
+				list.add(strings[i]);
+			}
+		}else {
+			list.add(value);
 		}
 		return list;
 	}

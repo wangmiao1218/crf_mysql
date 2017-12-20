@@ -48,7 +48,7 @@ public class DataModelChineseToEnglish{
     			//存在
     			if (value.indexOf("；") != -1) {
     				//将value转成list一个个查找
-    				List<String> list = ListAndStringUtils.valueSpiltToStringList(value);
+    				List<String> list = ListAndStringUtils.valueSpiltBySemicolonToStringList(value);
     				String writeContentString =null;
     				StringBuilder sb = new StringBuilder();
     				for (int i = 0; i < list.size(); i++) {

@@ -70,7 +70,7 @@ public class TestListAndStringUtils {
 	@Test
 	public void valueSpiltToStringList(){
 		String value="就诊.就诊基本信息.入院（就诊）时间；就诊.就诊基本信息.挂号日期";
-		List<String> list = ListAndStringUtils.valueSpiltToStringList(value);
+		List<String> list = ListAndStringUtils.valueSpiltBySemicolonToStringList(value);
 		for (int i = 0; i < list.size(); i++) {
 			System.out.println(list.get(i));
 		}

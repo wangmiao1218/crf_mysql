@@ -1,12 +1,8 @@
 package com.gennlife.crf.tianjin.crfPackage.test;
 
-import java.util.List;
-
 import org.junit.Test;
-
 import com.gennlife.crf.bean.Excel;
 import com.gennlife.crf.utils.ExcelUtils;
-import com.gennlife.crf.utils.ListAndStringUtils;
 
 public class Testtianjin {
 

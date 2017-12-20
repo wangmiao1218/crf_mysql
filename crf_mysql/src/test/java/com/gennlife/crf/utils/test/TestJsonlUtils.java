@@ -1,26 +1,22 @@
 package com.gennlife.crf.utils.test;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Test;
-
 import com.gennlife.crf.utils.FileUtils;
-import com.gennlife.crf.utils.JsonUtils;
 
 public class TestJsonlUtils {
 	
 	@Test
 	public void getJSONObjectAllKeys() throws Exception {
-		String strs = FileUtils.readFileContent("C:\\Users\\www\\Desktop\\1.json");
-		JSONObject object=new JSONObject(strs);
+		String strs = FileUtils.readFileContent("C:\\Users\\www\\Desktop\\test.json");
+		JSONObject obj=new JSONObject(strs);
+		System.out.println(obj.get("OP_LESION").toString());
+		
+		//obj.g
+		
 		//System.out.println(object);  
-		String str = JsonUtils.getJSONObjectAllKeys(object);
-		System.out.println(str);
+		//String str = JsonUtils.getJSONObjectAllKeys(obj);
+		//System.out.println(str);
 		
 		/*List<String> list = JsonUtils.getJSONObjectAllKeysList(jsonObject);
 		

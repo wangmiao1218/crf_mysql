@@ -190,10 +190,8 @@ public class ExcelUtils {
     		if (value!=null && !"".equals(value) && !" ".equals(value)) {  
     			list.add(value);
     		}
-    		
     	}
     	return list;
-    	
     }  
     
 	

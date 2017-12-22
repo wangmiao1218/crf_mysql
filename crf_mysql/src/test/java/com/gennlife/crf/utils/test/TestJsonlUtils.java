@@ -14,9 +14,6 @@ public class TestJsonlUtils {
 	@Test
 	public void test01() throws Exception {
 		String nlpSource="$.visits[*].record.admissions_record.admissions_records_past_medical_history;$.visits[*].record.course_record.fir.first_course_record_medical_feature";
-		/*String[] nlpArray = ListAndStringUtils.valueSpiltBySemicolonToStringArray(nlpSource);
-		System.out.println(nlpArray[0]);
-		System.out.println(nlpArray[1]);*/
 		JSONArray nlpJsonArray = ListAndStringUtils.valueSpiltBySemicolonToJSONArray(nlpSource);
 		System.out.println(nlpJsonArray);
 		
@@ -45,7 +42,9 @@ public class TestJsonlUtils {
 		JSONObject lastJson=new JSONObject();
 		lastJson.put("blocks", blockJson);
 		System.out.println(lastJson);
-		ConfiguredCrfPackageJson.jsonToJsonFile(lastJson);
+		
+		//ConfiguredCrfPackageJson.jsonToJsonFile(lastJson);
+		
 	}
 	
 	

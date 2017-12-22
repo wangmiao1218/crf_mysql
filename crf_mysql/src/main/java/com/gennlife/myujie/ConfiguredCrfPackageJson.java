@@ -1,10 +1,7 @@
 package com.gennlife.myujie;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.List;
@@ -69,6 +66,10 @@ public class ConfiguredCrfPackageJson {
 					String chNameContent = ExcelUtils.readContent(excel, isConfiguredRowNum, chNameCellNum);
 					
 					
+					
+					String computeContent = ExcelUtils.readContent(excel, isConfiguredRowNum, chNameCellNum);
+					
+					
 					//获取对应的值，传入到构造nlp方法
 					ConfiguredCrfPackageJson.createNlpJson(chNameContent,nlpSource);
 				}else if ("block".equals(fieldEnName)) {
@@ -106,22 +107,19 @@ public class ConfiguredCrfPackageJson {
 		//转换
 		JSONArray nlpJsonArray = ListAndStringUtils.valueSpiltBySemicolonToJSONArray(nlpSource);
 		
-		//nlp
-		new JSONObject().put("nlp", nlpJsonArray);
-		
 		//sourceJson
-		JSONObject sourceJson=new JSONObject();
-		
-		
+		Object source = new JSONObject().put("source", new JSONObject().put("nlp", nlpJsonArray));
+
 		//conditionJson
 		JSONObject conditionJson=new JSONObject();
 		
 		//computerJson
 		JSONObject computerJson=new JSONObject();
 		
+		
 		//blockJson
 		JSONObject blockJson=new JSONObject();
-		blockJson.put("block_"+chNameContent, sourceJson);
+		new JSONObject().put("block_"+chNameContent, source);
 		
 		//最后的json
 		lastJson.put("blocks", blockJson);

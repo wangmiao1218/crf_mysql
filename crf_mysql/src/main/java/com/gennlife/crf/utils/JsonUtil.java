@@ -1,12 +1,5 @@
 package com.gennlife.crf.utils;
 
-import java.util.Iterator;
-import java.util.Map;
-
-import net.sf.json.JSONArray;
-import net.sf.json.JSONException;
-import net.sf.json.JSONObject;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
@@ -18,6 +11,8 @@ import com.google.gson.JsonElement;
  */
 public class JsonUtil {
 
+	
+	/*忘记逻辑功能了！！！
 	public static void test2(Object o,Map<String,Object> m)  
     {  
         if(o.getClass().equals(JSONObject.class))  
@@ -88,10 +83,11 @@ public class JsonUtil {
             }  
         }  
     }  
-
+*/
+	
 	/**
 	 * @Title: getJSONObjectAllKeys
-	 * @Description: 获取jsonObject中所有的key（递归）
+	 * @Description: 获取jsonObject中所有的key（递归），输出所有key
 	 * @param: @param jsonObject
 	 * @param: @return :
 	 * @return: List<String>
@@ -171,9 +167,10 @@ public class JsonUtil {
 		return result;
 	}
 */
+	
 	/**
 	 * @Title: stringIsArrayORObject
-	 * @Description: 判断一个字符串是array类型还是object
+	 * @Description: 判断一个字符串是array类型还是object（上面使用）
 	 * @param: @param jsonStr
 	 * @param: @return : 0:既不是array也不是object 1：是object 2 ：是Array
 	 * @return: int

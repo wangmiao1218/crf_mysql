@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import net.sf.json.JSONArray;
+
 import org.openqa.selenium.WebElement;
 
 import com.gennlife.crf.bean.CrfTemplateAnzhenXinXueguan;
@@ -474,6 +476,28 @@ public class ListAndStringUtils {
 			list.add(value);
 		}
 		return list;
+	}
+	
+	/** 
+	 * @Title: valueSpiltBySemicolonToJSONArray 
+	 * @Description: 将value用“;”分割,转成JSONArray 
+	 * @param: @param value
+	 * @return: String[] 
+	 * @throws 
+	 */
+	public static JSONArray valueSpiltBySemicolonToJSONArray(String value) {
+		List<String> list = new ArrayList<String>();
+		if (value.contains(";")) {
+			String[] strings = value.split(";");
+			for (int i = 0; i < strings.length; i++) {
+				list.add(strings[i]);
+			}
+		}else {
+			list.add(value);
+		}
+		
+		JSONArray jsonArray = JSONArray.fromObject(list);
+		return 	jsonArray;
 	}
 	
 

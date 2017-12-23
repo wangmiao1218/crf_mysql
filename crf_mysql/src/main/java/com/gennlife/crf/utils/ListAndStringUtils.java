@@ -10,6 +10,7 @@ import java.util.Random;
 
 import net.sf.json.JSONArray;
 
+import org.apache.commons.collections4.map.HashedMap;
 import org.openqa.selenium.WebElement;
 
 import com.gennlife.crf.bean.CrfTemplateAnzhenXinXueguan;
@@ -21,6 +22,81 @@ import com.gennlife.crf.bean.CrfTemplateAnzhenXinXueguan;
  * @Date: 2017年6月9日 上午9:58:00
  */
 public class ListAndStringUtils {
+
+	
+	/** 
+	 * @Title: valueSpiltByCommaToStrings 
+	 * @Description: 将value以“,”进行分割,返回数组 
+	 * @param: @param value
+	 * @return: String[] 
+	 * @throws 
+	 */
+	public static String[] valueSpiltByCommaToStrings(String value) {
+		String[] strings = null;
+		if (value.contains(",")) {
+			strings = value.split(",");
+			for (int i = 0; i < strings.length; i++) {
+				if (strings[i]==null) {
+					strings[i]=null;
+				}else {
+					strings[i] = strings[i].trim();
+				}
+			}
+		}
+		return strings;
+	}
+	
+	/** 
+	 * @Title: valueSpiltBySemicolonToStringMap 
+	 * @Description: 将value用“;”分割,然后用map，转成listMap 
+	 * @param: @param value
+	 * @return:  Map<String, String> 
+	 * @throws 
+	 */
+	public static Map<String, String> valueSpiltBySemicolonToStringMap(String value) {
+		Map<String, String> map=new HashedMap<String, String>();
+		if (value.contains(";")) {
+			String[] strings = value.split(";");
+			for (int i = 0; i < strings.length; i++) {
+				String[] mapStrs =null;
+				if (strings[i].contains(":")) {
+					//冒号分割，填入map
+					mapStrs = strings[i].split(":");
+					map.put(mapStrs[0].trim(), mapStrs[1].trim());
+				}
+			}
+		}else {
+			if (value.trim().contains(":")) {
+				//冒号分割，填入map
+				String[] mapStrs = value.split(":");
+				map.put(mapStrs[0].trim(), mapStrs[1].trim());
+			}
+		}
+		return map;
+	}
+	
+
+	/** 
+	 * @Title: valueSpiltBySemicolonToJSONArray 
+	 * @Description: 将value用“;”分割,转成JSONArray 
+	 * @param: @param value
+	 * @return: JSONArray
+	 * @throws 
+	 */
+	public static JSONArray valueSpiltBySemicolonToJSONArray(String value) {
+		List<String> list = new ArrayList<String>();
+		if (value.contains(";")) {
+			String[] strings = value.split(";");
+			for (int i = 0; i < strings.length; i++) {
+				list.add(strings[i]);
+			}
+		}else {
+			list.add(value);
+		}
+		
+		JSONArray jsonArray = JSONArray.fromObject(list);
+		return 	jsonArray;
+	}
 	
 
 	/** 
@@ -455,7 +531,7 @@ public class ListAndStringUtils {
 	
 	/** 
 	* @Title: valueSpiltBySemicolonToStringList 
-	* @Description: 将value用“；”分割,转成list 
+	* @Description: 将value用“;”分割,转成list 
 	* @param: @param value
 	* @return: List<String>
 	* @throws 
@@ -476,28 +552,6 @@ public class ListAndStringUtils {
 			list.add(value);
 		}
 		return list;
-	}
-	
-	/** 
-	 * @Title: valueSpiltBySemicolonToJSONArray 
-	 * @Description: 将value用“;”分割,转成JSONArray 
-	 * @param: @param value
-	 * @return: String[] 
-	 * @throws 
-	 */
-	public static JSONArray valueSpiltBySemicolonToJSONArray(String value) {
-		List<String> list = new ArrayList<String>();
-		if (value.contains(";")) {
-			String[] strings = value.split(";");
-			for (int i = 0; i < strings.length; i++) {
-				list.add(strings[i]);
-			}
-		}else {
-			list.add(value);
-		}
-		
-		JSONArray jsonArray = JSONArray.fromObject(list);
-		return 	jsonArray;
 	}
 	
 

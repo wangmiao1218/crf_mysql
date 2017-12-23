@@ -6,6 +6,10 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import org.apache.commons.collections4.map.HashedMap;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -34,7 +38,7 @@ public class ConfiguredCrfPackageJson {
 		//System.out.println("start。。。");
 		Integer isConfiguredCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "是否配置");
 		Integer sourceCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "source");
-		Integer chNameCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "属性中文名");
+		Integer enNameCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "英文名");
 		Integer nlpCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "数据模型来源（NLP）");
 		Integer blockCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "block");
 		Integer patientDetailCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "PatientDetail");
@@ -56,37 +60,65 @@ public class ConfiguredCrfPackageJson {
 				isConfiguredStr=entry.getValue();
 			}
 			
-			if ("是".equals(list.get(i))) {
+			if ("是".equals(isConfiguredStr)) {
 				System.out.println("配置字段！正在配置");
+				String enNameContent = ExcelUtils.readContent(excel, isConfiguredRowNum, enNameCellNum);
+				//读取compute
+				String computeContent = ExcelUtils.readContent(excel, isConfiguredRowNum, computeCellNum);
+				
 				//判断source
 				String fieldEnName = ExcelUtils.readContent(excel, isConfiguredRowNum, sourceCellNum);
 				if ("nlp".equals(fieldEnName)) {
 					//读取npl的source
-					String nlpSource = ExcelUtils.readContent(excel, isConfiguredRowNum, nlpCellNum);
-					String chNameContent = ExcelUtils.readContent(excel, isConfiguredRowNum, chNameCellNum);
+					String nlpSourceContent = ExcelUtils.readContent(excel, isConfiguredRowNum, nlpCellNum);
 					
+					//==============condition======================
+					//判断condition是什么
+					String conditionContent = ExcelUtils.readContent(excel, isConfiguredRowNum, conditionCellNum);
+					String selectContent = ExcelUtils.readContent(excel, isConfiguredRowNum, selectCellNum);
+					String inContent = ExcelUtils.readContent(excel, isConfiguredRowNum, inCellNum);
+					String elementContent = ExcelUtils.readContent(excel, isConfiguredRowNum, elementCellNum);
 					
-					
-					String computeContent = ExcelUtils.readContent(excel, isConfiguredRowNum, chNameCellNum);
-					
+					int conditionNum = ListAndStringUtils.valueSpiltBySemicolonToStringList(conditionContent).size();
+					if (conditionNum==1) {
+						if ("select".equals(conditionContent)) {
+							//构建select_condition
+							ConfiguredCrfPackageJson.selectCondition("select_condition",selectContent,elementContent);
+							
+						}else if ("in".equals(conditionContent)) {
+							//构建in_condition
+							ConfiguredCrfPackageJson.inCondition("in_condition",inContent,elementContent);
+						
+						}
+					}else if(conditionNum==2){
+						//构建select_condition
+						ConfiguredCrfPackageJson.selectCondition("select_condition",selectContent,elementContent);
+						
+						//构建in_condition
+						ConfiguredCrfPackageJson.inCondition("in_condition",inContent,elementContent);
+						
+					}
+					//====================================
 					
 					//获取对应的值，传入到构造nlp方法
-					ConfiguredCrfPackageJson.createNlpJson(chNameContent,nlpSource);
+					ConfiguredCrfPackageJson.createNlpJson(enNameContent,nlpSourceContent,computeContent);
 				}else if ("block".equals(fieldEnName)) {
+					//读取block的source
+					String blockSourceContent = ExcelUtils.readContent(excel, isConfiguredRowNum, blockCellNum);
 					
 					
 					
 					//获取对应的值，传入到构造block方法
-					ConfiguredCrfPackageJson.createBlockJson("");
+					ConfiguredCrfPackageJson.createBlockJson(enNameContent,blockSourceContent,computeContent);
 				}else if ("PatientDetail".equals(fieldEnName)) {
+					//读取patientDetail的source
+					String patientDetailSourceContent = ExcelUtils.readContent(excel, isConfiguredRowNum, patientDetailCellNum);
 					
 					
 					
 					//获取对应的值，传入到构造PatientDetail方法
-					ConfiguredCrfPackageJson.createPatientDetailJson("");
+					ConfiguredCrfPackageJson.createPatientDetailJson(enNameContent,patientDetailSourceContent,computeContent);
 				}
-				
-				
 			}else {
 				System.out.println("非配置字段！");
 			}
@@ -96,34 +128,89 @@ public class ConfiguredCrfPackageJson {
 		System.out.println("ok");
 	}
 	
+	/** 
+	* @Title: selectCondition 
+	* @Description: 构建selectCondition的json
+	* @param: String keyName
+	* @param: String selectContent
+	* @param: String elementContent
+	* @return: void
+	* @throws 
+	*/
+	public static void selectCondition(String keyName,String selectContent,String elementContent) {
+		//元素集合
+		Map<String,String> map = ListAndStringUtils.valueSpiltBySemicolonToStringMap(elementContent);
+		map.get("A");
+		
+		//selectContent表达式解析(没有括号情况)
+		if (!selectContent.contains("(") || !selectContent.contains(")")) {
+			for (int i = 0; i < selectContent.length(); i++) {
+				char charAt = selectContent.charAt(i);
+				System.out.println(charAt);
+				
+				
+				if (!"&".equals(charAt) && !"|".equals(charAt)) {
+					//元素
+					map.get(charAt);
+					
+				}
+			}
+			
+			
+		}else if (selectContent.contains("(") && selectContent.contains(")")) {
+			//selectContent表达式解析(有括号情况)
+			
+		}
+		
+	
+	}
+	
+	
+	/** 
+	 * @Title: inCondition 
+	 * @Description: 构建inCondition的json
+	 * @param: String keyName
+	 * @param: String inContent
+	 * @param: String elementContent
+	 * @return: void
+	 * @throws 
+	 */
+	public static void inCondition(String keyName,String inContent,String elementContent) {
+		
+		
+		
+	}
+	
 	
 	/** 
 	* @Title: createNlpJson 
-	* @Description: 生成Nlp的json
-	* @param: @param tableName :传入的表名
+	* @Description: 创建nlp的block
+	* @param: @param chNameContent
+	* @param: @param nlpSourceContent
+	* @param: @param computeContent 
 	* @throws 
 	*/
-	public static void createNlpJson(String chNameContent,String nlpSource) {
-		//转换
-		JSONArray nlpJsonArray = ListAndStringUtils.valueSpiltBySemicolonToJSONArray(nlpSource);
+	public static void createNlpJson(String enNameContent,String nlpSourceContent,String computeContent) {
+		//nlpJson
+		JSONObject nlpSourceJson=new JSONObject();
+		nlpSourceJson.put("nlp", ListAndStringUtils.valueSpiltBySemicolonToJSONArray(nlpSourceContent));
 		
-		//sourceJson
-		Object source = new JSONObject().put("source", new JSONObject().put("nlp", nlpJsonArray));
-
-		//conditionJson
-		JSONObject conditionJson=new JSONObject();
+		//condition
 		
-		//computerJson
-		JSONObject computerJson=new JSONObject();
 		
+		//定义map，放source、compute、condition
+		Map<String,Object> map = new HashedMap<String, Object>();
+		map.put("condition","");
+		
+		map.put("compute", ListAndStringUtils.valueSpiltBySemicolonToJSONArray(computeContent));
+		map.put("source", nlpSourceJson);
 		
 		//blockJson
 		JSONObject blockJson=new JSONObject();
-		new JSONObject().put("block_"+chNameContent, source);
+		blockJson.put("block_"+enNameContent, map);
 		
 		//最后的json
 		lastJson.put("blocks", blockJson);
-		
 	}
 
 	
@@ -133,9 +220,27 @@ public class ConfiguredCrfPackageJson {
 	* @param: @param tableName :传入的表名
 	* @throws 
 	*/
-	public static void createBlockJson(String tableName) {
+	public static void createBlockJson(String enNameContent,String blockSourceContent,String computeContent) {
+		//blockJson
+		JSONObject blockSourceJson=new JSONObject();
+		blockSourceJson.put("block", ListAndStringUtils.valueSpiltBySemicolonToJSONArray(blockSourceContent));
+		
+		//condition
 		
 		
+		//定义map，放source、compute、condition
+		Map<String,Object> map = new HashedMap<String, Object>();
+		map.put("condition","");
+		
+		map.put("compute", ListAndStringUtils.valueSpiltBySemicolonToJSONArray(computeContent));
+		map.put("source", blockSourceJson);
+		
+		//blockJson
+		JSONObject blockJson=new JSONObject();
+		blockJson.put("block_"+enNameContent, map);
+		
+		//最后的json
+		lastJson.put("blocks", blockJson);
 	}
 	
 	
@@ -145,22 +250,42 @@ public class ConfiguredCrfPackageJson {
 	 * @param: @param tableName :传入的表名
 	 * @throws 
 	 */
-	public static void createPatientDetailJson(String tableName) {
+	public static void createPatientDetailJson(String enNameContent,String patientDetailSourceContent,String computeContent) {
+		//patientDetailSourceJson
+		//patientDetail:visits
+		JSONObject patientDetailSourceJson=new JSONObject();
+		patientDetailSourceJson.put("patientDetail",patientDetailSourceContent);
+		
+		//condition
 		
 		
+		//定义map，放source、compute、condition
+		Map<String,Object> map = new HashedMap<String, Object>();
+		map.put("condition", "");
+		
+		map.put("compute", ListAndStringUtils.valueSpiltBySemicolonToJSONArray(computeContent));
+		map.put("source", patientDetailSourceJson);
+		
+		//blockJson
+		JSONObject blockJson=new JSONObject();
+		blockJson.put("block_"+enNameContent, map);
+		
+		//最后的json
+		lastJson.put("blocks", blockJson);
 	}
 	
 	
 	/** 
-	 * @Title: jsonToJsonFile 
-	 * @Description: 将json生成json文件
-	 * @param: @param tableName :传入的表名
-	 * @throws 
-	 */
+	* @Title: jsonToJsonFile 
+	* @Description: 将json生成json文件
+	* @param: JSONObject lastJson 
+	* @return: void
+	* @throws 
+	*/
 	public static void jsonToJsonFile(JSONObject lastJson) {
+		System.out.println(lastJson);
 		String path="E:\\CRF重组\\自动工具\\工具\\test.json";
         File file=new File(path);
-        
         try {
         	 Writer write = new OutputStreamWriter(new FileOutputStream(file), "UTF-8");
         	 write.write(lastJson.toString());
@@ -169,7 +294,6 @@ public class ConfiguredCrfPackageJson {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
     }
 
 }

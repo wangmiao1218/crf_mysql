@@ -1,22 +1,54 @@
 package com.gennlife.crf.utils.test;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import net.sf.json.JSONObject;
+
 import org.junit.Test;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.support.ui.Select;
+
 import com.gennlife.crf.bean.Excel;
 import com.gennlife.crf.utils.CreateWebDriver;
 import com.gennlife.crf.utils.ExcelUtils;
 import com.gennlife.crf.utils.ListAndStringUtils;
 import com.gennlife.crf.utils.LoginCrfOfAnzhen;
 import com.gennlife.crf.utils.QuitWebDriver;
+import com.sun.jndi.url.iiopname.iiopnameURLContextFactory;
 
 public class TestListAndStringUtils {
 	
 	private String filePath = "E:\\安贞\\！安贞心血管";
 	private String fileName = "参会医院名称更改0923－添加上级科室.xlsx";
 	private String sheetName = "Sheet1";
+	
+
+	@Test
+	public void valueSpiltByCommaToStrings(){
+		String strs="attribute.NEG,,isnull";
+		String[] strings= ListAndStringUtils.valueSpiltByCommaToStrings(strs);
+		System.out.println(strings.length);
+		if (strings.length==3) {
+			JSONObject objJson=new JSONObject();
+			objJson.put("source", strings[0]);
+			objJson.put("target_value", strings[1]);
+			objJson.put("operator", strings[2]);
+			System.out.println(objJson);
+		}
+	}
+	
+	
+	@Test
+	public void valueSpiltBySemicolonToStringListMap(){
+		String strs="A:attribute.NEG,,isnull;B:attribute.FAM,,isnull;C:label,medicalproblem,equal;D:normalized_value,(?<!肾)癌|淋巴瘤|白血病|黑色素瘤|肉瘤,regex;E:normalized_value,瘤,contain;F :attribute.PRO, 恶性, contain; ";
+		Map<String,String> map = ListAndStringUtils.valueSpiltBySemicolonToStringMap(strs);
+		System.out.println(map);
+		System.out.println(map.get("A"));
+	}
+	
 	
 	@Test
 	public void compareTwoListReturnDiffrent() throws Exception{

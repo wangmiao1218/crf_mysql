@@ -20,7 +20,7 @@ import com.google.gson.JsonElement;
  * @author: wangmiao
  * @Date: 2017年11月27日 下午4:32:42
  */
-public class JsonUtil {
+public class JsonUtil_bak {
 
 	
 	
@@ -98,7 +98,7 @@ public class JsonUtil {
 				//不为空，则封装成整个Object
 				//if (BeanMap.create(returnJsonBean)!=null) {
 				if (returnJsonBean.getOperator()!=null) {
-					JsonUtil.jsontest(selectContent, elementMap);
+					JsonUtil_bak.jsontest(selectContent, elementMap);
 					//如果returnJsonBean的operator不为空，则把returnJsonBean转为map添加到listmap中
 					//先把listMap清空
 					//listMaps.clear();

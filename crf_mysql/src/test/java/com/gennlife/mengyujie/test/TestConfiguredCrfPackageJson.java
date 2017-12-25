@@ -14,7 +14,7 @@ import org.junit.Test;
 
 import com.gennlife.crf.bean.CrfPackageJsonBean;
 import com.gennlife.crf.bean.Excel;
-import com.gennlife.crf.utils.JsonUtil;
+import com.gennlife.crf.utils.JsonUtil_bak;
 import com.gennlife.crf.utils.ListAndStringUtils;
 import com.gennlife.myujie.ConfiguredCrfPackageJson;
 
@@ -68,7 +68,7 @@ public class TestConfiguredCrfPackageJson {
 		
 		
 		//
-		CrfPackageJsonBean returnJsonBean = JsonUtil.jsontest(selectContent, elementMap);
+		CrfPackageJsonBean returnJsonBean = JsonUtil_bak.jsontest(selectContent, elementMap);
 		System.out.println(returnJsonBean.getOperator()==null);
 		
 		detailJson.put("select_condition", BeanMap.create(returnJsonBean));

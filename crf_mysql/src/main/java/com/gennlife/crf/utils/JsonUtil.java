@@ -1,5 +1,16 @@
 package com.gennlife.crf.utils;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import net.sf.cglib.beans.BeanMap;
+
+import org.apache.commons.collections4.map.HashedMap;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import com.gennlife.crf.bean.CrfPackageJsonBean;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
@@ -11,6 +22,126 @@ import com.google.gson.JsonElement;
  */
 public class JsonUtil {
 
+	
+	
+	public static CrfPackageJsonBean jsontest2(String selectContent,Map<String,String> elementMap) throws JSONException{
+		//返回的CrfPackageJsonBean
+		CrfPackageJsonBean returnJsonBean = new CrfPackageJsonBean();
+		List<Map> listMaps = new ArrayList<Map>();
+		//找最后一个“(”和它之后的第一个“)”
+		
+		
+		/*
+		//
+		for (int i = 0; i < selectContent.length(); i++) {
+			String element =  String.valueOf(selectContent.charAt(i));
+			System.out.println(element);
+			
+			//判断
+			if (!"&".equals(element) && !"|".equals(element)) {
+				//判断对象jsonBean是否为空
+				//不为空，则封装成整个Object
+				//if (BeanMap.create(returnJsonBean)!=null) {
+				if (returnJsonBean.getOperator()!=null) {
+					JsonUtil.jsontest(selectContent, elementMap);
+					//如果returnJsonBean的operator不为空，则把returnJsonBean转为map添加到listmap中
+					//先把listMap清空
+					//listMaps.clear();
+					//listMaps.add(BeanMap.create(returnJsonBean));
+					//System.out.println(listMaps);
+				}	
+				//元素
+				String[] strings = ListAndStringUtils.valueSpiltByCommaToStrings(elementMap.get(element));
+				if (strings.length==3) {
+					Map<String,Object> mapJson = new HashedMap<String, Object>();
+					mapJson.put("source", strings[0]);
+					mapJson.put("target_value", strings[1]);
+					mapJson.put("operator", strings[2]);
+					
+					//封装成list
+					listMaps.add(mapJson);
+				}
+				
+				returnJsonBean.setDetail(listMaps);
+				
+			}else if ("&".equals(element)) {
+				returnJsonBean.setOperator("and");
+				//break;
+				
+			}else if ("|".equals(element)) {
+				returnJsonBean.setOperator("or");
+				
+			}
+			
+		}
+		*/
+		return returnJsonBean;
+		
+	
+	}
+	
+	
+	
+	public static CrfPackageJsonBean jsontest(String selectContent,Map<String,String> elementMap) throws JSONException{
+		//返回的CrfPackageJsonBean
+		CrfPackageJsonBean returnJsonBean = new CrfPackageJsonBean();
+		List<Map> listMaps = new ArrayList<Map>();
+		
+		//
+		for (int i = 0; i < selectContent.length(); i++) {
+			String element =  String.valueOf(selectContent.charAt(i));
+			System.out.println(element);
+			
+			//判断
+			if (!"&".equals(element) && !"|".equals(element)) {
+				//判断对象jsonBean是否为空
+				//不为空，则封装成整个Object
+				//if (BeanMap.create(returnJsonBean)!=null) {
+				if (returnJsonBean.getOperator()!=null) {
+					JsonUtil.jsontest(selectContent, elementMap);
+					//如果returnJsonBean的operator不为空，则把returnJsonBean转为map添加到listmap中
+					//先把listMap清空
+					//listMaps.clear();
+					//listMaps.add(BeanMap.create(returnJsonBean));
+					//System.out.println(listMaps);
+				}	
+				//元素
+				String[] strings = ListAndStringUtils.valueSpiltByCommaToStrings(elementMap.get(element));
+				if (strings.length==3) {
+					Map<String,Object> mapJson = new HashedMap<String, Object>();
+					mapJson.put("source", strings[0]);
+					mapJson.put("target_value", strings[1]);
+					mapJson.put("operator", strings[2]);
+					
+					//封装成list
+					listMaps.add(mapJson);
+				}
+				
+				returnJsonBean.setDetail(listMaps);
+				
+			}else if ("&".equals(element)) {
+				returnJsonBean.setOperator("and");
+				//break;
+				
+			}else if ("|".equals(element)) {
+				returnJsonBean.setOperator("or");
+				
+			}
+			
+		}
+		
+		return returnJsonBean;
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	/*忘记逻辑功能了！！！
 	public static void test2(Object o,Map<String,Object> m)  

@@ -3,12 +3,11 @@ package com.gennlife.crf.mongodb;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bson.BSONObject;
 import org.bson.Document;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.gennlife.crf.utils.MongodbJDBCUtils;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
@@ -47,20 +46,24 @@ public class TianjinMongodbDataProcess {
         String returnStr =null;
         try {
             while (cursor.hasNext()) {
-            	//BSONObject dbObject = cursor.next();
-            	returnStr=cursor.next().toString();
+            	BSONObject dbObject = cursor.next();
+            	dbObject= (BSONObject) ((BSONObject) dbObject.get("data")).get("visits");
+            	System.out.println(dbObject.toString());
+            	
+            	//returnStr=cursor.next().toString();
             }
         } finally {
             cursor.close();
         }
-        
+       /* 
         //将returnStr字符串转换成json对象:JSONObject
         com.alibaba.fastjson.JSONObject jsonObject=(com.alibaba.fastjson.JSONObject) JSON.parse(returnStr);
         jsonObject= (com.alibaba.fastjson.JSONObject)jsonObject.get("data");
         System.out.println(jsonObject);
         jsonObject = (com.alibaba.fastjson.JSONObject)jsonObject.getJSONArray("visits").get(0);
-        
+      
         System.out.println(jsonObject);
+          */
         
 		return returnStr;  
 	}

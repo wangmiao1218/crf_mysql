@@ -114,13 +114,14 @@ public class CrfLogic {
 		Integer patientDetailCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "patientDetail");
 		Integer insertContentCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "输入文本");
 		
-		//读取基础文本文件，并转为json
-		org.json.JSONObject baseJson = JsonUtils.readFileContentReturnJson(path);
-		
 		//获取isConfiguredCellNum一列（用readExcelOfListReturnListMap，因为有重复值）(除表头)
 		List<Map<Integer,String>> list = ExcelUtils.readExcelOfListReturnListMap(excel, isConfiguredCellNum);
 		//获取是否配置的列，开始遍历
 		for (int i = 1; i < list.size(); i++) {
+			//放到上面设置变量，则不循环，但是每个值都保存了
+			//读取基础文本文件，并转为json
+			org.json.JSONObject baseJson = JsonUtils.readFileContentReturnJson(path);
+			
 			Map<Integer, String> map = list.get(i);
 			//定义是否填的行号和内容
 			Integer isConfiguredRowNum=null;
@@ -172,6 +173,7 @@ public class CrfLogic {
 		System.out.println("ok");
 	}
 	
+	
 	/** 
 	* @Title: requireCrfAutoInterfaceByPat 
 	* @Description: 批量请求crf组装接口，返回接口处理的结果
@@ -195,6 +197,7 @@ public class CrfLogic {
 		System.out.println("请求接口end...");
 		return new JSONObject(str);
 	}
+	
 	
 	/** 
 	* @Title: writePatIntoExcel 
@@ -236,13 +239,14 @@ public class CrfLogic {
 		Integer patientDetailCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "patientDetail");
 		Integer insertContentCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "输入文本");
 		
-		//读取基础文本文件，并转为json
-		org.json.JSONObject baseJson = JsonUtils.readFileContentReturnJson(path);
-		
 		//获取isConfiguredCellNum一列（用readExcelOfListReturnListMap，因为有重复值）(除表头)
 		List<Map<Integer,String>> list = ExcelUtils.readExcelOfListReturnListMap(excel, isConfiguredCellNum);
 		//获取是否配置的列，开始遍历
 		for (int i = 1; i < list.size(); i++) {
+			//放到上面设置变量，则不循环，但是每个值都保存了
+			//读取基础文本文件，并转为json
+			org.json.JSONObject baseJson = JsonUtils.readFileContentReturnJson(path);
+			
 			Map<Integer, String> map = list.get(i);
 			//定义是否填的行号和内容
 			Integer isConfiguredRowNum=null;

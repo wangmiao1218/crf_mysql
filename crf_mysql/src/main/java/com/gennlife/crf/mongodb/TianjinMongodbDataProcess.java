@@ -2,15 +2,18 @@ package com.gennlife.crf.mongodb;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+
+import org.bson.Document;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import com.gennlife.crf.utils.MongodbJDBCUtils;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
+import com.mongodb.client.MongoCollection;
 
 /**
  * @Description: 天津肿瘤mongodb的数据处理（crfdata表）
@@ -19,32 +22,28 @@ import com.mongodb.DBCursor;
  */
 public class TianjinMongodbDataProcess {
 
-	/** 
-	* @Title: RysqkYongyaoqk 
-	* @Description: 烟台入院时情况_用药情况，返回数据来源相关的字段值
-	* @param: @param patient_sn 传入patient_sn
-	* @param: @param rydate 传入入院时间
-	* @return: String 返回y用药情况的数据来源相关的字段值
+	/**
+	* @Title: insertDatasIntoPatientDetailMongodb 
+	* @Description: 天津数据库，批量插入json
+	* @param: @param listJsons :
+	* @return: void
 	* @throws 
 	*/
-	public static String RysqkYongyaoqkReturnDataSources(String patient_sn,String rydate) {
-		List<String> list = new ArrayList<String>();
-		
-		//连接烟台数据库
-		DBCollection dbCollection = MongodbJDBCUtils.connectYantaiMongodbReturnDBCollection();
+	
+	public static String queryDatasOfCrfdataMongodb(String pat,String crfdataContent) throws JSONException {
+		//连接数据库
+		DBCollection dbCollection = MongodbJDBCUtils.connectTianjinMongodbCrfdataReturnDBCollection();
 		
 		//大的查询条件
 		BasicDBObject query = new BasicDBObject();  
-		query.put("patient_info.patient_info_patient_sn",patient_sn); 
+		query.put("data.patient_info.PATIENT_BASICINFO.PATIENT_SN.value",pat);
 		
-		//数组内查询条件
+		//只查询该值
 		BasicDBObject edit = new BasicDBObject();
-		edit.put("visits", new BasicDBObject("$elemMatch", 
-				new BasicDBObject("type.visit_info_admission_date",rydate)
-				.append("type.visit_info_admission_dept","神经内科")));
+		edit.put(crfdataContent,"");
 		
-        DBCursor cursor=dbCollection.find(query,edit);
-        //将想要的返回数据转成String，方便后期处理
+		DBCursor cursor=dbCollection.find(query,edit);
+		//将想要的返回数据转成String，方便后期处理
         String returnStr =null;
         try {
             while (cursor.hasNext()) {
@@ -53,69 +52,42 @@ public class TianjinMongodbDataProcess {
             }
         } finally {
             cursor.close();
-            
         }
         
         //将returnStr字符串转换成json对象:JSONObject
-        JSONObject jsonObject=(JSONObject) JSON.parse(returnStr);
-        JSONArray jsonArray = jsonObject.getJSONArray("visits");
+        com.alibaba.fastjson.JSONObject jsonObject=(com.alibaba.fastjson.JSONObject) JSON.parse(returnStr);
+        jsonObject= (com.alibaba.fastjson.JSONObject)jsonObject.get("data");
+        System.out.println(jsonObject);
+        jsonObject = (com.alibaba.fastjson.JSONObject)jsonObject.getJSONArray("visits").get(0);
         
-        //返回visits的JSONObject
-        jsonObject = (JSONObject) jsonArray.get(0);
+        System.out.println(jsonObject);
         
-        //返回record的JSONObject
-        jsonArray = jsonObject.getJSONArray("record");
-        jsonObject = (JSONObject) jsonArray.get(0);
-        
-        //获取course_record的JSONObject
-        //first_course_record_medical_feature
-        //first_course_record_diagnosis_basis
-        JSONArray course_record_Array = jsonObject.getJSONArray("course_record");
-        JSONObject course_record_Object = (JSONObject) course_record_Array.get(0);
-        JSONArray fir_course_record_Array= course_record_Object.getJSONArray("fir");
-        JSONObject fir_course_record_Object= (JSONObject) fir_course_record_Array.get(0);
-        //处理fir_course_record_Object
-        Map fir_course_record_map = (Map) fir_course_record_Object;
-        for (Object map : fir_course_record_map.entrySet()){ 
-        	if ("first_course_record_medical_feature"==((Map.Entry)map).getKey() || 
-        		"first_course_record_diagnosis_basis"==((Map.Entry)map).getKey()) {
-        		list.add(((Map.Entry)map).getKey()+":"+((Map.Entry)map).getValue());
-         		//System.out.println(((Map.Entry)map).getKey()+":"+((Map.Entry)map).getValue());
- 			}
-        }
-        
-        
-        //获取discharge_record的JSONObject
-        //discharge_records_hospital_admission_condition
-        //discharge_records_hospital_admission_diagnose
-        JSONArray discharge_record = jsonObject.getJSONArray("discharge_record");
-        JSONObject discharge_record_Object = (JSONObject) discharge_record.get(0);
-        //处理discharge_record_Object
-        Map discharge_record_map = (Map) discharge_record_Object;
-        for (Object map : discharge_record_map.entrySet()){ 
-        	if ("discharge_records_hospital_admission_condition"==((Map.Entry)map).getKey() || 
-        		"discharge_records_hospital_admission_diagnose"==((Map.Entry)map).getKey()) {
-        		list.add(((Map.Entry)map).getKey()+":"+((Map.Entry)map).getValue());
-         		//System.out.println(((Map.Entry)map).getKey()+":"+((Map.Entry)map).getValue());
- 			}
-        }
-        
-        //获取admissions_record的JSONObject
-        //admissions_records_past_medical_history
-        //admissions_records_prsent_illness_history
-        JSONArray admissions_record = jsonObject.getJSONArray("admissions_record");
-        JSONObject admissions_record_Object = (JSONObject) admissions_record.get(0);
-        //处理admissions_record_Object
-        Map admissions_record_map = (Map) admissions_record_Object;
-        for (Object map : admissions_record_map.entrySet()){ 
-        	if ("admissions_records_past_medical_history"==((Map.Entry)map).getKey() || 
-        		"admissions_records_prsent_illness_history"==((Map.Entry)map).getKey()) {
-        		list.add(((Map.Entry)map).getKey()+":"+((Map.Entry)map).getValue());
-         		//System.out.println(((Map.Entry)map).getKey()+":"+((Map.Entry)map).getValue());
- 			}
-        }
-        
-		return JSON.toJSON(list).toString();  
+		return returnStr;  
+	}
+	
+	
+	/** 
+	 * @Title: insertDatasIntoPatientDetailMongodb 
+	 * @Description: 天津数据库，批量插入json
+	 * @param: @param listJsons 
+	 * @return: void
+	 * @throws 
+	 */
+	public static void insertDatasIntoPatientDetailMongodb(List<JSONObject> listJsons) {
+		//连接数据库
+		MongoCollection<Document> mongoCollection = MongodbJDBCUtils.connectTianjinMongodbPatientDetailReturnMongoCollection();
+		//转换
+		List<Document> documents = new ArrayList<Document>();
+		for (int i = 0; i < listJsons.size(); i++) {
+			Document document = Document.parse(listJsons.get(i).toString());
+			documents.add(document);
+		}
+		//插入时，可检查pat是否存在，存在则删除（后续加）
+		//id重复也报错
+		//mongoCollection.insertMany(documents, new InsertManyOptions().ordered(false));
+		mongoCollection.insertMany(documents);
+		
+		System.out.println("插入数据完成。"+"insert "+listJsons.size()+" successfully");
 	}
 	
 }

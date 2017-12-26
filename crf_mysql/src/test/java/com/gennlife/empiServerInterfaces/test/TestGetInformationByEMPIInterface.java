@@ -3,7 +3,7 @@ package com.gennlife.empiServerInterfaces.test;
 import org.junit.Test;
 
 import com.gennlife.crf.bean.Excel;
-import com.gennlife.zhpengyan.GetInformationByEMPIInterface;
+import com.gennlife.crf.zhpy.GetInformationByEMPIInterface;
 
 public class TestGetInformationByEMPIInterface {
 

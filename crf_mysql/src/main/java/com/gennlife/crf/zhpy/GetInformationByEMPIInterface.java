@@ -1,4 +1,4 @@
-package com.gennlife.zhpengyan;
+package com.gennlife.crf.zhpy;
 
 import java.util.ArrayList;
 import java.util.List;

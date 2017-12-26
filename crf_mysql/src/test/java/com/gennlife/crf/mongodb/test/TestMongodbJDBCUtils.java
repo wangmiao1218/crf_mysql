@@ -14,10 +14,10 @@ import com.mongodb.client.MongoCollection;
 
 public class TestMongodbJDBCUtils {
 
-
+	
 	@Test
-	public void connectTianjinMongodbReturnDBCollection() {
-		DBCollection dbCollection = MongodbJDBCUtils.connectTianjinMongodbReturnDBCollection();
+	public void connectTianjinMongodbCrfdataReturnDBCollection() {
+		DBCollection dbCollection = MongodbJDBCUtils.connectTianjinMongodbCrfdataReturnDBCollection();
 		
 		//大的查询条件
 		BasicDBObject query = new BasicDBObject();  

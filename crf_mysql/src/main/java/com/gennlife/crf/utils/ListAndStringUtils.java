@@ -25,6 +25,33 @@ public class ListAndStringUtils {
 
 	
 	/** 
+	 * @Title: dealWithpatientDetailByDotToStrings 
+	 * @Description: 处理patientDetail，去掉$.以及[*],然后将value以“.”进行分割,返回数组 
+	 * @param: @param value
+	 * @return: String[] 
+	 * @throws 
+	 */
+	public static String[] dealWithpatientDetailByDotToStrings(String value) {
+		//处理
+		if (value.indexOf("$") != -1) {
+			value = value.replace("$.", "");
+		}
+		if (value.indexOf("[") != -1 && value.indexOf("]") != -1) {
+			value = value.replace("[*]","");
+		}
+		//转换
+		String[] strings = null;
+		if (value.contains(".")) {
+			strings = value.split("\\.");
+			for (int i = 0; i < strings.length; i++) {
+				strings[i] = strings[i].trim();
+			}
+		}
+		return strings;
+	}
+	
+	
+	/** 
 	 * @Title: valueSpiltByCommaToStrings 
 	 * @Description: 将value以“,”进行分割,返回数组 
 	 * @param: @param value

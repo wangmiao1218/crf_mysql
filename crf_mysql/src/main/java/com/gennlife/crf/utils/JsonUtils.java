@@ -6,12 +6,9 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
-import java.util.Iterator;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -25,124 +22,59 @@ import com.google.gson.JsonElement;
  * @Date: 2017年11月27日 下午4:32:42
  */
 public class JsonUtils {
-
-	/*
-	public void getJSONode(Object obj) throws Exception {
-		if (obj instanceof JSONObject) {
-			JSONObject jo = (JSONObject) obj;
-			String[] names = JSONObject.getNames(jo);
-			for (String na : names) {
-				try {
-					getJSONode(jo.getJSONObject(na));
-				} catch (JSONException e) {
-					if (jo.get(na) instanceof JSONArray) {
-						if (!jo.get(na).toString().contains(":")) {
-							hm.put(na, jo.get(na).toString());
-						} else {
-							getJSONode(jo.get(na));
-						}
-					} else {
-						if (hm.containsKey(na)) {
-							// String k = na + new Random().nextInt();
-							hm.put(na + "=>" + jo.getString(na),
-									jo.getString(na));
-							hm.put(jo.getString(na), na);
-						} else {
-							hm.put(na, jo.getString(na));
-							hm.put(jo.getString(na), na);
-						}
-					}
-				}
-			}
-		} else if (obj instanceof JSONArray) {
-			JSONArray jarr = (JSONArray) obj;
-			for (int i = 0; i < jarr.length(); i++) {
-				JSONObject jso = jarr.getJSONObject(i);
-				getJSONode(jso);
-			}
-		}
-	}
 	
+	/** 
+	* @Title: insertPatAndValueReturnNewJSONObject 
+	* @Description: 插入patContent和字段的值，返回新的JSONObject
+	* @param: @param baseJson
+	* @param: @param patPath
+	* @param: @param patContent
+	* @param: @param strs
+	* @param: @param insertContent
+	* @param: @return
+	* @return: JSONObject
+	* @throws 
 	*/
-	
-	
-	
-	
-	
-	
-	public void jsonPattern(String inFile,String outFile,String patt) throws IOException, JSONException{
-		File fi = new File(inFile);
-		if(fi.isFile() && fi.exists()){
-			//read file
-			InputStreamReader in = new InputStreamReader(new FileInputStream(fi));
-			BufferedReader br = new BufferedReader(in);
-			String jsonStr = br.readLine(); //read by line
-			//write file
-			File fo = new File(outFile);
-			OutputStream out = new FileOutputStream(fo);
-			
-			String [] pats = patt.split(":");
-			String [] pat_detail = pats[1].split(",");
-			JSONArray ja = getJsonArray(jsonStr,pats[0]); //get target json array
-			
-			//get target items from json array via pattern
-			int len = ja.length();
-			for(int i=0;i<len;i++){
-				Object seatID = ja.getJSONObject(i).get(pat_detail[0]);
-				Object seatName = ja.getJSONObject(i).get(pat_detail[1]);
-				//write to output file
-				String outStr = "seatID: "+seatID+"\tseatName: "+seatName+"\r\n";
-				byte[] by = outStr.getBytes();
-				out.write(by);
-			}
-			br.close();
-			in.close();
-			out.close();
-		}
+	public static JSONObject insertPatAndValueReturnNewJSONObject(JSONObject baseJson,
+			String patPath,String patContent,String[] strs,String insertContent) throws JSONException{
+		//定义中间JSONObject
+		JSONObject middleJsonObject = new JSONObject();
+		//长度进行判断
+		switch(strs.length){
+		case 0:
+			break;
+	    case 1:
+	        break;
+	    case 2:
+	    	middleJsonObject=((JSONObject) baseJson.getJSONArray(strs[0]).get(0));
+	    	middleJsonObject.put(strs[1], insertContent);
+	        break;
+	    case 3:
+	        middleJsonObject=((JSONObject) ((JSONObject) baseJson.getJSONArray(strs[0]).get(0)).getJSONArray(strs[1]).get(0));
+	    	middleJsonObject.put(strs[2], insertContent);
+	        break;
+	    case 4:
+	    	middleJsonObject=((JSONObject) ((JSONObject) ((JSONObject) baseJson.getJSONArray(strs[0]).get(0)).getJSONArray(strs[1]).get(0)).getJSONArray(strs[2]).get(0));
+	    	middleJsonObject.put(strs[3], insertContent);
+	    	break;
+	    case 5:
+	    	middleJsonObject=(JSONObject) ((JSONObject) ((JSONObject) ((JSONObject) baseJson.getJSONArray(strs[0]).get(0)).getJSONArray(strs[1]).get(0)).getJSONArray(strs[2]).get(0)).getJSONArray(strs[3]).get(0);
+	    	middleJsonObject.put(strs[4], insertContent);
+	    	break;
+	    default:
+	        break;
+		} 
+		//最后统一加pat
+		String[] patSplit = patPath.split("\\.");
+		((JSONObject) baseJson.get(patSplit[0])).put(patSplit[1], patContent);
+		
+		return baseJson;
 	}
-
-	
-	public JSONArray getJsonArray(String jsonStr, String listKey){
-		if(jsonStr.equals("")){
-			return null;
-		}
-		Character c = jsonStr.charAt(0);
-		if(c == '{'){
-			try {
-				JSONObject jo = new JSONObject(jsonStr);
-				Iterator it = jo.keys();
-				while(it.hasNext()){
-					String key = (String)it.next();
-					if(key.equals(listKey)){
-						return jo.getJSONArray(key);
-					}else{
-						String value = jo.get(key).toString();
-						JSONArray ja = getJsonArray(value,listKey); //recursion
-						if(ja!=null){
-							return ja;
-						}
-					}
-				}//end while
-			} catch (JSONException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-				return null;
-			}
-		}
-		return null;
-	}
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	/**
 	* @Title: readFileContent 
-	* @Description: 读取文件内容，返回json
+	* @Description: 读取文件内容，返回JSONObject
 	* @param: @param Path
 	* @param: @return :
 	* @return: JSONObject

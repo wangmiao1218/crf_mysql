@@ -1,6 +1,7 @@
 package com.gennlife.crf.CrfLogic.test;
 
 import java.util.List;
+import java.util.Map;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -23,9 +24,8 @@ public class TestCrfLogic {
 	@Test
 	public void queryDataOfCrfdataByPatAndWriteResults() throws JSONException{
 		Excel excel = new Excel(filePath,fileName,sheetName);
-		
+		CrfLogic.queryDataOfCrfdataByPatAndWriteResults(excel);
 	}
-	
 	
 	
 	@Test
@@ -37,9 +37,9 @@ public class TestCrfLogic {
 	
 	//测试
 	@Test
-	public void readExcelReturnJsonList() throws JSONException{
+	public void readExcelReturnJsonMapList() throws JSONException{
 		Excel excel = new Excel(filePath,fileName,sheetName);
-		List<JSONObject> list = CrfLogic.readExcelReturnJsonList(excel, path);
+		List<Map<String, JSONObject>> list = CrfLogic.readExcelReturnJsonMapList(excel, path);
 		TianjinMongodbDataProcess.insertDatasIntoPatientDetailMongodb(list);
 		System.out.println("插入数据end。。。");
 	}

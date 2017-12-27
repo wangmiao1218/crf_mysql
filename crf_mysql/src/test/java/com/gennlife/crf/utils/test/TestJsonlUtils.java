@@ -18,7 +18,6 @@ public class TestJsonlUtils {
 		System.out.println(baseJson);
 		
 		JSONObject jsonObject = (JSONObject) baseJson.getJSONArray("visits").get(0);
-		
 	}
 	
 	

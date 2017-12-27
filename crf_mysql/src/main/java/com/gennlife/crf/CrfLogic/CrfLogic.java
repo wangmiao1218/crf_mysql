@@ -3,6 +3,7 @@ package com.gennlife.crf.CrfLogic;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.apache.commons.collections4.map.HashedMap;
 import org.json.JSONException;
@@ -14,6 +15,7 @@ import com.gennlife.crf.utils.ExcelUtils;
 import com.gennlife.crf.utils.JsonUtils;
 import com.gennlife.crf.utils.ListAndStringUtils;
 import com.gennlife.interfaces.ManualEMRAutoCRFV2OfCrfAutoInterface;
+import com.sun.tools.classfile.Annotation.element_value;
 
 /**
  * @Description: 测试crf逻辑
@@ -22,30 +24,32 @@ import com.gennlife.interfaces.ManualEMRAutoCRFV2OfCrfAutoInterface;
  */
 public class CrfLogic {
 
-	private static String patPath = "patient_info.patient_info_patient_sn";
-	//存放批量的json，统一插入到mongodb
-	private static List<JSONObject> listJsons = new ArrayList<JSONObject>();
+	private static final String patPath = "patient_info.patient_info_patient_sn";
+	
+	//存放批量的json，统一插入到mongodb(插入到数据库，要先判断pat是否存在  所以以map形式存储)
+	private static List<Map<String, JSONObject>> listMapJsons = new ArrayList<Map<String,JSONObject>>();
+	
 	//将行号和pat号对应，存到map里，方便后续写入，和批量请求
 	private static Map<Integer, String> cellNumAndPatMap = new HashedMap<Integer, String>();
-	
-	//将行号和crf的查询结果，存到map里，方便查询，和后续写入
-	private static Map<Integer, String> cellNumAndCrfdataValueMap = new HashedMap<Integer, String>();
-		
 
-	/** 
+	
+	/**
 	* @Title: queryDataOfCrfdataByPatAndWriteResults 
 	* @Description:  去crfdata数据库，查询对应数据，返回结果和行号的map
 	* @param: @param excel :
 	* @return: void
 	* @throws 
 	*/
-	public static void queryDataOfCrfdataByPatAndWriteResults(Excel excel){
+	public static void queryDataOfCrfdataByPatAndWriteResults(Excel excel) throws JSONException{
 		System.out.println("start。。。");
+		//因为key有重复，不用IdentityHashMap，则放到list中
+		//将pat和crfdata路径，存到map里，再讲行号和map封装成map，方便查询
+		Map<Integer,Map<String, String>> rowNumAndpatCrfdataMapMap = new HashedMap<Integer, Map<String,String>>();
+		
 		Integer isConfiguredCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "是否配置");
-		Integer reusePatCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "reusePat");
+		Integer reusePatRowNumCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "reusePatRowNum");
 		Integer crfdataCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "crfdata");
 		Integer patCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "pat");
-		Integer outputCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "预期输出");
 
 		//获取isConfiguredCellNum一列（用readExcelOfListReturnListMap，因为有重复值）(除表头)
 		List<Map<Integer,String>> list = ExcelUtils.readExcelOfListReturnListMap(excel, isConfiguredCellNum);
@@ -59,44 +63,47 @@ public class CrfLogic {
 				isConfiguredRowNum=entry.getKey();
 				isConfiguredStr=entry.getValue();
 			}
-			
 			if ("是".equals(isConfiguredStr)) {
-				System.out.println("配置字段！正在配置");
+				//因为key可能相同，value可能不同，所以在for里新建map，最后再放到list中
+				Map<String, String> cellNumAndCrfdataValueMap = new HashedMap<String, String>();
 				//获取并行的三列，进行判断
-				String reusePatContent = ExcelUtils.readContent(excel, isConfiguredRowNum, reusePatCellNum);
+				String reusePatRowNumContent = ExcelUtils.readContent(excel, isConfiguredRowNum, reusePatRowNumCellNum);
 				String patContent = ExcelUtils.readContent(excel, isConfiguredRowNum, patCellNum);
 				String crfdataContent = ExcelUtils.readContent(excel, isConfiguredRowNum, crfdataCellNum);
-				
 				//只有满足以下才进行查询
-				if (reusePatContent==null && patContent!=null && crfdataContent!=null){
-					//不复用pat时逻辑
-					//对crfdata进行处理
-					String[] crfdataContentStrs = ListAndStringUtils.dealWithpatientDetailByDotToStrings(crfdataContent);
-					//pat编号
-					
-					
-					//存行号和查询结果
-					cellNumAndPatMap.put(isConfiguredRowNum, "");
-					
-					
-				}else if (reusePatContent!=null && crfdataContent!=null) {
-					//不为空，则复用pat，直接根据crfdata查对应数据
-					
-					
+				if (reusePatRowNumContent==null && patContent!=null && crfdataContent!=null){
+					//存pat和crfdata源
+					cellNumAndCrfdataValueMap.put(patContent, crfdataContent);
+					rowNumAndpatCrfdataMapMap.put(isConfiguredRowNum, cellNumAndCrfdataValueMap);
+				}else if (reusePatRowNumContent!=null && crfdataContent!=null) {
+					//不为空，则复用pat，直接存复用的pat和crfdata
+					//根据reusePatRowNum，查pat（行号要减1，因为之前方便看，增加了1）
+					String reusePatContent = ExcelUtils.readContent(excel, Integer.valueOf(reusePatRowNumContent)-1, patCellNum);
+					//判断是否为空
+					if (reusePatContent!=null) {
+						cellNumAndCrfdataValueMap.put(reusePatContent, crfdataContent);
+						rowNumAndpatCrfdataMapMap.put(isConfiguredRowNum, cellNumAndCrfdataValueMap);
+					}
 				}
-						
-					
 			}else {
 				System.out.println("非配置字段！");
 			}
 		}
 		
+		//传入查询crfdata的方法
+		Map<Integer, org.bson.BSONObject> returnMap = TianjinMongodbDataProcess.queryDatasOfCrfdataMongodb(rowNumAndpatCrfdataMapMap);
+		//将结果写入excel
+		//CrfLogic.writePatIntoExcel(excel, cellNumAndPatMap);
+		System.out.println(returnMap);
+		for (Entry<Integer, org.bson.BSONObject> map: returnMap.entrySet()) {  
+			org.bson.BSONObject crfdata = map.getValue();
+			System.out.println(crfdata);
+		}
 		
 		System.out.println("ok");
 	}
 		
 	
-
 	/** 
 	* @Title: insertDatasIntoPatientDetailAndPostAndWritePatIntoExcel 
 	* @Description: 读excel相关配置，根据组装规则，组装数据并插入数据库，请求接口，将pat写入excel
@@ -108,9 +115,8 @@ public class CrfLogic {
 	*/
 	public static void insertDatasIntoPatientDetailAndPostAndWritePatIntoExcel(Excel excel,String path) throws JSONException {
 		System.out.println("start。。。");
-		
 		Integer isConfiguredCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "是否配置");
-		Integer reusePatCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "reusePat");
+		Integer reusePatRowNumCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "reusePatRowNum");
 		Integer patientDetailCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "patientDetail");
 		Integer insertContentCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "输入文本");
 		
@@ -123,7 +129,7 @@ public class CrfLogic {
 			org.json.JSONObject baseJson = JsonUtils.readFileContentReturnJson(path);
 			
 			Map<Integer, String> map = list.get(i);
-			//定义是否填的行号和内容
+			//定义行号和内容
 			Integer isConfiguredRowNum=null;
 			String isConfiguredStr=null;
 			for (Map.Entry<Integer, String> entry: map.entrySet()) {  
@@ -132,9 +138,8 @@ public class CrfLogic {
 			}
 			
 			if ("是".equals(isConfiguredStr)) {
-				System.out.println("配置字段！正在配置");
 				//获取并行的三列，进行判断
-				String reusePatContent = ExcelUtils.readContent(excel, isConfiguredRowNum, reusePatCellNum);
+				String reusePatContent = ExcelUtils.readContent(excel, isConfiguredRowNum, reusePatRowNumCellNum);
 				String patientDetailContent = ExcelUtils.readContent(excel, isConfiguredRowNum, patientDetailCellNum);
 				String insertContent = ExcelUtils.readContent(excel, isConfiguredRowNum, insertContentCellNum);
 				
@@ -150,22 +155,22 @@ public class CrfLogic {
 					//解析json，将pat、和输入文本插入到json中
 					JSONObject newJSONObject = JsonUtils.insertPatAndValueReturnNewJSONObject(baseJson, patPath, patContent, dealWithpatientDetailByDotToStrings, insertContent);
 					
-					//添加到listJsons
-					listJsons.add(newJSONObject);
-				}else {
-					continue;
+					//添加到listJsons（map只有一个值，方便后面遍历）
+					Map<String,JSONObject> patAndJsonMap =new  HashedMap<String, JSONObject>();
+					patAndJsonMap.put(patContent, newJSONObject);
+					listMapJsons .add(patAndJsonMap);
 				}
 			}else {
 				System.out.println("非配置字段！");
 			}
 		}
 		//将新的json的list插入mongodb的patientDetail中
-		TianjinMongodbDataProcess.insertDatasIntoPatientDetailMongodb(listJsons);
+		TianjinMongodbDataProcess.insertDatasIntoPatientDetailMongodb(listMapJsons);
 		
 		//===============================
 		//可优化为多线程，一个请求接口，一个将pat写入excel
 		//批量请求接口
-		CrfLogic.requireCrfAutoInterfaceByPat(cellNumAndPatMap);
+		CrfLogic.requestCrfAutoInterfaceByPat(cellNumAndPatMap);
 		
 		//将pat写入excel
 		CrfLogic.writePatIntoExcel(excel, cellNumAndPatMap);
@@ -175,7 +180,7 @@ public class CrfLogic {
 	
 	
 	/** 
-	* @Title: requireCrfAutoInterfaceByPat 
+	* @Title: requestCrfAutoInterfaceByPat 
 	* @Description: 批量请求crf组装接口，返回接口处理的结果
 	* @param: @param cellNumAndPatMap
 	* @param: @return
@@ -183,7 +188,7 @@ public class CrfLogic {
 	* @return: JSONObject
 	* @throws 
 	*/
-	public static JSONObject requireCrfAutoInterfaceByPat(Map<Integer, String> cellNumAndPatMap) throws JSONException {
+	public static JSONObject requestCrfAutoInterfaceByPat(Map<Integer, String> cellNumAndPatMap) throws JSONException {
 		//处理map,将pat封装成list
 		String pat=null;
 		StringBuilder sb = new StringBuilder();
@@ -221,21 +226,20 @@ public class CrfLogic {
 	}
 	
 	
-	
 	/** 
-	 * @Title: readExcelReturnJsonList (测试用)
+	 * @Title: readExcelReturnJsonMapList (测试用)
 	 * @Description: 读excel相关配置，根据组装规则，返回json的list，方便后续插入数据库
 	 * @param: @param excel
 	 * @param: @param path
-	 * @return: List<JSONObject>
+	 * @return: List<Map<String, JSONObject>>
 	 * @throws 
 	 */
-	public static List<JSONObject> readExcelReturnJsonList(Excel excel,String path) throws JSONException {
+	public static List<Map<String,JSONObject>> readExcelReturnJsonMapList(Excel excel,String path) throws JSONException {
 		System.out.println("start。。。");
 		//存放批量的json，统一插入到mongodb
-		List<JSONObject> returnListJsons = new ArrayList<JSONObject>();
+		List<Map<String, JSONObject>> returnListMapJsons = new ArrayList<Map<String,JSONObject>>();
 		Integer isConfiguredCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "是否配置");
-		Integer reusePatNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "reusePat");
+		Integer reusePatNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "reusePatRowNum");
 		Integer patientDetailCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "patientDetail");
 		Integer insertContentCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "输入文本");
 		
@@ -257,7 +261,6 @@ public class CrfLogic {
 			}
 			
 			if ("是".equals(isConfiguredStr)) {
-				System.out.println("配置字段！正在配置");
 				//获取并行的三列，进行判断
 				String reusePatContent = ExcelUtils.readContent(excel, isConfiguredRowNum, reusePatNum);
 				String patientDetailContent = ExcelUtils.readContent(excel, isConfiguredRowNum, patientDetailCellNum);
@@ -273,25 +276,26 @@ public class CrfLogic {
 					//解析json，将pat、和输入文本插入到json中
 					JSONObject newJSONObject = JsonUtils.insertPatAndValueReturnNewJSONObject(baseJson, patPath, patContent, dealWithpatientDetailByDotToStrings, insertContent);
 					
-					//添加到listJsons
-					returnListJsons.add(newJSONObject);
-				}else {
-					continue;
+					//添加到listJsons（map只有一个值，方便后面遍历）
+					Map<String,JSONObject> patAndJsonMap =new  HashedMap<String, JSONObject>();
+					patAndJsonMap.put(patContent, newJSONObject);
+					returnListMapJsons.add(patAndJsonMap);
 				}
 			}else {
 				System.out.println("非配置字段！");
 			}
 		}
 		
-		return returnListJsons;
+		return returnListMapJsons;
 	}
+	
 	
 	/** 
 	* @Title: readExcelReturnCellNumAndPatMap (测试用)
 	* @Description: 读excel相关配置，返回行号和pat的
 	* @param: @param excel
 	* @param: @return
-	* @param: @throws JSONException :
+	* @param: @throws JSONException
 	* @return: Map<Integer,String>
 	* @throws 
 	*/
@@ -300,7 +304,7 @@ public class CrfLogic {
 		Map<Integer, String> returnCellNumAndPatMap = new HashedMap<Integer, String>();
 		
 		Integer isConfiguredCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "是否配置");
-		Integer reusePatNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "reusePat");
+		Integer reusePatNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "reusePatRowNum");
 		Integer patientDetailCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "patientDetail");
 		Integer insertContentCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "输入文本");
 	
@@ -328,8 +332,6 @@ public class CrfLogic {
 					String patContent="pat_"+(isConfiguredRowNum+1);
 					//存行号和pat
 					returnCellNumAndPatMap.put(isConfiguredRowNum, patContent);
-				}else {
-					continue;
 				}
 			}else {
 				System.out.println("非配置字段！");
@@ -337,5 +339,6 @@ public class CrfLogic {
 		}
 		return returnCellNumAndPatMap;
 	}
+	
 	
 }

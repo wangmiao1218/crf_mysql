@@ -14,9 +14,7 @@ import com.gennlife.crf.utils.MongodbJDBCUtils;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
-import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
-import com.mongodb.client.result.DeleteResult;
 
 /**
  * @Description: 天津肿瘤mongodb的数据处理（crfdata表）
@@ -67,6 +65,7 @@ public class TianjinMongodbDataProcess {
 		        try {
 		            while (cursor.hasNext()) {
 		            	org.bson.BSONObject jsonObject = (org.bson.BSONObject) cursor.next();
+		            	//方便后续解析
 		            	//jsonObject=(JSONObject) ((JSONObject) jsonObject.get("data")).getJSONArray("visits").get(0);
 		            	//System.out.println(jsonObject);
 		            	returnJsonObject=jsonObject;

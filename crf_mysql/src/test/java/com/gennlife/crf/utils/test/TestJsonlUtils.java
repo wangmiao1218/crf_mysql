@@ -12,6 +12,15 @@ public class TestJsonlUtils {
 	private String path2 = "E:\\CRFLogic\\test\\little.json";
 	
 	@Test
+	public void test01() throws Exception {
+		String patientDetailContent="visits.record.admissions_record.admissions_records_physical_examination";
+		if (!patientDetailContent.contains(";")) {
+			System.out.println("ok");
+		}
+	}
+	
+	
+	@Test
 	public void getJSONode() throws Exception {
 		org.json.JSONObject baseJson = JsonUtils.readFileContentReturnJson(path2);
 		String patientDetailContent="visits.record.admissions_record.admissions_records_physical_examination";

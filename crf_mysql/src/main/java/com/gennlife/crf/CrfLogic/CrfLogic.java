@@ -34,13 +34,13 @@ public class CrfLogic {
 
 	
 	/**
-	* @Title: queryDataOfCrfdataByPatAndWriteResults 
+	* @Title: queryCrfdataByPatAndWriteResults 
 	* @Description:  去crfdata数据库，查询对应数据，返回结果和行号的map
 	* @param: @param excel :
 	* @return: void
 	* @throws 
 	*/
-	public static void queryDataOfCrfdataByPatAndWriteResults(Excel excel) throws JSONException{
+	public static void queryCrfdataByPatAndWriteResults(Excel excel) throws JSONException{
 		System.out.println("start。。。");
 		//因为key有重复，不用IdentityHashMap，则放到list中
 		//将pat和crfdata路径，存到map里，再讲行号和map封装成map，方便查询
@@ -91,18 +91,43 @@ public class CrfLogic {
 		}
 		
 		//传入查询crfdata的方法
-		Map<Integer, org.bson.BSONObject> returnMap = TianjinMongodbDataProcess.queryDatasOfCrfdataMongodb(rowNumAndpatCrfdataMapMap);
-		//将结果写入excel
+		Map<Integer, org.bson.BSONObject> rowNumAndcrfdataMap = TianjinMongodbDataProcess.queryDatasOfCrfdataMongodb(rowNumAndpatCrfdataMapMap);
+		
 		//CrfLogic.writePatIntoExcel(excel, cellNumAndPatMap);
-		System.out.println(returnMap);
-		for (Entry<Integer, org.bson.BSONObject> map: returnMap.entrySet()) {  
+		System.out.println(rowNumAndcrfdataMap);
+		for (Entry<Integer, org.bson.BSONObject> map: rowNumAndcrfdataMap.entrySet()) {  
 			org.bson.BSONObject crfdata = map.getValue();
 			System.out.println(crfdata);
 		}
 		
+		//将结果写入excel
+		CrfLogic.writeCrfdataIntoExcel(excel, rowNumAndcrfdataMap);
+		
 		System.out.println("ok");
 	}
 		
+
+	/** 
+	* @Title: writeCrfdataIntoExcel 
+	* @Description: 将生成的crf结果写入到excel
+	* @param: @param excel
+	* @param: @param rowNumAndcrfdataMap :
+	* @return: void
+	* @throws 
+	*/
+	public static void writeCrfdataIntoExcel(Excel excel,Map<Integer, org.bson.BSONObject> rowNumAndcrfdataMap ){
+		Integer outputCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "实际输出");
+		Integer rowNum=null;
+		org.bson.BSONObject crfdata=null;
+		
+		for (Entry<Integer, org.bson.BSONObject> entry: rowNumAndcrfdataMap.entrySet()) {  
+			rowNum=entry.getKey();
+			crfdata=entry.getValue();
+			ExcelUtils.writeAndSaveContent(excel, crfdata.toString(), rowNum, outputCellNum);
+		}
+		System.out.println("crfdata写入excel完成...");
+	}
+	
 	
 	/** 
 	* @Title: insertDatasIntoPatientDetailAndPostAndWritePatIntoExcel 
@@ -145,15 +170,22 @@ public class CrfLogic {
 				
 				//只有满足以下才进行计算(不服用pat，且数据源与输入文本不为空)
 				if (reusePatContent==null && patientDetailContent!=null && insertContent!=null) {
-					//对数据源patientDetail进行处理
-					String[] dealWithpatientDetailByDotToStrings = ListAndStringUtils.dealWithpatientDetailByDotToStrings(patientDetailContent);
 					//pat编号
 					String patContent="pat_"+(isConfiguredRowNum+1);
 					//存行号和pat
 					cellNumAndPatMap.put(isConfiguredRowNum, patContent);
-					
-					//解析json，将pat、和输入文本插入到json中
-					JSONObject newJSONObject = JsonUtils.insertPatAndValueReturnNewJSONObject(baseJson, patPath, patContent, dealWithpatientDetailByDotToStrings, insertContent);
+					JSONObject newJSONObject = null;
+					//============单个数据源处理============
+					if (!patientDetailContent.contains(";")) {
+						//对数据源patientDetail进行处理
+						String[] dealWithpatientDetailByDotToStrings = ListAndStringUtils.dealWithpatientDetailByDotToStrings(patientDetailContent);
+						//解析json，将pat、和输入文本插入到json中
+						newJSONObject = JsonUtils.insertPatAndValueReturnNewJSONObject(baseJson, patPath, patContent, dealWithpatientDetailByDotToStrings, insertContent);
+					}else if (patientDetailContent.contains(";")) {//多个源
+						//============多个数据源处理============	
+						
+						
+					} 
 					
 					//添加到listJsons（map只有一个值，方便后面遍历）
 					Map<String,JSONObject> patAndJsonMap =new  HashedMap<String, JSONObject>();
@@ -268,14 +300,20 @@ public class CrfLogic {
 				
 				//只有满足以下才进行计算(不服用pat，且数据源与输入文本不为空)
 				if (reusePatContent==null && patientDetailContent!=null && insertContent!=null) {
-					//对数据源patientDetail进行处理
-					String[] dealWithpatientDetailByDotToStrings = ListAndStringUtils.dealWithpatientDetailByDotToStrings(patientDetailContent);
 					//pat编号
 					String patContent="pat_"+(isConfiguredRowNum+1);
-					
-					//解析json，将pat、和输入文本插入到json中
-					JSONObject newJSONObject = JsonUtils.insertPatAndValueReturnNewJSONObject(baseJson, patPath, patContent, dealWithpatientDetailByDotToStrings, insertContent);
-					
+					JSONObject newJSONObject = null;
+					//============单个数据源处理============
+					if (!patientDetailContent.contains(";")) {
+						//对数据源patientDetail进行处理
+						String[] dealWithpatientDetailByDotToStrings = ListAndStringUtils.dealWithpatientDetailByDotToStrings(patientDetailContent);
+						//解析json，将pat、和输入文本插入到json中
+						newJSONObject = JsonUtils.insertPatAndValueReturnNewJSONObject(baseJson, patPath, patContent, dealWithpatientDetailByDotToStrings, insertContent);
+					}else if (patientDetailContent.contains(";")) {
+						//============多个数据源处理============	
+						
+						
+					} 
 					//添加到listJsons（map只有一个值，方便后面遍历）
 					Map<String,JSONObject> patAndJsonMap =new  HashedMap<String, JSONObject>();
 					patAndJsonMap.put(patContent, newJSONObject);

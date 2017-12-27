@@ -22,9 +22,9 @@ public class TestCrfLogic {
 	
 
 	@Test
-	public void queryDataOfCrfdataByPatAndWriteResults() throws JSONException{
+	public void queryCrfdataByPatAndWriteResults() throws JSONException{
 		Excel excel = new Excel(filePath,fileName,sheetName);
-		CrfLogic.queryDataOfCrfdataByPatAndWriteResults(excel);
+		CrfLogic.queryCrfdataByPatAndWriteResults(excel);
 	}
 	
 	

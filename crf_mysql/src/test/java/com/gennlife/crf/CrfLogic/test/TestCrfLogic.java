@@ -19,6 +19,7 @@ public class TestCrfLogic {
 	private String fileName = "测试字段.xlsx";
 	private String sheetName = "Sheet2";
 	private String path = "E:\\CRFLogic\\test\\New1.json";
+	private String path2 = "E:\\CRFLogic\\test\\all_info.json";
 	
 
 	@Test
@@ -31,7 +32,7 @@ public class TestCrfLogic {
 	@Test
 	public void insertDatasIntoPatientDetailAndPostAndWritePatIntoExcel() throws JSONException{
 		Excel excel = new Excel(filePath,fileName,sheetName);
-		CrfLogic.insertDatasIntoPatientDetailAndPostAndWritePatIntoExcel(excel, path);
+		CrfLogic.insertDatasIntoPatientDetailAndPostAndWritePatIntoExcel(excel, path2);
 	}
 	
 	
@@ -39,7 +40,7 @@ public class TestCrfLogic {
 	@Test
 	public void readExcelReturnJsonMapList() throws JSONException{
 		Excel excel = new Excel(filePath,fileName,sheetName);
-		List<Map<String, JSONObject>> list = CrfLogic.readExcelReturnJsonMapList(excel, path);
+		List<Map<String, JSONObject>> list = CrfLogic.readExcelReturnJsonMapList(excel, path2);
 		TianjinMongodbDataProcess.insertDatasIntoPatientDetailMongodb(list);
 		System.out.println("插入数据end。。。");
 	}

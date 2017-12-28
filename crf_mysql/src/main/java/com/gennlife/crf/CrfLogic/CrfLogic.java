@@ -1,6 +1,7 @@
 package com.gennlife.crf.CrfLogic;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -15,7 +16,6 @@ import com.gennlife.crf.utils.ExcelUtils;
 import com.gennlife.crf.utils.JsonUtils;
 import com.gennlife.crf.utils.ListAndStringUtils;
 import com.gennlife.interfaces.ManualEMRAutoCRFV2OfCrfAutoInterface;
-import com.sun.tools.classfile.Annotation.element_value;
 
 /**
  * @Description: 测试crf逻辑
@@ -175,16 +175,29 @@ public class CrfLogic {
 					//存行号和pat
 					cellNumAndPatMap.put(isConfiguredRowNum, patContent);
 					JSONObject newJSONObject = null;
-					//============单个数据源处理============
+					//============单个数据源处理============（目前是update方式，后续改成增加方式）
 					if (!patientDetailContent.contains(";")) {
 						//对数据源patientDetail进行处理
 						String[] dealWithpatientDetailByDotToStrings = ListAndStringUtils.dealWithpatientDetailByDotToStrings(patientDetailContent);
 						//解析json，将pat、和输入文本插入到json中
-						newJSONObject = JsonUtils.insertPatAndValueReturnNewJSONObject(baseJson, patPath, patContent, dealWithpatientDetailByDotToStrings, insertContent);
-					}else if (patientDetailContent.contains(";")) {//多个源
+						newJSONObject = JsonUtils.updatePatAndValueReturnNewJSONObject(baseJson, patPath, patContent, dealWithpatientDetailByDotToStrings, insertContent);
+					}else if (patientDetailContent.contains(";") && insertContent.contains(";")) {
 						//============多个数据源处理============	
-						
-						
+						//处理patientDetail，然后用；分割
+						String byAsteriskToString = ListAndStringUtils.dealWithpatientDetailByAsteriskToString(patientDetailContent);
+						List<String> patientDetailContents = ListAndStringUtils.dealWithpatientDetailBySemicolonToStrings(byAsteriskToString);
+						//处理insertContent，然后用;分割
+						List<String> insertContents = ListAndStringUtils.dealWithpatientDetailBySemicolonToStrings(insertContent);
+						//循环处理json放入一个人的数据里
+						for (int j = 0; j < patientDetailContents.size(); j++) {
+							//=======================
+							//后续会加是否重复的判断,第几次出现
+							//int count = Collections.frequency(patientDetailContents, patientDetailContents.get(j));
+							
+							//=======================
+							String[] dbyDotToStrings = ListAndStringUtils.dealWithpatientDetailByDotToStrings(patientDetailContents.get(j));
+							newJSONObject = JsonUtils.updatePatAndValueReturnNewJSONObject(baseJson, patPath, patContent, dbyDotToStrings, insertContents.get(j));
+						}
 					} 
 					
 					//添加到listJsons（map只有一个值，方便后面遍历）
@@ -303,16 +316,29 @@ public class CrfLogic {
 					//pat编号
 					String patContent="pat_"+(isConfiguredRowNum+1);
 					JSONObject newJSONObject = null;
-					//============单个数据源处理============
+					//============单个数据源处理============（目前是update方式，后续改成增加方式）
 					if (!patientDetailContent.contains(";")) {
 						//对数据源patientDetail进行处理
 						String[] dealWithpatientDetailByDotToStrings = ListAndStringUtils.dealWithpatientDetailByDotToStrings(patientDetailContent);
 						//解析json，将pat、和输入文本插入到json中
-						newJSONObject = JsonUtils.insertPatAndValueReturnNewJSONObject(baseJson, patPath, patContent, dealWithpatientDetailByDotToStrings, insertContent);
-					}else if (patientDetailContent.contains(";")) {
+						newJSONObject = JsonUtils.updatePatAndValueReturnNewJSONObject(baseJson, patPath, patContent, dealWithpatientDetailByDotToStrings, insertContent);
+					}else if (patientDetailContent.contains(";") && insertContent.contains(";")) {
 						//============多个数据源处理============	
-						
-						
+						//处理patientDetail，然后用；分割
+						String byAsteriskToString = ListAndStringUtils.dealWithpatientDetailByAsteriskToString(patientDetailContent);
+						List<String> patientDetailContents = ListAndStringUtils.dealWithpatientDetailBySemicolonToStrings(byAsteriskToString);
+						//处理insertContent，然后用;分割
+						List<String> insertContents = ListAndStringUtils.dealWithpatientDetailBySemicolonToStrings(insertContent);
+						//循环处理json放入一个人的数据里
+						for (int j = 0; j < patientDetailContents.size(); j++) {
+							//=======================
+							//后续会加是否重复的判断
+							
+							
+							//=======================
+							String[] dbyDotToStrings = ListAndStringUtils.dealWithpatientDetailByDotToStrings(patientDetailContents.get(j));
+							newJSONObject = JsonUtils.updatePatAndValueReturnNewJSONObject(baseJson, patPath, patContent, dbyDotToStrings, insertContents.get(j));
+						}
 					} 
 					//添加到listJsons（map只有一个值，方便后面遍历）
 					Map<String,JSONObject> patAndJsonMap =new  HashedMap<String, JSONObject>();

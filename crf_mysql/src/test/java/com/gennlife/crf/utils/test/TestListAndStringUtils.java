@@ -27,6 +27,13 @@ public class TestListAndStringUtils {
 	
 
 	@Test
+	public void dealWithpatientDetailByAsteriskToString(){
+		String strs="$.visits[*].record.admissions_record.admissions_records_chief_complaint";
+		String strings= ListAndStringUtils.dealWithpatientDetailByAsteriskToString(strs);
+		System.out.println(strings);
+	}
+	
+	@Test
 	public void valueSpiltByCommaToStrings(){
 		String strs="attribute.NEG,,isnull";
 		String[] strings= ListAndStringUtils.valueSpiltByCommaToStrings(strs);

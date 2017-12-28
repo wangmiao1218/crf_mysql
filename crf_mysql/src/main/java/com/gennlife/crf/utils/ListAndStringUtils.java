@@ -26,6 +26,24 @@ public class ListAndStringUtils {
 	
 	/** 
 	 * @Title: dealWithpatientDetailByDotToStrings 
+	 * @Description: 处理patientDetail，去掉$.以及[*] (希望用于传入路径，写值)，目前只在多源时，去掉多余符号
+	 * @param: @param value
+	 * @return: String
+	 * @throws 
+	 */
+	public static String dealWithpatientDetailByAsteriskToString(String value) {
+		if (value.indexOf("$") != -1) {
+			value = value.replace("$.", "");
+		}
+		if (value.indexOf("[") != -1 && value.indexOf("]") != -1) {
+			value = value.replace("[*]","");
+		}
+		return value;
+	}
+	
+	
+	/** 
+	 * @Title: dealWithpatientDetailByDotToStrings 
 	 * @Description: 处理patientDetail，去掉$.以及[*],然后将value以“.”进行分割,返回数组 
 	 * @param: @param value
 	 * @return: String[] 
@@ -48,6 +66,31 @@ public class ListAndStringUtils {
 			}
 		}
 		return strings;
+	}
+	
+	
+	/** 
+	 * @Title: dealWithpatientDetailBySemicolonToStrings 
+	 * @Description: value以“;”进行分割,返回List<String>
+	 * @param: @param value
+	 * @return: List<String>
+	 * @throws 
+	 */
+	public static List<String> dealWithpatientDetailBySemicolonToStrings(String value) {
+		List<String> list = new ArrayList<String>();
+		//转换
+		String[] strings = null;
+		if (value.contains(";")) {
+			strings = value.split(";");
+			for (int i = 0; i < strings.length; i++) {
+				if (strings[i]==null) {
+					list.add("");
+				}else {
+					list.add(strings[i].trim());
+				}
+			}
+		}
+		return list;
 	}
 	
 	

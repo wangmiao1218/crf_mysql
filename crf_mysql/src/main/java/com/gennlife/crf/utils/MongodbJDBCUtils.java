@@ -23,7 +23,8 @@ public class MongodbJDBCUtils {
 
 	//private static final String ipTianjin="10.0.2.176";
 	private static final String ipYantai="10.0.2.176";
-	private static final String ip="10.0.2.185";
+	//private static final String ip="10.0.2.185";
+	private static final String ip="10.0.0.166";
 
 	/** 
 	* @Title: connectMongodbPatientDetailReturnMongoCollection 
@@ -40,7 +41,6 @@ public class MongodbJDBCUtils {
 			ServerAddress serverAddress = new ServerAddress(ip, 27017);
 			List<ServerAddress> addrs = new ArrayList<ServerAddress>();
 			addrs.add(serverAddress);
-
 			// MongoCredential.createScramSha1Credential()三个参数分别为 用户名 数据库名称 密码
 			MongoCredential credential = MongoCredential.createScramSha1Credential("Wangmiao", "CRF_Model","@Wangmiao2015".toCharArray());
 			List<MongoCredential> credentials = new ArrayList<MongoCredential>();
@@ -48,7 +48,10 @@ public class MongodbJDBCUtils {
 
 			// 通过连接认证获取MongoDB连接
 			MongoClient mongoClient = new MongoClient(addrs, credentials);
-
+			//=====================================
+			//若没有用户名密码则用下面方法
+			MongoClient mongoClient2 = new MongoClient(addrs);
+			//=====================================
 			// 连接到数据库
 			MongoDatabase mongoDatabase = mongoClient.getDatabase("CRF_Model");
 			System.out.println("Connect to database successfully");

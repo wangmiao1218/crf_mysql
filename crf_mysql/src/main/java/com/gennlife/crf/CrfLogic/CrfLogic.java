@@ -86,7 +86,7 @@ public class CrfLogic {
 					}
 				}
 			}else {
-				System.out.println("非配置字段！");
+				//System.out.println("非配置字段！");
 			}
 		}
 		
@@ -199,7 +199,7 @@ public class CrfLogic {
 					listMapJsons .add(patAndJsonMap);
 				}
 			}else {
-				System.out.println("非配置字段！");
+				//System.out.println("非配置字段！");
 			}
 		}
 		//将新的json的list插入mongodb的patientDetail中
@@ -339,7 +339,7 @@ public class CrfLogic {
 					returnListMapJsons.add(patAndJsonMap);
 				}
 			}else {
-				System.out.println("非配置字段！");
+				//System.out.println("非配置字段！");
 			}
 		}
 		
@@ -391,7 +391,7 @@ public class CrfLogic {
 					returnCellNumAndPatMap.put(isConfiguredRowNum, patContent);
 				}
 			}else {
-				System.out.println("非配置字段！");
+				//System.out.println("非配置字段！");
 			}
 		}
 		return returnCellNumAndPatMap;

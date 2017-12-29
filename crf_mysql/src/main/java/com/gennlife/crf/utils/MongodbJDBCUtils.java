@@ -23,8 +23,8 @@ public class MongodbJDBCUtils {
 
 	//private static final String ipTianjin="10.0.2.176";
 	private static final String ipYantai="10.0.2.176";
-	//private static final String ip="10.0.2.185";
-	private static final String ip="10.0.0.166";
+	private static final String ip="10.0.2.185";
+	//private static final String ip="10.0.0.166";
 
 	/** 
 	* @Title: connectMongodbPatientDetailReturnMongoCollection 
@@ -50,7 +50,7 @@ public class MongodbJDBCUtils {
 			MongoClient mongoClient = new MongoClient(addrs, credentials);
 			//=====================================
 			//若没有用户名密码则用下面方法
-			MongoClient mongoClient2 = new MongoClient(addrs);
+			//MongoClient mongoClient2 = new MongoClient(addrs);
 			//=====================================
 			// 连接到数据库
 			MongoDatabase mongoDatabase = mongoClient.getDatabase("CRF_Model");

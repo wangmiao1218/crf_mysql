@@ -16,7 +16,7 @@ public class TestCrfLogic {
 
 	private String filePath = "E:\\CRFLogic\\test";
 	//private String filePath = "D:\\我的文档\\Desktop\\json";
-	private String fileName = "test_1.xlsx";
+	private String fileName = "test_2.xlsx";
 	private String sheetName = "Sheet2";
 	
 	private String path = "E:\\CRFLogic\\test\\New1.json";

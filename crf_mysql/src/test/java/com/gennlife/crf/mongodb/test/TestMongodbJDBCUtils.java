@@ -17,7 +17,7 @@ public class TestMongodbJDBCUtils {
 	
 	@Test
 	public void connectTianjinMongodbCrfdataReturnDBCollection() {
-		DBCollection dbCollection = MongodbJDBCUtils.connectTianjinMongodbCrfdataReturnDBCollection();
+		DBCollection dbCollection = MongodbJDBCUtils.connectMongodbCrfdataReturnDBCollection();
 		
 		//大的查询条件
 		BasicDBObject query = new BasicDBObject();  

@@ -8,10 +8,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Map;
 
-import org.apache.commons.collections4.map.HashedMap;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -19,6 +18,8 @@ import org.json.JSONObject;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
+import com.jayway.jsonpath.JsonPath;
+import com.jayway.jsonpath.ReadContext;
 
 /**
  * @Description: json格式的处理工具类
@@ -26,117 +27,72 @@ import com.google.gson.JsonElement;
  * @Date: 2017年11月27日 下午4:32:42
  */
 public class JsonUtils {
-
 	
-	public static JSONObject  test01(String[]  strs) throws JSONException{  
-		JSONObject jsonObject = new JSONObject().put(strs[strs.length-1], "test");
-		
-		for (int i = 0; i < strs.length; i++) {
-			JSONArray objArray =new JSONArray(jsonObject.toString());
-			jsonObject.put(strs[i-1], objArray);
-			
+	
+	/** 
+	* @Title: analysisCrfdataPathAndReturnNewValue 
+	* @Description: 根据传入的路径，分析json数据，返回查询后的值
+	* @param: @param objJson ：传入的查询出来的JSONObject
+	* @param: @param oldJsonPath：crfdata原路径
+	* @param: @return 
+	* @return: String
+	* @throws 
+	*/
+	public static String analysisCrfdataPathAndReturnNewValue(String jsonStr,String oldJsonPath){ 
+		String jsonPath=oldJsonPath.replace("data.visits.", "");
+		jsonPath=jsonPath.substring(0,jsonPath.lastIndexOf("."));
+		System.out.println(jsonPath);
+		ReadContext context = JsonPath.parse(jsonStr);
+		//分割
+		String[] strings = null;
+		if (jsonPath.contains(".")) {
+			strings = jsonPath.split("\\.");
+			for (int i = 0; i < strings.length; i++) {
+				strings[i] = strings[i].trim();
+			}
 		}
 		
-		return jsonObject;
+		System.out.println(strings.length);
 		
-	}
-	
-	
-	public static void  analysisJson(Object objJson){  
-        //如果obj为json数组  
-        if(objJson instanceof JSONArray){  
-        	net.sf.json.JSONArray objArray = (net.sf.json.JSONArray)objJson;  
-            for (int i = 0; i < objArray.size(); i++) {  
-                analysisJson(objArray.get(i));  
-            }  
-        }  
-        //如果为json对象  
-        else if(objJson instanceof JSONObject){  
-        	net.sf.json.JSONObject jsonObject = (net.sf.json.JSONObject)objJson;  
-            Iterator it = jsonObject.keys();  
-            while(it.hasNext()){  
-                String key = it.next().toString();  
-                Object object = jsonObject.get(key);  
-                //如果得到的是数组  
-                if(object instanceof JSONArray){  
-                    JSONArray objArray = (JSONArray)object;  
-                    analysisJson(objArray);  
-                }  
-                //如果key中是一个json对象  
-                else if(object instanceof JSONObject){  
-                    analysisJson((JSONObject)object);  
-                }  
-                //如果key中是其他  
-                else{  
-                    System.out.println("["+key+"]:"+object.toString()+" ");  
-                }  
-            }  
-        }  
+		String newJsonPath=null;
+		//表.第二组.字段
+		//inpatientDetails.IP_CC.IP_CHIEF_COMPLAINT
+		if (strings.length==3) {
+			//判断第二组是否为数组
+			Object obj = context.read(strings[0]+"."+strings[1]);
+			if(obj instanceof ArrayList){ 
+				newJsonPath=strings[0]+"."+strings[1]+"[*]"+"."+strings[2]+".value";
+		    }else{ 
+				newJsonPath=strings[0]+"."+strings[1]+"."+strings[2]+".value";
+		    } 
+		}
+		
+		//表.第二组.第三组.字段
+		//inpatientDetails.IP_CANCER_HX.IPH_CANCER.IPH_CANCER_NAME
+		if (strings.length==4) {
+			//判断第二组是否为数组
+			Object obj2 = context.read(strings[0]+"."+strings[1]);
+			if(obj2 instanceof ArrayList){ 
+				//第三组肯定为非数组
+				newJsonPath=strings[0]+"."+strings[1]+"[*]"+"."+strings[2]+"."+strings[3]+".value";
+			} else{
+				//进而判断第三组是否为数组
+				Object obj3 = context.read(strings[0]+"."+strings[1]+"."+strings[2]);
+				if (obj3 instanceof ArrayList) {
+					newJsonPath=strings[0]+"."+strings[1]+"."+strings[2]+"[*]"+"."+strings[3]+".value";
+				}else{ 
+					newJsonPath=strings[0]+"."+strings[1]+"."+strings[2]+"."+strings[3]+".value";
+				}
+			}
+		}
+		System.out.println(newJsonPath);
+		return context.read(newJsonPath).toString();
     } 
-	
-	
-	public static Object traveseJson(Object json) throws JSONException {
-		if (json == null) {
-			return null;
-		}
-		if (json instanceof JSONObject) {// json 是一个map
-			// 创建一个json对象
-			JSONObject jsonObj = new JSONObject();
-			// 将json转换为JsonObject对象
-			JSONObject jsonStr = (JSONObject) json;
-			// 迭代器迭代 map集合所有的keys
-			Iterator it = jsonStr.keys();
-			while (it.hasNext()) {
-				// 获取map的key
-				String key = (String) it.next();
-				// 得到value的值
-				Object value = jsonStr.get(key);
-				// System.out.println(value);
-				// 递归遍历
-				jsonObj.put(key, traveseJson(value));
 
-			}
-			return jsonObj;
-
-		} else if (json instanceof JSONArray) {// if json 是 数组
-			JSONArray jsonAry = new JSONArray();
-			JSONArray jsonStr = (JSONArray) json;
-			// 获取Array 的长度
-			int length = jsonStr.length();
-			for (int i = 0; i < length; i++) {
-				jsonAry.put(traveseJson(jsonStr.get(i)));
-			}
-
-			return jsonAry;
-
-		} else {// 其他类型
-
-			return json;
-		}
-
-	}
-
-	public static JSONObject test(String[] patientDetail, String insertContent)
-			throws JSONException {
-		JSONObject middleJsonObject = new JSONObject();
-		JSONArray jsonArray = new JSONArray();
-		Map<Object, Object> map = new HashedMap<Object, Object>();
-
-		for (int i = 0; i < patientDetail.length; i++) {
-			// 定义中间JSONObject
-			map.put(patientDetail[patientDetail.length - 1 - i], insertContent);
-			jsonArray.put(map);
-			middleJsonObject.put(
-					patientDetail[patientDetail.length - 1 - i - 1], jsonArray);
-
-		}
-
-		return null;
-	}
 
 	/**
 	 * @Title: insertPatAndValueReturnNewJSONObject
-	 * @Description: 插入patContent和字段的值，返回新的JSONObject（使用少量的json时使用）
+	 * @Description: 插入patContent和字段的值，返回新的JSONObject（使用少量的json时使用，未完成）
 	 * @param: @param baseJson
 	 * @param: @param patPath
 	 * @param: @param patContent
@@ -146,6 +102,7 @@ public class JsonUtils {
 	 * @return: JSONObject
 	 * @throws
 	 */
+	//有问题，还没完成
 	public static JSONObject insertPatAndValueReturnNewJSONObject(
 			JSONObject baseJson, String patientDetail, String insertContent,
 			String patPath, String patContent) throws JSONException {
@@ -172,6 +129,7 @@ public class JsonUtils {
 		return baseJson;
 	}
 
+	
 	/**
 	 * @Title: updatePatAndValueReturnNewJSONObject
 	 * @Description: 更新patContent和字段的值，返回新的JSONObject（使用全量的json时使用）

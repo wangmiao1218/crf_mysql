@@ -10,6 +10,7 @@ import org.bson.Document;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.gennlife.crf.utils.JsonUtils;
 import com.gennlife.crf.utils.MongodbJDBCUtils;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
@@ -17,11 +18,11 @@ import com.mongodb.DBCursor;
 import com.mongodb.client.MongoCollection;
 
 /**
- * @Description: 天津肿瘤mongodb的数据处理（crfdata表）
+ * @Description:mongodb的数据处理（crfdata表）
  * @author: wangmiao
  * @Date: 2017年12月18日 下午2:41:11 
  */
-public class TianjinMongodbDataProcess {
+public class CrfdataOrPatientDetailMongodbDataProcess {
 
 	
 	/** 
@@ -33,12 +34,12 @@ public class TianjinMongodbDataProcess {
 	* @return: Map<Integer,org.bson.BSONObject>
 	* @throws 
 	*/
-	public static Map<Integer,org.bson.BSONObject> queryDatasOfCrfdataMongodb(Map<Integer,Map<String, String>> rowNumAndpatCrfdataMapMap) throws JSONException {
+	public static Map<Integer,String> queryDatasOfCrfdataMongodb(Map<Integer,Map<String, String>> rowNumAndpatCrfdataMapMap) throws JSONException {
 		if (!rowNumAndpatCrfdataMapMap.isEmpty()) {
 			//定义返回结果
-			Map<Integer,org.bson.BSONObject> rowNumAndQueryJsonMap = new HashMap<Integer,org.bson.BSONObject>();
+			Map<Integer,String> rowNumAndQueryJsonMap = new HashMap<Integer,String>();
 			//连接数据库
-			DBCollection dbCollection = MongodbJDBCUtils.connectTianjinMongodbCrfdataReturnDBCollection();
+			DBCollection dbCollection = MongodbJDBCUtils.connectMongodbCrfdataReturnDBCollection();
 			//rowNumAndpatCrfdataMapMap
 			for (Entry<Integer, Map<String, String>>  mapMap : rowNumAndpatCrfdataMapMap.entrySet()) {
 				//行号
@@ -61,19 +62,19 @@ public class TianjinMongodbDataProcess {
 				returnField.put(crfdata,"");
 				DBCursor cursor=dbCollection.find(queryCondition,returnField);
 				//将想要的返回数据转成JSONObject，放入map中
-				org.bson.BSONObject returnJsonObject = null;
+				String returnStr = null;
 		        try {
 		            while (cursor.hasNext()) {
-		            	org.bson.BSONObject jsonObject = (org.bson.BSONObject) cursor.next();
-		            	//方便后续解析
-		            	//jsonObject=(JSONObject) ((JSONObject) jsonObject.get("data")).getJSONArray("visits").get(0);
-		            	//System.out.println(jsonObject);
-		            	returnJsonObject=jsonObject;
+		            	String middleStr = cursor.next().toString();
+		            	//方便后续解析(先除去data，和visits[0]默认一次就诊，剩下的节点)
+		            	JSONObject jsonObject=new JSONObject(middleStr);
+		            	returnStr=((JSONObject) jsonObject.get("data")).getJSONArray("visits").get(0).toString();
+		            	returnStr= JsonUtils.analysisCrfdataPathAndReturnNewValue(returnStr, crfdata);
 		            }
 		        } finally {
 		            cursor.close();
 		        }
-		        rowNumAndQueryJsonMap.put(rowNum, returnJsonObject);
+		        rowNumAndQueryJsonMap.put(rowNum, returnStr);
 			}
 			
 			return rowNumAndQueryJsonMap;  
@@ -92,7 +93,7 @@ public class TianjinMongodbDataProcess {
 	 */
 	public static void insertDatasIntoPatientDetailMongodb(List<Map<String, JSONObject>> listMapJsons) {
 		//连接数据库
-		MongoCollection<Document> mongoCollection = MongodbJDBCUtils.connectTianjinMongodbPatientDetailReturnMongoCollection();
+		MongoCollection<Document> mongoCollection = MongodbJDBCUtils.connectMongodbPatientDetailReturnMongoCollection();
 		//转换
 		List<Document> documents = new ArrayList<Document>();
 		for (int i = 0; i < listMapJsons.size(); i++) {

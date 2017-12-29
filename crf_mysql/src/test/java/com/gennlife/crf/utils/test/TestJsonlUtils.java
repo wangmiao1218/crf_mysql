@@ -10,11 +10,63 @@ import org.json.JSONObject;
 import org.junit.Test;
 
 import com.gennlife.crf.utils.JsonUtils;
+import com.jayway.jsonpath.JsonPath;
+import com.jayway.jsonpath.ReadContext;
+
 
 public class TestJsonlUtils {
 	
 	private String path = "E:\\CRFLogic\\test\\New1.json";
 	private String path2 = "E:\\CRFLogic\\test\\little.json";
+	
+	
+	@Test
+	public void test08() throws Exception {
+		//String patientDetailContent="$.visits[0].record[0].admissions_record[0].admissions_records_physical_examination";
+		//JSONObject  baseJson = JsonUtils.readFileContentReturnJson(path);
+		//ReadContext context = JsonPath.parse(baseJson.toString());
+		/**
+		 * {"inpatientDetails":{"IP_CC":[{"IP_CHIEF_COMPLAINT":{"value":["右侧肾癌"]}},{"IP_CHIEF_COMPLAINT":{"value":["肺转移"]}}]}}
+		   {"inpatientDetails":{"IP_CC":[{"IP_CHIEF_COMPLAINT_DURATION":{"value":["730.0"]}},{"IP_CHIEF_COMPLAINT_DURATION":{"value":["7.0"]}}]}}
+		   {"inpatientDetails":{"IP_PE":{"IP_HEIGHT":{"value":"165.0"}}}}
+		 */
+		
+		String path="inpatientDetails.IP_CC.IP_CHIEF_COMPLAINT_DURATION.value";
+		String str=" {\"inpatientDetails\":{\"IP_CC\":[{\"IP_CHIEF_COMPLAINT_DURATION\":{\"value\":[\"730.0\"]}},{\"IP_CHIEF_COMPLAINT_DURATION\":{\"value\":[\"7.0\"]}}]}}";
+		//String str="{ \"inpatientDetails\" : { \"IP_PE\" : { \"IP_HEIGHT\" : { \"value\" : \"165.0\"}}}}";
+		
+		//ReadContext context = JsonPath.parse(str);
+		//Object obj = context.read("inpatientDetails.IP_PE");
+		//Object obj = context.read("inpatientDetails.IP_CC");
+		String returnStr= JsonUtils.analysisCrfdataPathAndReturnNewValue(str, path);
+		System.out.println(returnStr);
+		
+	}
+	
+	
+	@Test
+	public void test07() throws Exception {
+		//String patientDetailContent="$.visits[0].record[0].admissions_record[0].admissions_records_physical_examination";
+		//JSONObject  baseJson = JsonUtils.readFileContentReturnJson(path);
+		//ReadContext context = JsonPath.parse(baseJson.toString());
+		/**
+		 * {"inpatientDetails":{"IP_CC":[{"IP_CHIEF_COMPLAINT":{"value":["右侧肾癌"]}},{"IP_CHIEF_COMPLAINT":{"value":["肺转移"]}}]}}
+		   {"inpatientDetails":{"IP_CC":[{"IP_CHIEF_COMPLAINT_DURATION":{"value":["730.0"]}},{"IP_CHIEF_COMPLAINT_DURATION":{"value":["7.0"]}}]}}
+		   {"inpatientDetails":{"IP_PE":{"IP_HEIGHT":{"value":"165.0"}}}}
+		 */
+		
+		String path="inpatientDetails.IP_PE.IP_HEIGHT.value";
+		String str=" {\"inpatientDetails\":{\"IP_CC\":[{\"IP_CHIEF_COMPLAINT_DURATION\":{\"value\":[\"730.0\"]}},{\"IP_CHIEF_COMPLAINT_DURATION\":{\"value\":[\"7.0\"]}}]}}";
+		//String str="{ \"inpatientDetails\" : { \"IP_PE\" : { \"IP_HEIGHT\" : { \"value\" : \"165.0\"}}}}";
+		
+		ReadContext context = JsonPath.parse(str);
+		//Object obj = context.read("inpatientDetails.IP_PE");
+		Object obj = context.read("inpatientDetails.IP_CC");
+		//String returnStr= JsonUtils.analysisCrfdataPathAndReturnNewValue(str, path);
+		System.out.println(obj instanceof ArrayList);
+		System.out.println(obj);
+		
+	}
 	
 	
 	@Test
@@ -31,27 +83,7 @@ public class TestJsonlUtils {
 			}
 		}
 		
-		JSONObject test01 = JsonUtils.test01(strings);
-		System.out.println(test01);
-		
 	}
-	
-	
-	@Test
-	public void test05() throws Exception {
-		org.json.JSONObject baseJson = JsonUtils.readFileContentReturnJson(path);
-		//JsonUtils.analysisJson(baseJson);
-		
-	}
-	
-	@Test
-	public void test04() throws Exception {
-		org.json.JSONObject baseJson = JsonUtils.readFileContentReturnJson(path);
-		
-		Object object = JsonUtils.traveseJson(baseJson);
-		System.out.println(object);
-	}
-	
 	
 	@Test
 	public void test03() throws Exception {

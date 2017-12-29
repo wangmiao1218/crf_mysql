@@ -11,7 +11,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.gennlife.crf.bean.Excel;
-import com.gennlife.crf.mongodb.TianjinMongodbDataProcess;
+import com.gennlife.crf.mongodb.CrfdataOrPatientDetailMongodbDataProcess;
 import com.gennlife.crf.utils.ExcelUtils;
 import com.gennlife.crf.utils.JsonUtils;
 import com.gennlife.crf.utils.ListAndStringUtils;
@@ -90,17 +90,10 @@ public class CrfLogic {
 			}
 		}
 		
-		//传入查询crfdata的方法
-		Map<Integer, org.bson.BSONObject> rowNumAndcrfdataMap = TianjinMongodbDataProcess.queryDatasOfCrfdataMongodb(rowNumAndpatCrfdataMapMap);
+		//传入查询crfdata的方法，返回行号和查询结果的map
+		Map<Integer,String> rowNumAndcrfdataMap = CrfdataOrPatientDetailMongodbDataProcess.queryDatasOfCrfdataMongodb(rowNumAndpatCrfdataMapMap);
 		
-		//CrfLogic.writePatIntoExcel(excel, cellNumAndPatMap);
-		System.out.println(rowNumAndcrfdataMap);
-		for (Entry<Integer, org.bson.BSONObject> map: rowNumAndcrfdataMap.entrySet()) {  
-			org.bson.BSONObject crfdata = map.getValue();
-			System.out.println(crfdata);
-		}
-		
-		//将结果写入excel
+		//将crfdata结果写入excel
 		CrfLogic.writeCrfdataIntoExcel(excel, rowNumAndcrfdataMap);
 		
 		System.out.println("ok");
@@ -115,12 +108,12 @@ public class CrfLogic {
 	* @return: void
 	* @throws 
 	*/
-	public static void writeCrfdataIntoExcel(Excel excel,Map<Integer, org.bson.BSONObject> rowNumAndcrfdataMap ){
+	public static void writeCrfdataIntoExcel(Excel excel,Map<Integer, String> rowNumAndcrfdataMap ){
 		Integer outputCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "实际输出");
 		Integer rowNum=null;
-		org.bson.BSONObject crfdata=null;
+		String crfdata=null;
 		
-		for (Entry<Integer, org.bson.BSONObject> entry: rowNumAndcrfdataMap.entrySet()) {  
+		for (Entry<Integer, String> entry: rowNumAndcrfdataMap.entrySet()) {  
 			rowNum=entry.getKey();
 			crfdata=entry.getValue();
 			ExcelUtils.writeAndSaveContent(excel, crfdata.toString(), rowNum, outputCellNum);
@@ -210,7 +203,7 @@ public class CrfLogic {
 			}
 		}
 		//将新的json的list插入mongodb的patientDetail中
-		TianjinMongodbDataProcess.insertDatasIntoPatientDetailMongodb(listMapJsons);
+		CrfdataOrPatientDetailMongodbDataProcess.insertDatasIntoPatientDetailMongodb(listMapJsons);
 		
 		//===============================
 		//可优化为多线程，一个请求接口，一个将pat写入excel

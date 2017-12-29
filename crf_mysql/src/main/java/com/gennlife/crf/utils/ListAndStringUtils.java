@@ -25,7 +25,7 @@ public class ListAndStringUtils {
 
 	
 	/** 
-	 * @Title: dealWithpatientDetailByDotToStrings 
+	 * @Title: dealWithpatientDetailByAsteriskToString 
 	 * @Description: 处理patientDetail，去掉$.以及[*] (希望用于传入路径，写值)，目前只在多源时，去掉多余符号
 	 * @param: @param value
 	 * @return: String
@@ -693,7 +693,7 @@ public class ListAndStringUtils {
 
 	/**
 	 * @Title: stringReplaceReturnValue
-	 * @Description: 将\变成\\后，再将路径中去掉最后一个\\之后，返回filePath
+	 * @Description: 将\变成\\，返回filePath
 	 * @param: @param value
 	 * @return: String
 	 * @throws
@@ -748,6 +748,7 @@ public class ListAndStringUtils {
 		return list;
 	}
 
+	
 	/**
 	 * @Title: stringToSubstring
 	 * @Description: 将路径中去掉最后一个\\之前，以及后缀名，只剩下纯文件名

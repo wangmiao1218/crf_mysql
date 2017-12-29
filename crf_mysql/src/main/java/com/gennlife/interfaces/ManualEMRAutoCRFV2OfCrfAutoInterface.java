@@ -15,7 +15,10 @@ import java.net.URL;
  */
 public class ManualEMRAutoCRFV2OfCrfAutoInterface {
 
-	final static String strURL ="http://10.0.2.175:6060/auto/ManualEMRAutoCRFV2";
+	final static String strURL ="http://10.0.2.184:6060/auto/ManualEMRAutoCRFV2";
+	//final static String strURL ="http://10.0.2.175:6060/auto/ManualEMRAutoCRFV2";
+	//final static String str ="kidney_cancer";
+	final static String str ="lymphoma";
 	
 	/**
 	 * @Title: getResultsByPostMethod(天津环境)
@@ -37,7 +40,7 @@ public class ManualEMRAutoCRFV2OfCrfAutoInterface {
 	 * @throws
 	 */
 	public static String getResultsByPostMethod(String patStrs) {
-		String params = "{\"crf_id\":\"kidney_cancer\",\"list\":[" + patStrs+"]}";
+		String params = "{\"crf_id\":\""+str+"\",\"list\":[" + patStrs+"]}";
 		try {
 			// 创建连接
 			URL url = new URL(strURL);

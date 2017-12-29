@@ -21,20 +21,23 @@ import com.mongodb.client.MongoDatabase;
  */
 public class MongodbJDBCUtils {
 
+	//private static final String ipTianjin="10.0.2.176";
+	private static final String ipYantai="10.0.2.176";
+	private static final String ip="10.0.2.185";
 
 	/** 
-	* @Title: connectTianjinMongodbPatientDetailReturnMongoCollection 
-	* @Description: 连接天津测试环境mongodb数据库（PatientDetail）,返回MongoCollection<Document>
+	* @Title: connectMongodbPatientDetailReturnMongoCollection 
+	* @Description: 连接测试环境mongodb数据库（PatientDetail）,返回MongoCollection<Document>
 	* @param: @return :
 	* @return: MongoCollection<Document> 返回 MongoCollection<Document>
 	* @throws 
 	*/
-	public static MongoCollection<Document> connectTianjinMongodbPatientDetailReturnMongoCollection() {
+	public static MongoCollection<Document> connectMongodbPatientDetailReturnMongoCollection() {
 		MongoCollection<Document> mongoCollection = null;
 		try {
 			// 连接到MongoDB服务 如果是远程连接可以替换“localhost”为服务器所在IP地址
 			// ServerAddress()两个参数分别为 服务器地址 和 端口
-			ServerAddress serverAddress = new ServerAddress("10.0.2.176", 27017);
+			ServerAddress serverAddress = new ServerAddress(ip, 27017);
 			List<ServerAddress> addrs = new ArrayList<ServerAddress>();
 			addrs.add(serverAddress);
 
@@ -61,18 +64,18 @@ public class MongodbJDBCUtils {
 	}
 	
 	/** 
-	 * @Title: connectTianjinMongodbCrfdataReturnDBCollection （crfdata库）
-	 * @Description: 连接天津测试环境mongodb数据库,返回DBCollection
+	 * @Title: connectMongodbCrfdataReturnDBCollection （crfdata库）
+	 * @Description: 连接测试环境mongodb数据库,返回DBCollection
 	 * (官方文档和源代码均建议使用MongoClient类，而且，在不久的将来，会废弃Mongo类。)
 	 * @param: @return :
 	 * @return: DBCollection
 	 * @throws 
 	 */
-	public static DBCollection connectTianjinMongodbCrfdataReturnDBCollection() {
+	public static DBCollection connectMongodbCrfdataReturnDBCollection() {
 		DBCollection dbCollection =null;
 		try {
 			MongoCredential credential = MongoCredential.createCredential("Wangmiao", "CRF_Model", "@Wangmiao2015".toCharArray()); 
-			ServerAddress serverAddress = new ServerAddress("10.0.2.176", 27017);
+			ServerAddress serverAddress = new ServerAddress(ip, 27017);
 			MongoClient mongoClient = new MongoClient(serverAddress, Arrays.asList(credential)); 
 			
 			// 连接到数据库
@@ -102,7 +105,7 @@ public class MongodbJDBCUtils {
 		try {
 			// 连接到MongoDB服务 如果是远程连接可以替换“localhost”为服务器所在IP地址
 			// ServerAddress()两个参数分别为 服务器地址 和 端口
-			ServerAddress serverAddress = new ServerAddress("10.0.2.171", 27017);
+			ServerAddress serverAddress = new ServerAddress(ipYantai, 27017);
 			List<ServerAddress> addrs = new ArrayList<ServerAddress>();
 			addrs.add(serverAddress);
 
@@ -141,7 +144,7 @@ public class MongodbJDBCUtils {
 		DBCollection dbCollection =null;
 		try {
 			MongoCredential credential = MongoCredential.createCredential("wangmiao", "CRF_Model", "@wangmiao2015".toCharArray()); 
-			ServerAddress serverAddress = new ServerAddress("10.0.2.171", 27017);
+			ServerAddress serverAddress = new ServerAddress(ipYantai, 27017);
 			MongoClient mongoClient = new MongoClient(serverAddress, Arrays.asList(credential)); 
 	
 			// 连接到数据库

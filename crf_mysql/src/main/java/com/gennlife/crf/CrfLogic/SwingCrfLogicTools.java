@@ -53,7 +53,7 @@ public class SwingCrfLogicTools extends JFrame implements ActionListener {
     JButton start_button2 = new JButton("配置联动路径");
 
     public void show(){
-        mainframe = new JFrame("CRF模板工具-2.0");
+        mainframe = new JFrame("CrfLogic工具-1.0");
         // Setting the width and height of frame
         mainframe.setSize(575, 380);
         mainframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

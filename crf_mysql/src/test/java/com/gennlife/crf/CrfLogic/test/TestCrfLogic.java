@@ -7,8 +7,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Test;
 
-import com.gennlife.crf.CrfLogic.CrfLogic;
 import com.gennlife.crf.bean.Excel;
+import com.gennlife.crf.crfLogic.CrfLogic;
 import com.gennlife.crf.mongodb.CrfdataOrPatientDetailMongodbDataProcess;
 import com.gennlife.interfaces.ManualEMRAutoCRFV2OfCrfAutoInterface;
 

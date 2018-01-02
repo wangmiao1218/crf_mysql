@@ -22,12 +22,45 @@ import com.mongodb.client.MongoDatabase;
 public class SwingMongodbJDBCUtils {
 
 	/** 
-	* @Title: connectMongodbPatientDetailReturnMongoCollection 
-	* @Description: 连接测试环境mongodb数据库（PatientDetail）,返回MongoCollection<Document>
+	* @Title: connectDevelopMongodbPatientDetailReturnMongoCollection 
+	* @Description: 连接开发环境mongodb数据库（PatientDetail）,返回MongoCollection<Document>
 	* @param: @return :
 	* @return: MongoCollection<Document> 返回 MongoCollection<Document>
 	* @throws 
 	*/
+	public static MongoCollection<Document> connectDevelopMongodbPatientDetailReturnMongoCollection(String mongodbIp) {
+		MongoCollection<Document> mongoCollection = null;
+		try {
+			// 连接到MongoDB服务 如果是远程连接可以替换“localhost”为服务器所在IP地址
+			// ServerAddress()两个参数分别为 服务器地址 和 端口
+			ServerAddress serverAddress = new ServerAddress(mongodbIp, 27017);
+			List<ServerAddress> addrs = new ArrayList<ServerAddress>();
+			addrs.add(serverAddress);
+			//=====================================
+			//若没有用户名密码则用下面方法
+			MongoClient mongoClient2 = new MongoClient(addrs);
+			//=====================================
+			// 连接到数据库
+			MongoDatabase mongoDatabase = mongoClient2.getDatabase("CRF_Model");
+			System.out.println("Connect to database successfully");
+			
+			//获取集合
+			mongoCollection = mongoDatabase.getCollection("patientDetail");
+		} catch (Exception e) {
+			System.err.println(e.getClass().getName() + ": " + e.getMessage());
+		}
+
+		return mongoCollection;
+	}
+	
+	
+	/** 
+	 * @Title: connectMongodbPatientDetailReturnMongoCollection 
+	 * @Description: 连接测试环境mongodb数据库（PatientDetail）,返回MongoCollection<Document>
+	 * @param: @return :
+	 * @return: MongoCollection<Document> 返回 MongoCollection<Document>
+	 * @throws 
+	 */
 	public static MongoCollection<Document> connectMongodbPatientDetailReturnMongoCollection(String mongodbIp) {
 		MongoCollection<Document> mongoCollection = null;
 		try {
@@ -40,7 +73,7 @@ public class SwingMongodbJDBCUtils {
 			MongoCredential credential = MongoCredential.createScramSha1Credential("Wangmiao", "CRF_Model","@Wangmiao2015".toCharArray());
 			List<MongoCredential> credentials = new ArrayList<MongoCredential>();
 			credentials.add(credential);
-
+			
 			// 通过连接认证获取MongoDB连接
 			MongoClient mongoClient = new MongoClient(addrs, credentials);
 			//=====================================
@@ -56,10 +89,10 @@ public class SwingMongodbJDBCUtils {
 		} catch (Exception e) {
 			System.err.println(e.getClass().getName() + ": " + e.getMessage());
 		}
-
+		
 		return mongoCollection;
-
 	}
+	
 	
 	/** 
 	 * @Title: connectMongodbCrfdataReturnDBCollection （crfdata库）

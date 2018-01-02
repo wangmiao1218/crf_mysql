@@ -205,10 +205,13 @@ public class SwingCrfLogic {
 			}
 		}
 		//将新的json的list插入mongodb的patientDetail中（测试库）
-		//也可同时加写入开发库（多线程）
 		SwingCrfdataOrPatientDetailMongodbDataProcess.
 				insertDatasIntoPatientDetailMongodb(mongodbIp,listMapJsons);
 		
+		//同时加写入开发库
+		//后续改成多线程
+		SwingCrfdataOrPatientDetailMongodbDataProcess
+			.insertDatasIntoPatientDetailMongodbOfDevelop("10.0.0.166",listMapJsons);
 		
 		//===============================
 		//可优化为多线程，一个请求接口，一个将pat写入excel

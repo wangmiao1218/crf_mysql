@@ -1,4 +1,4 @@
-package com.gennlife.crf.crfLogic;
+package com.gennlife.crf.crfLogic.swing;
 
 import java.awt.Dimension;
 import java.awt.Font;

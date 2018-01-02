@@ -15,10 +15,10 @@ import java.net.URL;
  */
 public class ManualEMRAutoCRFV2OfCrfAutoInterface {
 
-	final static String strURL ="http://10.0.2.184:6060/auto/ManualEMRAutoCRFV2";
+	//final static String strURL ="http://10.0.2.184:6060/auto/ManualEMRAutoCRFV2";
 	//final static String strURL ="http://10.0.2.175:6060/auto/ManualEMRAutoCRFV2";
 	//final static String str ="kidney_cancer";
-	final static String str ="lymphoma";
+	//final static String str ="lymphoma";
 	
 	/**
 	 * @Title: getResultsByPostMethod(天津环境)
@@ -39,11 +39,11 @@ public class ManualEMRAutoCRFV2OfCrfAutoInterface {
 	 * @return: String：返回一个大的json字符串
 	 * @throws
 	 */
-	public static String getResultsByPostMethod(String patStrs) {
-		String params = "{\"crf_id\":\""+str+"\",\"list\":[" + patStrs+"]}";
+	public static String getResultsByPostMethod(String httpUrl,String disease,String patStrs) {
+		String params = "{\"crf_id\":\""+disease+"\",\"list\":[" + patStrs+"]}";
 		try {
 			// 创建连接
-			URL url = new URL(strURL);
+			URL url = new URL(httpUrl);
 			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 			connection.setDoOutput(true);
 			connection.setDoInput(true);

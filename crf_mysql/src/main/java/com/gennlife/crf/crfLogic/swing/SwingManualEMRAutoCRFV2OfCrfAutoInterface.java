@@ -1,4 +1,4 @@
-package com.gennlife.interfaces;
+package com.gennlife.crf.crfLogic.swing;
 
 import java.io.IOException;
 import java.io.InputStream;

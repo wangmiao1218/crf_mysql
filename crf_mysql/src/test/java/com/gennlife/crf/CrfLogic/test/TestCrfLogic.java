@@ -15,36 +15,24 @@ import com.gennlife.interfaces.ManualEMRAutoCRFV2OfCrfAutoInterface;
 public class TestCrfLogic {
 
 	private String filePath = "E:\\CRFLogic\\test";
-	//private String filePath = "D:\\我的文档\\Desktop\\json";
-	private String fileName = "test_2.xlsx";
-	private String sheetName = "Sheet2";
-	
-	private String path = "E:\\CRFLogic\\test\\New1.json";
-	private String path2 = "E:\\CRFLogic\\test\\all_info.json";
-	
-
-	@Test
-	public void queryCrfdataByPatAndWriteResults() throws JSONException{
-		Excel excel = new Excel(filePath,fileName,sheetName);
-		CrfLogic.queryCrfdataByPatAndWriteResults(excel);
-	}
-	
+	private String fileName = "test_2_1.xlsx";
+	private String sheetName = "Sheet1";
+	private String path = "E:\\CRFLogic\\test\\all_info.json";
+	private String mongodbIp = "10.0.2.185";
+	private String auto = "http://10.0.2.184:6060/auto/ManualEMRAutoCRFV2";
+	private String disease = "lymphoma";
 	
 	@Test
 	public void insertDatasIntoPatientDetailAndPostAndWritePatIntoExcel() throws JSONException{
 		Excel excel = new Excel(filePath,fileName,sheetName);
-		CrfLogic.insertDatasIntoPatientDetailAndPostAndWritePatIntoExcel(excel, path2);
+		CrfLogic.insertDatasIntoPatientDetailAndPostAndWritePatIntoExcel(excel, 
+				path, mongodbIp, auto, disease);
 	}
 	
-	
-	//测试
 	@Test
-	public void readExcelReturnJsonMapList() throws JSONException{
+	public void queryCrfdataByPatAndWriteResults() throws JSONException{
 		Excel excel = new Excel(filePath,fileName,sheetName);
-		List<Map<String, JSONObject>> list = CrfLogic.readExcelReturnJsonMapList(excel, path2);
-		CrfdataOrPatientDetailMongodbDataProcess.insertDatasIntoPatientDetailMongodb(list);
-		System.out.println("插入数据end。。。");
+		CrfLogic.queryCrfdataByPatAndWriteResults(excel, mongodbIp);
 	}
-	
 	
 }

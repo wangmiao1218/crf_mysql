@@ -1,4 +1,4 @@
-package com.gennlife.crf.utils;
+package com.gennlife.crf.crfLogic.swing;
 
 import java.util.ArrayList;
 import java.util.Arrays;

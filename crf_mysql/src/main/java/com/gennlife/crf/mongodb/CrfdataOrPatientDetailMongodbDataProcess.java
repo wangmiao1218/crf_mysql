@@ -10,6 +10,7 @@ import org.bson.Document;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.gennlife.crf.crfLogic.swing.SwingMongodbJDBCUtils;
 import com.gennlife.crf.utils.JsonUtils;
 import com.gennlife.crf.utils.MongodbJDBCUtils;
 import com.mongodb.BasicDBObject;
@@ -34,12 +35,12 @@ public class CrfdataOrPatientDetailMongodbDataProcess {
 	* @return: Map<Integer,org.bson.BSONObject>
 	* @throws 
 	*/
-	public static Map<Integer,String> queryDatasOfCrfdataMongodb(Map<Integer,Map<String, String>> rowNumAndpatCrfdataMapMap) throws JSONException {
+	public static Map<Integer,String> queryDatasOfCrfdataMongodb(String mongodbIp,Map<Integer,Map<String, String>> rowNumAndpatCrfdataMapMap) throws JSONException {
 		if (!rowNumAndpatCrfdataMapMap.isEmpty()) {
 			//定义返回结果
 			Map<Integer,String> rowNumAndQueryJsonMap = new HashMap<Integer,String>();
 			//连接数据库
-			DBCollection dbCollection = MongodbJDBCUtils.connectMongodbCrfdataReturnDBCollection();
+			DBCollection dbCollection = MongodbJDBCUtils.connectMongodbCrfdataReturnDBCollection(mongodbIp);
 			//rowNumAndpatCrfdataMapMap
 			for (Entry<Integer, Map<String, String>>  mapMap : rowNumAndpatCrfdataMapMap.entrySet()) {
 				//行号
@@ -86,14 +87,14 @@ public class CrfdataOrPatientDetailMongodbDataProcess {
 	
 	/** 
 	 * @Title: insertDatasIntoPatientDetailMongodb 
-	 * @Description: 天津数据库，批量插入json
+	 * @Description: 测试数据库，批量插入json
 	 * @param: @param listJsons 
 	 * @return: void
 	 * @throws 
 	 */
-	public static void insertDatasIntoPatientDetailMongodb(List<Map<String, JSONObject>> listMapJsons) {
+	public static void insertDatasIntoPatientDetailMongodb(String mongodbIp,List<Map<String, JSONObject>> listMapJsons) {
 		//连接数据库
-		MongoCollection<Document> mongoCollection = MongodbJDBCUtils.connectMongodbPatientDetailReturnMongoCollection();
+		MongoCollection<Document> mongoCollection = MongodbJDBCUtils.connectMongodbPatientDetailReturnMongoCollection(mongodbIp);
 		//转换
 		List<Document> documents = new ArrayList<Document>();
 		for (int i = 0; i < listMapJsons.size(); i++) {
@@ -118,7 +119,46 @@ public class CrfdataOrPatientDetailMongodbDataProcess {
 		//批量插入
 		mongoCollection.insertMany(documents);
 		
-		System.out.println("插入数据完成。"+"insert "+listMapJsons.size()+" successfully");
+		System.out.println("插入测试库完成。"+"insert "+listMapJsons.size()+" successfully");
 	}
+	
+	
+	/** 
+	 * @Title: insertDatasIntoPatientDetailMongodbOfDevelop 
+	 * @Description: 开发数据库，批量插入json
+	 * @param: @param listJsons 
+	 * @return: void
+	 * @throws 
+	 */
+	public static void insertDatasIntoPatientDetailMongodbOfDevelop(String mongodbIp,List<Map<String, JSONObject>> listMapJsons) {
+		//连接数据库
+		MongoCollection<Document> mongoCollection = SwingMongodbJDBCUtils.connectDevelopMongodbPatientDetailReturnMongoCollection(mongodbIp);
+		//转换
+		List<Document> documents = new ArrayList<Document>();
+		for (int i = 0; i < listMapJsons.size(); i++) {
+			Map<String, JSONObject> map = listMapJsons.get(i);
+			//由于封装的map只有一个值，所以不在下面for循环
+			String pat=null;
+			JSONObject json=null;
+			for (Entry<String, JSONObject> entry: map.entrySet()) {  
+				pat = entry.getKey();
+				json = entry.getValue();
+			}
+			//删除//插入时，直接删除原有的pat
+			BasicDBObject queryCondition = new BasicDBObject();  
+			queryCondition.put("patient_info.patient_info_patient_sn",pat);
+			mongoCollection.deleteOne(queryCondition);
+			
+			//放入到documents，方便批量插入
+			Document document = Document.parse(json.toString());
+			documents.add(document);
+		}
+		
+		//批量插入
+		mongoCollection.insertMany(documents);
+		
+		System.out.println("插入开发库完成。"+"insert "+listMapJsons.size()+" successfully");
+	}
+	
 	
 }

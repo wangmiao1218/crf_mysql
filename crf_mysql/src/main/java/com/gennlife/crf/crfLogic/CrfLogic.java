@@ -1,7 +1,6 @@
 package com.gennlife.crf.crfLogic;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -40,7 +39,7 @@ public class CrfLogic {
 	* @return: void
 	* @throws 
 	*/
-	public static void queryCrfdataByPatAndWriteResults(Excel excel) throws JSONException{
+	public static void queryCrfdataByPatAndWriteResults(Excel excel,String mongodbIp) throws JSONException{
 		System.out.println("start。。。");
 		//因为key有重复，不用IdentityHashMap，则放到list中
 		//将pat和crfdata路径，存到map里，再讲行号和map封装成map，方便查询
@@ -91,7 +90,8 @@ public class CrfLogic {
 		}
 		
 		//传入查询crfdata的方法，返回行号和查询结果的map
-		Map<Integer,String> rowNumAndcrfdataMap = CrfdataOrPatientDetailMongodbDataProcess.queryDatasOfCrfdataMongodb(rowNumAndpatCrfdataMapMap);
+		Map<Integer,String> rowNumAndcrfdataMap = CrfdataOrPatientDetailMongodbDataProcess
+				.queryDatasOfCrfdataMongodb(mongodbIp,rowNumAndpatCrfdataMapMap);
 		
 		//将crfdata结果写入excel
 		CrfLogic.writeCrfdataIntoExcel(excel, rowNumAndcrfdataMap);
@@ -131,7 +131,7 @@ public class CrfLogic {
 	* @return: void
 	* @throws 
 	*/
-	public static void insertDatasIntoPatientDetailAndPostAndWritePatIntoExcel(Excel excel,String path) throws JSONException {
+	public static void insertDatasIntoPatientDetailAndPostAndWritePatIntoExcel(Excel excel,String path,String mongodbIp,String httpUrl,String disease) throws JSONException {
 		System.out.println("start。。。");
 		Integer isConfiguredCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "是否配置");
 		Integer reusePatRowNumCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "reusePatRowNum");
@@ -203,12 +203,19 @@ public class CrfLogic {
 			}
 		}
 		//将新的json的list插入mongodb的patientDetail中
-		CrfdataOrPatientDetailMongodbDataProcess.insertDatasIntoPatientDetailMongodb(listMapJsons);
+		CrfdataOrPatientDetailMongodbDataProcess
+			.insertDatasIntoPatientDetailMongodb(mongodbIp,listMapJsons);
+		
+		//同时加写入开发库
+		//后续改成多线程
+		CrfdataOrPatientDetailMongodbDataProcess
+			.insertDatasIntoPatientDetailMongodbOfDevelop("10.0.0.166",listMapJsons);
+		
 		
 		//===============================
 		//可优化为多线程，一个请求接口，一个将pat写入excel
 		//批量请求接口
-		CrfLogic.requestCrfAutoInterfaceByPat(cellNumAndPatMap);
+		CrfLogic.requestCrfAutoInterfaceByPat(cellNumAndPatMap, httpUrl, disease);
 		
 		//将pat写入excel
 		CrfLogic.writePatIntoExcel(excel, cellNumAndPatMap);
@@ -226,7 +233,8 @@ public class CrfLogic {
 	* @return: JSONObject
 	* @throws 
 	*/
-	public static JSONObject requestCrfAutoInterfaceByPat(Map<Integer, String> cellNumAndPatMap) throws JSONException {
+	public static JSONObject requestCrfAutoInterfaceByPat(Map<Integer, String> cellNumAndPatMap,
+			String httpUrl,String disease) throws JSONException {
 		//处理map,将pat封装成list
 		String pat=null;
 		StringBuilder sb = new StringBuilder();
@@ -236,7 +244,7 @@ public class CrfLogic {
 			sb.append(str.trim()).append(",");
 		}
 		String patStrs = sb.deleteCharAt(sb.length() - 1).toString();
-		String str = ManualEMRAutoCRFV2OfCrfAutoInterface.getResultsByPostMethod(patStrs);
+		String str = ManualEMRAutoCRFV2OfCrfAutoInterface.getResultsByPostMethod(httpUrl, disease, patStrs);
 		System.out.println("请求接口end...");
 		return new JSONObject(str);
 	}

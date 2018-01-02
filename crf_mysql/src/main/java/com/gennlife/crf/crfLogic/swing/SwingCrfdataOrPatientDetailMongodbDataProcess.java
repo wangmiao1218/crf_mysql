@@ -1,4 +1,4 @@
-package com.gennlife.crf.mongodb;
+package com.gennlife.crf.crfLogic.swing;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,7 +11,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.gennlife.crf.utils.JsonUtils;
-import com.gennlife.crf.utils.SwingMongodbJDBCUtils;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;

@@ -1,4 +1,4 @@
-package com.gennlife.crf.crfLogic;
+package com.gennlife.crf.crfLogic.swing;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,11 +10,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.gennlife.crf.bean.Excel;
-import com.gennlife.crf.mongodb.SwingCrfdataOrPatientDetailMongodbDataProcess;
 import com.gennlife.crf.utils.ExcelUtils;
 import com.gennlife.crf.utils.JsonUtils;
 import com.gennlife.crf.utils.ListAndStringUtils;
-import com.gennlife.interfaces.SwingManualEMRAutoCRFV2OfCrfAutoInterface;
 
 /**
  * @Description: 测试crf逻辑

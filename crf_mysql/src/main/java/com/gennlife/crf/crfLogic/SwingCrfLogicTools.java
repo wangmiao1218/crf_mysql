@@ -1,4 +1,4 @@
-package com.gennlife.crf.crfLogic.swing;
+package com.gennlife.crf.crfLogic;
 
 import java.awt.Dimension;
 import java.awt.Font;
@@ -212,10 +212,10 @@ public class SwingCrfLogicTools extends JFrame implements ActionListener {
                 
                 try {
                 	//调用方法_插入patientDetail
-                	SwingCrfLogic.insertDatasIntoPatientDetailAndPostAndWritePatIntoExcel(excel, path_Json,infilepath_Mongo, infilepath_Auto, infilepath_Disease);
+                	CrfLogic.insertDatasIntoPatientDetailAndPostAndWritePatIntoExcel(excel, path_Json,infilepath_Mongo, infilepath_Auto, infilepath_Disease);
                 	
                 	//调用方法_查询crfdata
-                	SwingCrfLogic.queryCrfdataByPatAndWriteResults(excel,infilepath_Mongo);
+                	CrfLogic.queryCrfdataByPatAndWriteResults(excel,infilepath_Mongo);
                 	
 				} catch (Exception e1) {
 					e1.printStackTrace();

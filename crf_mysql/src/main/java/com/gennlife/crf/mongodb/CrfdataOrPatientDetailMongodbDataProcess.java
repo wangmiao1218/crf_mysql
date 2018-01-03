@@ -10,7 +10,6 @@ import org.bson.Document;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.gennlife.crf.crfLogic.swing.SwingMongodbJDBCUtils;
 import com.gennlife.crf.utils.JsonUtils;
 import com.gennlife.crf.utils.MongodbJDBCUtils;
 import com.mongodb.BasicDBObject;
@@ -125,14 +124,14 @@ public class CrfdataOrPatientDetailMongodbDataProcess {
 	
 	/** 
 	 * @Title: insertDatasIntoPatientDetailMongodbOfDevelop 
-	 * @Description: 开发数据库，批量插入json
+	 * @Description: 开发数据库，批量插入json（由于开发库没有密码，所以单一个方法）
 	 * @param: @param listJsons 
 	 * @return: void
 	 * @throws 
 	 */
 	public static void insertDatasIntoPatientDetailMongodbOfDevelop(String mongodbIp,List<Map<String, JSONObject>> listMapJsons) {
 		//连接数据库
-		MongoCollection<Document> mongoCollection = SwingMongodbJDBCUtils.connectDevelopMongodbPatientDetailReturnMongoCollection(mongodbIp);
+		MongoCollection<Document> mongoCollection = MongodbJDBCUtils.connectDevelopMongodbPatientDetailReturnMongoCollection(mongodbIp);
 		//转换
 		List<Document> documents = new ArrayList<Document>();
 		for (int i = 0; i < listMapJsons.size(); i++) {

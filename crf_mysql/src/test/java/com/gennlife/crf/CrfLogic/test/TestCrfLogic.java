@@ -1,7 +1,10 @@
 package com.gennlife.crf.CrfLogic.test;
 
+import java.util.UUID;
+
 import org.json.JSONException;
 import org.junit.Test;
+
 import com.gennlife.crf.bean.Excel;
 import com.gennlife.crf.crfLogic.CrfLogic;
 
@@ -14,6 +17,13 @@ public class TestCrfLogic {
 	private String mongodbIp = "10.0.2.185";
 	private String auto = "http://10.0.2.184:6060/auto/ManualEMRAutoCRFV2";
 	private String disease = "lymphoma";
+	
+	@Test
+	public void uuid(){
+		UUID uuid = UUID.randomUUID();
+	    System.out.println(uuid);
+		System.out.println(uuid.toString().split("-")[0]);
+	}
 	
 	@Test
 	public void insertDatasIntoPatientDetailAndPostAndWritePatIntoExcel() throws JSONException{

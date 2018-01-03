@@ -3,6 +3,7 @@ package com.gennlife.crf.crfLogic;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.Map.Entry;
 
 import org.apache.commons.collections4.map.HashedMap;
@@ -164,7 +165,7 @@ public class CrfLogic {
 				//只有满足以下才进行计算(不服用pat，且数据源与输入文本不为空)
 				if (reusePatContent==null && patientDetailContent!=null && insertContent!=null) {
 					//pat编号
-					String patContent="pat_"+(isConfiguredRowNum+1);
+					String patContent="pat_"+UUID.randomUUID().toString().split("-")[0]+"_"+(isConfiguredRowNum+1);
 					//存行号和pat
 					cellNumAndPatMap.put(isConfiguredRowNum, patContent);
 					JSONObject newJSONObject = null;

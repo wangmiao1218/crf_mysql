@@ -44,10 +44,10 @@ public class MongodbJDBCUtils {
 			addrs.add(serverAddress);
 			//=====================================
 			//若没有用户名密码则用下面方法
-			MongoClient mongoClient2 = new MongoClient(addrs);
+			MongoClient mongoClient = new MongoClient(addrs);
 			//=====================================
 			// 连接到数据库
-			MongoDatabase mongoDatabase = mongoClient2.getDatabase("CRF_Model");
+			MongoDatabase mongoDatabase = mongoClient.getDatabase("CRF_Model");
 			System.out.println("Connect to database successfully");
 			
 			//获取集合
@@ -73,7 +73,7 @@ public class MongodbJDBCUtils {
 		try {
 			// 连接到MongoDB服务 如果是远程连接可以替换“localhost”为服务器所在IP地址
 			// ServerAddress()两个参数分别为 服务器地址 和 端口
-			ServerAddress serverAddress = new ServerAddress(ip, 27017);
+			ServerAddress serverAddress = new ServerAddress(mongodbIp, 27017);
 			List<ServerAddress> addrs = new ArrayList<ServerAddress>();
 			addrs.add(serverAddress);
 			// MongoCredential.createScramSha1Credential()三个参数分别为 用户名 数据库名称 密码

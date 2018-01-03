@@ -18,7 +18,7 @@ import com.mongodb.DBCursor;
 import com.mongodb.client.MongoCollection;
 
 /**
- * @Description:mongodb的数据处理（crfdata表）
+ * @Description:mongodb的数据处理
  * @author: wangmiao
  * @Date: 2017年12月18日 下午2:41:11 
  */
@@ -39,7 +39,8 @@ public class CrfdataOrPatientDetailMongodbDataProcess {
 			//定义返回结果
 			Map<Integer,String> rowNumAndQueryJsonMap = new HashMap<Integer,String>();
 			//连接数据库
-			DBCollection dbCollection = MongodbJDBCUtils.connectMongodbCrfdataReturnDBCollection(mongodbIp);
+			DBCollection dbCollection = MongodbJDBCUtils
+					.connectMongodbOfQueryReturnDBCollection(mongodbIp, "CRF_Model", "crfdata");
 			//rowNumAndpatCrfdataMapMap
 			for (Entry<Integer, Map<String, String>>  mapMap : rowNumAndpatCrfdataMapMap.entrySet()) {
 				//行号
@@ -93,7 +94,8 @@ public class CrfdataOrPatientDetailMongodbDataProcess {
 	 */
 	public static void insertDatasIntoPatientDetailMongodb(String mongodbIp,List<Map<String, JSONObject>> listMapJsons) {
 		//连接数据库
-		MongoCollection<Document> mongoCollection = MongodbJDBCUtils.connectMongodbPatientDetailReturnMongoCollection(mongodbIp);
+		MongoCollection<Document> mongoCollection = MongodbJDBCUtils
+				.connectTestMongodbOfInsertReturnMongoCollection(mongodbIp, "CRF_Model", "patientDetail");
 		//转换
 		List<Document> documents = new ArrayList<Document>();
 		for (int i = 0; i < listMapJsons.size(); i++) {
@@ -131,7 +133,8 @@ public class CrfdataOrPatientDetailMongodbDataProcess {
 	 */
 	public static void insertDatasIntoPatientDetailMongodbOfDevelop(String mongodbIp,List<Map<String, JSONObject>> listMapJsons) {
 		//连接数据库
-		MongoCollection<Document> mongoCollection = MongodbJDBCUtils.connectDevelopMongodbPatientDetailReturnMongoCollection(mongodbIp);
+		MongoCollection<Document> mongoCollection = MongodbJDBCUtils
+				.connectDevelopMongodbOfInsertReturnMongoCollection(mongodbIp, "CRF_Model", "patientDetail");
 		//转换
 		List<Document> documents = new ArrayList<Document>();
 		for (int i = 0; i < listMapJsons.size(); i++) {

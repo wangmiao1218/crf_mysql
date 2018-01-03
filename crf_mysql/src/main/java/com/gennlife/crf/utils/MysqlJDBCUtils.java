@@ -13,6 +13,10 @@ import java.sql.Statement;
  */
 public class MysqlJDBCUtils {
 	
+	// 避免中文乱码要指定useUnicode和characterEncoding
+	private static final String url = "jdbc:mysql://10.0.2.238:9003/gennlife_tjzl?"
+			+ "user=gennlife_tjzl_user&password=@Gennlife_tjzl2015&useUnicode=true&characterEncoding=UTF8";
+	
 	/**
 	 * @Title: connectTianjinMysqlReturnResultSetByExecuteQuery
 	 * @Description: 连接天津mysql单表数据库,根据表名和字段名查询，返回符合条件的一个map
@@ -24,9 +28,6 @@ public class MysqlJDBCUtils {
 	public static ResultSet connectTianjinMysqlReturnResultSetByExecuteQuery(String sql) throws SQLException{
 		Connection conn = null;
 		ResultSet rs = null;
-		// 避免中文乱码要指定useUnicode和characterEncoding
-		String url = "jdbc:mysql://10.0.2.238:9003/gennlife_tjzl?"
-				+ "user=gennlife_tjzl_user&password=@Gennlife_tjzl2015&useUnicode=true&characterEncoding=UTF8";
 		try {
 			// 之所以要使用下面这条语句，是因为要使用MySQL的驱动，所以我们要把它驱动起来，
 			// 可以通过Class.forName把它加载进去，也可以通过初始化来驱动起来，下面三种形式都可以

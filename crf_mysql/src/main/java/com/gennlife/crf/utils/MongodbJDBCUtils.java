@@ -21,20 +21,18 @@ import com.mongodb.client.MongoDatabase;
  */
 public class MongodbJDBCUtils {
 
-	//private static final String ipTianjin="10.0.2.176";
 	private static final String ipYantai="10.0.2.176";
-	private static final String ip="10.0.2.185";
-	//private static final String ip="10.0.0.166";
 
 
 	/** 
-	* @Title: connectDevelopMongodbPatientDetailReturnMongoCollection 
+	* @Title: connectDevelopMongodbOfInsertReturnMongoCollection 
 	* @Description: 连接开发环境mongodb数据库（PatientDetail）,返回MongoCollection<Document>
 	* @param: @return :
 	* @return: MongoCollection<Document> 返回 MongoCollection<Document>
 	* @throws 
 	*/
-	public static MongoCollection<Document> connectDevelopMongodbPatientDetailReturnMongoCollection(String mongodbIp) {
+	public static MongoCollection<Document> connectDevelopMongodbOfInsertReturnMongoCollection(
+			String mongodbIp,String dataBaseName,String dbCollectionName) {
 		MongoCollection<Document> mongoCollection = null;
 		try {
 			// 连接到MongoDB服务 如果是远程连接可以替换“localhost”为服务器所在IP地址
@@ -47,11 +45,11 @@ public class MongodbJDBCUtils {
 			MongoClient mongoClient = new MongoClient(addrs);
 			//=====================================
 			// 连接到数据库
-			MongoDatabase mongoDatabase = mongoClient.getDatabase("CRF_Model");
+			MongoDatabase mongoDatabase = mongoClient.getDatabase(dataBaseName);
 			System.out.println("Connect to database successfully");
 			
 			//获取集合
-			mongoCollection = mongoDatabase.getCollection("patientDetail");
+			mongoCollection = mongoDatabase.getCollection(dbCollectionName);
 		} catch (Exception e) {
 			System.err.println(e.getClass().getName() + ": " + e.getMessage());
 		}
@@ -59,16 +57,15 @@ public class MongodbJDBCUtils {
 		return mongoCollection;
 	}
 	
-	
-	
 	/** 
-	* @Title: connectMongodbPatientDetailReturnMongoCollection 
+	* @Title: connectTestMongodbOfInsertReturnMongoCollection(测试环境用于操作数据：如插入、删除等) 
 	* @Description: 连接测试环境mongodb数据库（PatientDetail）,返回MongoCollection<Document>
 	* @param: @return :
 	* @return: MongoCollection<Document> 返回 MongoCollection<Document>
 	* @throws 
 	*/
-	public static MongoCollection<Document> connectMongodbPatientDetailReturnMongoCollection(String mongodbIp) {
+	public static MongoCollection<Document> connectTestMongodbOfInsertReturnMongoCollection(
+			String mongodbIp,String dataBaseName,String dbCollectionName) {
 		MongoCollection<Document> mongoCollection = null;
 		try {
 			// 连接到MongoDB服务 如果是远程连接可以替换“localhost”为服务器所在IP地址
@@ -77,7 +74,7 @@ public class MongodbJDBCUtils {
 			List<ServerAddress> addrs = new ArrayList<ServerAddress>();
 			addrs.add(serverAddress);
 			// MongoCredential.createScramSha1Credential()三个参数分别为 用户名 数据库名称 密码
-			MongoCredential credential = MongoCredential.createScramSha1Credential("Wangmiao", "CRF_Model","@Wangmiao2015".toCharArray());
+			MongoCredential credential = MongoCredential.createScramSha1Credential("Wangmiao", dataBaseName,"@Wangmiao2015".toCharArray());
 			List<MongoCredential> credentials = new ArrayList<MongoCredential>();
 			credentials.add(credential);
 
@@ -88,11 +85,11 @@ public class MongodbJDBCUtils {
 			//MongoClient mongoClient2 = new MongoClient(addrs);
 			//=====================================
 			// 连接到数据库
-			MongoDatabase mongoDatabase = mongoClient.getDatabase("CRF_Model");
+			MongoDatabase mongoDatabase = mongoClient.getDatabase(dataBaseName);
 			System.out.println("Connect to database successfully");
 			
 			//获取集合
-			mongoCollection = mongoDatabase.getCollection("patientDetail");
+			mongoCollection = mongoDatabase.getCollection(dbCollectionName);
 		} catch (Exception e) {
 			System.err.println(e.getClass().getName() + ": " + e.getMessage());
 		}
@@ -102,26 +99,27 @@ public class MongodbJDBCUtils {
 	}
 	
 	/** 
-	 * @Title: connectMongodbCrfdataReturnDBCollection （crfdata库）
-	 * @Description: 连接测试环境mongodb数据库,返回DBCollection
+	 * @Title: connectMongodbOfQueryReturnDBCollection 
+	 * @Description: 连接测试环境mongodb数据库,返回DBCollection(用于查询)
 	 * (官方文档和源代码均建议使用MongoClient类，而且，在不久的将来，会废弃Mongo类。)
 	 * @param: @return :
 	 * @return: DBCollection
 	 * @throws 
 	 */
-	public static DBCollection connectMongodbCrfdataReturnDBCollection(String mongodbIp) {
+	public static DBCollection connectMongodbOfQueryReturnDBCollection(String mongodbIp,
+			String dataBaseName,String dbCollectionName) {
 		DBCollection dbCollection =null;
 		try {
-			MongoCredential credential = MongoCredential.createCredential("Wangmiao", "CRF_Model", "@Wangmiao2015".toCharArray()); 
+			MongoCredential credential = MongoCredential.createCredential("Wangmiao", dataBaseName, "@Wangmiao2015".toCharArray()); 
 			ServerAddress serverAddress = new ServerAddress(mongodbIp, 27017);
 			MongoClient mongoClient = new MongoClient(serverAddress, Arrays.asList(credential)); 
 			
 			// 连接到数据库
-			DB db = mongoClient.getDB("CRF_Model");
+			DB db = mongoClient.getDB(dataBaseName);
 			System.out.println("Connect to database successfully");
 			
 			//获取crfdata集合
-			dbCollection = db.getCollection("crfdata");
+			dbCollection = db.getCollection(dbCollectionName);
 			
 		}catch (Exception e) {
 			System.err.println(e.getClass().getName() + ": " + e.getMessage());
@@ -130,6 +128,7 @@ public class MongodbJDBCUtils {
 		return dbCollection;
 	}
 	
+//==========================================================================================
 	
 	/** 
 	* @Title: connectYantaiMongodbReturnMongoCollection 

@@ -3,8 +3,8 @@ package com.gennlife.crf.crfLogic;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 import java.util.Map.Entry;
+import java.util.UUID;
 import java.util.concurrent.Callable;
 
 import org.apache.commons.collections4.map.HashedMap;
@@ -12,7 +12,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.gennlife.crf.bean.Excel;
-import com.gennlife.crf.bean.SysOp;
 import com.gennlife.crf.mongodb.CrfdataOrPatientDetailMongodbDataProcess;
 import com.gennlife.crf.utils.ExcelUtils;
 import com.gennlife.crf.utils.JsonUtils;

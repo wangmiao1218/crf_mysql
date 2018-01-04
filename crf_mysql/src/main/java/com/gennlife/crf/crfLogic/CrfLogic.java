@@ -5,12 +5,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.Map.Entry;
+import java.util.concurrent.Callable;
 
 import org.apache.commons.collections4.map.HashedMap;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.gennlife.crf.bean.Excel;
+import com.gennlife.crf.bean.SysOp;
 import com.gennlife.crf.mongodb.CrfdataOrPatientDetailMongodbDataProcess;
 import com.gennlife.crf.utils.ExcelUtils;
 import com.gennlife.crf.utils.JsonUtils;
@@ -123,7 +125,7 @@ public class CrfLogic {
 	}
 	
 	
-	/** 
+	/**
 	* @Title: insertDatasIntoPatientDetailAndPostAndWritePatIntoExcel 
 	* @Description: 读excel相关配置，根据组装规则，组装数据并插入数据库，请求接口，将pat写入excel
 	* @param: @param excel
@@ -132,7 +134,8 @@ public class CrfLogic {
 	* @return: void
 	* @throws 
 	*/
-	public static void insertDatasIntoPatientDetailAndPostAndWritePatIntoExcel(Excel excel,String path,String mongodbIp,String httpUrl,String disease) throws JSONException {
+	public static void insertDatasIntoPatientDetailAndPostAndWritePatIntoExcel(final Excel excel,
+			String path,final String mongodbIp,final String httpUrl,final String disease)throws Exception{
 		System.out.println("start。。。");
 		Integer isConfiguredCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "是否配置");
 		Integer reusePatRowNumCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "reusePatRowNum");
@@ -203,25 +206,65 @@ public class CrfLogic {
 				//System.out.println("非配置字段！");
 			}
 		}
+		/*
 		//将新的json的list插入mongodb的patientDetail中
 		CrfdataOrPatientDetailMongodbDataProcess
 			.insertDatasIntoPatientDetailMongodb(mongodbIp,listMapJsons);
-		
 		//同时加写入开发库
-		//后续改成多线程
 		CrfdataOrPatientDetailMongodbDataProcess
 			.insertDatasIntoPatientDetailMongodbOfDevelop("10.0.0.166",listMapJsons);
-		
-		
-		//===============================
-		//可优化为多线程，一个请求接口，一个将pat写入excel
 		//批量请求接口
 		CrfLogic.requestCrfAutoInterfaceByPat(cellNumAndPatMap, httpUrl, disease);
-		
 		//将pat写入excel
-		CrfLogic.writePatIntoExcel(excel, cellNumAndPatMap);
+		CrfLogic.writePatIntoExcel(excel, cellNumAndPatMap);		
+		*/		
 		
-		System.out.println("ok");
+		//=========================多线程实现======================================
+		//将新的json的list插入mongodb的patientDetail中
+		String callableTest = new Callable<String>() {
+			@Override
+			public String call() throws Exception {
+				System.out.println("callableTest");
+				CrfdataOrPatientDetailMongodbDataProcess
+					.insertDatasIntoPatientDetailMongodb(mongodbIp,listMapJsons);
+				return "success";
+			}
+		}.call();
+		//同时加写入开发库
+		String callableDevelop = new Callable<String>() {
+			@Override
+			public String call() throws Exception {
+				System.out.println("callableDevelop");
+				CrfdataOrPatientDetailMongodbDataProcess
+					.insertDatasIntoPatientDetailMongodbOfDevelop("10.0.0.166",listMapJsons);
+				return "success";
+			}
+		}.call();
+		
+		//判断入库完成
+		if ("success".equals(callableTest) && "success".equals(callableDevelop)) {
+			//批量请求接口
+			String callableAuto = new Callable<String>() {
+				@Override
+				public String call() throws Exception {
+					CrfLogic.requestCrfAutoInterfaceByPat(cellNumAndPatMap, httpUrl, disease);
+					return "success";
+				}
+			}.call();;
+			//将pat写入excel
+			String callableExcel = new Callable<String>() {
+				@Override
+				public String call() throws Exception {
+					CrfLogic.writePatIntoExcel(excel, cellNumAndPatMap);
+					return "success";
+				}
+			}.call();;
+			
+			if ("success".equals(callableAuto) && "success".equals(callableExcel)) {
+				System.out.println("ok");
+			}
+		}
+		//======================================================================
 	}
 	
 	

@@ -26,7 +26,7 @@ public class TestCrfLogic {
 	}
 	
 	@Test
-	public void insertDatasIntoPatientDetailAndPostAndWritePatIntoExcel() throws JSONException{
+	public void insertDatasIntoPatientDetailAndPostAndWritePatIntoExcel() throws Exception{
 		Excel excel = new Excel(filePath,fileName,sheetName);
 		CrfLogic.insertDatasIntoPatientDetailAndPostAndWritePatIntoExcel(excel, 
 				path, mongodbIp, auto, disease);

@@ -116,10 +116,8 @@ public class CrfdataOrPatientDetailMongodbDataProcess {
 			Document document = Document.parse(json.toString());
 			documents.add(document);
 		}
-		
 		//批量插入
 		mongoCollection.insertMany(documents);
-		
 		System.out.println("插入测试库完成。"+"insert "+listMapJsons.size()+" successfully");
 	}
 	
@@ -155,10 +153,8 @@ public class CrfdataOrPatientDetailMongodbDataProcess {
 			Document document = Document.parse(json.toString());
 			documents.add(document);
 		}
-		
 		//批量插入
 		mongoCollection.insertMany(documents);
-		
 		System.out.println("插入开发库完成。"+"insert "+listMapJsons.size()+" successfully");
 	}
 	

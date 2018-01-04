@@ -2,11 +2,20 @@ package com.gennlife.crf.CrfLogic.test;
 
 import java.util.UUID;
 
+import org.bson.Document;
+import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 import org.junit.Test;
 
 import com.gennlife.crf.bean.Excel;
 import com.gennlife.crf.crfLogic.CrfLogic;
+import com.gennlife.crf.utils.MongodbJDBCUtils;
+import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
 
 public class TestCrfLogic {
 
@@ -21,7 +30,7 @@ public class TestCrfLogic {
 	@Test
 	public void uuid(){
 		UUID uuid = UUID.randomUUID();
-	    System.out.println(uuid);
+		System.out.println(uuid);
 		System.out.println(uuid.toString().split("-")[0]);
 	}
 	

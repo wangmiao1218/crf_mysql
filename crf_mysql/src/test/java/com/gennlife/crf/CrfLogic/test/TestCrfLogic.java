@@ -28,13 +28,6 @@ public class TestCrfLogic {
 	private String disease = "lymphoma";
 	
 	@Test
-	public void uuid(){
-		UUID uuid = UUID.randomUUID();
-		System.out.println(uuid);
-		System.out.println(uuid.toString().split("-")[0]);
-	}
-	
-	@Test
 	public void insertDatasIntoPatientDetailAndPostAndWritePatIntoExcel() throws Exception{
 		Excel excel = new Excel(filePath,fileName,sheetName);
 		CrfLogic.insertDatasIntoPatientDetailAndPostAndWritePatIntoExcel(excel, 

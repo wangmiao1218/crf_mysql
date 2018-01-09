@@ -170,13 +170,37 @@ public class ListAndStringUtils {
 	
 
 	/** 
-	* @Title: dealPatListAddDoubleQuotationMarksReturnPatStrs 
-	* @Description: 处理从excel读取的patlist,将每个元素加双引号及每个末尾加逗号，返回一个处理后的String
+	* @Title: dealOldPatListAddDoubleQuotationMarksReturnOldPatStrs 
+	* @Description: 处理从excel读取的oldPatlist,返回一个处理后的String
 	* @param: @param patList
 	* @param: @return :
 	* @return: String
 	* @throws 
 	*/
+	public static String dealOldPatListAddDoubleQuotationMarksReturnOldPatStrs(List<String> oldPatList) {
+		if (oldPatList.size()>0) {
+			StringBuilder sb = new StringBuilder();
+			for (int i = 0; i < oldPatList.size(); i++) {
+				String str ="{\"PatientID\":\""+oldPatList.get(i)+"\",\"VisitType\":\"1\"}";
+				sb.append(str.trim()).append(",");
+			}
+			sb.deleteCharAt(sb.length() - 1);
+			return sb.toString();
+		}else{
+			return null;
+		}
+		
+	}
+	
+	
+	/** 
+	 * @Title: dealPatListAddDoubleQuotationMarksReturnPatStrs 
+	 * @Description: 处理从excel读取的patlist,将每个元素加双引号及每个末尾加逗号，返回一个处理后的String
+	 * @param: @param patList
+	 * @param: @return :
+	 * @return: String
+	 * @throws 
+	 */
 	public static String dealPatListAddDoubleQuotationMarksReturnPatStrs(List<String> patList) {
 		if (patList.size()>0) {
 			StringBuilder sb = new StringBuilder();

@@ -1,4 +1,4 @@
-package com.gennlife.empiServerInterfaces.test;
+package com.gennlife.crf.zhpy.test;
 
 import org.junit.Test;
 
@@ -18,6 +18,7 @@ public class TestGetInformationByEMPIInterface {
 		String results = GetInformationByEMPIInterface.getResultsByPostMethod(excel);
 		System.out.println(results);
 	}
+	
 	
 	//测试传入一个pat
 	@Test

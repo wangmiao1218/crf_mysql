@@ -13,7 +13,7 @@ import com.gennlife.crf.utils.ListAndStringUtils;
 import com.gennlife.interfaces.PatientDetailsInfoOfEMPIServerInterface;
 
 /**
- * @Description: 通过请求empi接口，pat返回信息
+ * @Description: 通过请求empi接口，pat返回相关的信息
  * @author: wangmiao
  * @Date: 2017年12月16日 下午3:40:33 
  */

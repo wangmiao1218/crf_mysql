@@ -1,11 +1,12 @@
 package com.gennlife.crf.utils;
 
-import java.io.FileOutputStream;
-
-import com.lowagie.text.Document;
-import com.lowagie.text.pdf.PdfCopy;
-import com.lowagie.text.pdf.PdfImportedPage;
-import com.lowagie.text.pdf.PdfReader;
+import java.io.FileOutputStream;  
+import java.io.IOException;  
+import com.lowagie.text.Document;  
+import com.lowagie.text.DocumentException;  
+import com.lowagie.text.pdf.PdfCopy;  
+import com.lowagie.text.pdf.PdfImportedPage;  
+import com.lowagie.text.pdf.PdfReader;  
 
 /**
  * @Description: 合并多个pdf

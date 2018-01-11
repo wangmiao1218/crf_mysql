@@ -17,5 +17,4 @@ public class TestGetPatsByEMPIInterface {
 		String results = GetPatsByEMPIInterface.getPatsByPostMethod(excel);
 		System.out.println(results);
 	}
-	
 }

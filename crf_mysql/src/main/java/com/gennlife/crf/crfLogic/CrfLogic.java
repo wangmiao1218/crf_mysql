@@ -72,11 +72,11 @@ public class CrfLogic {
 				String patContent = ExcelUtils.readContent(excel, isConfiguredRowNum, patCellNum);
 				String crfdataContent = ExcelUtils.readContent(excel, isConfiguredRowNum, crfdataCellNum);
 				//只有满足以下才进行查询
-				if (reusePatRowNumContent==null && patContent!=null && crfdataContent!=null){
+				if ((reusePatRowNumContent==null || "".equals(reusePatRowNumContent)) && patContent!=null && crfdataContent!=null){
 					//存pat和crfdata源
 					cellNumAndCrfdataValueMap.put(patContent, crfdataContent);
 					rowNumAndpatCrfdataMapMap.put(isConfiguredRowNum, cellNumAndCrfdataValueMap);
-				}else if (reusePatRowNumContent!=null && crfdataContent!=null) {
+				}else if (reusePatRowNumContent!=null & !"".equals(reusePatRowNumContent) && crfdataContent!=null) {
 					//不为空，则复用pat，直接存复用的pat和crfdata
 					//根据reusePatRowNum，查pat（行号要减1，因为之前方便看，增加了1）
 					String reusePatContent = ExcelUtils.readContent(excel, Integer.valueOf(reusePatRowNumContent)-1, patCellNum);
@@ -163,9 +163,9 @@ public class CrfLogic {
 				String reusePatContent = ExcelUtils.readContent(excel, isConfiguredRowNum, reusePatRowNumCellNum);
 				String patientDetailContent = ExcelUtils.readContent(excel, isConfiguredRowNum, patientDetailCellNum);
 				String insertContent = ExcelUtils.readContent(excel, isConfiguredRowNum, insertContentCellNum);
-				
-				//只有满足以下才进行计算(不服用pat，且数据源与输入文本不为空)
-				if (reusePatContent==null && patientDetailContent!=null && insertContent!=null) {
+
+				//只有满足以下才进行计算(不复用pat，且数据源与输入文本不为空)
+				if ((reusePatContent==null ||"".equals(reusePatContent)) && patientDetailContent!=null && insertContent!=null) {
 					//pat编号
 					String patContent="pat_"+UUID.randomUUID().toString().split("-")[0]+"_"+(isConfiguredRowNum+1);
 					//存行号和pat
@@ -184,6 +184,7 @@ public class CrfLogic {
 						List<String> patientDetailContents = ListAndStringUtils.dealWithpatientDetailBySemicolonToStrings(byAsteriskToString);
 						//处理insertContent，然后用;分割
 						List<String> insertContents = ListAndStringUtils.dealWithpatientDetailBySemicolonToStrings(insertContent);
+						
 						//循环处理json放入一个人的数据里
 						for (int j = 0; j < patientDetailContents.size(); j++) {
 							//=======================
@@ -195,7 +196,6 @@ public class CrfLogic {
 							newJSONObject = JsonUtils.updatePatAndValueReturnNewJSONObject(baseJson, patPath, patContent, dbyDotToStrings, insertContents.get(j));
 						}
 					} 
-					
 					//添加到listJsons（map只有一个值，方便后面遍历）
 					Map<String,JSONObject> patAndJsonMap =new  HashedMap<String, JSONObject>();
 					patAndJsonMap.put(patContent, newJSONObject);

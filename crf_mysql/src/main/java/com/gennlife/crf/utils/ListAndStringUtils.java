@@ -168,15 +168,15 @@ public class ListAndStringUtils {
 		return 	jsonArray;
 	}
 	
-
+	
 	/** 
-	* @Title: dealOldPatListAddDoubleQuotationMarksReturnOldPatStrs 
-	* @Description: 处理从excel读取的oldPatlist,返回一个处理后的String
-	* @param: @param patList
-	* @param: @return :
-	* @return: String
-	* @throws 
-	*/
+	 * @Title: dealOldPatListAddDoubleQuotationMarksReturnOldPatStrs 
+	 * @Description: 处理从excel读取的oldPatlist,返回一个处理后的String
+	 * @param: @param patList
+	 * @param: @return :
+	 * @return: String
+	 * @throws 
+	 */
 	public static String dealOldPatListAddDoubleQuotationMarksReturnOldPatStrs(List<String> oldPatList) {
 		if (oldPatList.size()>0) {
 			StringBuilder sb = new StringBuilder();

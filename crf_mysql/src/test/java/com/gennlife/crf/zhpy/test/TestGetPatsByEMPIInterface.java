@@ -8,7 +8,7 @@ import com.gennlife.crf.zhpy.GetPatsByEMPIInterface;
 public class TestGetPatsByEMPIInterface {
 
 	private String filePath = "C:\\Users\\www\\Desktop";
-	private String fileName = "淋巴瘤病人编号关联.xlsx";
+	private String fileName = "淋巴瘤病人编号关联_0113.xlsx";
 	private String sheetName = "Sheet1";
 	
 	@Test

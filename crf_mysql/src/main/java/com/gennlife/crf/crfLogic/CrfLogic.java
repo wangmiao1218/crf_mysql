@@ -26,10 +26,8 @@ import com.gennlife.interfaces.ManualEMRAutoCRFV2OfCrfAutoInterface;
 public class CrfLogic {
 
 	private static final String patPath = "patient_info.patient_info_patient_sn";
-	
 	//存放批量的json，统一插入到mongodb(插入到数据库，要先判断pat是否存在  所以以map形式存储)
 	private static List<Map<String, JSONObject>> listMapJsons = new ArrayList<Map<String,JSONObject>>();
-	
 	//将行号和pat号对应，存到map里，方便后续写入，和批量请求
 	private static Map<Integer, String> cellNumAndPatMap = new HashedMap<Integer, String>();
 
@@ -42,7 +40,6 @@ public class CrfLogic {
 	* @throws 
 	*/
 	public static void queryCrfdataByPatAndWriteResults(Excel excel,String mongodbIp) throws JSONException{
-		System.out.println("start。。。");
 		//因为key有重复，不用IdentityHashMap，则放到list中
 		//将pat和crfdata路径，存到map里，再讲行号和map封装成map，方便查询
 		Map<Integer,Map<String, String>> rowNumAndpatCrfdataMapMap = new HashedMap<Integer, Map<String,String>>();
@@ -86,15 +83,12 @@ public class CrfLogic {
 						rowNumAndpatCrfdataMapMap.put(isConfiguredRowNum, cellNumAndCrfdataValueMap);
 					}
 				}
-			}else {
-				//System.out.println("非配置字段！");
 			}
 		}
 		
 		//传入查询crfdata的方法，返回行号和查询结果的map
 		Map<Integer,String> rowNumAndcrfdataMap = CrfdataOrPatientDetailMongodbDataProcess
 				.queryDatasOfCrfdataMongodb(mongodbIp,rowNumAndpatCrfdataMapMap);
-		
 		//将crfdata结果写入excel
 		CrfLogic.writeCrfdataIntoExcel(excel, rowNumAndcrfdataMap);
 		
@@ -114,7 +108,6 @@ public class CrfLogic {
 		Integer outputCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "实际输出");
 		Integer rowNum=null;
 		String crfdata=null;
-		
 		for (Entry<Integer, String> entry: rowNumAndcrfdataMap.entrySet()) {  
 			rowNum=entry.getKey();
 			crfdata=entry.getValue();
@@ -135,7 +128,6 @@ public class CrfLogic {
 	*/
 	public static void insertDatasIntoPatientDetailAndPostAndWritePatIntoExcel(final Excel excel,
 			String path,final String mongodbIp,final String httpUrl,final String disease)throws Exception{
-		System.out.println("start。。。");
 		Integer isConfiguredCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "是否配置");
 		Integer reusePatRowNumCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "reusePatRowNum");
 		Integer patientDetailCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "patientDetail");
@@ -201,24 +193,8 @@ public class CrfLogic {
 					patAndJsonMap.put(patContent, newJSONObject);
 					listMapJsons .add(patAndJsonMap);
 				}
-			}else {
-				//System.out.println("非配置字段！");
 			}
 		}
-		/*
-		//将新的json的list插入mongodb的patientDetail中
-		CrfdataOrPatientDetailMongodbDataProcess
-			.insertDatasIntoPatientDetailMongodb(mongodbIp,listMapJsons);
-		//同时加写入开发库
-		CrfdataOrPatientDetailMongodbDataProcess
-			.insertDatasIntoPatientDetailMongodbOfDevelop("10.0.0.166",listMapJsons);
-		//批量请求接口
-		CrfLogic.requestCrfAutoInterfaceByPat(cellNumAndPatMap, httpUrl, disease);
-		//将pat写入excel
-		CrfLogic.writePatIntoExcel(excel, cellNumAndPatMap);		
-		*/		
-		
-		//=========================多线程实现======================================
 		//将新的json的list插入mongodb的patientDetail中
 		String callableTest = new Callable<String>() {
 			@Override
@@ -263,7 +239,6 @@ public class CrfLogic {
 				System.out.println("ok");
 			}
 		}
-		//======================================================================
 	}
 	
 	
@@ -305,7 +280,6 @@ public class CrfLogic {
 		Integer patCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "pat");
 		Integer rowNum=null;
 		String pat=null;
-		
 		for (Map.Entry<Integer, String> entry: cellNumAndPatMap.entrySet()) {  
 			rowNum=entry.getKey();
 			pat=entry.getValue();
@@ -324,7 +298,6 @@ public class CrfLogic {
 	 * @throws 
 	 */
 	public static List<Map<String,JSONObject>> readExcelReturnJsonMapList(Excel excel,String path) throws JSONException {
-		System.out.println("start。。。");
 		//存放批量的json，统一插入到mongodb
 		List<Map<String, JSONObject>> returnListMapJsons = new ArrayList<Map<String,JSONObject>>();
 		Integer isConfiguredCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "是否配置");
@@ -393,7 +366,6 @@ public class CrfLogic {
 				//System.out.println("非配置字段！");
 			}
 		}
-		
 		return returnListMapJsons;
 	}
 	
@@ -441,8 +413,6 @@ public class CrfLogic {
 					//存行号和pat
 					returnCellNumAndPatMap.put(isConfiguredRowNum, patContent);
 				}
-			}else {
-				//System.out.println("非配置字段！");
 			}
 		}
 		return returnCellNumAndPatMap;

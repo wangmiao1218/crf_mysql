@@ -44,12 +44,10 @@ public class ConfiguredCrfdataPath {
 					//转到第一组的逻辑
 					writePathOfOneGroups(excel,tableName);
 				}
-				
 				if ("两组".equals(groupInfo)) {
 					//转到第二组的逻辑
 					writePathOfTwoGroups(excel,tableName);
 				}
-				
 				if ("三组".equals(groupInfo)) {
 					//转到第三组的逻辑
 					writePathOfThreeGroups(excel,tableName);

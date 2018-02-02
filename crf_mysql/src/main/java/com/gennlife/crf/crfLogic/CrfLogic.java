@@ -225,7 +225,7 @@ public class CrfLogic {
 					CrfLogic.requestCrfAutoInterfaceByPat(cellNumAndPatMap, httpUrl, disease);
 					return "success";
 				}
-			}.call();;
+			}.call();
 			//将pat写入excel
 			String callableExcel = new Callable<String>() {
 				@Override
@@ -233,7 +233,7 @@ public class CrfLogic {
 					CrfLogic.writePatIntoExcel(excel, cellNumAndPatMap);
 					return "success";
 				}
-			}.call();;
+			}.call();
 			
 			if ("success".equals(callableAuto) && "success".equals(callableExcel)) {
 				System.out.println("ok");

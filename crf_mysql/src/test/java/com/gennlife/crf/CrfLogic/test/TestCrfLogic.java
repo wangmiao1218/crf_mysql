@@ -16,6 +16,7 @@ public class TestCrfLogic {
 	private String auto = "http://10.0.2.184:6060/auto/ManualEMRAutoCRFV2";
 	private String disease = "lymphoma_test";
 	
+	
 	@Test
 	public void insertDatasIntoPatientDetailAndPostAndWritePatIntoExcel() throws Exception{
 		Excel excel = new Excel(filePath,fileName,sheetName);

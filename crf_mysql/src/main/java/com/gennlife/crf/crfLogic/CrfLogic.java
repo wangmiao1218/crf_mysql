@@ -247,19 +247,14 @@ public class CrfLogic {
 			
 			if ("success".equals(interfaceResults) && "success".equals(excelResults)) {
 				System.out.println("ok");
-			}
-			
-			if(interfaceResults.isDone() && excelResults.isDone()){
 				 //关闭线程池和服务  
 	            threadPool.shutdown();
 			} else {
 	        	System.out.println("Error");
 			} 
 		}
-    			
-      
-
 		//======================线程池方法结束===================================
+		
 		
 		/*
 		//======================普通多线程方法===================================

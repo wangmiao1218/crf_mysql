@@ -6,6 +6,10 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.UUID;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.FutureTask;
 
 import org.apache.commons.collections4.map.HashedMap;
 import org.json.JSONException;
@@ -195,6 +199,70 @@ public class CrfLogic {
 				}
 			}
 		}
+		//=====================线程池方法====================================
+		//创建线程池并返回ExecutorService实例 
+		ExecutorService threadPool =Executors.newFixedThreadPool(2); 
+		
+		// 执行任务
+		//将新的json的list插入mongodb的patientDetail中
+		Future<String> futureTest = threadPool.submit(new Callable<String>() {
+			@Override
+			public String call() throws Exception {
+				System.out.println("callableTest");
+					CrfdataOrPatientDetailMongodbDataProcess
+						.insertDatasIntoPatientDetailMongodb(mongodbIp,listMapJsons);
+				return "success";
+			}
+		});
+		//同时加写入开发库
+		Future<String> futureDevelop = threadPool.submit(new Callable<String>() {
+			@Override
+			public String call() throws Exception {
+				System.out.println("callableDevelop");
+				CrfdataOrPatientDetailMongodbDataProcess
+					.insertDatasIntoPatientDetailMongodbOfDevelop("10.0.0.166",listMapJsons);
+				return "success";
+			}
+		});
+		
+        //判断入库完成
+		if ("success".equals(futureTest) && "success".equals(futureDevelop)) {
+			//批量请求接口
+			Future<String> interfaceResults = threadPool.submit(new Callable<String>() {
+				@Override
+				public String call() throws Exception {
+					CrfLogic.requestCrfAutoInterfaceByPat(cellNumAndPatMap, httpUrl, disease);
+					return "success";
+				}
+			});
+			
+			//将pat写入excel
+			Future<String> excelResults = threadPool.submit(new Callable<String>() {
+				@Override
+				public String call() throws Exception {
+					CrfLogic.writePatIntoExcel(excel, cellNumAndPatMap);
+					return "success";
+				}
+			});
+			
+			if ("success".equals(interfaceResults) && "success".equals(excelResults)) {
+				System.out.println("ok");
+			}
+			
+			if(interfaceResults.isDone() && excelResults.isDone()){
+				 //关闭线程池和服务  
+	            threadPool.shutdown();
+			} else {
+	        	System.out.println("Error");
+			} 
+		}
+    			
+      
+
+		//======================线程池方法结束===================================
+		
+		/*
+		//======================普通多线程方法===================================
 		//将新的json的list插入mongodb的patientDetail中
 		String callableTest = new Callable<String>() {
 			@Override
@@ -239,6 +307,8 @@ public class CrfLogic {
 				System.out.println("ok");
 			}
 		}
+		//======================普通多线程方法结束===================================
+		*/
 	}
 	
 	

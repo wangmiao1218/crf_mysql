@@ -10,7 +10,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 
 /**
- * @Description: 登录crf系统相关方法（安贞）
+ * @Description: 登录crf系统相关方法（烟台）
  * @author: wangmiao
  * @Date: 2017年6月9日 下午2:23:49
  */

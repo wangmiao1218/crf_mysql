@@ -18,9 +18,8 @@ import org.apache.poi.ss.usermodel.Workbook;
 
 import com.gennlife.crf.bean.Excel;
 
-
 /**
- * @Description: 对excel的处理
+ * @Description: 对excel的处理(列：line；行：row)
  * @author: wangmiao
  * @Date: 2017年6月9日 上午10:08:05
  */
@@ -196,6 +195,54 @@ public class ExcelUtils {
     }  
     
 	
+    
+    /** 
+     * @Title: readExcelOfOneLine 
+     * @Description: 搜索某一个文件,指定行数据，有值则添加到list中，返回list
+     * @param: Excel excel：传入excel
+     * @param: Integer beginCell：列号（从0 开始）
+     * @return: List<String>
+     * @throws 
+     */
+    public static List<String> readExcelOfOneLine(Excel excel,Integer beginRow) { 
+    	List<String> list = new ArrayList<String>();
+    	// 构造Workbook
+    	Workbook workbook = excel.getWorkbook();  
+    	
+    	if (workbook == null){
+    		return null;  //不存在
+    	}  
+    	
+    	//获取sheet
+    	Sheet sheet = workbook.getSheet(excel.getSheetName());
+    	Row row = sheet.getRow(beginRow);
+        // 循环读取一行中数据，row.getLastCellNum()：最大列号
+  		for ( int cellNum= 0; cellNum <= row.getLastCellNum(); cellNum++) {
+  			Cell cell = null;
+  			//判断是否为空
+  			if (row!=null) {
+  				//指定 列beginCell
+  	 			cell = row.getCell(cellNum);
+ 			}
+  			String value=null;
+  			//判断是否为空
+  			if (cell!=null) {
+  				cell.setCellType(HSSFCell.CELL_TYPE_STRING);
+  				value = cell.getStringCellValue();
+ 			}
+  			
+  			//将值放入list中
+			if (value!=null && !"".equals(value) && !" ".equals(value)) {  
+				list.add(value);
+			}
+  		}
+		
+    	return list;
+    }  
+    
+    
+    
+    
     /** 
      * @Title: readExcelOfTwoList 
      * @Description: 搜索某一个文件中，指定2列所有数值，并顺序添加到list中，返回list

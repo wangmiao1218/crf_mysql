@@ -16,7 +16,7 @@ public class LoginCrf {
 	public static final String pwd ="333333";
 	public static final String danbingzhongUrl="http://10.0.2.184/uranus/crf_case.html";
 	
-	public static final String xpath ="//*[@id=\"case-list-container\"]/tbody/tr[1]/td[2]/a";
+	public static final String xpath ="//*[@id='case-list-container']/tbody/tr[1]/td[2]/a";
 	
 	/**
 	 * @Title: loginAndToDanbingzhongByPhantomJSDriver
@@ -70,7 +70,7 @@ public class LoginCrf {
 		String returnString = loginAndToDanbingzhongByPhantomJSDriver(driver);
 		if ("登陆成功".equals(returnString)) {
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(2000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

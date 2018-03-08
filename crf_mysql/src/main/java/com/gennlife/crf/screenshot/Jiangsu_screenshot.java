@@ -22,22 +22,20 @@ public class Jiangsu_screenshot {
 	 * @throws
 	 */
 	public static String screenshot(PhantomJSDriver driver) throws Exception {
-		driver.manage().window().maximize(); // 浏览器窗口最大化
+		driver.manage().window().maximize();// 浏览器窗口最大化 
 		try {
 			Thread.sleep(3000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-
 		// 截图到output
 		File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-
 		String savePath = "F:\\screenshot.png";
 		// 复制内容到指定文件中
 		FileUtils.copyFile(scrFile, new File(savePath));
 
 		return "ok";
-
 	}
+	
 
 }

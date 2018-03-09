@@ -1,6 +1,7 @@
 package com.gennlife.crf.screenshot;
 
 import java.io.File;
+import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
@@ -21,7 +22,7 @@ public class Jiangsu_screenshot {
 	 * @return: String
 	 * @throws
 	 */
-	public static String screenshot(PhantomJSDriver driver) throws Exception {
+	public static String screenshot(PhantomJSDriver driver){
 		driver.manage().window().maximize();// 浏览器窗口最大化 
 		try {
 			Thread.sleep(3000);
@@ -32,7 +33,11 @@ public class Jiangsu_screenshot {
 		File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 		String savePath = "F:\\screenshot.png";
 		// 复制内容到指定文件中
-		FileUtils.copyFile(scrFile, new File(savePath));
+		try {
+			FileUtils.copyFile(scrFile, new File(savePath));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 		return "ok";
 	}

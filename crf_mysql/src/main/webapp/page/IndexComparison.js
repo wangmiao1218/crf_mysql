@@ -10,13 +10,13 @@ $(function () {
             text: '数据来源: xxxx'
         },*/
         xAxis: [{
-            categories: ['一月', '二月', '三月', '四月', '五月', '六月',
-                         '七月', '八月', '九月', '十月', '十一月', '十二月'],
+            categories: ['2000', '2001', '2002', '2003', '2004', '2005',
+                         '2006', '2007', '2008', '2009', '2010', '2011'],
             crosshair: true
         }],
         yAxis: [{ // Primary yAxis
             labels: {
-                format: '{value}°C',
+                format: '{value}单位',
                 style: {
                     color: Highcharts.getOptions().colors[2]
                 }
@@ -37,7 +37,7 @@ $(function () {
                 }
             },
             labels: {
-                format: '{value} mm',
+                format: '{value} 单位',
                 style: {
                     color: Highcharts.getOptions().colors[0]
                 }
@@ -51,7 +51,7 @@ $(function () {
                 }
             },
             labels: {
-                format: '{value} mb',
+                format: '{value} 单位',
                 style: {
                     color: Highcharts.getOptions().colors[1]
                 }
@@ -67,35 +67,35 @@ $(function () {
             x: 80,
             verticalAlign: 'top',
             y: 55,
-            floating: true,
-            backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+           // floating: true //指标点选显示
+           // backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
         },
         series: [{
             name: '指标2',
             type: 'column',
             yAxis: 1,
-            data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4],
+            data: [39.9, 51.5, 41.4, 169.2, 134.0, 156.0, 145.6, 14.5, 55.4, 164.1, 89.6, 99.4],
             tooltip: {
-                valueSuffix: ' mm'
+                valueSuffix: ' 单位'
             }
         }, {
             name: '指标3',
             type: 'spline',
             yAxis: 2,
-            data: [1016, 1016, 1015.9, 1015.5, 1012.3, 1009.5, 1009.6, 1010.2, 1013.1, 1016.9, 1018.2, 1016.7],
+            data: [1015, 1015, 1014.9, 1014.5, 1011.3, 1010.5, 1010.6, 1011.2, 1014.1, 1016.9, 1017.2, 1015.7],
             marker: {
                 enabled: false
             },
             dashStyle: 'shortdot',
             tooltip: {
-                valueSuffix: ' mb'
+                valueSuffix: ' 单位'
             }
         }, {
             name: '指标1',
             type: 'spline',
-            data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6],
+            data: [6.0, 5.9, 8.5, 13.5, 17.2, 20.5, 19.2, 25.5, 22.3, 17.3, 12.9, 10.6],
             tooltip: {
-                valueSuffix: ' °C'
+                valueSuffix: ' 单位'
             }
         }]
     });

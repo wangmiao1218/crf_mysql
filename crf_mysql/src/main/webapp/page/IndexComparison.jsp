@@ -10,7 +10,8 @@
 	String rootPath = request.getContextPath();
 %>
 <script src="https://img.hcharts.cn/jquery/jquery-1.8.3.min.js"></script>
-<script src="https://img.hcharts.cn/highcharts/highcharts.js"></script>
+<!-- <script src="https://img.hcharts.cn/highcharts/highcharts.js"></script> -->
+<script src="<%=rootPath%>/res/highcharts/highcharts.js"></script>
 <script src="https://img.hcharts.cn/highcharts/modules/exporting.js"></script>
 <script src="https://img.hcharts.cn/highcharts-plugins/highcharts-zh_CN.js"></script>
 

@@ -13,20 +13,16 @@
 <!-- <script src="https://img.hcharts.cn/highcharts/highcharts.js"></script> -->
 <script src="<%=rootPath%>/res/highcharts/highcharts.js"></script>
 <script src="https://img.hcharts.cn/highcharts/modules/exporting.js"></script>
-<script src="https://img.hcharts.cn/highcharts-plugins/highcharts-zh_CN.js"></script>
+<script
+	src="https://img.hcharts.cn/highcharts-plugins/highcharts-zh_CN.js"></script>
 
-<script language="javascript" type="text/javascript" src=""></script>
-
+<script src="<%=rootPath%>/demo/1/IndexComparison.js"></script>
 <body>
-
 	<div>
 		<h5>指标对比</h5>
 	</div>
 
-	<div id="container" style="min-width:400px;height:400px"></div>
-	<script language="javascript" type="text/javascript" 
-		src="<%=rootPath%>/page/IndexComparison.js">
-	</script>
+	<div id="container" style="min-width: 400px; height: 400px"></div>
 
 
 </body>

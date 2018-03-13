@@ -31,16 +31,16 @@ function initDateTime() {
 	// 开始时间
 	$("#timeStartBox").live("click", function() {
 		WdatePicker({
-					el : "timeStart",
-					dateFmt : "yyyy-MM-dd HH:mm:ss"
-				});
+			el : "timeStart",
+			dateFmt : "yyyy-MM-dd HH:mm:ss"
+		});
 	});
 	// 结束时间
 	$("#timeEndBox").live("click", function() {
 		WdatePicker({
-					el : "timeEnd",
-					dateFmt : "yyyy-MM-dd HH:mm:ss"
-				});
+			el : "timeEnd",
+			dateFmt : "yyyy-MM-dd HH:mm:ss"
+		});
 	});
 }
 
@@ -118,8 +118,8 @@ function initGrid(){
             reader: {
                 type: 'json',
                 // 指定根节点使用的数据
-               // root: 'rows',
-               root: 'list', // PageHelper 
+                // root: 'rows',
+                root: 'list', // PageHelper 
                 // 指定总记录数
 	            totalProperty: 'total'
             }
@@ -212,7 +212,7 @@ function initGrid(){
             items: [{
                 text:'',
                 tooltip:'新建',
-               // tooltip:'验证下拉框',
+                //tooltip:'验证下拉框',
                 minWidth: 30,
                 minHeight:30,
                 iconCls:'new-ico',
@@ -237,9 +237,9 @@ function initGrid(){
     });
     //pager
     pager = Ext.create('Ext.PagingToolbar', {
-            store: store,
-            displayInfo: true,
-            displayMsg : '显示第 {0} 条到 {1} 条记录,一共 {2} 条'
+        store: store,
+        displayInfo: true,
+        displayMsg : '显示第 {0} 条到 {1} 条记录,一共 {2} 条'
     });
     // create the Grid
     queryGrid = Ext.create('Ext.grid.Panel', {
@@ -282,7 +282,6 @@ function buttonRender(value, meta, record, rowIndex, colIndex, store) {
    // returnValue += '<em class="modify-ico" title="修改" onclick="modify('+opId+')"></em>'+
     returnValue += '<em class="modify-ico" title="验证下拉框" onclick="modify()"></em>'+
                     '<em class="del-ico" title="删除" onclick="deleteSysOp('+opId+')"></em>';
-    
     return returnValue;
 }
 
@@ -313,20 +312,19 @@ function deleteSysOp(opId){
 	
 	// 找出记录号和记录条数
 	// 当前页展示的起始记录号
-	var fromRecord = ((curPage - 1) * pageSize) + 1; 
+	var fromRecord = ((curPage - 1) * pageSize) + 1;
     // 当前页展示的结尾记录号
-    var toRecord = Math.min(curPage * pageSize, totalCount); 
-    // 当前页展示的记录条数 
-    var totalOnCurPage = toRecord - fromRecord + 1; 
-    // 总的页数  
-    var totalPage = Math.ceil(totalCount / pageSize); 
+    var toRecord = Math.min(curPage * pageSize, totalCount);
+    // 当前页展示的记录条数
+    var totalOnCurPage = toRecord - fromRecord + 1;
+    // 总的页数
+    var totalPage = Math.ceil(totalCount / pageSize);
     
     // 若当前页是最后一页，且不是仅有的一页，且删除的记录数是当前页上的最后一条（因为我们是单条删除）
-    if (curPage === totalPage && totalPage != 1 && totalOnCurPage == 1)  
-    {  
+    if (curPage === totalPage && totalPage != 1 && totalOnCurPage == 1){
     	// 更改store的当前页为前一页
-    	store.currentPage = store.currentPage-1;  
-    }    
+    	store.currentPage = store.currentPage-1;
+    }
 	
 	var url = rootPath + "/user/delete";
 	var data = {opId:opId};
@@ -336,8 +334,7 @@ function deleteSysOp(opId){
 		store.load();
 	};
 	var type = "json";
-	$.post(url, data, callback, type);
-	
+	$.post(url, data, callback, type);	
 }
 
 

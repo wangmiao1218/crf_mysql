@@ -19,6 +19,8 @@ var oOptions = {
     
     //x轴
     xAxis: {
+    	//直接动态
+    	//type: 'datetime',
         title: {
             text: 'X 轴 标 题'
         },

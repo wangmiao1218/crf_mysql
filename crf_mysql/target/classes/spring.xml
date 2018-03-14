@@ -83,4 +83,33 @@
 		<aop:pointcut id="transactionPointcut" expression="execution (* com.gennlife.crf.service..*Impl.*(..))"/>
 		<aop:advisor advice-ref="transactionAdvice" pointcut-ref="transactionPointcut"/>
 	</aop:config>
+	
+	
+	<!-- 开始整合定时任务 -->
+	<!-- 定义TriggerServiceBean(手动引入，不需要@service注解) -->
+    <bean id="triggerService" class="com.gennlife.crf.service.impl.TriggerServiceImpl"></bean>
+    
+	<!-- start 整合quartz -->
+    <bean id="jobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+	    <property name="targetObject" ref="triggerService" />
+	    <property name="targetMethod" value="doIt" />
+	</bean>
+	
+	<bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+	    <property name="jobDetail" ref="jobDetail" />
+	    <!-- 没5秒执行一次(测试) -->
+	    <property name="cronExpression" value="*/5 * * * * ?" />
+	    <!--每天晚上12点导出  -->
+	    <!-- <property name="cronExpression" value="0 0 0 * * ?" /> -->
+	</bean>
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+	    <property name="triggers">
+	        <list>
+	            <ref bean="cronTrigger" />
+	        </list>
+	    </property>
+	</bean>
+	<!-- 整合quartz end -->
+	
+	
 </beans>

@@ -13,8 +13,8 @@ import com.gennlife.crf.service.CreateRwsTaskSerive;
 @Service
 public class CreateRwsTaskSeriveImpl implements CreateRwsTaskSerive{
 
-	@Autowired
-	private CreateRwsTaskSerive createRwsTaskSerive;
+	/*@Autowired
+	private CreateRwsTaskSerive createRwsTaskSerive;*/
 	
 	@Override
 	public void createRwsTask() throws Exception {

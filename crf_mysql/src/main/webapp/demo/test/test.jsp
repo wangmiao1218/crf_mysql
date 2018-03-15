@@ -23,16 +23,6 @@
 	<div>
 		<h5>指标对比</h5>
 	</div>
-
-    <label class="form-label col-xs-1 col-sm-1"><strong>指标：</strong></label>  
-    <div class="formControls col-xs-2 col-sm-2">  
-        <select name="shipment.endstation" id="endstation">  
-        </select>  
-    </div>  
-    <div class="formControls col-xs-2 col-sm-2">  
-        <select name="shipment.startstation" id="startstation">  
-        </select>  
-    </div>  
     
 	<div id="container" style="height: 400px; max-width: 800px; margin: 0 auto"></div>
 	

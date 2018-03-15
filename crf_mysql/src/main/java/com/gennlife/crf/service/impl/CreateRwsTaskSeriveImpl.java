@@ -4,17 +4,11 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.gennlife.crf.service.CreateRwsTaskSerive;
 
 @Service
 public class CreateRwsTaskSeriveImpl implements CreateRwsTaskSerive{
-
-	/*@Autowired
-	private CreateRwsTaskSerive createRwsTaskSerive;*/
 	
 	@Override
 	public void createRwsTask() throws Exception {

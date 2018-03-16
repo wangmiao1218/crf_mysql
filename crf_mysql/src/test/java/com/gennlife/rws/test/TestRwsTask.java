@@ -1,27 +1,43 @@
-package com.gennlife.crf.service.impl;
+package com.gennlife.rws.test;
 
 import java.util.Date;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
-import org.springframework.stereotype.Service;
-import com.gennlife.crf.service.CreateRwsTaskSerive;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
 import com.gennlife.crf.utils.CreateWebDriver;
 import com.gennlife.crf.utils.QuitWebDriver;
 import com.gennlife.rws.RwsTask;
 
-@Service
-public class CreateRwsTaskSeriveImpl implements CreateRwsTaskSerive{
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration("classpath:spring.xml")
+public class TestRwsTask {
 	
 	public static final String rwsUrl="http://10.0.2.162/uranus/project_index.html";
-	
-	@Override
+	private static final String loginName="testrws001";
+	private static final String pwd="testrws001";
+
+	@Test
 	public void createRwsTask() throws Exception {
-		//开始执行定时任务（用三个线程,模拟三个用户）
-		//=====================线程池方法====================================
-		//创建线程池并返回ExecutorService实例 
+		// 登录并到add页面
+		PhantomJSDriver driver = CreateWebDriver.createWebDriverByPhantomJSDriver();
+		String value = RwsTask.createRwsTask(driver, rwsUrl,loginName, pwd);
+		System.out.println(value);
+		// 关闭driver
+		QuitWebDriver.quitWebDriverByPhantomJSDriver(driver);
+	}
+	
+	
+	@Test
+	public void createRwsTaskThreadReturnCallable() throws Exception {
 		ExecutorService threadPool =Executors.newFixedThreadPool(3); 
 		// 执行任务
 		Future<String> futureTest1 = threadPool.submit(new Callable<String>() {
@@ -73,7 +89,7 @@ public class CreateRwsTaskSeriveImpl implements CreateRwsTaskSerive{
 			}
 		});
 		
-		try {
+		try {  
 			futureTest1.get();  
 			futureTest2.get();
 			futureTest3.get(); 
@@ -89,5 +105,25 @@ public class CreateRwsTaskSeriveImpl implements CreateRwsTaskSerive{
         	System.out.println("Error");
 		} 
 	}
+	
+	
+	//测试单个线程，是否成功
+	@Test
+	public void createRwsTaskThreadReturnCallable2() throws Exception {
+		String callableTest = new Callable<String>() {
+			@Override
+			public String call() throws Exception {
+				// 登录并到add页面
+				PhantomJSDriver driver = CreateWebDriver.createWebDriverByPhantomJSDriver();
+				String value = RwsTask.createRwsTask(driver, rwsUrl,loginName, pwd);
+				System.out.println(value);
+				// 关闭driver
+				QuitWebDriver.quitWebDriverByPhantomJSDriver(driver);
+				return "success";
+			}
+		}.call();
+		System.out.println(callableTest);
+	}
+
 	
 }

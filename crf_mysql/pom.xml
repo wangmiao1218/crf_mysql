@@ -3,64 +3,90 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.gennlife</groupId>
 	<artifactId>crf_mysql</artifactId>
+
 	<version>0.0.1-SNAPSHOT</version>
+	<!-- logback配置版本-->
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<logback.version>1.1.7</logback.version>
+		<slf4j.version>1.7.21</slf4j.version>
+	</properties>
+
 	<dependencies>
+		<!-- logback配置 -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-core</artifactId>
+			<version>${logback.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>${logback.version}</version>
+		</dependency>
+
 		<!-- 生成二维码 -->
 		<!-- https://mvnrepository.com/artifact/com.google.zxing/core -->
 		<dependency>
-		    <groupId>com.google.zxing</groupId>
-		    <artifactId>core</artifactId>
-		    <version>3.3.0</version>
+			<groupId>com.google.zxing</groupId>
+			<artifactId>core</artifactId>
+			<version>3.3.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.google.zxing</groupId>
 			<artifactId>javase</artifactId>
-			<version>3.0.0</version>   
-		 </dependency>
-		
+			<version>3.0.0</version>
+		</dependency>
+
 		<!-- 合并多个pdf为一个pdf文件 -->
 		<!-- https://mvnrepository.com/artifact/com.lowagie/itext -->
 		<dependency>
-		    <groupId>com.lowagie</groupId>
-		    <artifactId>itext</artifactId>
-		    <version>2.1.7</version>
+			<groupId>com.lowagie</groupId>
+			<artifactId>itext</artifactId>
+			<version>2.1.7</version>
 		</dependency>
-	
+
 		<!--利用jsonpath 解析json(换版本会报错) -->
 		<!-- https://mvnrepository.com/artifact/com.jayway.jsonpath/json-path -->
 		<dependency>
-		    <groupId>net.minidev</groupId>
-		    <artifactId>json-smart</artifactId>
-		    <version>2.2.1</version>
+			<groupId>net.minidev</groupId>
+			<artifactId>json-smart</artifactId>
+			<version>2.2.1</version>
 		</dependency>
 		<dependency>
-		    <groupId>com.jayway.jsonpath</groupId>
-		    <artifactId>json-path</artifactId>
-		    <version>2.2.0</version>
+			<groupId>com.jayway.jsonpath</groupId>
+			<artifactId>json-path</artifactId>
+			<version>2.2.0</version>
 		</dependency>
-		
+
 		<!-- 解析html -->
 		<dependency>
 			<groupId>org.jsoup</groupId>
 			<artifactId>jsoup</artifactId>
 			<version>1.10.3</version>
 		</dependency>
-	
-		<!--mongodb  -->
+
+		<!--mongodb -->
 		<dependency>
 			<groupId>org.mongodb</groupId>
 			<artifactId>mongo-java-driver</artifactId>
 			<version>3.2.0</version>
 		</dependency>
-		
+
 		<!-- JavaCSV -->
 		<!-- https://mvnrepository.com/artifact/net.sourceforge.javacsv/javacsv -->
 		<dependency>
-	    	<groupId>net.sourceforge.javacsv</groupId>
-	    	<artifactId>javacsv</artifactId>
-	    	<version>2.0</version>
+			<groupId>net.sourceforge.javacsv</groupId>
+			<artifactId>javacsv</artifactId>
+			<version>2.0</version>
 		</dependency>
-		
+
 		<!-- Gson -->
 		<dependency>
 			<groupId>com.google.code.gson</groupId>

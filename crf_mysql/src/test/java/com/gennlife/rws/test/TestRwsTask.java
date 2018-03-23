@@ -35,7 +35,52 @@ public class TestRwsTask {
 		QuitWebDriver.quitWebDriverByPhantomJSDriver(driver);
 	}
 	
+	//优化过的多线程
+	@Test
+	public void CreateRwsCallable() throws Exception {
+		ExecutorService threadPool =Executors.newFixedThreadPool(3); 
+		// 执行任务
+		Future<String> futureTest1 = threadPool.submit(RwsTask.CreateRwsCallable(rwsUrl, "testrws001", "testrws001"));
+		Future<String> futureTest2 = threadPool.submit(RwsTask.CreateRwsCallable(rwsUrl, "testrws002", "testrws002"));
+		Future<String> futureTest3 = threadPool.submit(RwsTask.CreateRwsCallable(rwsUrl, "testrws003", "testrws003"));
+		
+		try {  
+			futureTest1.get();  
+			futureTest2.get();
+			futureTest3.get(); 
+		} catch (InterruptedException e) {  
+			e.printStackTrace();  
+		} 
+		
+		//关闭线程池
+		if (futureTest1.isDone() && futureTest2.isDone() && futureTest3.isDone()) {
+			//关闭线程池和服务  
+			threadPool.shutdown();
+		} else {
+			System.out.println("Error");
+		} 
+	}
 	
+	
+	//测试单个线程，是否成功
+	@Test
+	public void createRwsTaskThreadReturnCallable2() throws Exception {
+		String callableTest = new Callable<String>() {
+			@Override
+			public String call() throws Exception {
+				// 登录并到add页面
+				PhantomJSDriver driver = CreateWebDriver.createWebDriverByPhantomJSDriver();
+				String value = RwsTask.createRwsTask(driver, rwsUrl,loginName, pwd);
+				System.out.println(value);
+				// 关闭driver
+				QuitWebDriver.quitWebDriverByPhantomJSDriver(driver);
+				return "success";
+			}
+		}.call();
+		System.out.println(callableTest);
+	}
+
+
 	@Test
 	public void createRwsTaskThreadReturnCallable() throws Exception {
 		ExecutorService threadPool =Executors.newFixedThreadPool(3); 
@@ -106,50 +151,5 @@ public class TestRwsTask {
 		} 
 	}
 	
-	
-	@Test
-	public void CreateRwsCallable() throws Exception {
-		ExecutorService threadPool =Executors.newFixedThreadPool(3); 
-		// 执行任务
-		Future<String> futureTest1 = threadPool.submit(RwsTask.CreateRwsCallable(rwsUrl, "testrws001", "testrws001"));
-		Future<String> futureTest2 = threadPool.submit(RwsTask.CreateRwsCallable(rwsUrl, "testrws002", "testrws002"));
-		Future<String> futureTest3 = threadPool.submit(RwsTask.CreateRwsCallable(rwsUrl, "testrws003", "testrws003"));
-		
-		try {  
-			futureTest1.get();  
-			futureTest2.get();
-			futureTest3.get(); 
-		} catch (InterruptedException e) {  
-			e.printStackTrace();  
-		} 
-		
-		//关闭线程池
-		if (futureTest1.isDone() && futureTest2.isDone() && futureTest3.isDone()) {
-			//关闭线程池和服务  
-			threadPool.shutdown();
-		} else {
-			System.out.println("Error");
-		} 
-	}
-	
-	
-	//测试单个线程，是否成功
-	@Test
-	public void createRwsTaskThreadReturnCallable2() throws Exception {
-		String callableTest = new Callable<String>() {
-			@Override
-			public String call() throws Exception {
-				// 登录并到add页面
-				PhantomJSDriver driver = CreateWebDriver.createWebDriverByPhantomJSDriver();
-				String value = RwsTask.createRwsTask(driver, rwsUrl,loginName, pwd);
-				System.out.println(value);
-				// 关闭driver
-				QuitWebDriver.quitWebDriverByPhantomJSDriver(driver);
-				return "success";
-			}
-		}.call();
-		System.out.println(callableTest);
-	}
-
 	
 }

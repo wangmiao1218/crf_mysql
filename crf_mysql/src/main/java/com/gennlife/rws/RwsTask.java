@@ -1,7 +1,14 @@
 package com.gennlife.rws;
 
+import java.util.Date;
+import java.util.concurrent.Callable;
+
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import com.gennlife.crf.utils.CreateWebDriver;
 import com.gennlife.crf.utils.LoginRws;
+import com.gennlife.crf.utils.QuitWebDriver;
 
 /**
  * @Description: 执行rws的计算相关方法（rws定时程序使用，动态传url地址、用户与密码）
@@ -10,11 +17,13 @@ import com.gennlife.crf.utils.LoginRws;
  */
 public class RwsTask {
 	
+	private static final Logger logger = LoggerFactory.getLogger(RwsTask.class);
+	
 	public static final String firstProjectXpath="//*[@id='item-list-container']/tbody/tr[1]/td[2]/a";
 	public static final String projectId="rws_defined.html";
 	public static final String firstIndexXpath=" //*[@id='app']/div/div/div/div[2]/div/div[1]/table/tbody/tr[1]/td[2]/a";
 	//保存指标的按钮的xpath
-	public static final String indexToSaveButtonXpath="//*[@id='app']/div/div/div[2]/div/div[2]/button[2]";
+	public static final String indexToSaveButtonXpath="//*[@id='model']/div[2]/div/div[2]/button[2]";
 	//保存事件的按钮的xpath
 	//public static final String eventToSaveButtonXpath=" //*[@id='app']/div/div/div[2]/div/button[2]";
 	//第一个条件的日期输入框
@@ -39,6 +48,7 @@ public class RwsTask {
 		String returnString=null;
 		String loginValue = LoginRws.loginAndToRwsByPhantomJSDriver(driver, rwsUrl, loginName, pwd);
 		if ("登陆成功".equals(loginValue)) {
+			logger.info("login success");
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
@@ -54,13 +64,14 @@ public class RwsTask {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			
+			logger.info("To firstProject success");
 			driver.findElementByXPath(firstIndexXpath).click();
 			try {
 				Thread.sleep(2000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
+			logger.info("To firstIndex success");
 			/*
 			 * 页面没有切换，所以不用切换到新的窗口
 			// 得到当前窗口的set集合,将set集合存入list对象, 切换到弹出的新窗口
@@ -101,6 +112,36 @@ public class RwsTask {
 			returnString="error";
 		}
 		return returnString;
+	}
+	
+	
+	/** 
+	* @Title: CreateRwsCallable 
+	* @Description: 创建rws的Callable，返回Callable实例，便于多线程调用
+	* @param: @param rwsUrl
+	* @param: @param loginName
+	* @param: @param pwd
+	* @return: Callable<String> 返回Callable实例
+	* @throws 
+	*/
+	public static Callable<String> CreateRwsCallable(final String rwsUrl,
+			final String loginName,final String pwd) {
+		return new Callable<String>() {
+			@Override
+			public String call() throws Exception {
+				PhantomJSDriver driver = CreateWebDriver.createWebDriverByPhantomJSDriver();
+				//执行登录并改条件执行计算
+				String value = RwsTask.createRwsTask(driver, rwsUrl,loginName, pwd);
+				// 关闭driver
+				QuitWebDriver.quitWebDriverByPhantomJSDriver(driver);
+				if ("保存成功".equals(value)) {
+					logger.info(loginName+"_success_"+new Date());
+					return "success";
+				}else {
+					return "error";
+				}
+			}
+		};
 	}
 	
 	

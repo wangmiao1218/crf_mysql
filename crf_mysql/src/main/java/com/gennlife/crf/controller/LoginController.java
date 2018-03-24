@@ -3,6 +3,7 @@ package com.gennlife.crf.controller;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +11,7 @@ import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.collections4.map.HashedMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.gennlife.crf.bean.CrfTemplate;
+import com.gennlife.crf.bean.SysFuncBean;
 import com.gennlife.crf.bean.SysOp;
 import com.gennlife.crf.service.CrfTemplateService;
 import com.gennlife.crf.service.LoginService;
@@ -42,7 +45,6 @@ public class LoginController {
 	
 	@Autowired
 	private CrfTemplateService crfTemplateService;
-	
 	
 
 	/**
@@ -146,7 +148,47 @@ public class LoginController {
 		return list;
 	}
 
-	
+	//获取列表(!!!!!!!!!!!!!!!!!!!!!报错)
+	@ResponseBody
+	@RequestMapping("getMenu_bug")
+	public List<SysFuncBean> getMenu_bug(HttpSession session) throws Exception{
+		//获取用户opid
+		SysOp sysOp = (SysOp) session.getAttribute("currentUser");
+		Long opId = (long) sysOp.getOpId();
+		
+		//构建一个map 作为参数传到后台
+		Map<String, Object> map = new HashedMap<>();
+		map.put("opId", opId);
+		
+		//执行查询
+		List<SysFuncBean> list = loginService.selectSysFuncByOpId(map);
+		
+		List<SysFuncBean> newList =new ArrayList<>();;
+		
+		//拼装一棵树
+		//第一次循环
+		for (int i = 0; i < list.size(); i++) {
+			SysFuncBean parent = list.get(i);
+			//拿到一级节点
+			if (list.get(i).getFuncLevel().equals(new Short("1") )) {
+				//第二次循环，找其他子节点
+				List<SysFuncBean> childList=new ArrayList<>();
+				for (int j = 0; j < list.size(); j++) {
+					SysFuncBean child = list.get(j);
+					if (parent.getFuncId().equals(child.getSupFuncId())) {
+						childList.add(child);
+					}
+				}
+				//将子节点列表放入到父节点中
+				parent.setChildren(childList);
+				newList.add(parent);
+			}
+		}
+		
+		//返回
+		return newList;
+	}
+		
 	/*@RequestMapping("/list")
 	public String list(@RequestParam(value="pageNo",required=false) String pageNoStr,
 			Map<String, Object> map){

@@ -24,7 +24,6 @@
 		<include refid="CrfTemplateTest4_Column_List"></include>
 		from crf_template_yantai_test4
 	</select>
-	
 
 	<!-- 通过baseName查询列表 -->
 	<select id="getCrfTemplateTest4ListByBaseName" resultMap="BaseResultMap" parameterType="java.lang.String">

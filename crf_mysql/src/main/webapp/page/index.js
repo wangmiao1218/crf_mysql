@@ -23,10 +23,10 @@ function getMenu() {
 	var menuData ="";
 	
 	$.ajax({
-	 // 注意请求地址也要变为动态
-   	/* url : rootPath + '/logincontroller/getMenu',*/
+	 // 注意请求地址也要变为动态(报错中，还没联调)
+	 //url : rootPath + '/logincontroller/getMenu',
    	 // 注意请求地址也要变为动态
-   	 url : rootPath + '/crfTemplateController/getCrfTemplateList',
+   	 //url : rootPath + '/crfTemplateController/getCrfTemplateList',
    	 // 同步：false,默认是true
    	 async : false,
    	 dataType: 'json',
@@ -110,7 +110,6 @@ function getMenu() {
    	 	 alert("请求失败");
    	 }
    });
-	
 
 };
 

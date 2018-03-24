@@ -1,6 +1,6 @@
 /*
  * index.js 框架交互js
- * author gaomy
+ * author wangmiao
  */
 function menuOpera(){
 	var $mn = $(".frt span");

@@ -9,14 +9,14 @@ import com.gennlife.crf.bean.SysFuncBean;
 public interface SysFuncMapper {
 	
 	/** 
-	* @Title: selectSysFuncByOpId 
-	* @Description: 根据OP_ID查询菜单
+	* @Title: selectSysFuncList 
+	* @Description: 查询菜单列表数据
 	* @param: @param map
 	* @param: @return
 	* @param: @throws Exception :
 	* @return: List<SysFuncBean>
 	* @throws 
 	*/
-	public List<SysFuncBean> selectSysFuncByOpId(Map<String, Object> map) throws Exception;
+	public List<SysFuncBean> selectSysFuncList(Map<String, Object> map) throws Exception;
 	
 }

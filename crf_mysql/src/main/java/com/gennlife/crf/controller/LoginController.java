@@ -35,7 +35,7 @@ import com.gennlife.crf.utils.VerifyCodeUtil;
  * @Date: 2017年6月14日 下午6:22:02
  */
 @Controller
-@RequestMapping("logincontroller")
+@RequestMapping("loginController")
 public class LoginController {
 
 	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
@@ -117,10 +117,8 @@ public class LoginController {
 			redirectAttributes.addFlashAttribute("errMsg", "用户名密码不正确");
 			return "redirect:/login";
 		}
-
 		// 登录用户信息放到session中
 		session.setAttribute("currentUser", sysOp);
-
 		// 成功返回主页
 		//测试return "redirect:/page/list.html";
 		return "redirect:/index";
@@ -130,41 +128,19 @@ public class LoginController {
 	
 	/** 
 	* @Title: getMenu 
-	* @Description: 获取CrfTemplate列表,获取菜单
-	* @param: @param session
+	* @Description: 获取菜单列表(!!!!!!!!!!!!!!!!!!!!!报错)
+	* @param: @param map
 	* @param: @return
 	* @param: @throws Exception :
-	* @return: List<CrfTemplate>
+	* @return: List<SysFuncBean>
 	* @throws 
 	*/
 	@ResponseBody
-	@RequestMapping(value = "getMenu", method = RequestMethod.GET)
-	public List<CrfTemplate> getMenu(HttpSession session,Map<String, Object> map) throws Exception {
-
-		// 执行查询
-		List<CrfTemplate> list = crfTemplateService.getCrfTemplateList(map);
-		map.put("newList", list);
-		// 返回
-		return list;
-	}
-
-	//获取列表(!!!!!!!!!!!!!!!!!!!!!报错)
-	@ResponseBody
-	@RequestMapping("getMenu_bug")
-	public List<SysFuncBean> getMenu_bug(HttpSession session) throws Exception{
-		//获取用户opid
-		SysOp sysOp = (SysOp) session.getAttribute("currentUser");
-		Long opId = (long) sysOp.getOpId();
-		
-		//构建一个map 作为参数传到后台
-		Map<String, Object> map = new HashedMap<>();
-		map.put("opId", opId);
-		
+	@RequestMapping("getMenu")
+	public List<SysFuncBean> getMenu(Map<String, Object> map) throws Exception{
 		//执行查询
-		List<SysFuncBean> list = loginService.selectSysFuncByOpId(map);
-		
+		List<SysFuncBean> list = loginService.selectSysFuncList(map);
 		List<SysFuncBean> newList =new ArrayList<>();;
-		
 		//拼装一棵树
 		//第一次循环
 		for (int i = 0; i < list.size(); i++) {
@@ -184,24 +160,8 @@ public class LoginController {
 				newList.add(parent);
 			}
 		}
-		
 		//返回
 		return newList;
 	}
 		
-	/*@RequestMapping("/list")
-	public String list(@RequestParam(value="pageNo",required=false) String pageNoStr,
-			Map<String, Object> map){
-		int pageNo=1;
-		
-		try {
-			pageNo=Integer.parseInt(pageNoStr);
-		} catch (Exception e) {
-		}
-		
-		Page<User> page = userService.getPage(pageNo);
-		map.put("page", page);
-		
-		return "page/list";
-	}*/
 }

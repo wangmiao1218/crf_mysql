@@ -27,9 +27,10 @@ public class LoginServiceImpl implements LoginService{
 	}
 
 	@Override
-	public List<SysFuncBean> selectSysFuncByOpId(Map<String, Object> map)
+	public List<SysFuncBean> selectSysFuncList(Map<String, Object> map)
 			throws Exception {
-		return sysFuncMapper.selectSysFuncByOpId(map);
+		return sysFuncMapper.selectSysFuncList(map);
 	}
+
 
 }

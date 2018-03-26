@@ -19,8 +19,8 @@
 		</div>
 		<div class="nav">
 			<img src="<%=rootPath%>/theme/gray/images/logo.png" alt="生命奇点自动化测试平台" />
+			<!--左侧树  -->
 			<ul id="menu" class="menu">
-
 			</ul>
 		</div>
 		<!-- 右侧主内容 -->
@@ -37,7 +37,8 @@
 					</div>
 				</div>
 				<div class="">
-					<iframe src="page/crfList/crfMgnt.jsp" frameborder="0" scrolling="no"
+				<!--对应index.js中getMenu()的 oper = 'onclick=……操作的点击链接。默认显示crfMgnt.jsp -->
+				<iframe src="page/crfList/crfMgnt.jsp" frameborder="0" scrolling="no"
 						height="2300px" width="100%" id="indexiframe"></iframe>
 				</div>
 			</div>

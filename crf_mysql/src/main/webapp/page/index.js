@@ -24,9 +24,7 @@ function getMenu() {
 	
 	$.ajax({
 	 // 注意请求地址也要变为动态(报错中，还没联调)
-	 //url : rootPath + '/logincontroller/getMenu',
-   	 // 注意请求地址也要变为动态
-   	 //url : rootPath + '/crfTemplateController/getCrfTemplateList',
+	 url : rootPath + '/loginController/getMenu',
    	 // 同步：false,默认是true
    	 async : false,
    	 dataType: 'json',
@@ -66,11 +64,11 @@ function getMenu() {
    					css += "acc-ico";
    				} else if (menu.funcCode == "MAINTENANCE_MENT") {
    					css +="acc-ico";
-   				}else if (menu.funcCode == "SHANGPINGUANLI") {
+   				}else if (menu.funcCode == "CRFLURUZIDONGHUA") {//sys_func表的func_Code字段，对应前台显示的左侧列图标
    					css +="goods-ico";
-   				}else if (menu.funcCode == "DINGDANGUANLI") {
+   				}else if (menu.funcCode == "GAOJISOUSUOZIDONGHUA") {
    					css +="busi-ico";
-   				}else if (menu.funcCode == "GONGYINGSHANGGUANLI") {
+   				}else if (menu.funcCode == "EMPIZIDONGHUA") {
    					css +="acc-ico";
    				}else {
    					css +="acc-ico";
@@ -92,7 +90,7 @@ function getMenu() {
    							}
    						}
    					}
-   					secondMenuHtml+="</ul>"
+   					secondMenuHtml+="</ul>";
    					menuHtml = "<li class=\"frt hasMenu\"><span "+oper+" ><i id=\""+menu.funcId+"\"" +css+"></i>"+menu.funcName+"</span><em class=\"m-arrow\">></em>"+secondMenuHtml+"</li>";
    				} else {
    					menuHtml = "<li id=\"defaultPage"+firstCount+"\" idsrc=\"page/+"+menu.funcUrl+"\" class=\"frt\"><span "+oper+" ><i id=\""+menu.funcId+"\"" +css+"></i>"+menu.funcName+"</span></li>";

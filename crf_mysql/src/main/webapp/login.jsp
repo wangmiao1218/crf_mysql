@@ -53,7 +53,7 @@
 <body class="lg-wrap">
 	<div class="wrapper2">
 		<!-- 使用shiro登录验证：loginShiro ，不使用为login-->
-		<form class="login-cnt" action="<%=rootPath%>/logincontroller/login" method="POST">
+		<form class="login-cnt" action="<%=rootPath%>/loginController/login" method="POST">
 			<ul class="login">
 				<li>
 					<label class="login-tip">用户名</label> 
@@ -73,7 +73,7 @@
 					<span class="login-ipt code-ipt"> 
 					<input type="text" name="verifyCode" id="verifyCode" />
 					</span> 
-					<img id="verifyCodeImage" class="verify-code" onclick="reloadVerifyCode()" src="<%=rootPath%>/logincontroller/getVerifyCode" /> 
+					<img id="verifyCodeImage" class="verify-code" onclick="reloadVerifyCode()" src="<%=rootPath%>/loginController/getVerifyCode" /> 
 					<em class="ver-turn" onclick="reloadVerifyCode()" title="换一张">换一张</em>
 				</li>
 				<li class="login-action">

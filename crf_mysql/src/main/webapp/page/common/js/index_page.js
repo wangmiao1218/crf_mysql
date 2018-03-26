@@ -59,7 +59,6 @@ function setIframeHeight(obj) {
 				//iframe.height = height;
 				iframe.style.height=height+"px";
 				
-
 			} catch (e) {}	
 		}
 	} catch (e) {}

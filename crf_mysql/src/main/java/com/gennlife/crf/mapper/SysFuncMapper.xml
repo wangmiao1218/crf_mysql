@@ -62,15 +62,10 @@
 	</sql>
 
 	<!-- 查询菜单 -->
-	<select id="selectSysFuncByOpId" resultMap="FuncResultMap"
-		parameterType="java.util.Map">
-		select
+	<select id="selectSysFuncList" resultMap="FuncResultMap" parameterType="java.util.Map">
+		SELECT
 		<include refid="Func_Column_List"></include>
-		from sys_func sf where
-		sf.FUNC_ID in (
-		select DISTINCT srf.FUNC_ID from SYS_ROLE_FUNC srf,SYS_OP_ROLE sor
-		where srf.ROLE_ID = sor.ROLE_ID and sor.OP_ID = #{opId}
-		)
+		from sys_func 
 	</select>
 
 </mapper>

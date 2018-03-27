@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>表单验证-JS方式验证</title>
+<!-- jQueryValidator 依赖jQuery包，所以要先导入jQuery -->
+<script type="text/javascript" src="../../res/jquery/jquery-1.6.4.min.js"></script>
+<!-- 导入 jQueryValidator -->
+<script type="text/javascript" src="../../res/jquery/plugins/jquery.validate.min.js" ></script>
+<script type="text/javascript" src="../../res/jquery/plugins/jquery.validate.message_cn.js" ></script>
+<script type="text/javascript">
+	
+	$.validator.setDefaults({
+		// 当表单提交时，验证通过，重新绑定提交方法
+		submitHandler:function(){
+			alert("提交了");
+		}
+	});
+	
+	$().ready(function(){
+		// 当表单提交的时候进行内容校验
+		$("#testForm").validate({
+			rules:{
+				opName:{
+					required:true,
+					rangelength:[2,2]
+				}
+			},
+			messages:{
+				opName:{
+					required:"请输入操作员名称",
+					minlength:"操作员名称长度不能小于2"
+				}
+			}
+		});
+	});
+
+</script>
+</head>
+<body>
+	<form action="" method="post" id="testForm">
+		操作员名称：<input type="text" id="opName" name="opName"> <br><br>
+		邮箱地址：<input type="text" id="email" name="email"> <br><br>
+		性别：<input type="radio" name="gender">男
+			 <input type="radio" name="gender">女
+		<br><br>
+		
+		<input type="submit" value="提交" >
+	</form>
+</body>
+</html>

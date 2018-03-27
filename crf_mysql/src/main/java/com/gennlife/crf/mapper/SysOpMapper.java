@@ -10,13 +10,13 @@ import com.gennlife.crf.bean.SysOp;
 public interface SysOpMapper {
 	
     /** 
-    * @Title: getSysOpByUnameAndPwd 
+    * @Title: selectSysOpByUnameAndPwd 
     * @Description: 根据用户名密码查询
     * @param: SysOp sysOp
     * @param: @throws Exception :
     * @return: SysOp
     * @throws 
     */
-    public SysOp getSysOpByUnameAndPwd(SysOp sysOp) throws Exception;
+    public SysOp selectSysOpByUnameAndPwd(SysOp sysOp) throws Exception;
 
 }

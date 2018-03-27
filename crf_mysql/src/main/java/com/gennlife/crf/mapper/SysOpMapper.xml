@@ -2,16 +2,39 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.gennlife.crf.mapper.SysOpMapper" >
 
-  <resultMap id="BaseResultMap" type="com.gennlife.crf.bean.SysOp" >
+  <!-- <resultMap id="BaseResultMap" type="com.gennlife.crf.bean.SysOp" >
     <id column="OP_ID" property="opId" jdbcType="INTEGER" />
     <result column="LOGIN_NAME" property="loginName" jdbcType="VARCHAR" />
     <result column="LOGIN_PASSWD" property="loginPasswd" jdbcType="VARCHAR" />
+  </resultMap> -->
+  
+  <resultMap id="BaseResultMap" type="com.gennlife.crf.bean.SysOp" >
+    <id column="OP_ID" property="opId" jdbcType="DECIMAL" />
+    <result column="OP_NAME" property="opName" jdbcType="VARCHAR" />
+    <result column="OP_CODE" property="opCode" jdbcType="VARCHAR" />
+    <result column="OP_KIND" property="opKind" jdbcType="DECIMAL" />
+    <result column="OP_PIC" property="opPic" jdbcType="VARCHAR" />
+    <result column="MOBILE_NO" property="mobileNo" jdbcType="VARCHAR" />
+    <result column="EMAIL_ADRESS" property="emailAdress" jdbcType="VARCHAR" />
+    <result column="LOGIN_CODE" property="loginCode" jdbcType="VARCHAR" />
+    <result column="LOGIN_PASSWD" property="loginPasswd" jdbcType="VARCHAR" />
+    <result column="LOCK_FLAG" property="lockFlag" jdbcType="DECIMAL" />
+    <result column="DATA_STATE" property="dataState" jdbcType="DECIMAL" />
+    <result column="CREATOR" property="creator" jdbcType="DECIMAL" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="MODIFIER" property="modifier" jdbcType="DECIMAL" />
+    <result column="MODIFY_DATE" property="modifyDate" jdbcType="TIMESTAMP" />
   </resultMap>
   
   <sql id="SysOpMapper_Column_List" >
-    OP_ID, LOGIN_NAME, LOGIN_PASSWD
+    OP_ID, OP_NAME, OP_CODE, OP_KIND, OP_PIC, MOBILE_NO, EMAIL_ADRESS, LOGIN_CODE, LOGIN_PASSWD, 
+    LOCK_FLAG, DATA_STATE, CREATOR, CREATE_DATE, MODIFIER, MODIFY_DATE
   </sql>
   
+ <!--  <sql id="SysOpMapper_Column_List" >
+    OP_ID, LOGIN_NAME, LOGIN_PASSWD
+  </sql>
+   -->
   <!-- 根据用户名和密码查询用户 -->
   <select id="getSysOpByUnameAndPwd" resultMap="BaseResultMap" parameterType="com.gennlife.crf.bean.SysOp">
   	SELECT 
@@ -21,6 +44,16 @@
 	 <if test="loginPasswd != null">
 		and s.LOGIN_PASSWD= #{loginPasswd}
 	 </if>
+  </select>
+  
+  
+    <!-- 根据用户名和密码查询用户  -->
+  <select id="selectSysOpByUnameAndPwd" resultMap="BaseResultMap" parameterType="com.gennlife.crf.bean.SysOp">
+  		SELECT 
+		<include refid="SysOpMapper_Column_List"></include>
+		 from sys_op s 
+		where s.LOGIN_CODE= #{loginCode}
+		and s.LOGIN_PASSWD= #{loginPasswd}
   </select>
   
 </mapper>

@@ -25,7 +25,7 @@ public class LoginMapperAndServiceTest {
 	@Autowired
 	private LoginService loginService;
 	
-	
+	/*
 	@Test
 	public void testLoginService() throws Exception{
 		SysOp sysOp = new SysOp("admin", "admin");
@@ -42,6 +42,6 @@ public class LoginMapperAndServiceTest {
 		System.out.println(op.getLoginName());
 		System.out.println(op.getLoginPasswd());
 		
-	}
+	}*/
 
 }

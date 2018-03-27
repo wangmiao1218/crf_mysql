@@ -3,13 +3,31 @@ package com.gennlife.crf.bean;
 import java.util.List;
 
 /**
- * @Description: 查询左侧列表节点、子节点
+ * @Description: 查询左侧列菜单表节点、子节点
  * @author: wangmiao
- * @Date: 2018年3月24日 上午10:42:25 
+ * @Date: 2018年3月24日 上午10:42:25
  */
 public class SysFuncBean {
 	private List<SysFuncBean> children;
-	
+
+	private Long funcId;
+
+	private Short funcType;
+
+	private Long supFuncId;
+
+	private Short funcLevel;
+
+	private String funcCode;
+
+	private String funcName;
+
+	private Integer funcOrder;
+
+	private String funcUrl;
+
+	private String funcImg;
+
 	public List<SysFuncBean> getChildren() {
 		return children;
 	}
@@ -17,24 +35,6 @@ public class SysFuncBean {
 	public void setChildren(List<SysFuncBean> children) {
 		this.children = children;
 	}
-
-	private Long funcId;
-
-    private Short funcType;
-
-    private Long supFuncId;
-
-    private Short funcLevel;
-
-    private String funcCode;
-
-    private String funcName;
-
-    private Integer funcOrder;
-
-    private String funcUrl;
-
-    private String funcImg;
 
 	public Long getFuncId() {
 		return funcId;
@@ -107,5 +107,5 @@ public class SysFuncBean {
 	public void setFuncImg(String funcImg) {
 		this.funcImg = funcImg;
 	}
-	
+
 }

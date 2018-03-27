@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -106,19 +107,18 @@ public class LoginController {
 
 		// 用户名密码
 		SysOp param = new SysOp();
-		param.setLoginName(username);
+		param.setLoginCode(username);
 		param.setLoginPasswd(password);
 
 		// 后台查询
-		SysOp sysOp = loginService.getSysOpByUnameAndPwd(param);
-		System.out.println(sysOp);
+		SysOp sysOp = loginService.selectSysOpByUnameAndPwd(param);
 		if (sysOp == null) {
 			logger.debug("用户名密码不正确");
 			redirectAttributes.addFlashAttribute("errMsg", "用户名密码不正确");
 			return "redirect:/login";
 		}
 		// 登录用户信息放到session中
-		session.setAttribute("currentUser", sysOp);
+		session.setAttribute("loginSysOp", sysOp);
 		// 成功返回主页
 		//测试return "redirect:/page/list.html";
 		return "redirect:/index";
@@ -128,7 +128,7 @@ public class LoginController {
 	
 	/** 
 	* @Title: getMenu 
-	* @Description: 获取菜单列表(!!!!!!!!!!!!!!!!!!!!!报错)
+	* @Description: 通过登录的用户id，查询表，获取菜单列表
 	* @param: @param map
 	* @param: @return
 	* @param: @throws Exception :
@@ -137,7 +137,11 @@ public class LoginController {
 	*/
 	@ResponseBody
 	@RequestMapping("getMenu")
-	public List<SysFuncBean> getMenu(Map<String, Object> map) throws Exception{
+	public List<SysFuncBean> getMenu(HttpSession session) throws Exception{
+		SysOp sysOp = (SysOp) session.getAttribute("loginSysOp");
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("opId", sysOp.getOpId());
+		
 		//执行查询
 		List<SysFuncBean> list = loginService.selectSysFuncList(map);
 		List<SysFuncBean> newList =new ArrayList<>();;
@@ -163,5 +167,22 @@ public class LoginController {
 		//返回
 		return newList;
 	}
+	
+	
+	/** 
+	* @Title: logout 
+	* @Description: 退出功能 
+	* @param: @param session
+	* @param: @return
+	* @param: @throws Exception
+	* @return: String
+	* @throws 
+	*/
+	@RequestMapping("/logout")
+	public String logout(HttpSession session) throws Exception{
+		session.invalidate();
+		return "redirect:/login.jsp";
+	}
+	
 		
 }

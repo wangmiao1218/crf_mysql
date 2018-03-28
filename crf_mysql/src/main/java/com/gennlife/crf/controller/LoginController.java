@@ -12,6 +12,10 @@ import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,6 +82,7 @@ public class LoginController {
 
 	}
 
+	
 	/**
 	 * @Title: login
 	 * @Description: 登录(不使用shiro)
@@ -181,5 +186,59 @@ public class LoginController {
 		session.invalidate();
 		return "redirect:/login.jsp";
 	}
+	
+	
+	/** 
+	* @Title: loginShiro 
+	* @Description: 使用shiro登录
+	* @param: @param username
+	* @param: @param password
+	* @param: @param verifyCode
+	* @param: @param session
+	* @param: @param redirectAttributes
+	* @param: @return
+	* @param: @throws Exception
+	* @return: String
+	* @throws 
+	*/
+	@RequestMapping(value = "loginShiro", method = RequestMethod.POST)
+	public String loginShiro(@RequestParam("username") String username,
+			String password, String verifyCode, HttpSession session,
+			RedirectAttributes redirectAttributes) throws Exception {
+		logger.debug("登陆参数为" + username + "---" + password + "---" + verifyCode);
+		//获取验证码
+		String sessionVerifyCode = (String) session.getAttribute("verifyCode");
+		if (!verifyCode.equals(sessionVerifyCode)) {
+			logger.debug("验证码不正确");
+			redirectAttributes.addFlashAttribute("errMsg","验证码不正确");
+			return "redirect:/login";
+		}
+		//当前用户信息
+		Subject currentUser = SecurityUtils.getSubject();
 		
+		//是否经过认证，是否登录
+		if (!currentUser.isAuthenticated()) {
+			// 构造一个UsernamePasswordToken，传入用户名和密码（来自于前台）
+			UsernamePasswordToken token = new UsernamePasswordToken(username, password);
+			//执行认证
+			try {
+				currentUser.login(token);
+			} catch (AuthenticationException ae) {
+				// 针对登录时相关的所有异常，在这处理
+            	logger.info("****>  发生了异常：" + ae.getMessage());
+            	//异常处理(同原来一致)
+            	redirectAttributes.addFlashAttribute("errMsg","验证码不正确");
+    			return "redirect:/login";
+			}
+		}
+		
+		// 怎么获取到用户的对象
+		// currentUser.getPrincipal()是realm在构造SimpleAuthenticationInfo的时候,Object principal，传入的sysOp对象
+		//登录用户信息放到session中
+		session.setAttribute("loginSysOp", currentUser.getPrincipal());
+		
+		return "redirect:/index";
+	}
+	
+	
 }

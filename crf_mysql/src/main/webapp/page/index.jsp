@@ -31,7 +31,7 @@
 					<div class="user-info">
 						<img src="<%=rootPath%>/theme/gray/images/po.jpg" class="portrait" /> 
 						<!-- 使用shiro控制权限 -->
-						<%-- <em class="user-xx">您好，<i><shiro:principal property="opName"></shiro:principal></i></em> --%> 
+						<!-- <em class="user-xx">您好，<i><shiro:principal property="opName"></shiro:principal></i></em>  -->
 						<em class="user-xx">您好，<i>xxxxx</i></em>
 						<em class="logout">注销</em>
 					</div>

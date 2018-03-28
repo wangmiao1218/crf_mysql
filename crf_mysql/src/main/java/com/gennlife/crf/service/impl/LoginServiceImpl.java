@@ -22,14 +22,14 @@ public class LoginServiceImpl implements LoginService{
 	private SysFuncMapper sysFuncMapper;
 	
 	@Override
-	public SysOp selectSysOpByUnameAndPwd(SysOp sysOp) throws Exception {
-		return sysOpMapper.selectSysOpByUnameAndPwd(sysOp);
+	public SysOp getSysOpByUnameAndPwd(SysOp sysOp) throws Exception {
+		return sysOpMapper.getSysOpByUnameAndPwd(sysOp);
 	}
 
 	@Override
-	public List<SysFuncBean> selectSysFuncList(Map<String, Object> map)
+	public List<SysFuncBean> getSysFuncByOpId(Map<String, Object> map)
 			throws Exception {
-		return sysFuncMapper.selectSysFuncByOpId(map);
+		return sysFuncMapper.getSysFuncByOpId(map);
 	}
 
 

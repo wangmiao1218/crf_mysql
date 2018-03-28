@@ -13,18 +13,18 @@ import com.gennlife.crf.bean.SysOp;
  */
 public interface LoginService {
 	/**
-	 * @Title: selectSysOpByUnameAndPwd
+	 * @Title: getSysOpByUnameAndPwd
 	 * @Description: 根据用户名密码查询
 	 * @param: SysOp sysOp
 	 * @param: @throws Exception :
 	 * @return: SysOp
 	 * @throws
 	 */
-	public SysOp selectSysOpByUnameAndPwd(SysOp sysOp) throws Exception;
+	public SysOp getSysOpByUnameAndPwd(SysOp sysOp) throws Exception;
 	
 	
     /** 
-    * @Title: selectSysFuncList 
+    * @Title: getSysFuncByOpId 
     * @Description: 查询菜单列表数据
     * @param: @param map
     * @param: @return
@@ -32,7 +32,7 @@ public interface LoginService {
     * @return: List<SysFuncBean>
     * @throws 
     */
-    public List<SysFuncBean> selectSysFuncList(Map<String, Object> map) throws Exception;
+    public List<SysFuncBean> getSysFuncByOpId(Map<String, Object> map) throws Exception;
 	
 
 }

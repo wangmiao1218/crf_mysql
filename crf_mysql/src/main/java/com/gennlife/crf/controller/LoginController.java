@@ -109,7 +109,7 @@ public class LoginController {
 		param.setLoginPasswd(password);
 
 		// 后台查询
-		SysOp sysOp = loginService.selectSysOpByUnameAndPwd(param);
+		SysOp sysOp = loginService.getSysOpByUnameAndPwd(param);
 		if (sysOp == null) {
 			logger.debug("用户名密码不正确");
 			redirectAttributes.addFlashAttribute("errMsg", "用户名密码不正确");
@@ -141,7 +141,7 @@ public class LoginController {
 		map.put("opId", sysOp.getOpId());
 		
 		//执行查询
-		List<SysFuncBean> list = loginService.selectSysFuncList(map);
+		List<SysFuncBean> list = loginService.getSysFuncByOpId(map);
 		List<SysFuncBean> newList =new ArrayList<>();;
 		//拼装一棵树
 		//第一次循环

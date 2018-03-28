@@ -18,7 +18,8 @@
 		<result column="FUNC_PARAM" property="funcParam" jdbcType="VARCHAR" />
 		<result column="IF_DISPLAY" property="ifDisplay" jdbcType="DECIMAL" />
 		<result column="IF_COMMENT" property="ifComment" jdbcType="DECIMAL" />
-		<result column="FUNC_HELP_FLAG" property="funcHelpFlag" jdbcType="DECIMAL" />
+		<result column="FUNC_HELP_FLAG" property="funcHelpFlag"
+			jdbcType="DECIMAL" />
 		<result column="FUNC_HELP_URL" property="funcHelpUrl" jdbcType="VARCHAR" />
 		<result column="DOMAIN_ID" property="domainId" jdbcType="DECIMAL" />
 		<result column="STATE" property="state" jdbcType="DECIMAL" />
@@ -28,7 +29,7 @@
 		<result column="MODIFIER" property="modifier" jdbcType="DECIMAL" />
 		<result column="MODIFY_DATE" property="modifyDate" jdbcType="TIMESTAMP" />
 	</resultMap>
-	
+
 	<!-- 构造自定义的结果集start -->
 	<resultMap id="FuncResultMap" type="com.gennlife.crf.bean.SysFuncBean">
 		<id column="FUNC_ID" property="funcId" jdbcType="DECIMAL" />
@@ -47,7 +48,7 @@
 		FUNC_NAME, FUNC_ORDER, FUNC_URL, FUNC_IMG
 	</sql>
 	<!-- 构造自定义的结果集end -->
-	
+
 	<sql id="Base_Column_List">
 		FUNC_ID, RES_ID, OPRT_TYPE_ID, FUNC_TYPE, SUP_FUNC_ID,
 		FUNC_LEVEL,
@@ -61,23 +62,16 @@
 		MODIFIER, MODIFY_DATE
 	</sql>
 
-	<!-- 查询菜单 -->
-	<!-- <select id="selectSysFuncList" resultMap="FuncResultMap" parameterType="java.util.Map">
-		SELECT
+	<!-- 根据用户id查询其拥有的功能，用来显示功能菜单 -->
+	<select id="getSysFuncByOpId" resultMap="FuncResultMap"
+		parameterType="java.util.Map">
+		select
 		<include refid="Func_Column_List"></include>
-		from sys_func 
-	</select> -->
-	
-  
-  <!-- 根据用户id查询其拥有的功能，用来显示功能菜单-->
-  <select id="selectSysFuncByOpId" resultMap="FuncResultMap" parameterType="java.util.Map">
-  	select 
-	<include refid="Func_Column_List"></include>
-	 from sys_func sf 
-	 where sf.FUNC_ID in (
-	 select DISTINCT srf.FUNC_ID from SYS_ROLE_FUNC srf,SYS_OP_ROLE sor 
-	 where srf.ROLE_ID = sor.ROLE_ID and sor.OP_ID = #{opId}
-	 )
-  </select>
+		from sys_func sf
+		where sf.FUNC_ID in (
+		select DISTINCT srf.FUNC_ID from SYS_ROLE_FUNC srf,SYS_OP_ROLE sor
+		where srf.ROLE_ID = sor.ROLE_ID and sor.OP_ID = #{opId}
+		)
+	</select>
 
 </mapper>

@@ -12,7 +12,6 @@ import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.collections4.map.HashedMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.gennlife.crf.bean.CrfTemplate;
 import com.gennlife.crf.bean.SysFuncBean;
 import com.gennlife.crf.bean.SysOp;
 import com.gennlife.crf.service.CrfTemplateService;
@@ -136,7 +134,7 @@ public class LoginController {
 	* @throws 
 	*/
 	@ResponseBody
-	@RequestMapping("getMenu")
+	@RequestMapping(value = "getMenu", method = RequestMethod.GET)
 	public List<SysFuncBean> getMenu(HttpSession session) throws Exception{
 		SysOp sysOp = (SysOp) session.getAttribute("loginSysOp");
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -178,11 +176,10 @@ public class LoginController {
 	* @return: String
 	* @throws 
 	*/
-	@RequestMapping("/logout")
+	@RequestMapping(value = "logout", method = RequestMethod.GET)
 	public String logout(HttpSession session) throws Exception{
 		session.invalidate();
 		return "redirect:/login.jsp";
 	}
-	
 		
 }

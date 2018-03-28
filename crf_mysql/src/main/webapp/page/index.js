@@ -10,7 +10,7 @@ Ext.onReady(function(){
 
 function initLogout(){
 	$(".logout").click(function(){
-		window.location.href = rootPath + "/doLogout";
+		window.location.href = rootPath + "/loginController/logout";
 	});
 	
 }

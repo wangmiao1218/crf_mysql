@@ -71,7 +71,6 @@
 				}
 			});	
 		});
-			
 	</script>
 </head>
 <body>
@@ -128,7 +127,7 @@
               </li>
             </ul>
               </form>
-            <div class="form-aciton">
+            <div class="form-aciton" style="width:300px;margin-left:auto;margin-right:auto;">
                 <button class="submit-btn" onclick="saveUser()">确定</button>
                 <button class="quit-btn">取消</button>
             </div>

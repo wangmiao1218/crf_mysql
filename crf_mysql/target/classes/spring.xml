@@ -115,48 +115,48 @@
 	
 	<!-- 开始整合shiro -->
 	<!--开始配置SecurityManager.1、缓存管理器.2、realm：用来访问安全数据-->    	 
- 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+ 	<!-- <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
     	<property name="cacheManager" ref="cacheManager"/>
     	<property name="realm" ref="shiroRealm"/>
-    </bean>
+    </bean> -->
 
     <!-- 缓存管理器 -->
-    <bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+    <!-- <bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
         <property name="cacheManagerConfigFile" value="classpath:ehcache-shiro.xml"/> 
-    </bean>
+    </bean> -->
 
 	<!-- 设置自定义的realm -->
-    <bean id="shiroRealm" class="com.gennlife.crf.realm.CrfRealm">
+    <!-- <bean id="shiroRealm" class="com.gennlife.crf.realm.CrfRealm">
     	<property name="credentialsMatcher">
     		<bean class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
-    			<!-- 指定好加密算法 -->
+    			指定好加密算法
     			<property name="hashAlgorithmName" value="MD5" />
-    			<!-- 指定好加密的次数 -->
+    			指定好加密的次数
     			<property name="hashIterations" value="1024" />
     		</bean>
     	</property>
-    </bean>
+    </bean> -->
 
     <!-- 使用LifecycleBeanPostProcessor 来管理shiro的bean的生命周期 -->
-    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
-
+    <!-- <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+ -->
     <!-- 开启shiro的注解.注意：只有在配置了lifecycleBeanProcessor以后才生效 -->
-    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+   <!--  <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
           depends-on="lifecycleBeanPostProcessor"/>
     <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
         <property name="securityManager" ref="securityManager"/>
-    </bean>
+    </bean> -->
 
     <!-- shiroFilter采用的是org.apache.shiro.spring.web.ShiroFilterFactoryBean
     	filterChainDefinitions：用来配置资源和权限的关系
     	① anon：不进行校验
     	② authc：进行验证
      -->
-    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+   <!--  <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean"> -->
     	<!-- 引用上面定义的securityManager -->
-        <property name="securityManager" ref="securityManager"/>
+      <!--   <property name="securityManager" ref="securityManager"/> -->
         <!-- 定义登录的页面 -->
-        <property name="loginUrl" value="/login.jsp"/>
+        <!-- <property name="loginUrl" value="/login.jsp"/> -->
         <!-- 未授权的页面 -->
         <!--  <property name="unauthorizedUrl" value="/unauthorized.jsp"/> -->
        <!--  <property name="filterChainDefinitions">
@@ -169,7 +169,7 @@
                 /** = authc
             </value>
         </property> -->
-    </bean>
+   <!--  </bean> -->
 	<!--整合shiro end  -->
 	
 </beans>

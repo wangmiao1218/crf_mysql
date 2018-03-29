@@ -12,9 +12,44 @@
 %>
 
 
+
 <!-- 测试日期范围开始结束 -->
 <script language="javascript" type="text/javascript"
 	src="<%=rootPath%>/res/My97DatePicker/WdatePicker.js"></script>
+
+<script language="javascript" type="text/javascript">
+	//禁止用F5键
+	/* document.onkeydown = function(e) {
+		e = window.event || e;
+		var keycode = e.keyCode || e.which;
+		if (keycode = 116) {
+			if (window.event) {// ie
+				try {
+					e.keyCode = 0;
+				} catch (e) {
+				}
+				e.returnValue = false;
+			} else {// ff
+				e.preventDefault();
+			}
+		}
+	}
+ */ 
+ 	//禁止f5刷新
+	/* document.onkeydown = function(e) {
+		var ev = window.event || e;
+		var code = ev.keyCode || ev.which;
+		if (code == 116) {
+			ev.keyCode ? ev.keyCode = 0 : ev.which = 0;
+			cancelBubble = true;
+			return false;
+		}
+	};
+	//禁止右键刷新 
+	document.oncontextmenu = function() {
+		return false;
+	}; */
+</script>
 <body>
 
 	<div>
@@ -26,7 +61,7 @@
 		<h5>日期联动（前面大于今天，后面大于前面）</h5>
 		<input id="d5221" type="text"
 			onFocus="var d5222=$dp.$('d5222');WdatePicker({onpicked:function(){d5222.focus();},minDate:'%y-%M-%d',maxDate:'#F{$dp.$D(\'d5222\',{M:-3,d:-1})}'})" />
-		
+
 		- <input id="d5222" type="text"
 			onFocus="WdatePicker({minDate:'#F{$dp.$D(\'d5221\',{M:0,d:1})}'})" />
 	</div>
@@ -83,6 +118,14 @@
 		<input type="text" onFocus="WdatePicker({disabledDays:[0,6]})" />
 	</div> -->
 
+
+	<div style="position:absolute; height:400px; overflow:auto">
+	dsdasdasdasdasdsadsa
+	dasdsadsadsada
+	dssa
+	</div>
+	<DIV style="PADDING-RIGHT:10px;OVERFLOW-Y:auto;PADDING-LEFT:10px;SCROLLBAR-FACE-COLOR:#ffffff;FONT-SIZE:11pt;PADDING-BOTTOM:0px;SCROLLBAR-HIGHLIGHT-COLOR:#ffffff;OVERFLOW:auto;WIDTH:510px;SCROLLBAR-SHADOW-COLOR:#919192;COLOR:blue;SCROLLBAR-3DLIGHT-COLOR:#ffffff;LINE-HEIGHT:100%;SCROLLBAR-ARROW-COLOR:#919192;PADDING-TOP:0px;SCROLLBAR-TRACK-COLOR:#ffffff;FONT-FAMILY:宋体;SCROLLBAR-DARKSHADOW-COLOR:#ffffff;LETTER-SPACING:1pt;HEIGHT:200px;TEXT-ALIGN:left">
+</div> 
 
 </body>
 </html>

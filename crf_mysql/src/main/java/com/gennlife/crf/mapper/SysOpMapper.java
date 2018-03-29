@@ -1,5 +1,8 @@
 package com.gennlife.crf.mapper;
 
+import java.util.List;
+import java.util.Map;
+
 import com.gennlife.crf.bean.SysOp;
 
 /**
@@ -18,5 +21,29 @@ public interface SysOpMapper {
     * @throws 
     */
     public SysOp getSysOpByUnameAndPwd(SysOp sysOp) throws Exception;
+    
+   
+	/** 
+	* @Title: getSysOpList 
+	* @Description: 获取用户列表（PageHelper）
+	* @param: @param map
+	* @param: @return
+	* @param: @throws Exception :
+	* @return: List<SysOp>
+	* @throws 
+	*/
+	public List<SysOp> getSysOpList(Map<String, Object> map) throws Exception;
 
+	
+	/** 
+	* @Title: getSysOpById 
+	* @Description: 通过opId获取用户
+	* @param: @param opId
+	* @param: @return
+	* @param: @throws Exception :
+	* @return: SysOp
+	* @throws 
+	*/
+	public SysOp getSysOpById(Integer opId) throws Exception;
+	
 }

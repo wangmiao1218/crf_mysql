@@ -91,16 +91,16 @@ function initGrid(){
            {name: 'opCode', type: 'auto', convert: null, defaultValue: undefined},
            {name: 'opKind', type: 'auto', convert: null, defaultValue: undefined},
            {name: 'mobileNo', type: 'auto', convert: null, defaultValue: undefined},
-           {name: 'emailAddress', type: 'auto', convert: null, defaultValue: undefined},
+           {name: 'emailAdress', type: 'auto', convert: null, defaultValue: undefined},
            {name: 'loginCode', type: 'auto', convert: null, defaultValue: undefined},
            {name: 'lockFlag', type: 'auto', convert: null, defaultValue: undefined}
         ],  
         remoteSort: true,
         // 设置单页显示数量
-        pageSize: 7,
+        pageSize: 10,
         proxy: {
             type: 'ajax',
-            url: rootPath + '/user/getSysOp',
+            url: rootPath + '/UserController/getSysOpList',
             data: data,
             reader: {
                 type: 'json',
@@ -117,50 +117,51 @@ function initGrid(){
     columns = [
             {
                 text     : '用户ID',
-                width    : 110,
+                width    : 130,
                 sortable : true,
                 dataIndex: 'opId'
             },
             {
                 text     : '用户名称',
-                flex     : 1,
+                width    : 140,
+                //flex     : 1,
                 sortable : false,
                 dataIndex: 'opName',
                 renderer : qtips
             },
             {
                 text     : '用户类型',
-                width    : 110,
+                width    : 130,
                 sortable : true,
                 renderer : typeRender,
                 dataIndex: 'opKind'
             },
             {
                 text     : '电话号码',
-                width    : 110,
+                width    : 160,
                 sortable : true,
                 dataIndex: 'mobileNo'
             },
             {
                 text     : '邮箱地址',
-                width    : 110,
+                width    : 160,
                 sortable : true,
-                dataIndex: 'emailAddress'
+                dataIndex: 'emailAdress'//由于数据库写错字段
             },
             {
                 text     : '登录帐号',
                 width    : 110,
                 sortable : true,
                 dataIndex: 'loginCode',
-                align    : 'right'
+                align    : 'left'
             },
             {
                 text     : '是否锁定',
-                width    : 110,
+                width    : 109,
                 sortable : true,
                 dataIndex: 'lockFlag',
                 renderer : ifLockRender,
-                align    : 'right'
+                align    : 'left'
             },
             {
                 text: '操作',
@@ -191,7 +192,7 @@ function initGrid(){
 					click : {
 						element : 'el',
 						fn : function() {
-							window.location.href = rootPath + "/user/toAdd?type=add";
+							window.location.href = rootPath + "/UserController/toAddPage?type=add";
 						}
 					}
 				}
@@ -258,7 +259,7 @@ function buttonRender(value, meta, record, rowIndex, colIndex, store) {
  * 执行修改操作
  */
 function modify(opId){
-	window.location.href = rootPath + "/user/toAdd?type=modify&opId="+opId;
+	window.location.href = rootPath + "/UserController/toAddPage?type=modify&opId="+opId;
 }
 
 /*
@@ -320,9 +321,11 @@ function ifLockRender(value){
  */
 function typeRender(value){
 	if(value == '1'){
-		return '超级管理员';
+		return '平台管理员';
 	}else if(value == '2'){
-		return '管理员';
+		return '测试';
+	}else if(value == '3'){
+		return 'PM';
 	}else{
 		return '普通用户';
 	}

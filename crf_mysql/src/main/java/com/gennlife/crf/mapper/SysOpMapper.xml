@@ -21,9 +21,11 @@
 	</resultMap>
 
 	<sql id="SysOpMapper_Column_List">
-		OP_ID, OP_NAME, OP_CODE, OP_KIND, OP_PIC, MOBILE_NO, EMAIL_ADRESS,
+		OP_ID, OP_NAME, OP_CODE, OP_KIND, OP_PIC, MOBILE_NO,
+		EMAIL_ADRESS,
 		LOGIN_CODE, LOGIN_PASSWD,
-		LOCK_FLAG, DATA_STATE, CREATOR, CREATE_DATE, MODIFIER, MODIFY_DATE
+		LOCK_FLAG, DATA_STATE, CREATOR,
+		CREATE_DATE, MODIFIER, MODIFY_DATE
 	</sql>
 
 	<!-- 根据用户名和密码查询用户 -->
@@ -33,7 +35,68 @@
 		<include refid="SysOpMapper_Column_List"></include>
 		from sys_op s
 		where s.LOGIN_CODE= #{loginCode}
-		and s.LOGIN_PASSWD= #{loginPasswd}
+		and s.LOGIN_PASSWD=
+		#{loginPasswd}
 	</select>
 
+	<!-- 获取用户列表（PageHelper） -->
+	<select id="getSysOpList" resultMap="BaseResultMap" parameterType="java.util.Map">
+		select
+		<include refid="SysOpMapper_Column_List"></include>
+		from sys_op
+		<where>
+			data_state = 1
+			<if test="opName != null">
+				and OP_NAME = #{opName,jdbcType=VARCHAR}
+			</if>
+			<if test="opCode != null">
+				and OP_CODE = #{opCode,jdbcType=VARCHAR}
+			</if>
+			<if test="opKind != null">
+				and OP_KIND = #{opKind,jdbcType=DECIMAL}
+			</if>
+			<if test="opPic != null">
+				and OP_PIC = #{opPic,jdbcType=VARCHAR}
+			</if>
+			<if test="mobileNo != null">
+				and MOBILE_NO = #{mobileNo,jdbcType=VARCHAR}
+			</if>
+			<if test="emailAdress != null">
+				and EMAIL_ADRESS = #{emailAdress,jdbcType=VARCHAR}
+			</if>
+			<if test="loginCode != null">
+				and LOGIN_CODE = #{loginCode,jdbcType=VARCHAR}
+			</if>
+			<if test="loginPasswd != null">
+				and LOGIN_PASSWD = #{loginPasswd,jdbcType=VARCHAR}
+			</if>
+			<if test="lockFlag != null">
+				and LOCK_FLAG = #{lockFlag,jdbcType=DECIMAL}
+			</if>
+			<if test="dataState != null">
+				and DATA_STATE = #{dataState,jdbcType=DECIMAL}
+			</if>
+			<if test="creator != null">
+				and CREATOR = #{creator,jdbcType=DECIMAL}
+			</if>
+			<if test="createDate != null">
+				and CREATE_DATE = #{createDate,jdbcType=TIMESTAMP}
+			</if>
+			<if test="modifier != null">
+				and MODIFIER = #{modifier,jdbcType=DECIMAL}
+			</if>
+			<if test="modifyDate != null">
+				and MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP}
+			</if>
+		</where>
+	</select>
+	
+	<!--通过opId获取用户  -->
+	<select id="getSysOpById" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="SysOpMapper_Column_List"></include>
+		from sys_op
+		where op_id = #{opId}
+	</select>
 </mapper>

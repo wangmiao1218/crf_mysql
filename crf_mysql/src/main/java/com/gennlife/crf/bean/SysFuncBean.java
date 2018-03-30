@@ -3,7 +3,7 @@ package com.gennlife.crf.bean;
 import java.util.List;
 
 /**
- * @Description: 查询左侧列菜单表节点、子节点
+ * @Description: 查询左侧列菜单表节点、子节点（封装，便于查询子节点）
  * @author: wangmiao
  * @Date: 2018年3月24日 上午10:42:25
  */

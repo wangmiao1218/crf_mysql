@@ -100,7 +100,7 @@ function initGrid(){
         pageSize: 10,
         proxy: {
             type: 'ajax',
-            url: rootPath + '/UserController/getSysOpList',
+            url: rootPath + '/userController/getSysOpList',
             data: data,
             reader: {
                 type: 'json',
@@ -192,7 +192,7 @@ function initGrid(){
 					click : {
 						element : 'el',
 						fn : function() {
-							window.location.href = rootPath + "/UserController/toAddPage?type=add";
+							window.location.href = rootPath + "/userController/toAddPage?type=add";
 						}
 					}
 				}
@@ -259,7 +259,7 @@ function buttonRender(value, meta, record, rowIndex, colIndex, store) {
  * 执行修改操作
  */
 function modify(opId){
-	window.location.href = rootPath + "/UserController/toAddPage?type=modify&opId="+opId;
+	window.location.href = rootPath + "/userController/toAddPage?type=modify&opId="+opId;
 }
 
 /*

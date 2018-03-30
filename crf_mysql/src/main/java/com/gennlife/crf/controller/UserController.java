@@ -24,7 +24,7 @@ import com.github.pagehelper.PageInfo;
  * @Date: 2017年6月14日 下午6:22:02
  */
 @Controller
-@RequestMapping("UserController")
+@RequestMapping("userController")
 public class UserController {
 
 	private static final Logger logger = LoggerFactory.getLogger(UserController.class);

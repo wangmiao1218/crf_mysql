@@ -38,11 +38,11 @@ function initGrid(){
         pageSize: 10,
         proxy: {
             type: 'ajax',
-            url: rootPath + '/role/getRoleList',
+            url: rootPath + '/sysRoleController/getRoleList',
             data: data,
             reader: {
                 type: 'json',
-                root: 'list',
+                root: 'list',// PageHelper 
                 totalProperty: 'total'
             }
             
@@ -89,7 +89,7 @@ function initGrid(){
         		$.ajax({
         		    type: 'get',
         		    dataType :'json',
-        		    url: rootPath + '/role/getRolFuncTree',
+        		    url: rootPath + '/sysRoleController/getRolFuncTree',
         		    data :{
         		      roleId : roleId
         		    },

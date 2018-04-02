@@ -8,7 +8,6 @@ Ext.require([
     'Ext.form.FieldSet',
     'Ext.tip.QuickTipManager',
     'Ext.ux.data.PagingMemoryProxy'
-    
 ]);
 
 // 定义zTree容器

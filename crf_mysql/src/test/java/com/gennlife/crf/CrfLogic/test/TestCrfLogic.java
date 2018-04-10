@@ -8,18 +8,21 @@ import com.gennlife.crf.crfLogic.CrfLogic;
 
 public class TestCrfLogic {
 
-	private String filePath = "E:\\江苏肿瘤\\测试数据";
+	private String filePath = "E:\\CRFLogic\\test2";
 	private String fileName = "2test.xlsx";
 	private String sheetName = "Sheet1";
-	private String path = "E:\\江苏肿瘤\\测试数据\\all_info.json";
+	private String path = "E:\\CRFLogic\\test2\\all_info.json";
 	private String mongodbIp = "10.0.2.185";
 	private String auto = "http://10.0.2.184:6060/auto/ManualEMRAutoCRFV2";
 	private String disease = "lymphoma_test";
+	//private String disease = "lymphoma_release_1.0";
 	
 	@Test
 	public void insertDatasIntoPatientDetailAndPostAndWritePatIntoExcel() throws Exception{
 		Excel excel = new Excel(filePath,fileName,sheetName);
-		CrfLogic.insertDatasIntoPatientDetailAndPostAndWritePatIntoExcel(excel, 
+		//CrfLogic.insertDatasIntoPatientDetailAndPostAndWritePatIntoExcel(excel, path, mongodbIp, auto, disease);
+		
+		CrfLogic.addFirstPat_insertDatasIntoPatientDetailAndPostAndWritePatIntoExcel(excel, 
 				path, mongodbIp, auto, disease);
 	}
 	

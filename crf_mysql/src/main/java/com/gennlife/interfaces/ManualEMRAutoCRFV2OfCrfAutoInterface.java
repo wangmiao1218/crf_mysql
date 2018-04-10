@@ -9,7 +9,7 @@ import java.net.URL;
 
 /**
  * @Description: 通过接口：http://10.0.2.172:6060/auto/ManualEMRAutoCRFV2 （crf组装接口）
- *               传入一个pat返回一个json；或传入多个pat，返回一个大json包含多个子json。
+ *               传入一个pat返回一个json；或传入多个pat，返回一个大json包含多个子json。20180410：增加接口条件
  * @author: wangmiao
  * @Date: 2017年12月26日 下午2:22:05 
  */
@@ -32,6 +32,17 @@ public class ManualEMRAutoCRFV2OfCrfAutoInterface {
      * 			 "pat_25f9f33f82460a5628fbdc85200a45b1"
      * 			]
      * 	}
+     * 改成：
+     * {
+		    "crf_id":"lymphoma_release_1.0",
+		    "updateDetail":"FALSE",
+		    "list":[
+		    "pat_64807f10_4",
+		    "pat_308c0cab_5",
+		    "pat_bcd53275_9"
+		    ]
+		}
+     * 
 	 * 返回{ "pat_6": true,
   	 *		"pat_7": true,
   	 *		"pat_25f9f33f82460a5628fbdc85200a45b1": false
@@ -40,7 +51,7 @@ public class ManualEMRAutoCRFV2OfCrfAutoInterface {
 	 * @throws
 	 */
 	public static String getResultsByPostMethod(String httpUrl,String disease,String patStrs) {
-		String params = "{\"crf_id\":\""+disease+"\",\"list\":[" + patStrs+"]}";
+		String params = "{\"crf_id\":\""+disease+"\",\"updateDetail\":\"FALSE\",\"list\":[" + patStrs+"]}";
 		try {
 			// 创建连接
 			URL url = new URL(httpUrl);

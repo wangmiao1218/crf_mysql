@@ -33,7 +33,6 @@ public class CrfLogic {
 	private static List<Map<String, JSONObject>> listMapJsons = new ArrayList<Map<String,JSONObject>>();
 	//将行号和pat号对应，存到map里，方便后续写入，和批量请求
 	private static Map<Integer, String> cellNumAndPatMap = new HashedMap<Integer, String>();
-
 	
 
 	/**

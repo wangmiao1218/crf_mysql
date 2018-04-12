@@ -7,6 +7,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import net.sf.json.JSONArray;
 
@@ -23,6 +25,53 @@ import com.gennlife.crf.bean.CrfTemplateAnzhenXinXueguan;
  */
 public class ListAndStringUtils {
 
+	
+	/** 
+	* @Title: countChar 字符串中判断含有单个字符串的个数
+	* @Description: 
+	* @param: @param str
+	* @param: @param ch 用单引号''
+	* @param: @return :
+	* @return: int
+	* @throws 
+	*/
+	public static int countChar(String str,char ch) {
+	    // 将字符串转换为字符数组
+	    char[] chs = str.toCharArray();
+	    // 定义变量count存储字符串出现次数
+	    int count = 0;
+	    for(int i = 0;i < chs.length;i++) {
+	        if(chs[i] == ch) {
+	        count++;
+	        }
+	    }
+	    return count;
+	}
+	
+	/** 
+	* @Title: replaceBlankAndLastSemicolon 
+	* @Description: 去掉字符串的空格、回车、换行符、制表符，并且去掉结尾的分号
+	* @param: @param str
+	* @param: @return :
+	* @return: String
+	* @throws 
+	*/
+	public static String replaceBlankAndLastSemicolon(String str) {
+		if (str!=null) {
+			Pattern p = Pattern.compile("\\s*|\t|\r|\n");
+			Matcher m = p.matcher(str);
+			str = m.replaceAll("");
+		}
+		//然后徐去掉末尾的分号
+		if (str.contains(";")) {
+			String lastStr = str.substring(str.length()-1,str.length());
+			if (";".equals(lastStr)) {
+				str=str.substring(0,str.length()-1); 
+			}
+		}
+		return str;
+	}
+	
 	
 	/** 
 	 * @Title: dealWithpatientDetailByAsteriskToString 

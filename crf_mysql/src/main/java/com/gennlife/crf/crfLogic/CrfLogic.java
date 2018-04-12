@@ -84,20 +84,27 @@ public class CrfLogic {
 					
 				}else if (firstPatContent==null || "".equals(firstPatContent)) {
 					//===================firtPat为空的情况，仍是原有逻辑================================
-					//只有满足以下才进行计算：组装数据(不复用pat，且数据源与输入文本不为空)
-					if ((reusePatContent==null ||"".equals(reusePatContent)) && patientDetailContent!=null && insertContent!=null) {
+					//只有满足以下才进行计算：组装数据(不复用pat，且数据源与输入文本不为空)(且reusePatContent为空，且其他两个不为空)
+					if ((reusePatContent==null || "".equals(reusePatContent) || " ".equals(reusePatContent)) && 
+							(patientDetailContent!=null && !"".equals(patientDetailContent)&& !" ".equals(patientDetailContent)) 
+							&& (insertContent!=null && !"".equals(patientDetailContent) && !" ".equals(patientDetailContent))){
 						//pat编号
 						String patContent="pat_"+UUID.randomUUID().toString().split("-")[0]+"_"+(isConfiguredRowNum+1);
 						//存行号和pat
 						cellNumAndPatMap.put(isConfiguredRowNum, patContent);
 						JSONObject newJSONObject = null;
 						//============单个数据源处理============（目前是update方式，后续改成增加方式.....................）
-						if (!patientDetailContent.contains(";")) {
+						//=============
+						//20180412对数据源进行处理：开头末尾去掉空格、换行符，结尾的分号
+						patientDetailContent=ListAndStringUtils.replaceBlankAndLastSemicolon(patientDetailContent);
+						insertContent=ListAndStringUtils.replaceBlankAndLastSemicolon(insertContent);
+						//============
+						if (!patientDetailContent.contains(";")){
 							//对数据源patientDetail进行处理
 							String[] dealWithpatientDetailByDotToStrings = ListAndStringUtils.dealWithpatientDetailByDotToStrings(patientDetailContent);
 							//解析json，将pat、和输入文本插入到json中
 							newJSONObject = JsonUtils.updatePatAndValueReturnNewJSONObject(baseJson, patPath, patContent, dealWithpatientDetailByDotToStrings, insertContent);
-						}else if (patientDetailContent.contains(";") && insertContent.contains(";")) {
+						}else if (patientDetailContent.contains(";") && insertContent.contains(";") ) {
 							//============多个数据源处理============	
 							//处理patientDetail，然后用英文；分割
 							String byAsteriskToString = ListAndStringUtils.dealWithpatientDetailByAsteriskToString(patientDetailContent);

@@ -2,7 +2,6 @@ package com.gennlife.crf.utils.test;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import net.sf.json.JSONObject;
 
@@ -17,7 +16,6 @@ import com.gennlife.crf.utils.ExcelUtils;
 import com.gennlife.crf.utils.ListAndStringUtils;
 import com.gennlife.crf.utils.LoginCrfOfAnzhen;
 import com.gennlife.crf.utils.QuitWebDriver;
-import com.sun.jndi.url.iiopname.iiopnameURLContextFactory;
 
 public class TestListAndStringUtils {
 	
@@ -26,6 +24,32 @@ public class TestListAndStringUtils {
 	private String sheetName = "Sheet1";
 	
 
+	@Test
+	public void countChar(){
+		String strs="$.visits[*].record.admissions_record	.admissions_records_chief_complaint ";
+		int a= ListAndStringUtils.countChar(strs,';');
+		System.out.println(a);
+		System.out.println(a==1);
+		System.out.println(a==3);
+	}
+	
+	
+	@Test
+	public void replaceBlank(){
+		String strs="$.visits[*].record.admissions_record	.admissions_records_chief_complain; ";
+		String strings= ListAndStringUtils.replaceBlankAndLastSemicolon(strs);
+		System.out.println(strings);
+		String value ="dsadasdasd;hgjghjhjgh;";
+		String lastStr = value.substring(value.length()-1,value.length());
+		if (";".equals(lastStr)) {
+			value=value.substring(0,value.length()-1); 
+			System.out.println("1--"+value);
+		}else {
+			System.out.println("2--"+value);
+		}
+	}
+	
+	
 	@Test
 	public void dealWithpatientDetailByAsteriskToString(){
 		String strs="$.visits[*].record.admissions_record.admissions_records_chief_complaint";

@@ -10,7 +10,8 @@ public class TestCrfLogic {
 
 	private String filePath = "E:\\CRFLogic\\test2";
 	//private String fileName = "2test.xlsx";
-	private String fileName = "天津肝癌测试用例_test.xlsx";
+	//private String fileName = "天津肝癌测试用例.xlsx";
+	private String fileName = "天津肝癌测试-介入(2).xlsx";
 	private String sheetName = "Sheet1";
 	private String path = "E:\\CRFLogic\\test2\\all_info.json";
 	//private String mongodbIp = "10.0.2.185";

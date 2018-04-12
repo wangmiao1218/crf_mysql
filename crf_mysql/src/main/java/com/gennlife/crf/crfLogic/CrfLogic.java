@@ -521,7 +521,7 @@ public class CrfLogic {
 					//存pat和crfdata源
 					cellNumAndCrfdataValueMap.put(patContent, crfdataContent);
 					rowNumAndpatCrfdataMapMap.put(isConfiguredRowNum, cellNumAndCrfdataValueMap);
-				}else if (reusePatRowNumContent!=null & !"".equals(reusePatRowNumContent) && crfdataContent!=null) {
+				}else if (reusePatRowNumContent!=null && !"".equals(reusePatRowNumContent) && crfdataContent!=null) {
 					//不为空，则复用pat，直接存复用的pat和crfdata
 					//根据reusePatRowNum，查pat（行号要减1，因为之前方便看，增加了1）
 					String reusePatContent = ExcelUtils.readContent(excel, Integer.valueOf(reusePatRowNumContent)-1, patCellNum);
@@ -535,10 +535,15 @@ public class CrfLogic {
 		}
 		
 		//传入查询crfdata的方法，返回行号和查询结果的map
-		Map<Integer,String> rowNumAndcrfdataMap = CrfdataOrPatientDetailMongodbDataProcess
-				.queryDatasOfCrfdataMongodb(mongodbIp,rowNumAndpatCrfdataMapMap);
-		//将crfdata结果写入excel
-		CrfLogic.writeCrfdataIntoExcel(excel, rowNumAndcrfdataMap);
+		try {
+			Map<Integer,String> rowNumAndcrfdataMap = CrfdataOrPatientDetailMongodbDataProcess
+					.queryDatasOfCrfdataMongodb(mongodbIp,rowNumAndpatCrfdataMapMap);
+			//将crfdata结果写入excel
+			CrfLogic.writeCrfdataIntoExcel(excel, rowNumAndcrfdataMap);
+		} catch (Exception e) {
+			System.out.println("出错了");
+			e.printStackTrace();
+		}
 		
 		System.out.println("ok");
 	}

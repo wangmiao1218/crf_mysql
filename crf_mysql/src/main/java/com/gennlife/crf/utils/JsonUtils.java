@@ -41,7 +41,7 @@ public class JsonUtils {
 	public static String analysisCrfdataPathAndReturnNewValue(String jsonStr,String oldJsonPath){ 
 		String jsonPath=oldJsonPath.replace("data.visits.", "");
 		jsonPath=jsonPath.substring(0,jsonPath.lastIndexOf("."));
-		System.out.println(jsonPath);
+		System.out.println("去掉首尾的路径："+jsonPath);
 		ReadContext context = JsonPath.parse(jsonStr);
 		//分割
 		String[] strings = null;
@@ -52,9 +52,15 @@ public class JsonUtils {
 			}
 		}
 		
-		System.out.println(strings.length);
+		System.out.println("路径长度："+strings.length);
 		
 		String newJsonPath=null;
+		
+		//20180412：新增：表.字段
+		if (strings.length==2) {
+			newJsonPath=strings[0]+"."+strings[1]+".value";
+		}
+		
 		//表.第二组.字段
 		//inpatientDetails.IP_CC.IP_CHIEF_COMPLAINT
 		if (strings.length==3) {
@@ -85,7 +91,7 @@ public class JsonUtils {
 				}
 			}
 		}
-		System.out.println(newJsonPath);
+		System.out.println("新组装后的路径："+newJsonPath);
 		return context.read(newJsonPath).toString();
     } 
 

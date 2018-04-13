@@ -833,5 +833,18 @@ public class ListAndStringUtils {
 		return value.substring(value.lastIndexOf("\\") + 1,
 				value.lastIndexOf("."));
 	}
+	
+	
+	/** 
+	* @Title: segmentFileAllNameToFileName 
+	* @Description: 分割文件名，去掉后缀，仅剩文件名称
+	* @param: @param value
+	* @param: @return :
+	* @return: String
+	* @throws 
+	*/
+	public static String segmentFileAllNameToFileName(String value) {
+		return value.substring(0,value.lastIndexOf("."));
+	}
 
 }

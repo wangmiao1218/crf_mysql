@@ -9,6 +9,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -193,11 +195,10 @@ public class SwingCrfLogicTools extends JFrame implements ActionListener {
             	String outFilePath = ListAndStringUtils.stringReplaceReturnValue(outfilepath);
             	String fileName_Excel = ListAndStringUtils.stringToSubstringReturnFileName(infilepath_Excel);
             	String fileName_Json = ListAndStringUtils.stringToSubstringReturnFileName(infilepath_Json);
-            	
             	 //先把文件copy到输出路径
                 try {
 					FileUtils.copyFile(ListAndStringUtils.stringReplaceReturnValue(infilepath_Excel), outFilePath+"\\\\"+fileName_Excel);
-				} catch (Exception e1) {
+                } catch (Exception e1) {
 					e1.printStackTrace();
 				}
                 try {
@@ -205,18 +206,28 @@ public class SwingCrfLogicTools extends JFrame implements ActionListener {
                 } catch (Exception e1) {
                 	e1.printStackTrace();
                 }
-               
+                
                 Excel excel = new Excel(outFilePath,fileName_Excel, "Sheet1");
                 //处理后的json文件path
                 String path_Json = outFilePath+"\\\\"+fileName_Json;
                 
                 try {
                 	//调用方法_插入patientDetail
-                	CrfLogic.insertDatasIntoPatientDetailAndPostAndWritePatIntoExcel(excel, path_Json,infilepath_Mongo, infilepath_Auto, infilepath_Disease);
+                	//CrfLogic.insertDatasIntoPatientDetailAndPostAndWritePatIntoExcel(excel, path_Json,infilepath_Mongo, infilepath_Auto, infilepath_Disease);
+                	//使用心得逻辑
+                	CrfLogic.addFirstPat_insertDatasIntoPatientDetailAndPostAndWritePatIntoExcel(excel, path_Json,infilepath_Mongo, infilepath_Auto, infilepath_Disease);
                 	
                 	//调用方法_查询crfdata
                 	CrfLogic.queryCrfdataByPatAndWriteResults(excel,infilepath_Mongo);
                 	
+                	//===========改变名称 start=========
+                	String newFileName_Excel=null;
+					File file=new File(outFilePath+"\\\\"+fileName_Excel); 
+					newFileName_Excel = ListAndStringUtils.segmentFileAllNameToFileName(fileName_Excel);
+					newFileName_Excel = newFileName_Excel+"_"+new SimpleDateFormat("yyyyMMdd-HHmmss").format(new Date());
+					file.renameTo(new File(outFilePath+"\\\\"+newFileName_Excel+".xlsx"));
+                	//===========改变名称 end=========
+					
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}

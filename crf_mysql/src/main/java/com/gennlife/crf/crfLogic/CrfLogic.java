@@ -97,7 +97,8 @@ public class CrfLogic {
 						//=============
 						//20180412对数据源进行处理：开头末尾去掉空格、换行符，结尾的分号
 						patientDetailContent=ListAndStringUtils.replaceBlankAndLastSemicolon(patientDetailContent);
-						insertContent=ListAndStringUtils.replaceBlankAndLastSemicolon(insertContent);
+						//
+						//insertContent=ListAndStringUtils.replaceBlankAndLastSemicolon(insertContent);
 						//============
 						if (!patientDetailContent.contains(";")){
 							//对数据源patientDetail进行处理

@@ -11,13 +11,13 @@ import com.gennlife.myujie.ConfiguredRequiredPath;
 
 public class TestConfiguredRequiredPath {
 
-private String filePath = "E:\\yujie\\7";
+private String filePath = "C:\\Users\\www\\Desktop";
 	
-	private String fileName = "模板结构-安贞心血管(1).xlsx";
-	private String fileName2 = "安贞心血管CRF1.1.7-20171107.xls";
+	private String fileName = "模板结构-安贞心血管1(2).xlsx";
+	private String fileName2 = "安贞心血管CRF1.2.2-2018-02-08-最终版增加字段(3).xls";
 	
 	private String sheetName = "总体结构";
-	private String sheetName2 = "患者信息";
+	//private String sheetName2 = "患者信息";
 
 	@Test
 	public void writeRequiredPath(){

@@ -48,11 +48,14 @@ public class ListAndStringUtils {
 	    return count;
 	}
 	
+	
 	/** 
 	* @Title: replaceBlankAndLastSemicolon 
 	* @Description: 去掉字符串的空格、回车、换行符、制表符，并且去掉结尾的分号
+	* @author: wangmiao
+	* @Date: 2018年4月17日 下午5:21:29 
 	* @param: @param str
-	* @param: @return :
+	* @param: @return
 	* @return: String
 	* @throws 
 	*/

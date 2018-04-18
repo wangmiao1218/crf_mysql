@@ -16,11 +16,22 @@ import com.gennlife.crf.utils.QuitWebDriver;
 public class TestAnzhen_Hzxx_AddJbxx {
 
 	@Test
+	public void loginByPhantomJSDriver() throws Exception {
+		// 登录并到add页面
+		PhantomJSDriver driver = CreateWebDriver.createWebDriverByPhantomJSDriver();
+		String value = LoginCrfOfAnzhen.loginByPhantomJSDriver(driver);
+		System.out.println(value);
+		
+		// 关闭driver
+		QuitWebDriver.quitWebDriverByPhantomJSDriver(driver);
+	}
+	
+	@Test
 	public void hzxx_AddJbxx_MenZhen() throws Exception {
 		// 登录并到add页面
 		PhantomJSDriver driver = CreateWebDriver.createWebDriverByPhantomJSDriver();
 		String value = LoginCrfOfAnzhen.loginAndToAddOfMenZhenAndBasicInfoByPhantomJSDriver(driver);
-		
+		System.out.println(value);
 		String text = Anzhen_Hzxx_AddJbxx.hzxx_AddJbxx_MenZhen_ZhuYuan_SheQu(driver, value);
 		System.out.println(text);
 		

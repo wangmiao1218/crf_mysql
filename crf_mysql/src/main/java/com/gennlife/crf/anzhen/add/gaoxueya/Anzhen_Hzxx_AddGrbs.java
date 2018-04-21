@@ -58,7 +58,6 @@ public class Anzhen_Hzxx_AddGrbs{
 		new Select(
 				driver.findElementByXPath("/html/body/div[2]/div[2]/div[2]/div[1]/div[3]/div[5]/div/select"))
 				.selectByValue("是");
-		
 		//取药间隔时间
 		new Select(
 				driver.findElementByXPath("/html/body/div[2]/div[2]/div[2]/div[1]/div[3]/div[6]/div/select"))

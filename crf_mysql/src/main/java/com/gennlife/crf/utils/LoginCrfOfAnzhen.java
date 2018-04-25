@@ -64,13 +64,14 @@ public class LoginCrfOfAnzhen {
 		}
 		
 		//切换医院（或切换科室：具体看页面对应的下拉框）
-		//Select sel = new Select(driver.findElementByXPath(".//*[@id='crf-lab']/select"));
+		Select sel = new Select(driver.findElementByXPath(".//*[@id='crf-lab']/select"));
 		//北京清华长庚医院
         //sel.selectByValue("anzhen-beijingqinghuazhanggengyiyuan"); 
         //sel.selectByValue("anzhen-nanfangyikedaxuenanfangyiyuan"); 
         //sel.selectByValue("anzhen-zhongguorenminjiefangjundisanjunyidaxue"); 
         //sel.selectByValue("anzhen-shoudouyikedaxuefushubeijingtiantanyiyuan"); 
 		//sel.selectByValue("anzhen-beijingshixinfeixueguanjibingyanjiusuo"); 
+		sel.selectByValue("anzhen-zhoukoushigaoxueyajibingyanjiusuo"); 
 		
 		/*// 等待
 		try {

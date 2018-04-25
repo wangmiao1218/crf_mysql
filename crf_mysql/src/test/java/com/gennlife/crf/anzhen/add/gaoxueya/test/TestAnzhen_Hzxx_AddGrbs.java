@@ -17,7 +17,7 @@ public class TestAnzhen_Hzxx_AddGrbs {
 
 	//添加完基本信息后，单病种页面显示的病人编号
 	//public static final String xpath = "/html/body/div/div[3]/div/div[3]/table/tbody/tr[7]/td[2]/a";
-	public static final String xpath = ".//*[@id='case-list-container']/tbody/tr[10]/td[2]/a";
+	public static final String xpath = "//*[@id='case-list-container']/tbody/tr[4]/td[2]/a";
 	
 	@Test
 	public void hzxx_AddGrbs_Gxyb() throws Exception {

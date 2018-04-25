@@ -104,8 +104,8 @@ public class Anzhen_Hzxx_AddJbxx{
 			
 			// 保存
 			driver.findElementByXPath("/html/body/div[2]/div[2]/div[1]/div[2]/button[2]").click();
-			Thread.sleep(2000);
-			driver.findElementByXPath("/html/body/div[4]/div/div/div/div[3]/button").click();
+			Thread.sleep(3000);
+			driver.findElementByXPath("//*[@id='alert-container']/div/div/div/div[3]/button").click();
 			
 			//获取默认添加的研究序列号
 			text = driver.findElementByXPath("/html/body/div[2]/div[2]/div[2]/div[1]/div/input").getAttribute("value");
@@ -145,9 +145,9 @@ public class Anzhen_Hzxx_AddJbxx{
 			// 调查时间(日期空间div)，直接xpath定位
 			driver.findElementByXPath("/html/body/div[2]/div[2]/div[2]/div[3]/div/input").click();
 			driver.findElementByXPath("/html/body/div[9]/div/div/select[2]").click();
-			driver.findElementByXPath("/html/body/div[9]/div/div/select[2]/option[6]").click();
-			driver.findElementByXPath("/html/body/div[9]/table/tbody/tr[2]/td[6]/a").click();
-
+			driver.findElementByXPath("html/body/div[9]/div/div/select[2]/option[4]").click();
+			driver.findElementByXPath("html/body/div[9]/table/tbody/tr[4]/td[3]/a").click();
+			
 			//
 			Thread.sleep(2000);
 			

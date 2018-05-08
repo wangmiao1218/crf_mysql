@@ -21,7 +21,6 @@ public class TestAnzhen_Hzxx_AddJbxx {
 		PhantomJSDriver driver = CreateWebDriver.createWebDriverByPhantomJSDriver();
 		String value = LoginCrfOfAnzhen.loginByPhantomJSDriver(driver);
 		System.out.println(value);
-		
 		// 关闭driver
 		QuitWebDriver.quitWebDriverByPhantomJSDriver(driver);
 	}

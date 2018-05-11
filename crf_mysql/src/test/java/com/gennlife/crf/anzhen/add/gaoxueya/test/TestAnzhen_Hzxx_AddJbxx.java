@@ -33,7 +33,6 @@ public class TestAnzhen_Hzxx_AddJbxx {
 		System.out.println(value);
 		String text = Anzhen_Hzxx_AddJbxx.hzxx_AddJbxx_MenZhen_ZhuYuan_SheQu(driver, value);
 		System.out.println(text);
-		
 		// 关闭driver
 		QuitWebDriver.quitWebDriverByPhantomJSDriver(driver);
 	}

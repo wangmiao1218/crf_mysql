@@ -51,7 +51,6 @@ public class InfoSelectController extends SelectBase {
 			
 			//保存到数据库
 			crfTemplateService.updateCrfTemplate(newCrfTemplate);
-			
 		}
 		//关闭driver
 		QuitWebDriver.quitWebDriverByPhantomJSDriver(driver);

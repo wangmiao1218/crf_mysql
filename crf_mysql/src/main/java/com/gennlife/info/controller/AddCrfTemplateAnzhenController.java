@@ -45,6 +45,7 @@ public class AddCrfTemplateAnzhenController{
 		// 登录并到add页面
 		PhantomJSDriver driver = CreateWebDriver.createWebDriverByPhantomJSDriver();
 		String value = LoginCrfOfAnzhen.loginAndToAddOfMenZhenAndBasicInfoByPhantomJSDriver(driver);
+		System.out.println(value);
 		
 		if ("添加页面".contains(value)) {
 			// 循环jbxxList
@@ -55,7 +56,8 @@ public class AddCrfTemplateAnzhenController{
 				else {
 					if ("调查时间".contains(jbxxList.get(i).getChineseName())) {
 						driver.findElementById(jbxxList.get(i).getIdXpath()).click();
-						driver.findElementByXPath(".//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[2]/a").click();
+						//driver.findElementByXPath(".//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[2]/a").click();
+						driver.findElementByXPath("//*[@id='ui-datepicker-div']/table/tbody/tr[3]/td[4]/a").click();
 					}
 					else if ("出生日期".contains(jbxxList.get(i).getChineseName())) {
 						driver.findElementById(jbxxList.get(i).getIdXpath()).click();
@@ -109,7 +111,8 @@ public class AddCrfTemplateAnzhenController{
 				else {
 					if ("调查时间".contains(jbxxList.get(i).getChineseName())) {
 						driver.findElementById(jbxxList.get(i).getIdXpath()).click();
-						driver.findElementByXPath(".//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[2]/a").click();
+						//driver.findElementByXPath(".//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[2]/a").click();
+						driver.findElementByXPath("//*[@id='ui-datepicker-div']/table/tbody/tr[3]/td[4]/a").click();
 					}
 					else if ("出生日期".contains(jbxxList.get(i).getChineseName())) {
 						driver.findElementById(jbxxList.get(i).getIdXpath()).click();
@@ -237,7 +240,8 @@ public class AddCrfTemplateAnzhenController{
 				else {
 					if ("调查时间".contains(jbxxList.get(i).getChineseName())) {
 						driver.findElementById(jbxxList.get(i).getIdXpath()).click();
-						driver.findElementByXPath(".//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[2]/a").click();
+						//driver.findElementByXPath(".//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[2]/a").click();
+						driver.findElementByXPath("//*[@id='ui-datepicker-div']/table/tbody/tr[3]/td[4]/a").click();
 					}
 					else if ("出生日期".contains(jbxxList.get(i).getChineseName())) {
 						driver.findElementById(jbxxList.get(i).getIdXpath()).click();

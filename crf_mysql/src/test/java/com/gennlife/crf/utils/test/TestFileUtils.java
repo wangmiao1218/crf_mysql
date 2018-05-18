@@ -76,6 +76,7 @@ public class TestFileUtils {
 		FileUtils.copyFile(oldfile, newfile);
 	}
 	
+	//安贞高血压环境，批量导入数据
 	@Test
 	public void fortest() throws Exception {
 		String fileName1="E:\\安贞\\_wm数据json&js\\安贞3w数据_上海交通_有图片_不同id\\1.json";

@@ -19,8 +19,6 @@ public class TestFileUtils {
 		File oldfile = new File(fileName);
 		
 		FileUtils.readFileAndPrintAllDateStr(oldfile);
-		
-	
 	}
 	
 	@Test

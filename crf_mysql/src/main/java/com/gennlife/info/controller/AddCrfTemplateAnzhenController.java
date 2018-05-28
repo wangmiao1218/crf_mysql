@@ -17,7 +17,6 @@ import com.gennlife.crf.utils.CreateWebDriver;
 import com.gennlife.crf.utils.LoginCrfOfAnzhen;
 import com.gennlife.crf.utils.QuitWebDriver;
 
-
 /**
  * @Description:  安贞环境，添加单病种数据库中crf
  * @author: wangmiao

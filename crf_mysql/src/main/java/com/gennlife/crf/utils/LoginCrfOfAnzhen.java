@@ -55,7 +55,6 @@ public class LoginCrfOfAnzhen {
 		driver.findElementById("loginName").sendKeys(loginName);
 		driver.findElementById("pwd").clear();
 		driver.findElementById("pwd").sendKeys(pwd);
-
 		driver.findElementById("login").click();
 
 		// 等待

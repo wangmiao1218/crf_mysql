@@ -89,7 +89,6 @@ public class LoginCrfOfAnzhen {
 		if ("添加".equals(text)) {
 			returnString = "登陆成功";
 		}
-		
 		return returnString;
 	}
 

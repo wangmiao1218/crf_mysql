@@ -18,7 +18,7 @@
 	<h4>RWS测试_直接比较_事件</h4>
 	<h5>直接比较——测试数据：pat_testrws001.txt(pat_testrws001_1.txt)</h5>
 	<p/>
-	<a href="<%=rootPath %>/page/testRWS_2.jsp">RWS测试_引用比较_事件</a>
+	<a href="<%=rootPath %>/test/testRWS_2.jsp">RWS测试_引用比较_事件</a>
 	<p/>
 	<div>
 		<span>一、定义事件</span><br/>

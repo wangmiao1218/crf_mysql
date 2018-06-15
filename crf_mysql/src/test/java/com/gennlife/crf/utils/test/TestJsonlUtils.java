@@ -40,9 +40,7 @@ public class TestJsonlUtils {
 		//Object obj = context.read("inpatientDetails.IP_CC");
 		String returnStr= JsonUtils.analysisCrfdataPathAndReturnNewValue(str, path);
 		System.out.println(returnStr);
-		
 	}
-	
 	
 	@Test
 	public void test07() throws Exception {

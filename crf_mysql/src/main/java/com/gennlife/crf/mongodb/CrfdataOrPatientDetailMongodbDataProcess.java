@@ -23,7 +23,6 @@ import com.mongodb.client.MongoCollection;
  * @Date: 2017年12月18日 下午2:41:11 
  */
 public class CrfdataOrPatientDetailMongodbDataProcess {
-
 	
 	/** 
 	* @Title: queryDatasOfCrfdataMongodb 

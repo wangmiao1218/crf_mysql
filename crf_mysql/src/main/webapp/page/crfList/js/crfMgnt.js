@@ -12,6 +12,7 @@ Ext.require([
     
 ]);
 
+
 var data, store, columns, queryGrid,pager;
 Ext.onReady(function(){
 	//悬浮

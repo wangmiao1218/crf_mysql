@@ -687,7 +687,6 @@ public class CrfLogic {
 							//=======================
 							//后续会加是否重复的判断
 							
-							
 							//=======================
 							String[] dbyDotToStrings = ListAndStringUtils.dealWithpatientDetailByDotToStrings(patientDetailContents.get(j));
 							newJSONObject = JsonUtils.updatePatAndValueReturnNewJSONObject(baseJson, patPath, patContent, dbyDotToStrings, insertContents.get(j));

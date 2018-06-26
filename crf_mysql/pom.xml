@@ -13,6 +13,18 @@
 	</properties> -->
 
 	<dependencies>
+		<!--连接hbase  -->
+		<!-- <dependency>
+		    <groupId>org.apache.hbase</groupId>
+		    <artifactId>hbase-client</artifactId>
+		    <version>1.2.6</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.hbase</groupId>
+		    <artifactId>hbase-server</artifactId>
+		    <version>1.2.6</version>
+		</dependency> -->
+	
 		<!-- logback配置 -->
 		<!-- <dependency>
 			<groupId>org.slf4j</groupId>

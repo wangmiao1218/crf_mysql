@@ -36,7 +36,7 @@ public class MysqlJDBCUtils {
 			// com.mysql.jdbc.Driver driver = new com.mysql.jdbc.Driver();
 			// or：
 			// new com.mysql.jdbc.Driver();
-			System.out.println("成功加载MySQL驱动程序");
+			//System.out.println("成功加载MySQL驱动程序");
 			// 一个Connection代表一个数据库连接
 			conn = DriverManager.getConnection(url);
 			// Statement里面带有很多方法，比如executeUpdate可以实现插入，更新和删除等

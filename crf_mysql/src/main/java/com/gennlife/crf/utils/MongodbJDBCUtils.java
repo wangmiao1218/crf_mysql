@@ -23,7 +23,6 @@ public class MongodbJDBCUtils {
 
 	private static final String ipYantai="10.0.2.176";
 
-
 	/** 
 	* @Title: connectDevelopMongodbOfInsertReturnMongoCollection 
 	* @Description: 连接开发环境mongodb数据库（PatientDetail）,返回MongoCollection<Document>

@@ -12,6 +12,11 @@ import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
+/**
+ * @Description: 生成二维码
+ * @author: wangmiao
+ * @Date: 2018年6月28日 下午12:20:03 
+ */
 public class QRCode {
 
 	public static void main(String[] args) throws IOException {

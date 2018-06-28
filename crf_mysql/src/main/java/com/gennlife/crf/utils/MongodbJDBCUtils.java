@@ -26,7 +26,6 @@ public class MongodbJDBCUtils {
 	/** 
 	* @Title: connectDevelopMongodbOfInsertReturnMongoCollection 
 	* @Description: 连接开发环境mongodb数据库（PatientDetail）,返回MongoCollection<Document>
-	* @param: @return :
 	* @return: MongoCollection<Document> 返回 MongoCollection<Document>
 	* @throws 
 	*/

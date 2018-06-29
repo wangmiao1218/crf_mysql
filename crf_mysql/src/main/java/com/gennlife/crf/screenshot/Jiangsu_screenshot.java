@@ -15,13 +15,16 @@ import org.openqa.selenium.phantomjs.PhantomJSDriver;
  */
 public class Jiangsu_screenshot {
 
-	/**
-	 * @Title: screenshot
-	 * @Description: 截取屏幕
-	 * @param: @param driver
-	 * @return: String
-	 * @throws
-	 */
+	/** 
+	* @Title: screenshot 
+	* @Description: 截取屏幕
+	* @author: wangmiao
+	* @Date: 2018年6月29日 下午2:28:20 
+	* @param: @param driver
+	* @param: @return
+	* @return: String
+	* @throws 
+	*/
 	public static String screenshot(PhantomJSDriver driver){
 		driver.manage().window().maximize();// 浏览器窗口最大化 
 		try {

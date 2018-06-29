@@ -2,7 +2,6 @@ package com.gennlife.crf.screenshot.test;
 
 import org.junit.Test;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
-
 import com.gennlife.crf.screenshot.Jiangsu_screenshot;
 import com.gennlife.crf.utils.CreateWebDriver;
 import com.gennlife.crf.utils.LoginCrf;

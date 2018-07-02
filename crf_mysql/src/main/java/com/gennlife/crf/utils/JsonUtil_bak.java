@@ -23,7 +23,6 @@ import com.google.gson.JsonElement;
 public class JsonUtil_bak {
 
 	
-	
 	public static CrfPackageJsonBean jsontest2(String selectContent,Map<String,String> elementMap) throws JSONException{
 		//返回的CrfPackageJsonBean
 		CrfPackageJsonBean returnJsonBean = new CrfPackageJsonBean();
@@ -144,33 +143,26 @@ public class JsonUtil_bak {
 	
 	
 	/*忘记逻辑功能了！！！
-	public static void test2(Object o,Map<String,Object> m)  
-    {  
-        if(o.getClass().equals(JSONObject.class))  
-        {  
+	public static void test2(Object o,Map<String,Object> m)  {  
+        if(o.getClass().equals(JSONObject.class))  {  
            JSONObject temp= (JSONObject)o;  
-           for(String keyMap:m.keySet())  
-           {  
-               if(m.get(keyMap)==null)  
-               {  
-                    if(temp.containsKey(keyMap))  
-                    {  
+           for(String keyMap:m.keySet()) {  
+               if(m.get(keyMap)==null) {  
+                    if(temp.containsKey(keyMap)){  
                         System.out.println("find out.....................");  
                        // System.out.println(temp.get(keyCondition));  
                         //Object result = temp.get(keyMap);  
                         m.put(keyMap, temp.get(keyMap));  
                         //System.out.println(result);  
                     }  
-                    else  
-                    {  
+                    else{  
                         Iterator it=temp.keySet().iterator();    
                          while(it.hasNext()){      
                                String key;      
   
                                key=it.next().toString();      
                                Object v=temp.get(key);   
-                              if(v.getClass().equals(JSONObject.class)||v.getClass().equals(JSONArray.class))  
-                              {  
+                              if(v.getClass().equals(JSONObject.class)||v.getClass().equals(JSONArray.class))  {  
                                   test2(v,m);  
                               }  
                           }     
@@ -179,36 +171,26 @@ public class JsonUtil_bak {
            }  
             
         }  
-        else if(o.getClass().equals(JSONArray.class))  
-        {  
+        else if(o.getClass().equals(JSONArray.class))  {  
             JSONArray tempArray=(JSONArray) o;  
-            for(Object ob:tempArray)  
-            {  
-                if(ob.getClass().equals(JSONObject.class))  
-                {  
+            for(Object ob:tempArray)  {  
+                if(ob.getClass().equals(JSONObject.class))  {  
                     JSONObject tempJb=(JSONObject) ob;  
-                     for(String keyMap:m.keySet())  
-                     {  
-                        if(m.get(keyMap)==null)  
-                        {  
-                            if(tempJb.containsKey(keyMap))  
-                            {  
+                     for(String keyMap:m.keySet())   {  
+                        if(m.get(keyMap)==null)   {  
+                            if(tempJb.containsKey(keyMap))  {  
                                 System.out.println("find out....2222.................");  
                                 // System.out.println(tempJb.get(keyCondition));  
                                // Object result=tempJb.get(keyMap);  
                                   m.put(keyMap, tempJb.get(keyMap));  
                             }  
-                            else  
-                            {  
+                            else {  
                                 test2(tempJb,m);  
                             }  
                         }  
-                        
-                     }  
-                   
+                     }     
                 }  
-                else if(ob.getClass().equals(JSONArray.class))  
-                {  
+                else if(ob.getClass().equals(JSONArray.class))  {  
                     test2(ob,m);  
                 }  
             }  

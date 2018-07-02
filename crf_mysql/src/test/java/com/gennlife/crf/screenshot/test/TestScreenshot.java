@@ -33,4 +33,5 @@ public class TestScreenshot {
 		QuitWebDriver.quitWebDriverByPhantomJSDriver(driver);
 	}
 
+	
 }

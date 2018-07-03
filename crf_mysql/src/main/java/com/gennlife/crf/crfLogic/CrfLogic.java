@@ -29,7 +29,7 @@ import com.gennlife.interfaces.ManualEMRAutoCRFV2OfCrfAutoInterface;
 public class CrfLogic {
 
 	private static final String patPath = "patient_info.patient_info_patient_sn";
-	//存放批量的json，统一插入到mongodb(插入到数据库，要先判断pat是否存在  所以以map形式存储)
+	//存放批量的json，统一插入到mongodb(插入到数据库，要先判断pat是否存在 ,所以,以map形式存储)
 	private static List<Map<String, JSONObject>> listMapJsons = new ArrayList<Map<String,JSONObject>>();
 	//将行号和pat号对应，存到map里，方便后续写入，和批量请求
 	private static Map<Integer, String> cellNumAndPatMap = new HashedMap<Integer, String>();
@@ -97,7 +97,7 @@ public class CrfLogic {
 						//=============
 						//20180412对数据源进行处理：开头末尾去掉空格、换行符，结尾的分号
 						patientDetailContent=ListAndStringUtils.replaceBlankAndLastSemicolon(patientDetailContent);
-						//
+						//对插入的数据进行去掉空格等，但实际使用时，对内容不允许去掉，所以取消
 						//insertContent=ListAndStringUtils.replaceBlankAndLastSemicolon(insertContent);
 						//============
 						if (!patientDetailContent.contains(";")){

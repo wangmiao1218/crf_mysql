@@ -3,6 +3,7 @@ package com.gennlife.crf.shardemr.test;
 import java.util.Map;
 
 import org.apache.commons.collections4.map.HashedMap;
+import org.jboss.netty.util.internal.ConcurrentHashMap;
 import org.json.JSONObject;
 import org.junit.Test;
 
@@ -16,7 +17,7 @@ public class TestShardemr {
 	
 	@Test
 	public void getAccessToken() throws Exception{
-		Map<String,String> map = new HashedMap<String, String>();
+		ConcurrentHashMap<String,String> map = new ConcurrentHashMap<>();
 		map.put("grant_type", "password");
 		map.put("username", "testshard");
 		map.put("password", "123456");
@@ -29,18 +30,20 @@ public class TestShardemr {
 	
 	@Test
 	public void getShardemr() throws Exception{
-		Map<String,String> oauthTokenMap = new HashedMap<String, String>();
+		ConcurrentHashMap<String,String> oauthTokenMap = new ConcurrentHashMap<>();
 		oauthTokenMap.put("grant_type", "password");
 		oauthTokenMap.put("username", "testshard");
 		oauthTokenMap.put("password", "123456");
 		oauthTokenMap.put("client_id", "webapp");
 		oauthTokenMap.put("client_secret", "web");
 		
-		Map<String,String> shardemrMap = new HashedMap<String, String>();
-		shardemrMap.put("inpatient_sn", "");
-		shardemrMap.put("patient_id", "");
+		ConcurrentHashMap<String,String> shardemrMap = new ConcurrentHashMap<>();
+		//住院号
+		//shardemrMap.put("inpatient_sn", "278684");
+		//身份证号
+		//shardemrMap.put("patient_id", "");
 		shardemrMap.put("patient_sn", "pat_60d87d6c8b784976ef2dd0df2e541f1c");
-		shardemrMap.put("scopes", "");
+		shardemrMap.put("scopes", "visits.diagnose");
 		
 		String shardemr = Shardemr.getShardemr(oauthURL, shardemrURL, oauthTokenMap, shardemrMap);
 		System.out.println(shardemr);

@@ -21,34 +21,57 @@ import java.util.regex.Pattern;
  */
 public class FileUtils {
 
-
+	
 	/** 
-	* @Title: readFileContent 
-	* @Description: 读取文件内容，返回String
-	* @param: @param Path
-	* @param: @return :
-	* @return: String
+	* @Title: writeContentToFile 
+	* @Description: 将字符串写入到文件中
+	* @author: wangmiao
+	* @Date: 2018年7月6日 下午4:01:17 
+	* @param: @param filePath
+	* @param: @param content
+	* @return: void
 	* @throws 
 	*/
-	public static String readFileContent(String Path){
+	public static String writeContentToFile(String filePath,String content) {
+		FileWriter writer;
+		try {
+			writer = new FileWriter(filePath);
+			writer.write(content);
+			writer.flush();
+			writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return "ok";
+	}
+
+	/**
+	 * @Title: readFileContent
+	 * @Description: 读取文件内容，返回String
+	 * @param: @param Path
+	 * @param: @return :
+	 * @return: String
+	 * @throws
+	 */
+	public static String readFileContent(String Path) {
 		String laststr = "";
 		FileInputStream fileInputStream = null;
 		InputStreamReader inputStreamReader = null;
 		BufferedReader reader = null;
-		try{
+		try {
 			fileInputStream = new FileInputStream(Path);
 			inputStreamReader = new InputStreamReader(fileInputStream, "UTF-8");
 			reader = new BufferedReader(inputStreamReader);
 			String tempString = null;
-			
-			while((tempString = reader.readLine()) != null){
+
+			while ((tempString = reader.readLine()) != null) {
 				laststr += tempString;
 			}
 			reader.close();
-		}catch(IOException e){
+		} catch (IOException e) {
 			e.printStackTrace();
-		}finally{
-			if(reader != null){
+		} finally {
+			if (reader != null) {
 				try {
 					reader.close();
 				} catch (IOException e) {
@@ -58,8 +81,7 @@ public class FileUtils {
 		}
 		return laststr;
 	}
-	
-	
+
 	/**
 	 * @Title: readFileAndPrintAllDateStr
 	 * @Description: 按行读取文件，读取所有日期格式的字符串
@@ -68,12 +90,12 @@ public class FileUtils {
 	 * @throws
 	 */
 	public static void readFileAndPrintAllDateStr(File file) {
-		//日期正则表达式
+		// 日期正则表达式
 		String reg = "[0-9]{4}[-][0-9]{1,2}[-][0-9]{1,2}[ ][0-9]{1,2}[:][0-9]{1,2}[:][0-9]{1,2}";
-		Pattern pattern = Pattern.compile (reg);
-		
+		Pattern pattern = Pattern.compile(reg);
+
 		String str = null;
-		//String returnValue = null;
+		// String returnValue = null;
 		// 读取文件
 		FileReader fr = null;
 		BufferedReader br = null;
@@ -82,14 +104,14 @@ public class FileUtils {
 			br = new BufferedReader(fr);
 
 			while ((str = br.readLine()) != null) {
-				//使用正则表达式判断日期
-				Matcher matcher = pattern.matcher (str);
-				
-		        if(matcher.find()){  
-		          String group = matcher.group();
-		          //打印找到的日期
-		          System.out.println(group);
-		        }  
+				// 使用正则表达式判断日期
+				Matcher matcher = pattern.matcher(str);
+
+				if (matcher.find()) {
+					String group = matcher.group();
+					// 打印找到的日期
+					System.out.println(group);
+				}
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -109,10 +131,9 @@ public class FileUtils {
 				e.printStackTrace();
 			}
 		}
-		//return returnValue;
+		// return returnValue;
 	}
-	
-	
+
 	/**
 	 * @Title: readFileAndReturnValue
 	 * @Description: 按行读取文件，返回含有value的整行字符串
@@ -168,7 +189,8 @@ public class FileUtils {
 	 * @return: void
 	 * @throws
 	 */
-	public static void readFileAndReplaceStrToNewFile(File oldfile,String oldStr, String replaceStr, File newFlie) {
+	public static void readFileAndReplaceStrToNewFile(File oldfile,
+			String oldStr, String replaceStr, File newFlie) {
 		String str = null;
 		// 读取文件
 		FileReader fr = null;
@@ -184,7 +206,8 @@ public class FileUtils {
 			StringBuffer buf = new StringBuffer();
 
 			// 保存该行前面的内容
-			for (int i = 1; (str = br.readLine()) != null && !str.contains(oldStr); i++) {
+			for (int i = 1; (str = br.readLine()) != null
+					&& !str.contains(oldStr); i++) {
 				buf = buf.append(str);
 				buf = buf.append(System.getProperty("line.separator"));
 			}
@@ -241,9 +264,11 @@ public class FileUtils {
 	 * @return: void
 	 * @throws
 	 */
-	public static void copyFile(String oldfile, String newfile)throws Exception {
+	public static void copyFile(String oldfile, String newfile)
+			throws Exception {
 		FileInputStream fis = new FileInputStream(oldfile);
-		String path = ListAndStringUtils.stringToSubstringReturnFilePath(newfile);
+		String path = ListAndStringUtils
+				.stringToSubstringReturnFilePath(newfile);
 		if (!new File(path).exists()) {
 			new File(path).mkdirs();
 		}
@@ -258,14 +283,14 @@ public class FileUtils {
 		fis.close();
 	}
 
-	/** 
-	* @Title: deleteFile 
-	* @Description: 删除某个文件夹下的所有文件夹和文件
-	* @param: @param delpath：文件绝对路径
-	* @param: @return
-	* @return: boolean
-	* @throws 
-	*/
+	/**
+	 * @Title: deleteFile
+	 * @Description: 删除某个文件夹下的所有文件夹和文件
+	 * @param: @param delpath：文件绝对路径
+	 * @param: @return
+	 * @return: boolean
+	 * @throws
+	 */
 	public static boolean deleteFile(String delpath) throws Exception {
 		try {
 			File file = new File(delpath);
@@ -280,12 +305,12 @@ public class FileUtils {
 					} else if (delfile.isDirectory()) {
 						deleteFile(fileList[i].getPath());
 					}
-					//删除子文件夹
+					// 删除子文件夹
 					fileList[i].delete();
 				}
-				//不删本身文件夹(根文件夹会保留)
-				//若放这，则会包括根文件夹也全部删除
-				//file.delete();
+				// 不删本身文件夹(根文件夹会保留)
+				// 若放这，则会包括根文件夹也全部删除
+				// file.delete();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -293,14 +318,14 @@ public class FileUtils {
 		return true;
 	}
 
-	/** 
-	* @Title: getFilesArrayList 
-	* @Description: 获取指定目录下的所有的文件（不包括文件夹），采用了递归
-	* @param: @param obj  文件路径
-	* @param: @return :
-	* @return: ArrayList<File>:例如：F:\\uploadFile\\1\\模板结构-乳腺癌.xlsx形式的文件数组
-	* @throws 
-	*/
+	/**
+	 * @Title: getFilesArrayList
+	 * @Description: 获取指定目录下的所有的文件（不包括文件夹），采用了递归
+	 * @param: @param obj 文件路径
+	 * @param: @return :
+	 * @return: ArrayList<File>:例如：F:\\uploadFile\\1\\模板结构-乳腺癌.xlsx形式的文件数组
+	 * @throws
+	 */
 	public static ArrayList<File> getFilesArrayList(Object obj) {
 		File directory = null;
 		if (obj instanceof File) {
@@ -321,7 +346,7 @@ public class FileUtils {
 		}
 		return files;
 	}
-	
+
 	/**
 	 * @Title: getFileNameList
 	 * @Description: 查询路径下所有文件，并返回纯文件名的list，使用上面getFilesArrayList方法
@@ -335,14 +360,16 @@ public class FileUtils {
 		// 获取目录下所有文件
 		ArrayList<File> files = FileUtils.getFilesArrayList(filePath);
 		// 将其转成\\返回list
-		List<String> list = ListAndStringUtils.arrayListFilesToStringList(files);
+		List<String> list = ListAndStringUtils
+				.arrayListFilesToStringList(files);
 
 		// 处理路径返回文件名
 		for (int i = 0; i < list.size(); i++) {
-			String fileName = ListAndStringUtils.stringToSubstringReturnFileName(list.get(i));
+			String fileName = ListAndStringUtils
+					.stringToSubstringReturnFileName(list.get(i));
 			fileNameListList.add(fileName);
 		}
 		return fileNameListList;
 	}
-	
+
 }

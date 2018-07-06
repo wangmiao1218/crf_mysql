@@ -1,10 +1,14 @@
 package com.gennlife.crf.shardemr;
 
 import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.Callable;
 
+import org.jboss.netty.util.internal.ConcurrentHashMap;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.gennlife.crf.utils.FileUtils;
 import com.gennlife.interfaces.ShardemrAndOauthTokenInterface;
 
 
@@ -67,5 +71,62 @@ public class Shardemr {
 		
 		return shardemr;
 	}
-
+	
+	
+	/** 
+	* @Title: CreateShardemrCallable 
+	* @Description: 创建查询接口的callable，便于循环创建线程，进行接口压力测试
+	* @author: wangmiao
+	* @Date: 2018年7月6日 下午4:49:19 
+	* @param: @param oauthURL
+	* @param: @param shardemrURL
+	* @param: @param oauthTokenMap
+	* @param: @param shardemrMap
+	* @param: @return
+	* @return: Callable<String>
+	* @throws 
+	*/
+	public static Callable<String> CreateShardemrCallable(final String oauthURL,
+			final String shardemrURL,final Map<String, String> oauthTokenMap,
+			final Map<String, String> shardemrMap) {
+		return new Callable<String>() {
+			@Override
+			public String call() throws Exception {
+				String shardemr = Shardemr.getShardemr(oauthURL, shardemrURL, oauthTokenMap, shardemrMap);
+				//System.out.println(shardemr);
+				String value = FileUtils.writeContentToFile("F:/test_"+UUID.randomUUID()+".json",shardemr);
+				
+				if ("ok".equals(value)) {
+					//logger.info(loginName+"_success_"+new Date());
+					return "success";
+				}else {
+					return "error";
+				}
+			}
+		};
+	}
+	
+	
+	/** 
+	* @Title: createOauthTokenMap 
+	* @Description: 不同用户，创建OauthTokenMap，确定返回不同的token
+	* @author: wangmiao
+	* @Date: 2018年7月6日 下午5:17:48 
+	* @param: @param name
+	* @param: @return
+	* @return: Map<String,String>
+	* @throws 
+	*/
+	public static Map<String, String> createOauthTokenMap(String name) {
+		ConcurrentHashMap<String,String> oauthTokenMap = new ConcurrentHashMap<>();
+		oauthTokenMap.put("grant_type", "password");
+		oauthTokenMap.put("username", name);
+		oauthTokenMap.put("password", "123456");
+		oauthTokenMap.put("client_id", "webapp");
+		oauthTokenMap.put("client_secret", "web");
+		
+		return oauthTokenMap;
+	}
+	
+	
 }

@@ -10,7 +10,6 @@ import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -46,14 +45,16 @@ public class ShardemrAndOauthTokenInterface {
 		String responses = null;
 		try {
 			httpClient = HttpClients.createDefault();
+			// 设置连接超时时间和获取数据超时时间
+			/**
 			RequestConfig requestConfig = RequestConfig.custom()
 					.setConnectTimeout(20000)
 					.setConnectionRequestTimeout(15000).setSocketTimeout(20000)
-					.build(); // 设置连接超时时间和获取数据超时时间
-
+					.build(); 
+			 */
 			// 创建Post请求的实例，并传入待连接的地址
 			httpPost = new HttpPost(url);
-			httpPost.setConfig(requestConfig);
+			//httpPost.setConfig(requestConfig);
 
 			// 设置请求头
 			httpPost.addHeader("content-type",
@@ -122,14 +123,16 @@ public class ShardemrAndOauthTokenInterface {
 		String responses = null;
 		try {
 			httpClient = HttpClients.createDefault();
+			// 设置连接超时时间和获取数据超时时间
+			/**
 			RequestConfig requestConfig = RequestConfig.custom()
 					.setConnectTimeout(20000)
 					.setConnectionRequestTimeout(15000).setSocketTimeout(20000)
-					.build(); // 设置连接超时时间和获取数据超时时间
-			
+					.build(); 
+			*/
 			// 创建Post请求的实例，并传入待连接的地址
 			httpPost = new HttpPost(url);
-			httpPost.setConfig(requestConfig);
+			//httpPost.setConfig(requestConfig);
 			
 			// 设置请求头
 			httpPost.addHeader("content-type","application/x-www-form-urlencoded; charset=UTF-8");

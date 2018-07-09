@@ -28,7 +28,6 @@ public class TestShardemr {
 		System.out.println(token);
 	}
 	
-	
 	@Test
 	public void getShardemr() throws Exception{
 		ConcurrentHashMap<String,String> oauthTokenMap = new ConcurrentHashMap<>();

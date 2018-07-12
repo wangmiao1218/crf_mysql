@@ -92,7 +92,7 @@ public class AnzhenInputValueMethod {
 		driver.findElementById("input-save").click();
 		Thread.sleep(1000);
 		driver.findElementByClassName("u-btn").click();
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 	}
 
 	
@@ -131,7 +131,17 @@ public class AnzhenInputValueMethod {
 			}
 			else if ("日期型".contains(list.get(i).getVariableType())){
 				driver.findElementById(list.get(i).getIdXpath()).click();
-				driver.findElementByXPath(".//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[2]/a").click();
+				//固定时间，防止报错
+				//定义年：2018
+				Select selYear = new Select(driver.findElementByXPath("//*[@id='ui-datepicker-div']/div/div/select[1]"));
+				selYear.selectByValue("2018"); 
+				//定义月：1月
+				Select selMouth = new Select(driver.findElementByXPath("//*[@id='ui-datepicker-div']/div/div/select[2]"));
+				selMouth.selectByValue("0"); 
+				//定义日：1号
+				driver.findElementByXPath("//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[1]/a").click();
+			
+				//driver.findElementByXPath("//*[@id='ui-datepicker-div']/table/tbody/tr[3]/td[3]/a").click();
 			}
 			else if ("图片型".contains(list.get(i).getVariableType())){
 				//driver.findElementById(list.get(i).getIdXpath()).click();
@@ -199,7 +209,17 @@ public class AnzhenInputValueMethod {
 			}
 			else if ("日期型".contains(list.get(i).getVariableType())){
 				driver.findElementById(list.get(i).getIdXpath()).click();
-				driver.findElementByXPath(".//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[2]/a").click();
+				//固定时间，防止报错
+				//定义年：2018
+				Select selYear = new Select(driver.findElementByXPath("//*[@id='ui-datepicker-div']/div/div/select[1]"));
+				selYear.selectByValue("2018"); 
+				//定义月：1月
+				Select selMouth = new Select(driver.findElementByXPath("//*[@id='ui-datepicker-div']/div/div/select[2]"));
+				selMouth.selectByValue("0"); 
+				//定义日：1号
+				driver.findElementByXPath("//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[1]/a").click();
+			
+				//driver.findElementByXPath("//*[@id='ui-datepicker-div']/table/tbody/tr[3]/td[3]/a").click();
 			}
 			else if ("图片型".contains(list.get(i).getVariableType())){
 				//driver.findElementById(list.get(i).getIdXpath()).click();
@@ -267,7 +287,17 @@ public class AnzhenInputValueMethod {
 			}
 			else if ("日期型".contains(list.get(i).getVariableType())){
 				driver.findElementById(list.get(i).getIdXpath()).click();
-				driver.findElementByXPath(".//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[2]/a").click();
+				//固定时间，防止报错
+				//定义年：2018
+				Select selYear = new Select(driver.findElementByXPath("//*[@id='ui-datepicker-div']/div/div/select[1]"));
+				selYear.selectByValue("2018"); 
+				//定义月：1月
+				Select selMouth = new Select(driver.findElementByXPath("//*[@id='ui-datepicker-div']/div/div/select[2]"));
+				selMouth.selectByValue("0"); 
+				//定义日：1号
+				driver.findElementByXPath("//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[1]/a").click();
+			
+				//driver.findElementByXPath("//*[@id='ui-datepicker-div']/table/tbody/tr[3]/td[3]/a").click();
 			}
 			else if ("图片型".contains(list.get(i).getVariableType())){
 				//driver.findElementById(list.get(i).getIdXpath()).click();

@@ -55,14 +55,26 @@ public class AddCrfTemplateAnzhenController{
 				else {
 					if ("调查时间".contains(jbxxList.get(i).getChineseName())) {
 						driver.findElementById(jbxxList.get(i).getIdXpath()).click();
-						//driver.findElementByXPath(".//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[2]/a").click();
-						driver.findElementByXPath("//*[@id='ui-datepicker-div']/table/tbody/tr[3]/td[4]/a").click();
+						//定义年：2018
+						Select selYear = new Select(driver.findElementByXPath("//*[@id='ui-datepicker-div']/div/div/select[1]"));
+						selYear.selectByValue("2018"); 
+						//定义月：1月
+						Select selMouth = new Select(driver.findElementByXPath("//*[@id='ui-datepicker-div']/div/div/select[2]"));
+						selMouth.selectByValue("0"); 
+						//定义日：1号
+						driver.findElementByXPath("//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[1]/a").click();
+					
 					}
 					else if ("出生日期".contains(jbxxList.get(i).getChineseName())) {
 						driver.findElementById(jbxxList.get(i).getIdXpath()).click();
-						driver.findElementByXPath(".//*[@id='ui-datepicker-div']/div/div/select[1]").click();
-						driver.findElementByXPath(".//*[@id='ui-datepicker-div']/div/div/select[1]/option[82]").click();//1998
-						driver.findElementByXPath(".//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[6]/a").click();
+						//定义年：1990
+						Select selYear = new Select(driver.findElementByXPath("//*[@id='ui-datepicker-div']/div/div/select[1]"));
+						selYear.selectByValue("1990"); 
+						//定义月：1月
+						Select selMouth = new Select(driver.findElementByXPath("//*[@id='ui-datepicker-div']/div/div/select[2]"));
+						selMouth.selectByValue("0"); 
+						//定义日：1号
+						driver.findElementByXPath("//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[1]/a").click();
 					}
 					else {
 						driver.findElementById(jbxxList.get(i).getIdXpath()).clear();
@@ -110,14 +122,26 @@ public class AddCrfTemplateAnzhenController{
 				else {
 					if ("调查时间".contains(jbxxList.get(i).getChineseName())) {
 						driver.findElementById(jbxxList.get(i).getIdXpath()).click();
-						//driver.findElementByXPath(".//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[2]/a").click();
-						driver.findElementByXPath("//*[@id='ui-datepicker-div']/table/tbody/tr[3]/td[4]/a").click();
+						//定义年：2018
+						Select selYear = new Select(driver.findElementByXPath("//*[@id='ui-datepicker-div']/div/div/select[1]"));
+						selYear.selectByValue("2018"); 
+						//定义月：1月
+						Select selMouth = new Select(driver.findElementByXPath("//*[@id='ui-datepicker-div']/div/div/select[2]"));
+						selMouth.selectByValue("0"); 
+						//定义日：1号
+						driver.findElementByXPath("//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[1]/a").click();
+					
 					}
 					else if ("出生日期".contains(jbxxList.get(i).getChineseName())) {
 						driver.findElementById(jbxxList.get(i).getIdXpath()).click();
-						driver.findElementByXPath(".//*[@id='ui-datepicker-div']/div/div/select[1]").click();
-						driver.findElementByXPath(".//*[@id='ui-datepicker-div']/div/div/select[1]/option[82]").click();//1998
-						driver.findElementByXPath(".//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[6]/a").click();
+						//定义年：1990
+						Select selYear = new Select(driver.findElementByXPath("//*[@id='ui-datepicker-div']/div/div/select[1]"));
+						selYear.selectByValue("1990"); 
+						//定义月：1月
+						Select selMouth = new Select(driver.findElementByXPath("//*[@id='ui-datepicker-div']/div/div/select[2]"));
+						selMouth.selectByValue("0"); 
+						//定义日：1号
+						driver.findElementByXPath("//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[1]/a").click();
 					}
 					else {
 						driver.findElementById(jbxxList.get(i).getIdXpath()).clear();
@@ -239,14 +263,26 @@ public class AddCrfTemplateAnzhenController{
 				else {
 					if ("调查时间".contains(jbxxList.get(i).getChineseName())) {
 						driver.findElementById(jbxxList.get(i).getIdXpath()).click();
-						//driver.findElementByXPath(".//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[2]/a").click();
-						driver.findElementByXPath("//*[@id='ui-datepicker-div']/table/tbody/tr[3]/td[4]/a").click();
+						//定义年：2018
+						Select selYear = new Select(driver.findElementByXPath("//*[@id='ui-datepicker-div']/div/div/select[1]"));
+						selYear.selectByValue("2018"); 
+						//定义月：1月
+						Select selMouth = new Select(driver.findElementByXPath("//*[@id='ui-datepicker-div']/div/div/select[2]"));
+						selMouth.selectByValue("0"); 
+						//定义日：1号
+						driver.findElementByXPath("//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[1]/a").click();
+					
 					}
 					else if ("出生日期".contains(jbxxList.get(i).getChineseName())) {
 						driver.findElementById(jbxxList.get(i).getIdXpath()).click();
-						driver.findElementByXPath(".//*[@id='ui-datepicker-div']/div/div/select[1]").click();
-						driver.findElementByXPath(".//*[@id='ui-datepicker-div']/div/div/select[1]/option[82]").click();//1998
-						driver.findElementByXPath(".//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[6]/a").click();
+						//定义年：1990
+						Select selYear = new Select(driver.findElementByXPath("//*[@id='ui-datepicker-div']/div/div/select[1]"));
+						selYear.selectByValue("1990"); 
+						//定义月：1月
+						Select selMouth = new Select(driver.findElementByXPath("//*[@id='ui-datepicker-div']/div/div/select[2]"));
+						selMouth.selectByValue("0"); 
+						//定义日：1号
+						driver.findElementByXPath("//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[1]/a").click();
 					}
 					else {
 						driver.findElementById(jbxxList.get(i).getIdXpath()).clear();
@@ -303,6 +339,7 @@ public class AddCrfTemplateAnzhenController{
 			driver.findElementByClassName("dropdown-toggle").click();
 			driver.findElementById("add-followup").click();
 			AnzhenInputValueMethod.inputValueByVariableType_Sf_inputValue03(driver, crfTemplateAnzhenService.getCrfTemplateAnzhenListByBaseName("随访"));
+		
 		}
 
 		// 关闭driver
@@ -337,13 +374,26 @@ public class AddCrfTemplateAnzhenController{
 				else {
 					if ("调查时间".contains(jbxxList.get(i).getChineseName())) {
 						driver.findElementById(jbxxList.get(i).getIdXpath()).click();
-						driver.findElementByXPath(".//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[2]/a").click();
+						//定义年：2018
+						Select selYear = new Select(driver.findElementByXPath("//*[@id='ui-datepicker-div']/div/div/select[1]"));
+						selYear.selectByValue("2018"); 
+						//定义月：1月
+						Select selMouth = new Select(driver.findElementByXPath("//*[@id='ui-datepicker-div']/div/div/select[2]"));
+						selMouth.selectByValue("0"); 
+						//定义日：1号
+						driver.findElementByXPath("//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[1]/a").click();
+					
 					}
 					else if ("出生日期".contains(jbxxList.get(i).getChineseName())) {
 						driver.findElementById(jbxxList.get(i).getIdXpath()).click();
-						driver.findElementByXPath(".//*[@id='ui-datepicker-div']/div/div/select[1]").click();
-						driver.findElementByXPath(".//*[@id='ui-datepicker-div']/div/div/select[1]/option[82]").click();//1998
-						driver.findElementByXPath(".//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[6]/a").click();
+						//定义年：1990
+						Select selYear = new Select(driver.findElementByXPath("//*[@id='ui-datepicker-div']/div/div/select[1]"));
+						selYear.selectByValue("1990"); 
+						//定义月：1月
+						Select selMouth = new Select(driver.findElementByXPath("//*[@id='ui-datepicker-div']/div/div/select[2]"));
+						selMouth.selectByValue("0"); 
+						//定义日：1号
+						driver.findElementByXPath("//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[1]/a").click();
 					}
 					else {
 						driver.findElementById(jbxxList.get(i).getIdXpath()).clear();
@@ -391,13 +441,26 @@ public class AddCrfTemplateAnzhenController{
 				else {
 					if ("调查时间".contains(jbxxList.get(i).getChineseName())) {
 						driver.findElementById(jbxxList.get(i).getIdXpath()).click();
-						driver.findElementByXPath(".//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[2]/a").click();
+						//定义年：2018
+						Select selYear = new Select(driver.findElementByXPath("//*[@id='ui-datepicker-div']/div/div/select[1]"));
+						selYear.selectByValue("2018"); 
+						//定义月：1月
+						Select selMouth = new Select(driver.findElementByXPath("//*[@id='ui-datepicker-div']/div/div/select[2]"));
+						selMouth.selectByValue("0"); 
+						//定义日：1号
+						driver.findElementByXPath("//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[1]/a").click();
+					
 					}
 					else if ("出生日期".contains(jbxxList.get(i).getChineseName())) {
 						driver.findElementById(jbxxList.get(i).getIdXpath()).click();
-						driver.findElementByXPath(".//*[@id='ui-datepicker-div']/div/div/select[1]").click();
-						driver.findElementByXPath(".//*[@id='ui-datepicker-div']/div/div/select[1]/option[82]").click();//1998
-						driver.findElementByXPath(".//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[6]/a").click();
+						//定义年：1990
+						Select selYear = new Select(driver.findElementByXPath("//*[@id='ui-datepicker-div']/div/div/select[1]"));
+						selYear.selectByValue("1990"); 
+						//定义月：1月
+						Select selMouth = new Select(driver.findElementByXPath("//*[@id='ui-datepicker-div']/div/div/select[2]"));
+						selMouth.selectByValue("0"); 
+						//定义日：1号
+						driver.findElementByXPath("//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[1]/a").click();
 					}
 					else {
 						driver.findElementById(jbxxList.get(i).getIdXpath()).clear();
@@ -519,13 +582,26 @@ public class AddCrfTemplateAnzhenController{
 				else {
 					if ("调查时间".contains(jbxxList.get(i).getChineseName())) {
 						driver.findElementById(jbxxList.get(i).getIdXpath()).click();
-						driver.findElementByXPath(".//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[2]/a").click();
+						//定义年：2018
+						Select selYear = new Select(driver.findElementByXPath("//*[@id='ui-datepicker-div']/div/div/select[1]"));
+						selYear.selectByValue("2018"); 
+						//定义月：1月
+						Select selMouth = new Select(driver.findElementByXPath("//*[@id='ui-datepicker-div']/div/div/select[2]"));
+						selMouth.selectByValue("0"); 
+						//定义日：1号
+						driver.findElementByXPath("//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[1]/a").click();
+					
 					}
 					else if ("出生日期".contains(jbxxList.get(i).getChineseName())) {
 						driver.findElementById(jbxxList.get(i).getIdXpath()).click();
-						driver.findElementByXPath(".//*[@id='ui-datepicker-div']/div/div/select[1]").click();
-						driver.findElementByXPath(".//*[@id='ui-datepicker-div']/div/div/select[1]/option[82]").click();//1998
-						driver.findElementByXPath(".//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[6]/a").click();
+						//定义年：1990
+						Select selYear = new Select(driver.findElementByXPath("//*[@id='ui-datepicker-div']/div/div/select[1]"));
+						selYear.selectByValue("1990"); 
+						//定义月：1月
+						Select selMouth = new Select(driver.findElementByXPath("//*[@id='ui-datepicker-div']/div/div/select[2]"));
+						selMouth.selectByValue("0"); 
+						//定义日：1号
+						driver.findElementByXPath("//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[1]/a").click();
 					}
 					else {
 						driver.findElementById(jbxxList.get(i).getIdXpath()).clear();
@@ -617,13 +693,26 @@ public class AddCrfTemplateAnzhenController{
 				else {
 					if ("调查时间".contains(jbxxList.get(i).getChineseName())) {
 						driver.findElementById(jbxxList.get(i).getIdXpath()).click();
-						driver.findElementByXPath(".//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[2]/a").click();
+						//定义年：2018
+						Select selYear = new Select(driver.findElementByXPath("//*[@id='ui-datepicker-div']/div/div/select[1]"));
+						selYear.selectByValue("2018"); 
+						//定义月：1月
+						Select selMouth = new Select(driver.findElementByXPath("//*[@id='ui-datepicker-div']/div/div/select[2]"));
+						selMouth.selectByValue("0"); 
+						//定义日：1号
+						driver.findElementByXPath("//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[1]/a").click();
+					
 					}
 					else if ("出生日期".contains(jbxxList.get(i).getChineseName())) {
 						driver.findElementById(jbxxList.get(i).getIdXpath()).click();
-						driver.findElementByXPath(".//*[@id='ui-datepicker-div']/div/div/select[1]").click();
-						driver.findElementByXPath(".//*[@id='ui-datepicker-div']/div/div/select[1]/option[82]").click();//1998
-						driver.findElementByXPath(".//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[6]/a").click();
+						//定义年：1990
+						Select selYear = new Select(driver.findElementByXPath("//*[@id='ui-datepicker-div']/div/div/select[1]"));
+						selYear.selectByValue("1990"); 
+						//定义月：1月
+						Select selMouth = new Select(driver.findElementByXPath("//*[@id='ui-datepicker-div']/div/div/select[2]"));
+						selMouth.selectByValue("0"); 
+						//定义日：1号
+						driver.findElementByXPath("//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[1]/a").click();
 					}
 					else {
 						driver.findElementById(jbxxList.get(i).getIdXpath()).clear();
@@ -671,13 +760,26 @@ public class AddCrfTemplateAnzhenController{
 				else {
 					if ("调查时间".contains(jbxxList.get(i).getChineseName())) {
 						driver.findElementById(jbxxList.get(i).getIdXpath()).click();
-						driver.findElementByXPath(".//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[2]/a").click();
+						//定义年：2018
+						Select selYear = new Select(driver.findElementByXPath("//*[@id='ui-datepicker-div']/div/div/select[1]"));
+						selYear.selectByValue("2018"); 
+						//定义月：1月
+						Select selMouth = new Select(driver.findElementByXPath("//*[@id='ui-datepicker-div']/div/div/select[2]"));
+						selMouth.selectByValue("0"); 
+						//定义日：1号
+						driver.findElementByXPath("//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[1]/a").click();
+					
 					}
 					else if ("出生日期".contains(jbxxList.get(i).getChineseName())) {
 						driver.findElementById(jbxxList.get(i).getIdXpath()).click();
-						driver.findElementByXPath(".//*[@id='ui-datepicker-div']/div/div/select[1]").click();
-						driver.findElementByXPath(".//*[@id='ui-datepicker-div']/div/div/select[1]/option[82]").click();//1998
-						driver.findElementByXPath(".//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[6]/a").click();
+						//定义年：1990
+						Select selYear = new Select(driver.findElementByXPath("//*[@id='ui-datepicker-div']/div/div/select[1]"));
+						selYear.selectByValue("1990"); 
+						//定义月：1月
+						Select selMouth = new Select(driver.findElementByXPath("//*[@id='ui-datepicker-div']/div/div/select[2]"));
+						selMouth.selectByValue("0"); 
+						//定义日：1号
+						driver.findElementByXPath("//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[1]/a").click();
 					}
 					else {
 						driver.findElementById(jbxxList.get(i).getIdXpath()).clear();
@@ -796,13 +898,26 @@ public class AddCrfTemplateAnzhenController{
 				else {
 					if ("调查时间".contains(jbxxList.get(i).getChineseName())) {
 						driver.findElementById(jbxxList.get(i).getIdXpath()).click();
-						driver.findElementByXPath(".//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[2]/a").click();
+						//定义年：2018
+						Select selYear = new Select(driver.findElementByXPath("//*[@id='ui-datepicker-div']/div/div/select[1]"));
+						selYear.selectByValue("2018"); 
+						//定义月：1月
+						Select selMouth = new Select(driver.findElementByXPath("//*[@id='ui-datepicker-div']/div/div/select[2]"));
+						selMouth.selectByValue("0"); 
+						//定义日：1号
+						driver.findElementByXPath("//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[1]/a").click();
+					
 					}
 					else if ("出生日期".contains(jbxxList.get(i).getChineseName())) {
 						driver.findElementById(jbxxList.get(i).getIdXpath()).click();
-						driver.findElementByXPath(".//*[@id='ui-datepicker-div']/div/div/select[1]").click();
-						driver.findElementByXPath(".//*[@id='ui-datepicker-div']/div/div/select[1]/option[82]").click();//1998
-						driver.findElementByXPath(".//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[6]/a").click();
+						//定义年：1990
+						Select selYear = new Select(driver.findElementByXPath("//*[@id='ui-datepicker-div']/div/div/select[1]"));
+						selYear.selectByValue("1990"); 
+						//定义月：1月
+						Select selMouth = new Select(driver.findElementByXPath("//*[@id='ui-datepicker-div']/div/div/select[2]"));
+						selMouth.selectByValue("0"); 
+						//定义日：1号
+						driver.findElementByXPath("//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[1]/a").click();
 					}
 					else {
 						driver.findElementById(jbxxList.get(i).getIdXpath()).clear();
@@ -892,13 +1007,26 @@ public class AddCrfTemplateAnzhenController{
 				else {
 					if ("调查时间".contains(jbxxList.get(i).getChineseName())) {
 						driver.findElementById(jbxxList.get(i).getIdXpath()).click();
-						driver.findElementByXPath(".//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[2]/a").click();
+						//定义年：2018
+						Select selYear = new Select(driver.findElementByXPath("//*[@id='ui-datepicker-div']/div/div/select[1]"));
+						selYear.selectByValue("2018"); 
+						//定义月：1月
+						Select selMouth = new Select(driver.findElementByXPath("//*[@id='ui-datepicker-div']/div/div/select[2]"));
+						selMouth.selectByValue("0"); 
+						//定义日：1号
+						driver.findElementByXPath("//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[1]/a").click();
+					
 					}
 					else if ("出生日期".contains(jbxxList.get(i).getChineseName())) {
 						driver.findElementById(jbxxList.get(i).getIdXpath()).click();
-						driver.findElementByXPath(".//*[@id='ui-datepicker-div']/div/div/select[1]").click();
-						driver.findElementByXPath(".//*[@id='ui-datepicker-div']/div/div/select[1]/option[82]").click();//1998
-						driver.findElementByXPath(".//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[6]/a").click();
+						//定义年：1990
+						Select selYear = new Select(driver.findElementByXPath("//*[@id='ui-datepicker-div']/div/div/select[1]"));
+						selYear.selectByValue("1990"); 
+						//定义月：1月
+						Select selMouth = new Select(driver.findElementByXPath("//*[@id='ui-datepicker-div']/div/div/select[2]"));
+						selMouth.selectByValue("0"); 
+						//定义日：1号
+						driver.findElementByXPath("//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[1]/a").click();
 					}
 					else {
 						driver.findElementById(jbxxList.get(i).getIdXpath()).clear();
@@ -946,13 +1074,26 @@ public class AddCrfTemplateAnzhenController{
 				else {
 					if ("调查时间".contains(jbxxList.get(i).getChineseName())) {
 						driver.findElementById(jbxxList.get(i).getIdXpath()).click();
-						driver.findElementByXPath(".//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[2]/a").click();
+						//定义年：2018
+						Select selYear = new Select(driver.findElementByXPath("//*[@id='ui-datepicker-div']/div/div/select[1]"));
+						selYear.selectByValue("2018"); 
+						//定义月：1月
+						Select selMouth = new Select(driver.findElementByXPath("//*[@id='ui-datepicker-div']/div/div/select[2]"));
+						selMouth.selectByValue("0"); 
+						//定义日：1号
+						driver.findElementByXPath("//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[1]/a").click();
+					
 					}
 					else if ("出生日期".contains(jbxxList.get(i).getChineseName())) {
 						driver.findElementById(jbxxList.get(i).getIdXpath()).click();
-						driver.findElementByXPath(".//*[@id='ui-datepicker-div']/div/div/select[1]").click();
-						driver.findElementByXPath(".//*[@id='ui-datepicker-div']/div/div/select[1]/option[82]").click();//1998
-						driver.findElementByXPath(".//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[6]/a").click();
+						//定义年：1990
+						Select selYear = new Select(driver.findElementByXPath("//*[@id='ui-datepicker-div']/div/div/select[1]"));
+						selYear.selectByValue("1990"); 
+						//定义月：1月
+						Select selMouth = new Select(driver.findElementByXPath("//*[@id='ui-datepicker-div']/div/div/select[2]"));
+						selMouth.selectByValue("0"); 
+						//定义日：1号
+						driver.findElementByXPath("//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[1]/a").click();
 					}
 					else {
 						driver.findElementById(jbxxList.get(i).getIdXpath()).clear();
@@ -1071,13 +1212,26 @@ public class AddCrfTemplateAnzhenController{
 				else {
 					if ("调查时间".contains(jbxxList.get(i).getChineseName())) {
 						driver.findElementById(jbxxList.get(i).getIdXpath()).click();
-						driver.findElementByXPath(".//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[2]/a").click();
+						//定义年：2018
+						Select selYear = new Select(driver.findElementByXPath("//*[@id='ui-datepicker-div']/div/div/select[1]"));
+						selYear.selectByValue("2018"); 
+						//定义月：1月
+						Select selMouth = new Select(driver.findElementByXPath("//*[@id='ui-datepicker-div']/div/div/select[2]"));
+						selMouth.selectByValue("0"); 
+						//定义日：1号
+						driver.findElementByXPath("//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[1]/a").click();
+					
 					}
 					else if ("出生日期".contains(jbxxList.get(i).getChineseName())) {
 						driver.findElementById(jbxxList.get(i).getIdXpath()).click();
-						driver.findElementByXPath(".//*[@id='ui-datepicker-div']/div/div/select[1]").click();
-						driver.findElementByXPath(".//*[@id='ui-datepicker-div']/div/div/select[1]/option[82]").click();//1998
-						driver.findElementByXPath(".//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[6]/a").click();
+						//定义年：1990
+						Select selYear = new Select(driver.findElementByXPath("//*[@id='ui-datepicker-div']/div/div/select[1]"));
+						selYear.selectByValue("1990"); 
+						//定义月：1月
+						Select selMouth = new Select(driver.findElementByXPath("//*[@id='ui-datepicker-div']/div/div/select[2]"));
+						selMouth.selectByValue("0"); 
+						//定义日：1号
+						driver.findElementByXPath("//*[@id='ui-datepicker-div']/table/tbody/tr[1]/td[1]/a").click();
 					}
 					else {
 						driver.findElementById(jbxxList.get(i).getIdXpath()).clear();

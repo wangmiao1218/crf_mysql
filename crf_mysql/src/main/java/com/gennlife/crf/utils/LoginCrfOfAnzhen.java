@@ -23,8 +23,8 @@ public class LoginCrfOfAnzhen {
 	public static final String xpathOfSheQu=".//*[@id='modal-container']/div/div/div/div[2]/a[4]";
 	
 	//安贞高血压地址（若换成心血管的直接改ip即可）
-	//public static final String danbingzhongUrl="http://10.0.2.157/uranus/crf_case.html";
-	public static final String danbingzhongUrl="http://10.0.0.195/uranus/crf_case.html";
+	public static final String danbingzhongUrl="http://10.0.2.157/uranus/crf_case.html";
+	//public static final String danbingzhongUrl="http://10.0.0.195/uranus/crf_case.html";
 	
 	//安贞心血管线上
 	//public static final String danbingzhongUrl="http://hero.vitark.gennlife.com/uranus/crf_case.html";
@@ -72,16 +72,25 @@ public class LoginCrfOfAnzhen {
         //sel.selectByValue("anzhen-zhongguorenminjiefangjundisanjunyidaxue"); 
         //sel.selectByValue("anzhen-shoudouyikedaxuefushubeijingtiantanyiyuan"); 
 		//sel.selectByValue("anzhen-beijingshixinfeixueguanjibingyanjiusuo"); 
-		//sel.selectByValue("anzhen-zhoukoushigaoxueyajibingyanjiusuo"); 
-		sel.selectByValue("anzhen-shanghailangxiashequfuwuzhongxin"); 
+		//sel.selectByValue("anzhen-shanghailangxiashequfuwuzhongxin"); 
 		
-		/*// 等待
+		//sel.selectByValue("anzhen-zhongriyouhaoyiyuan"); 
+		//sel.selectByValue("anzhen-beijingfuxingyiyuan"); 
+		sel.selectByValue("anzhen-beijinganzhenyiyuanhecha"); 
+		
+		
+		//sel.selectByValue("anzhen-beijingluheyiyuan"); 
+		//sel.selectByValue("anzhen-zhoukoushigaoxueyajibingyanjiusuo"); 
+		//sel.selectByValue("anzhen-shanxidayiyuan"); 
+		
+		
+		// 等待
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		 */
+		 
 		String returnString=null;
 		String text = driver.findElementByXPath(".//*[@id='action-container']/div[1]/button[1]").getText();
 		 

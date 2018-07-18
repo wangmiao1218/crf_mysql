@@ -78,7 +78,6 @@ public class LoginCrfOfAnzhen {
 		//sel.selectByValue("anzhen-beijingfuxingyiyuan"); 
 		//sel.selectByValue("anzhen-beijinganzhenyiyuanhecha"); 
 		
-		
 		//sel.selectByValue("anzhen-beijingluheyiyuan"); 
 		//sel.selectByValue("anzhen-zhoukoushigaoxueyajibingyanjiusuo"); 
 		//sel.selectByValue("anzhen-shanxidayiyuan"); 

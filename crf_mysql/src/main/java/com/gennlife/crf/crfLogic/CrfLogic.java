@@ -11,6 +11,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 import org.apache.commons.collections4.map.HashedMap;
+import org.apache.log4j.Logger;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -28,6 +29,8 @@ import com.gennlife.interfaces.ManualEMRAutoCRFV2OfCrfAutoInterface;
  */
 public class CrfLogic {
 
+	private static Logger logger = Logger.getLogger(CrfLogic.class); 
+	
 	private static final String patPath = "patient_info.patient_info_patient_sn";
 	//存放批量的json，统一插入到mongodb(插入到数据库，要先判断pat是否存在 ,所以,以map形式存储)
 	private static List<Map<String, JSONObject>> listMapJsons = new ArrayList<Map<String,JSONObject>>();
@@ -55,6 +58,7 @@ public class CrfLogic {
 		
 		//获取isConfiguredCellNum一列（用readExcelOfListReturnListMap，因为有重复值）(除表头)
 		List<Map<Integer,String>> list = ExcelUtils.readExcelOfListReturnListMap(excel, isConfiguredCellNum);
+		logger.info("获取列-配置"); 
 		//获取是否配置的列，开始遍历
 		for (int i = 1; i < list.size(); i++) {
 			//放到上面设置变量，则不循环，但是每个值都保存了

@@ -61,7 +61,6 @@ public class SelectBase {
 			if (listToString!=null) {
 				crfTemplate.setOutput(listToString);
 			}
-			
 			//判断并写入结果,保存新的crfTemplate
 			String rangeData =ListAndStringUtils.trimString(crfTemplate.getRangeData());
 			String output = crfTemplate.getOutput();

@@ -34,7 +34,6 @@ public class SelectBase {
 			logger.debug("无"+crfTemplate.getEnglishName()+"字段");
 			return null;
 		}
-		
 		//若有则继续验证
 		if (crfTemplate.getEnglishName()!=null) {
 			logger.debug("开始登陆...");

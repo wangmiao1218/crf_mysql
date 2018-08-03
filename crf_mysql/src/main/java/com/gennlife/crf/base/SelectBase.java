@@ -18,6 +18,7 @@ import com.gennlife.crf.utils.ListAndStringUtils;
  * @Date: 2017年6月9日 上午10:05:20 
  */
 public class SelectBase {
+	
 	private static final Logger logger = LoggerFactory.getLogger(SelectBase.class);
 	
 	/** 

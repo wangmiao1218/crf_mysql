@@ -47,10 +47,8 @@ public class SelectBase {
 				//去页面 遍历下拉列表所有选项
 				//Select selall = new Select(driver.findElementByXPath(xpath));
 				Select selall = new Select(driver.findElement(By.xpath(xpath)));
-				
 				//封装成List<WebElement>
 				List<WebElement> lw= selall.getOptions();
-				
 				//将list转为string
 				listToString = ListAndStringUtils.listWebElementToSelectString(lw);
 			}else {

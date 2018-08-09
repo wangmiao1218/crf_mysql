@@ -68,7 +68,6 @@ public class SelectBase {
 				crfTemplate.setResult("no");
 			}
 		}
-		
 		return crfTemplate;
 	}
 	

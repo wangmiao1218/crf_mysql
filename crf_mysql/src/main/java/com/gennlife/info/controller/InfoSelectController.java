@@ -45,7 +45,8 @@ public class InfoSelectController extends SelectBase {
 		for (int i = 0; i < list.size(); i++) {
 			//根据list值，获取对应的englishName
 			CrfTemplate oldCrfTemplate = crfTemplateService.getCrfTemplateByEnglishName(list.get(i).getEnglishName());
-			System.out.println(oldCrfTemplate);
+			//System.out.println(oldCrfTemplate);
+			
 			//获取newCrfTemplate
 			CrfTemplate newCrfTemplate = SelectBase.selectBase(driver,value,oldCrfTemplate);
 			

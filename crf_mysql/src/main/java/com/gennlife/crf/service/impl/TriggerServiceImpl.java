@@ -6,8 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.gennlife.crf.service.CreateRwsCalculateStabilityTaskSerive;
-import com.gennlife.crf.service.CreateShardemrTaskSerive;
+import com.gennlife.crf.service.CreateRwsCalculateStabilityTaskService;
 import com.gennlife.crf.service.TriggerService;
 
 /**
@@ -25,7 +24,7 @@ public class TriggerServiceImpl implements TriggerService{
 	*/
 	
 	@Autowired
-	private CreateRwsCalculateStabilityTaskSerive createRwsCalculateStabilityTaskSerive;
+	private CreateRwsCalculateStabilityTaskService createRwsCalculateStabilityTaskService;
 	
 	
 	@Override
@@ -43,7 +42,7 @@ public class TriggerServiceImpl implements TriggerService{
 		//logger.info("自动创建Shardemr的定时任务，结束--->" +new Date());
 		
 		logger.info("rws计算定时任务，开始--->" +new Date());
-		createRwsCalculateStabilityTaskSerive.createRwsCalculateStabilityTaskSerive();
+		createRwsCalculateStabilityTaskService.createRwsCalculateStabilityTask();
 		logger.info("rws计算定时任务，结束--->" +new Date());
 	}
 	

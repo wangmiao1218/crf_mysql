@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.gennlife.crf.service.CreateRwsCalculateStabilityTaskSerive;
 import com.gennlife.crf.service.CreateShardemrTaskSerive;
 import com.gennlife.crf.service.TriggerService;
 
@@ -18,9 +19,14 @@ import com.gennlife.crf.service.TriggerService;
 public class TriggerServiceImpl implements TriggerService{
 
 	private static final Logger logger = LoggerFactory.getLogger(TriggerServiceImpl.class);
-	
+	/*
 	@Autowired
 	private CreateShardemrTaskSerive createShardemrTaskSerive;
+	*/
+	
+	@Autowired
+	private CreateRwsCalculateStabilityTaskSerive createRwsCalculateStabilityTaskSerive;
+	
 	
 	@Override
 	public void doIt() throws Exception {
@@ -31,10 +37,15 @@ public class TriggerServiceImpl implements TriggerService{
 		//createRwsTaskSerive.createRwsTask();
 		//logger.info("自动创建rws的定时任务，结束--->" +new Date());
 		
+		//三线程并发测rws计算
+		//logger.info("自动创建Shardemr的定时任务，开始--->" +new Date());
+		//createShardemrTaskSerive.createShardemrTask();
+		//logger.info("自动创建Shardemr的定时任务，结束--->" +new Date());
 		
-		logger.info("自动创建Shardemr的定时任务，开始--->" +new Date());
-		createShardemrTaskSerive.createShardemrTask();
-		logger.info("自动创建Shardemr的定时任务，结束--->" +new Date());
+		logger.info("rws计算定时任务，开始--->" +new Date());
+		createRwsCalculateStabilityTaskSerive.createRwsCalculateStabilityTaskSerive();
+		logger.info("rws计算定时任务，结束--->" +new Date());
 	}
+	
 
 }

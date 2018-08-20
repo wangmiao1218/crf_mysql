@@ -99,9 +99,9 @@
 	    <!-- 每5秒执行一次(测试：/5 * * * * ?) --> 
 	    <!-- <property name="cronExpression" value="/5 * * * * ?" /> -->
 	    <!-- 每5分钟执行一次 -->
-	    <!-- <property name="cronExpression" value="0 0/5 * * * ?" /> -->
+	    <property name="cronExpression" value="0 0/5 * * * ?" />
 	    <!--每天晚上12点导出  -->
-	    <property name="cronExpression" value="0 0 0 * * ?" />
+	  	<!-- <property name="cronExpression" value="0 0 0 * * ?" /> -->
 	</bean>
 	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
 	    <property name="triggers">

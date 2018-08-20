@@ -5,43 +5,43 @@
 	<artifactId>crf_mysql</artifactId>
 
 	<version>0.0.1-SNAPSHOT</version>
-	<!-- logback配置版本-->
-	<!-- <properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<logback.version>1.1.7</logback.version>
-		<slf4j.version>1.7.21</slf4j.version>
-	</properties> -->
+
+	<!-- logback配置版本 -->
+	<!-- <properties> <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding> 
+		<logback.version>1.1.7</logback.version> <slf4j.version>1.7.21</slf4j.version> 
+		</properties> -->
 
 	<dependencies>
-		<!--连接hbase  -->
-		<!-- <dependency>
-		    <groupId>org.apache.hbase</groupId>
-		    <artifactId>hbase-client</artifactId>
-		    <version>1.2.6</version>
+		<!--httpclient -->
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.3.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpcore</artifactId>
+			<version>4.3.1</version>
 		</dependency>
 		<dependency>
-		    <groupId>org.apache.hbase</groupId>
-		    <artifactId>hbase-server</artifactId>
-		    <version>1.2.6</version>
-		</dependency> -->
-	
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpmime</artifactId>
+			<version>4.3.1</version>
+		</dependency>
+
+		<!--连接hbase -->
+		<!-- <dependency> <groupId>org.apache.hbase</groupId> <artifactId>hbase-client</artifactId> 
+			<version>1.2.6</version> </dependency> <dependency> <groupId>org.apache.hbase</groupId> 
+			<artifactId>hbase-server</artifactId> <version>1.2.6</version> </dependency> -->
+
 		<!-- logback配置 -->
-		<!-- <dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>${slf4j.version}</version>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-core</artifactId>
-			<version>${logback.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-classic</artifactId>
-			<version>${logback.version}</version>
-		</dependency> -->
+		<!-- <dependency> <groupId>org.slf4j</groupId> <artifactId>slf4j-api</artifactId> 
+			<version>${slf4j.version}</version> <scope>compile</scope> </dependency> 
+			<dependency> <groupId>ch.qos.logback</groupId> <artifactId>logback-core</artifactId> 
+			<version>${logback.version}</version> </dependency> <dependency> <groupId>ch.qos.logback</groupId> 
+			<artifactId>logback-classic</artifactId> <version>${logback.version}</version> 
+			</dependency> -->
 
 		<!-- 生成二维码 -->
 		<!-- https://mvnrepository.com/artifact/com.google.zxing/core -->

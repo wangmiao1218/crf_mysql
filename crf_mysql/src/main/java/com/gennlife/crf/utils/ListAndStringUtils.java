@@ -27,6 +27,27 @@ public class ListAndStringUtils {
 
 	
 	/** 
+	* @Title: isNumeric 
+	* @Description: 判断字符串是否为数字
+	* @author: wangmiao
+	* @Date: 2018年8月20日 上午11:31:24 
+	* @param: @param str
+	* @param: @return
+	* @return: Boolean
+	* @throws 
+	*/
+	public static Boolean isNumeric(String str) {
+		Pattern pattern = Pattern.compile("[0-9]*"); 
+		Matcher isNum = pattern.matcher(str);
+		if( !isNum.matches() ){
+			return false;
+		}else {
+			return true;
+		} 
+	}
+	
+	
+	/** 
 	* @Title: countChar 字符串中判断含有单个字符串的个数
 	* @Description: 
 	* @param: @param str

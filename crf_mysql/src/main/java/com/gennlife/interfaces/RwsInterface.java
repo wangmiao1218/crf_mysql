@@ -5,7 +5,6 @@ import java.io.IOException;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
-import org.apache.http.ParseException;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -111,6 +110,7 @@ public class RwsInterface {
 	*/
 	public static JSONObject rwsCalculate(CloseableHttpClient httpClient,String url,
 			String sessionId,String timeStr) throws JSONException {
+		JSONObject calculateResultObject = null;
 		//读取基础文本文件，并转为json（暂时不使用，便于改条件,进行计算）
 		//JSONObject json = JsonUtils.readFileContentReturnJson("C:\\Users\\www\\Desktop\\rws.json");
 		
@@ -197,7 +197,13 @@ public class RwsInterface {
 			}
 		}
 		
-		return new JSONObject(responses);
+		if (responses.contains("{")) {
+			calculateResultObject=new JSONObject(responses);
+		}else {
+			calculateResultObject=null;
+		}
+		
+		return calculateResultObject;
 	}
 	
 	
@@ -218,6 +224,7 @@ public class RwsInterface {
 	*/
 	public static JSONObject rwsResult(CloseableHttpClient httpClient,String url,
 			String sessionId,String id) throws Exception {
+		
 		String params="{\"projectId\":\"c5d9cb4d-1c53-40a9-8f3b-76373501ba7e\","
 				+ "\"type\":2,\"activeId\":\""+id+"\"}";
 		

@@ -50,23 +50,25 @@ public class RwsCalculateStabilityTask {
 		//第一步：请求登录,获取session
 		JSONObject loginResultObject = RwsInterface.doGet(httpClient,loginURL);
 		//判断返回结果
-		if ("1".contains(loginResultObject.getString("code"))) {
+		if (loginResultObject.has("code") && "1".contains(loginResultObject.getString("code"))) {
 			sessionId = ((JSONObject) loginResultObject.get("data")).getString("uid");
 			logger.info("sessionId:"+sessionId);
 			//第二步：请求计算接口,获取id
 			String timeStr = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
 			JSONObject calculateResultObject =  RwsInterface.rwsCalculate(httpClient,rwsCalculateURL,sessionId, timeStr);
-			if ("200".contains(calculateResultObject.getString("status"))) {
+			if (ListAndStringUtils.isJsonObject(calculateResultObject) &&
+					calculateResultObject.has("status") && 
+					"200".contains(calculateResultObject.getString("status"))) {
 				id = ((JSONObject) calculateResultObject.get("data")).getString("id");
 				logger.info("id:"+id);
-				
 				
 				//第三步：查看计算结果接口，直到有数值类型，保存到map中
 				//暂停2min钟，看结果，（固定2min时间，没算出来即为未计算）
 				//logger.info("sleep中...");
 				Thread.sleep(120000);
 				JSONObject resultObject = RwsInterface.rwsResult(httpClient,rwsResultURL,sessionId, id);
-				if ("200".contains(resultObject.getString("status"))) {
+				
+				if (resultObject.has("status") && "200".contains(resultObject.getString("status"))){
 					applyTotal = ((JSONObject) resultObject.get("data")).getString("applyTotal");
 					
 					//map.put(id, applyTotal);

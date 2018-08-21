@@ -8,9 +8,11 @@ import java.util.regex.Pattern;
 
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Test;
 
+import com.gennlife.crf.utils.ListAndStringUtils;
 import com.gennlife.interfaces.RwsInterface;
 
 
@@ -70,6 +72,17 @@ public class TestRwsInterface {
 		}else {
 			System.out.println("true"); 
 		} 
+		
+	}
+	
+	
+	@Test
+	public void test2() throws JSONException{
+		String str ="21312";
+		//JSONObject obj=new JSONObject("");
+		
+		Boolean jsonObject = ListAndStringUtils.isJsonObject("");
+		System.out.println(jsonObject);
 		
 	}
 	

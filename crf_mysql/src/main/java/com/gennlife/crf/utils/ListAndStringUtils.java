@@ -15,6 +15,7 @@ import net.sf.json.JSONArray;
 import org.apache.commons.collections4.map.HashedMap;
 import org.openqa.selenium.WebElement;
 
+import com.alibaba.fastjson.JSONObject;
 import com.gennlife.crf.bean.CrfTemplateAnzhenXinXueguan;
 
 
@@ -25,6 +26,35 @@ import com.gennlife.crf.bean.CrfTemplateAnzhenXinXueguan;
  */
 public class ListAndStringUtils {
 
+	 
+	/** 
+	* @Title: isJsonObject 
+	* @Description: 判断是否为JsonObject
+	* @author: wangmiao
+	* @Date: 2018年8月21日 下午2:30:34 
+	* @param: @param obj
+	* @param: @return
+	* @return: Boolean
+	* @throws 
+	*/
+	public static Boolean isJsonObject(Object obj){
+		if (obj==null) {
+			return  false;
+		}else {
+			String content = obj.toString();
+		    try {
+		        JSONObject.parseObject(content);
+		        if (content.startsWith("{")) {
+		        	return  true;
+				}else {
+					return  false;
+				}
+		   } catch (Exception e) {
+		        return false;
+		  }
+		}
+	}
+	
 	
 	/** 
 	* @Title: isNumeric 

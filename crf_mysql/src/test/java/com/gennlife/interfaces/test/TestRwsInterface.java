@@ -8,12 +8,14 @@ import java.util.regex.Pattern;
 
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Test;
 
-import com.gennlife.crf.utils.ListAndStringUtils;
+import com.alibaba.fastjson.JSONPath;
+import com.gennlife.crf.utils.JsonUtils;
 import com.gennlife.interfaces.RwsInterface;
+import com.jayway.jsonpath.DocumentContext;
+import com.jayway.jsonpath.JsonPath;
 
 
 public class TestRwsInterface {
@@ -77,13 +79,57 @@ public class TestRwsInterface {
 	
 	
 	@Test
-	public void test2() throws JSONException{
-		String str ="21312";
+	public void test2() throws Exception{
+		//String str ="21312";
 		//JSONObject obj=new JSONObject("");
+		//JSONObject json = JsonUtils.readFileContentReturnJson("C:\\Users\\www\\Desktop\\rws.json");
 		
-		Boolean jsonObject = ListAndStringUtils.isJsonObject("");
-		System.out.println(jsonObject);
+		//Boolean jsonObject = ListAndStringUtils.isJsonObject("");
+		//System.out.println(jsonObject);
 		
+		JSONObject json = JsonUtils.readFileContentReturnJson("C:\\Users\\www\\Desktop\\json.json");
+		//System.out.println(json);
+		
+		//String str ="21312";
+		/*JSONPath.set(json, "isSearch", "11111");
+		Object read = JSONPath.read(json.toString(), "isSearch");
+		System.out.println(read);*/
+		
+		//JSONPath.set(json, "$.active.config[0].conditions[0].details[0].value", "1111");
+		//JSONObject object = json.put("$.active.config[0].conditions[0].details[0].value", "12133");
+		
+		//Object read = JSONPath.read(object.toString(), "$.active.config[0].conditions[0].details[0].value");
+		//System.out.println(read);
+		
+		
+		//JSONPath.set(json, "$.active.config[0].conditions[0].details[0].value", "1111");
+		
+		String regex = "\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}";
+
+
+        Pattern p = Pattern.compile(regex);
+        Matcher matcher = p.matcher(json.toString());
+        if (matcher.find()) {
+            System.out.println(matcher.groupCount());
+            for (int i = 0; i < matcher.groupCount(); i++) {
+				
+			}
+            System.out.println(matcher.group(0));
+        }
+        
+       /* 
+        String all = null;
+        while (matcher.find ()){
+            System.out.println (matcher.group ());
+            String a=matcher.group ();
+            all = json.toString().replaceAll(a, 
+            		new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+        }
+        
+        Matcher matcher2 = p.matcher(all);
+        while (matcher2.find ()){
+            System.out.println (matcher2.group ());
+        }*/
 	}
 	
 	

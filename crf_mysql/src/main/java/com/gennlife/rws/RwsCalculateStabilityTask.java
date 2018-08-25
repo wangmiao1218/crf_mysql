@@ -47,13 +47,11 @@ public class RwsCalculateStabilityTask {
 		String id = null;
 		String applyTotal = null;
 		
-		//第一步：请求登录,获取session
 		JSONObject loginResultObject = RwsInterface.doGet(httpClient,loginURL);
-		//判断返回结果
 		if (loginResultObject.has("code") && "1".contains(loginResultObject.getString("code"))) {
 			sessionId = ((JSONObject) loginResultObject.get("data")).getString("uid");
 			logger.info("sessionId:"+sessionId);
-			//第二步：请求计算接口,获取id
+
 			String timeStr = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
 			JSONObject calculateResultObject =  RwsInterface.rwsCalculate(httpClient,rwsCalculateURL,sessionId, timeStr);
 			if (ListAndStringUtils.isJsonObject(calculateResultObject) &&
@@ -62,9 +60,8 @@ public class RwsCalculateStabilityTask {
 				id = ((JSONObject) calculateResultObject.get("data")).getString("id");
 				logger.info("id:"+id);
 				
-				//第三步：查看计算结果接口，直到有数值类型，保存到map中
 				//暂停2min钟，看结果，（固定2min时间，没算出来即为未计算）
-				//logger.info("sleep中...");
+				logger.info("sleep中...");
 				Thread.sleep(120000);
 				JSONObject resultObject = RwsInterface.rwsResult(httpClient,rwsResultURL,sessionId, id);
 				
@@ -75,7 +72,6 @@ public class RwsCalculateStabilityTask {
 					//判断是否为数字
 					if (ListAndStringUtils.isNumeric(applyTotal)) {
 						rwsBean = new RwsBean(timeStr,applyTotal,timeStr);
-			
 					}else {
 						rwsBean = new RwsBean(timeStr,"非数值",timeStr);
 					}

@@ -101,7 +101,6 @@ public class TestRwsInterface {
 		//Object read = JSONPath.read(object.toString(), "$.active.config[0].conditions[0].details[0].value");
 		//System.out.println(read);
 		
-		
 		//JSONPath.set(json, "$.active.config[0].conditions[0].details[0].value", "1111");
 		
 		String regex = "\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}";

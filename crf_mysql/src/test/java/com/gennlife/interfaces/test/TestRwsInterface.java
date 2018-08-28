@@ -74,9 +74,7 @@ public class TestRwsInterface {
 		}else {
 			System.out.println("true"); 
 		} 
-		
 	}
-	
 	
 	@Test
 	public void test2() throws Exception{

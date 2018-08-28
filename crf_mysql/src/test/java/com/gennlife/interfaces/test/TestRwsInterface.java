@@ -78,31 +78,9 @@ public class TestRwsInterface {
 	
 	@Test
 	public void test2() throws Exception{
-		//String str ="21312";
-		//JSONObject obj=new JSONObject("");
-		//JSONObject json = JsonUtils.readFileContentReturnJson("C:\\Users\\www\\Desktop\\rws.json");
-		
-		//Boolean jsonObject = ListAndStringUtils.isJsonObject("");
-		//System.out.println(jsonObject);
-		
-		JSONObject json = JsonUtils.readFileContentReturnJson("C:\\Users\\www\\Desktop\\json.json");
-		//System.out.println(json);
-		
-		//String str ="21312";
-		/*JSONPath.set(json, "isSearch", "11111");
-		Object read = JSONPath.read(json.toString(), "isSearch");
-		System.out.println(read);*/
-		
-		//JSONPath.set(json, "$.active.config[0].conditions[0].details[0].value", "1111");
-		//JSONObject object = json.put("$.active.config[0].conditions[0].details[0].value", "12133");
-		
-		//Object read = JSONPath.read(object.toString(), "$.active.config[0].conditions[0].details[0].value");
-		//System.out.println(read);
-		
-		//JSONPath.set(json, "$.active.config[0].conditions[0].details[0].value", "1111");
+		JSONObject json = JsonUtils.readFileContentReturnJson("E:\\RWS\\rws稳定性\\json.json");
 		
 		String regex = "\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}";
-
 
         Pattern p = Pattern.compile(regex);
         Matcher matcher = p.matcher(json.toString());
@@ -128,8 +106,6 @@ public class TestRwsInterface {
             System.out.println (matcher2.group ());
         }*/
 	}
-	
-	
 	
 	
 	

@@ -63,7 +63,6 @@ public class TestRwsInterface {
 		}
 	}
 	
-	
 	@Test
 	public void test(){
 		String str ="21312";

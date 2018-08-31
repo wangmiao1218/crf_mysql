@@ -9,7 +9,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.gennlife.crf.mapper.RwsMapper;
 import com.gennlife.crf.service.CreateRwsCalculateStabilityTaskService;
 
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:spring.xml")
 public class TestRwsCalculateStability {

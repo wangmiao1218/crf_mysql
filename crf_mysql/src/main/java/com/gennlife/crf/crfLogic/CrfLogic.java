@@ -153,7 +153,6 @@ public class CrfLogic {
 			}
 		}
 		*/
-		
 		//=====================线程池方法====================================
 		//创建线程池并返回ExecutorService实例 
 		ExecutorService threadPool =Executors.newFixedThreadPool(2); 

@@ -2,7 +2,6 @@ package com.gennlife.crf.mapper;
 
 import com.gennlife.crf.bean.RwsBean;
 
-
 /**
  * @Description: rws保存接口
  * @author: wangmiao

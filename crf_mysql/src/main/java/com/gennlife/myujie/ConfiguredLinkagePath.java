@@ -12,7 +12,6 @@ import com.gennlife.crf.utils.ListAndStringUtils;
  * @Date: 2017年8月30日 上午9:16:08
  */
 public class ConfiguredLinkagePath {
-
 	/** 
 	* @Title: writeLinkagePath 
 	* @Description: 根据结构，在crf模板中，写入schema路径

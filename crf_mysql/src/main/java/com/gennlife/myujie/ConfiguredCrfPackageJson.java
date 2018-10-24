@@ -6,12 +6,9 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 
 import org.apache.commons.collections4.map.HashedMap;
 
-import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import com.gennlife.crf.bean.Excel;

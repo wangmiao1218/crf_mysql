@@ -24,7 +24,6 @@ public class ConfiguredDataQualityControl {
 	* @throws 
 	*/
 	public static void writeDataQualityControl(Excel excelmb,Excel excel) {
-		//System.out.println("start。。。");
 		Integer sourceCellNum = ExcelUtils.searchKeyWordOfOneLine(excelmb, 0, "源Sheet");
 		Integer endCellNum = ExcelUtils.searchKeyWordOfOneLine(excelmb, 0, "目的Sheet");
 		System.out.println(sourceCellNum);

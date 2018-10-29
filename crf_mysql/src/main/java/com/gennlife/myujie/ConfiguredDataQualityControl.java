@@ -46,7 +46,7 @@ public class ConfiguredDataQualityControl {
 				
 				if ("年份分布".equals(list.get(i))) {
 					System.out.println(list.get(i)+"--"+tableName);
-					annualDistribution(excel,list.get(i),tableName);
+					//annualDistribution(excel,list.get(i),tableName);
 				}
 				/*if ("数据完整性".equals(list.get(i))) {
 					writeSchemaOfThreeGroups(excel,tableName);
@@ -72,7 +72,7 @@ public class ConfiguredDataQualityControl {
 	* @param: @param tableName :传入的表名
 	* @throws 
 	*/
-	public static void annualDistribution(Excel excel,String sourceTableName,
+	/*public static void annualDistribution(Excel excel,String sourceTableName,
 			String endTableName) {
 		Integer chNameCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "表中文名");
 		Integer enNameCellNum = ExcelUtils.searchKeyWordOfOneLine(excel, 0, "表英文名");
@@ -120,7 +120,7 @@ public class ConfiguredDataQualityControl {
 			ExcelUtils.writeAndSaveContent(excel, strings[1], writeContentRowNum, mainValueCellNum);
 		}
 		
-	}
+	}*/
 	
 
 }

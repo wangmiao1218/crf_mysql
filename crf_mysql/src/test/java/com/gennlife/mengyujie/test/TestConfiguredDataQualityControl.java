@@ -1,5 +1,8 @@
 package com.gennlife.mengyujie.test;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.junit.Test;
 
 import com.gennlife.crf.bean.Excel;
@@ -32,10 +35,15 @@ private String filePath = "E:\\yujie\\10";
 	}
 	
 	@Test
-	public void writeSchemaOfTwoGroups(){
-		Excel excel = new Excel(filePath, fileName2, sheetName2);
-		ConfiguredLinkagePath.writeSchemaOfTwoGroups(excel,"patient_info");
-		System.out.println("ok");
-	}
+	public void test001(){
+		String seconds="";
+		String format="";
+		if(seconds == null || seconds.isEmpty() || seconds.equals("null")){  
+		    
+		}  
+		if(format == null || format.isEmpty()) format = "yyyy-MM-dd HH:mm:ss";  
+			SimpleDateFormat sdf = new SimpleDateFormat(format);  
+			sdf.format(new Date(Long.valueOf(seconds+"000")));
+		}
 	
 }

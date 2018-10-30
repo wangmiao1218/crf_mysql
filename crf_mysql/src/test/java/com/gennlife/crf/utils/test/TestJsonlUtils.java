@@ -5,19 +5,66 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.bson.Document;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Test;
 
 import com.gennlife.crf.utils.JsonUtils;
+import com.gennlife.crf.utils.MongodbJDBCUtils;
 import com.jayway.jsonpath.JsonPath;
 import com.jayway.jsonpath.ReadContext;
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
 
 
 public class TestJsonlUtils {
 	
 	private String path = "E:\\CRFLogic\\test\\New1.json";
 	private String path2 = "E:\\CRFLogic\\test\\little.json";
+	private String path3 = "C:\\Users\\www\\Desktop\\91个pat.json";
+	
+	@Test
+	public void test09() throws JSONException {
+		JSONObject json = JsonUtils.readFileContentReturnJson(path3);
+		JSONArray jsonArray = ((JSONObject) json.get("hits")).getJSONArray("hits");
+		//System.out.println(jsonArray);
+		//System.out.println(jsonArray.length());
+		
+		List<String> list = new ArrayList<>();
+		
+		for (int i = 0; i < jsonArray.length(); i++) {
+			String pat=((JSONObject) jsonArray.get(i)).get("_id").toString();
+			//System.out.println(pat);
+			list.add(pat);
+		}
+		
+		System.out.println(list.size());
+		
+		//============================================
+		//查数据库获取全部的pat
+		MongoCollection<Document> collection = MongodbJDBCUtils.connectRwsMongodbOfInsertReturnMongoCollection(
+				"10.0.2.79", "rws", "55EBE5FC650B4752A53B18C6A0EA7BDB");
+		
+		System.out.println(collection.count());
+		FindIterable<Document> findIterable = collection.find();
+		MongoCursor<Document> mongoCursor = findIterable.iterator();
+		System.out.println(mongoCursor.next());
+		/*while(mongoCursor.hasNext()){
+			System.out.println(mongoCursor.next());
+	　　　} */
+		
+		
+		//============================================
+		//对比两个list的不同值
+		
+		
+		
+		
+	}
+	
 	
 	
 	@Test

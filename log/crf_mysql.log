@@ -1,1 +1,168 @@
-[2018-08-21 16:27:48,496] [main] (CompiledPath.java:47) DEBUG com.jayway.jsonpath.internal.path.CompiledPath - Evaluating path: $['active']['config'][0]['conditions'][0]['details'][0]['value']
+[2018-10-30 17:46:41,218] [main] (SLF4JLogger.java:71) INFO  org.mongodb.driver.cluster - Cluster created with settings {hosts=[10.0.2.176:27017], mode=MULTIPLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+[2018-10-30 17:46:41,249] [main] (SLF4JLogger.java:71) INFO  org.mongodb.driver.cluster - Adding discovered server 10.0.2.176:27017 to client view of cluster
+[2018-10-30 17:46:41,555] [main] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.cluster - Updating cluster description to  {type=UNKNOWN, servers=[{address=10.0.2.176:27017, type=UNKNOWN, state=CONNECTING}]
+[2018-10-30 17:53:07,946] [main] (SLF4JLogger.java:71) INFO  org.mongodb.driver.cluster - Cluster created with settings {hosts=[10.0.2.176:27017], mode=MULTIPLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+[2018-10-30 17:53:07,948] [main] (SLF4JLogger.java:71) INFO  org.mongodb.driver.cluster - Adding discovered server 10.0.2.176:27017 to client view of cluster
+[2018-10-30 17:53:08,000] [main] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.cluster - Updating cluster description to  {type=UNKNOWN, servers=[{address=10.0.2.176:27017, type=UNKNOWN, state=CONNECTING}]
+[2018-10-30 17:53:08,116] [main] (SLF4JLogger.java:71) INFO  org.mongodb.driver.cluster - No server chosen by ReadPreferenceServerSelector{readPreference=primary} from cluster description ClusterDescription{type=UNKNOWN, connectionMode=MULTIPLE, all=[ServerDescription{address=10.0.2.176:27017, type=UNKNOWN, state=CONNECTING}]}. Waiting for 30000 ms before timing out
+[2018-10-30 17:53:08,172] [cluster-ClusterId{value='5bd82a037e7cc31d5cf17fed', description='null'}-10.0.2.176:27017] (SLF4JLogger.java:71) INFO  org.mongodb.driver.connection - Opened connection [connectionId{localValue:1, serverValue:16593}] to 10.0.2.176:27017
+[2018-10-30 17:53:08,173] [cluster-ClusterId{value='5bd82a037e7cc31d5cf17fed', description='null'}-10.0.2.176:27017] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.cluster - Checking status of 10.0.2.176:27017
+[2018-10-30 17:53:08,180] [cluster-ClusterId{value='5bd82a037e7cc31d5cf17fed', description='null'}-10.0.2.176:27017] (SLF4JLogger.java:71) INFO  org.mongodb.driver.cluster - Monitor thread successfully connected to server with description ServerDescription{address=10.0.2.176:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[3, 4, 2]}, minWireVersion=0, maxWireVersion=5, electionId=null, maxDocumentSize=16777216, roundTripTimeNanos=6141888}
+[2018-10-30 17:53:08,189] [cluster-ClusterId{value='5bd82a037e7cc31d5cf17fed', description='null'}-10.0.2.176:27017] (SLF4JLogger.java:71) INFO  org.mongodb.driver.cluster - Discovered cluster type of STANDALONE
+[2018-10-30 17:53:08,192] [cluster-ClusterId{value='5bd82a037e7cc31d5cf17fed', description='null'}-10.0.2.176:27017] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.cluster - Updating cluster description to  {type=STANDALONE, servers=[{address=10.0.2.176:27017, type=STANDALONE, roundTripTime=6.1 ms, state=CONNECTED}]
+[2018-10-30 17:53:08,211] [main] (SLF4JLogger.java:71) INFO  org.mongodb.driver.connection - Opened connection [connectionId{localValue:2, serverValue:16594}] to 10.0.2.176:27017
+[2018-10-30 17:53:08,219] [main] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.protocol.command - Sending command {find : BsonString{value='55EBE5FC650B4752A53B18C6A0EA7BDB'}} to database rws on connection [connectionId{localValue:2, serverValue:16594}] to server 10.0.2.176:27017
+[2018-10-30 17:57:31,618] [main] (SLF4JLogger.java:71) INFO  org.mongodb.driver.cluster - Cluster created with settings {hosts=[10.0.2.176:2000], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+[2018-10-30 17:57:31,672] [main] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.cluster - Updating cluster description to  {type=UNKNOWN, servers=[{address=10.0.2.176:2000, type=UNKNOWN, state=CONNECTING}]
+[2018-10-30 17:58:09,511] [main] (SLF4JLogger.java:71) INFO  org.mongodb.driver.cluster - Cluster created with settings {hosts=[10.0.2.176:2000], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+[2018-10-30 17:58:09,622] [main] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.cluster - Updating cluster description to  {type=UNKNOWN, servers=[{address=10.0.2.176:2000, type=UNKNOWN, state=CONNECTING}]
+[2018-10-30 17:58:09,647] [main] (SLF4JLogger.java:71) INFO  org.mongodb.driver.cluster - No server chosen by ReadPreferenceServerSelector{readPreference=primary} from cluster description ClusterDescription{type=UNKNOWN, connectionMode=SINGLE, all=[ServerDescription{address=10.0.2.176:2000, type=UNKNOWN, state=CONNECTING}]}. Waiting for 30000 ms before timing out
+[2018-10-30 17:58:10,646] [cluster-ClusterId{value='5bd82b317e7cc31b4c3ce192', description='null'}-10.0.2.176:2000] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:1}
+[2018-10-30 17:58:10,673] [cluster-ClusterId{value='5bd82b317e7cc31b4c3ce192', description='null'}-10.0.2.176:2000] (SLF4JLogger.java:76) INFO  org.mongodb.driver.cluster - Exception in monitor thread while connecting to server 10.0.2.176:2000
+com.mongodb.MongoSocketOpenException: Exception opening socket
+	at com.mongodb.connection.SocketStream.open(SocketStream.java:63)
+	at com.mongodb.connection.InternalStreamConnection.open(InternalStreamConnection.java:114)
+	at com.mongodb.connection.DefaultServerMonitor$ServerMonitorRunnable.run(DefaultServerMonitor.java:128)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at com.mongodb.connection.SocketStreamHelper.initialize(SocketStreamHelper.java:50)
+	at com.mongodb.connection.SocketStream.open(SocketStream.java:58)
+	... 3 more
+[2018-10-30 17:58:10,690] [cluster-ClusterId{value='5bd82b317e7cc31b4c3ce192', description='null'}-10.0.2.176:2000] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.cluster - Updating cluster description to  {type=UNKNOWN, servers=[{address=10.0.2.176:2000, type=UNKNOWN, state=CONNECTING, exception={com.mongodb.MongoSocketOpenException: Exception opening socket}, caused by {java.net.ConnectException: Connection refused: connect}}]
+[2018-10-30 17:58:12,207] [cluster-ClusterId{value='5bd82b317e7cc31b4c3ce192', description='null'}-10.0.2.176:2000] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:2}
+[2018-10-30 17:58:13,727] [cluster-ClusterId{value='5bd82b317e7cc31b4c3ce192', description='null'}-10.0.2.176:2000] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:3}
+[2018-10-30 17:58:15,252] [cluster-ClusterId{value='5bd82b317e7cc31b4c3ce192', description='null'}-10.0.2.176:2000] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:4}
+[2018-10-30 17:58:16,761] [cluster-ClusterId{value='5bd82b317e7cc31b4c3ce192', description='null'}-10.0.2.176:2000] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:5}
+[2018-10-30 17:58:18,266] [cluster-ClusterId{value='5bd82b317e7cc31b4c3ce192', description='null'}-10.0.2.176:2000] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:6}
+[2018-10-30 17:58:19,789] [cluster-ClusterId{value='5bd82b317e7cc31b4c3ce192', description='null'}-10.0.2.176:2000] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:7}
+[2018-10-30 17:58:21,296] [cluster-ClusterId{value='5bd82b317e7cc31b4c3ce192', description='null'}-10.0.2.176:2000] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:8}
+[2018-10-30 17:58:22,819] [cluster-ClusterId{value='5bd82b317e7cc31b4c3ce192', description='null'}-10.0.2.176:2000] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:9}
+[2018-10-30 17:58:24,322] [cluster-ClusterId{value='5bd82b317e7cc31b4c3ce192', description='null'}-10.0.2.176:2000] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:10}
+[2018-10-30 17:58:25,827] [cluster-ClusterId{value='5bd82b317e7cc31b4c3ce192', description='null'}-10.0.2.176:2000] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:11}
+[2018-10-30 17:58:27,353] [cluster-ClusterId{value='5bd82b317e7cc31b4c3ce192', description='null'}-10.0.2.176:2000] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:12}
+[2018-10-30 17:58:28,877] [cluster-ClusterId{value='5bd82b317e7cc31b4c3ce192', description='null'}-10.0.2.176:2000] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:13}
+[2018-10-30 17:58:30,417] [cluster-ClusterId{value='5bd82b317e7cc31b4c3ce192', description='null'}-10.0.2.176:2000] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:14}
+[2018-10-30 17:58:31,945] [cluster-ClusterId{value='5bd82b317e7cc31b4c3ce192', description='null'}-10.0.2.176:2000] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:15}
+[2018-10-30 17:58:33,487] [cluster-ClusterId{value='5bd82b317e7cc31b4c3ce192', description='null'}-10.0.2.176:2000] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:16}
+[2018-10-30 17:58:35,012] [cluster-ClusterId{value='5bd82b317e7cc31b4c3ce192', description='null'}-10.0.2.176:2000] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:17}
+[2018-10-30 17:58:36,518] [cluster-ClusterId{value='5bd82b317e7cc31b4c3ce192', description='null'}-10.0.2.176:2000] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:18}
+[2018-10-30 17:58:38,044] [cluster-ClusterId{value='5bd82b317e7cc31b4c3ce192', description='null'}-10.0.2.176:2000] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:19}
+[2018-10-30 17:58:39,550] [cluster-ClusterId{value='5bd82b317e7cc31b4c3ce192', description='null'}-10.0.2.176:2000] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:20}
+[2018-10-30 18:02:06,814] [main] (SLF4JLogger.java:71) INFO  org.mongodb.driver.cluster - Cluster created with settings {hosts=[10.0.2.176:20000], mode=MULTIPLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+[2018-10-30 18:02:06,816] [main] (SLF4JLogger.java:71) INFO  org.mongodb.driver.cluster - Adding discovered server 10.0.2.176:20000 to client view of cluster
+[2018-10-30 18:02:06,871] [main] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.cluster - Updating cluster description to  {type=UNKNOWN, servers=[{address=10.0.2.176:20000, type=UNKNOWN, state=CONNECTING}]
+[2018-10-30 18:02:06,904] [main] (SLF4JLogger.java:71) INFO  org.mongodb.driver.cluster - No server chosen by ReadPreferenceServerSelector{readPreference=primary} from cluster description ClusterDescription{type=UNKNOWN, connectionMode=MULTIPLE, all=[ServerDescription{address=10.0.2.176:20000, type=UNKNOWN, state=CONNECTING}]}. Waiting for 30000 ms before timing out
+[2018-10-30 18:02:07,880] [cluster-ClusterId{value='5bd82c1e7e7cc32808d4d824', description='null'}-10.0.2.176:20000] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:1}
+[2018-10-30 18:02:07,883] [cluster-ClusterId{value='5bd82c1e7e7cc32808d4d824', description='null'}-10.0.2.176:20000] (SLF4JLogger.java:76) INFO  org.mongodb.driver.cluster - Exception in monitor thread while connecting to server 10.0.2.176:20000
+com.mongodb.MongoSocketOpenException: Exception opening socket
+	at com.mongodb.connection.SocketStream.open(SocketStream.java:63)
+	at com.mongodb.connection.InternalStreamConnection.open(InternalStreamConnection.java:114)
+	at com.mongodb.connection.DefaultServerMonitor$ServerMonitorRunnable.run(DefaultServerMonitor.java:128)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at com.mongodb.connection.SocketStreamHelper.initialize(SocketStreamHelper.java:50)
+	at com.mongodb.connection.SocketStream.open(SocketStream.java:58)
+	... 3 more
+[2018-10-30 18:02:07,891] [cluster-ClusterId{value='5bd82c1e7e7cc32808d4d824', description='null'}-10.0.2.176:20000] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.cluster - Updating cluster description to  {type=UNKNOWN, servers=[{address=10.0.2.176:20000, type=UNKNOWN, state=CONNECTING, exception={com.mongodb.MongoSocketOpenException: Exception opening socket}, caused by {java.net.ConnectException: Connection refused: connect}}]
+[2018-10-30 18:02:09,420] [cluster-ClusterId{value='5bd82c1e7e7cc32808d4d824', description='null'}-10.0.2.176:20000] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:2}
+[2018-10-30 18:02:10,931] [cluster-ClusterId{value='5bd82c1e7e7cc32808d4d824', description='null'}-10.0.2.176:20000] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:3}
+[2018-10-30 18:02:12,455] [cluster-ClusterId{value='5bd82c1e7e7cc32808d4d824', description='null'}-10.0.2.176:20000] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:4}
+[2018-10-30 18:02:13,970] [cluster-ClusterId{value='5bd82c1e7e7cc32808d4d824', description='null'}-10.0.2.176:20000] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:5}
+[2018-10-30 18:02:15,496] [cluster-ClusterId{value='5bd82c1e7e7cc32808d4d824', description='null'}-10.0.2.176:20000] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:6}
+[2018-10-30 18:02:17,001] [cluster-ClusterId{value='5bd82c1e7e7cc32808d4d824', description='null'}-10.0.2.176:20000] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:7}
+[2018-10-30 18:02:18,534] [cluster-ClusterId{value='5bd82c1e7e7cc32808d4d824', description='null'}-10.0.2.176:20000] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:8}
+[2018-10-30 18:02:20,044] [cluster-ClusterId{value='5bd82c1e7e7cc32808d4d824', description='null'}-10.0.2.176:20000] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:9}
+[2018-10-30 18:02:21,566] [cluster-ClusterId{value='5bd82c1e7e7cc32808d4d824', description='null'}-10.0.2.176:20000] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:10}
+[2018-10-30 18:02:23,096] [cluster-ClusterId{value='5bd82c1e7e7cc32808d4d824', description='null'}-10.0.2.176:20000] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:11}
+[2018-10-30 18:02:24,631] [cluster-ClusterId{value='5bd82c1e7e7cc32808d4d824', description='null'}-10.0.2.176:20000] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:12}
+[2018-10-30 18:02:26,160] [cluster-ClusterId{value='5bd82c1e7e7cc32808d4d824', description='null'}-10.0.2.176:20000] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:13}
+[2018-10-30 18:02:27,713] [cluster-ClusterId{value='5bd82c1e7e7cc32808d4d824', description='null'}-10.0.2.176:20000] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:14}
+[2018-10-30 18:02:29,545] [cluster-ClusterId{value='5bd82c1e7e7cc32808d4d824', description='null'}-10.0.2.176:20000] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:15}
+[2018-10-30 18:02:31,140] [cluster-ClusterId{value='5bd82c1e7e7cc32808d4d824', description='null'}-10.0.2.176:20000] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:16}
+[2018-10-30 18:02:33,429] [cluster-ClusterId{value='5bd82c1e7e7cc32808d4d824', description='null'}-10.0.2.176:20000] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:17}
+[2018-10-30 18:02:35,009] [cluster-ClusterId{value='5bd82c1e7e7cc32808d4d824', description='null'}-10.0.2.176:20000] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:18}
+[2018-10-30 18:02:36,527] [cluster-ClusterId{value='5bd82c1e7e7cc32808d4d824', description='null'}-10.0.2.176:20000] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:19}
+[2018-10-30 18:03:11,434] [main] (SLF4JLogger.java:71) INFO  org.mongodb.driver.cluster - Cluster created with settings {hosts=[10.0.2.79:2000], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+[2018-10-30 18:03:11,493] [main] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.cluster - Updating cluster description to  {type=UNKNOWN, servers=[{address=10.0.2.79:2000, type=UNKNOWN, state=CONNECTING}]
+[2018-10-30 18:03:11,515] [main] (SLF4JLogger.java:71) INFO  org.mongodb.driver.cluster - No server chosen by ReadPreferenceServerSelector{readPreference=primary} from cluster description ClusterDescription{type=UNKNOWN, connectionMode=SINGLE, all=[ServerDescription{address=10.0.2.79:2000, type=UNKNOWN, state=CONNECTING}]}. Waiting for 30000 ms before timing out
+[2018-10-30 18:03:12,506] [cluster-ClusterId{value='5bd82c5f7e7cc323f0493125', description='null'}-10.0.2.79:2000] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:1}
+[2018-10-30 18:03:12,511] [cluster-ClusterId{value='5bd82c5f7e7cc323f0493125', description='null'}-10.0.2.79:2000] (SLF4JLogger.java:76) INFO  org.mongodb.driver.cluster - Exception in monitor thread while connecting to server 10.0.2.79:2000
+com.mongodb.MongoSocketOpenException: Exception opening socket
+	at com.mongodb.connection.SocketStream.open(SocketStream.java:63)
+	at com.mongodb.connection.InternalStreamConnection.open(InternalStreamConnection.java:114)
+	at com.mongodb.connection.DefaultServerMonitor$ServerMonitorRunnable.run(DefaultServerMonitor.java:128)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at com.mongodb.connection.SocketStreamHelper.initialize(SocketStreamHelper.java:50)
+	at com.mongodb.connection.SocketStream.open(SocketStream.java:58)
+	... 3 more
+[2018-10-30 18:03:12,521] [cluster-ClusterId{value='5bd82c5f7e7cc323f0493125', description='null'}-10.0.2.79:2000] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.cluster - Updating cluster description to  {type=UNKNOWN, servers=[{address=10.0.2.79:2000, type=UNKNOWN, state=CONNECTING, exception={com.mongodb.MongoSocketOpenException: Exception opening socket}, caused by {java.net.ConnectException: Connection refused: connect}}]
+[2018-10-30 18:03:14,041] [cluster-ClusterId{value='5bd82c5f7e7cc323f0493125', description='null'}-10.0.2.79:2000] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:2}
+[2018-10-30 18:03:15,567] [cluster-ClusterId{value='5bd82c5f7e7cc323f0493125', description='null'}-10.0.2.79:2000] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:3}
+[2018-10-30 18:03:17,073] [cluster-ClusterId{value='5bd82c5f7e7cc323f0493125', description='null'}-10.0.2.79:2000] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:4}
+[2018-10-30 18:03:18,579] [cluster-ClusterId{value='5bd82c5f7e7cc323f0493125', description='null'}-10.0.2.79:2000] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:5}
+[2018-10-30 18:03:20,094] [cluster-ClusterId{value='5bd82c5f7e7cc323f0493125', description='null'}-10.0.2.79:2000] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:6}
+[2018-10-30 18:03:21,600] [cluster-ClusterId{value='5bd82c5f7e7cc323f0493125', description='null'}-10.0.2.79:2000] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:7}
+[2018-10-30 18:03:23,135] [cluster-ClusterId{value='5bd82c5f7e7cc323f0493125', description='null'}-10.0.2.79:2000] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:8}
+[2018-10-30 18:03:24,652] [cluster-ClusterId{value='5bd82c5f7e7cc323f0493125', description='null'}-10.0.2.79:2000] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:9}
+[2018-10-30 18:03:26,161] [cluster-ClusterId{value='5bd82c5f7e7cc323f0493125', description='null'}-10.0.2.79:2000] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:10}
+[2018-10-30 18:03:27,698] [cluster-ClusterId{value='5bd82c5f7e7cc323f0493125', description='null'}-10.0.2.79:2000] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:11}
+[2018-10-30 18:03:29,214] [cluster-ClusterId{value='5bd82c5f7e7cc323f0493125', description='null'}-10.0.2.79:2000] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:12}
+[2018-10-30 18:03:30,719] [cluster-ClusterId{value='5bd82c5f7e7cc323f0493125', description='null'}-10.0.2.79:2000] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:13}
+[2018-10-30 18:03:32,232] [cluster-ClusterId{value='5bd82c5f7e7cc323f0493125', description='null'}-10.0.2.79:2000] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:14}
+[2018-10-30 18:03:33,758] [cluster-ClusterId{value='5bd82c5f7e7cc323f0493125', description='null'}-10.0.2.79:2000] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:15}
+[2018-10-30 18:03:35,290] [cluster-ClusterId{value='5bd82c5f7e7cc323f0493125', description='null'}-10.0.2.79:2000] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:16}
+[2018-10-30 18:03:36,818] [cluster-ClusterId{value='5bd82c5f7e7cc323f0493125', description='null'}-10.0.2.79:2000] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:17}
+[2018-10-30 18:03:38,334] [cluster-ClusterId{value='5bd82c5f7e7cc323f0493125', description='null'}-10.0.2.79:2000] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:18}
+[2018-10-30 18:03:39,856] [cluster-ClusterId{value='5bd82c5f7e7cc323f0493125', description='null'}-10.0.2.79:2000] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:19}
+[2018-10-30 18:03:41,362] [cluster-ClusterId{value='5bd82c5f7e7cc323f0493125', description='null'}-10.0.2.79:2000] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.connection - Closing connection connectionId{localValue:20}
+[2018-10-30 18:04:30,468] [main] (SLF4JLogger.java:71) INFO  org.mongodb.driver.cluster - Cluster created with settings {hosts=[10.0.2.79:20000], mode=MULTIPLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+[2018-10-30 18:04:30,471] [main] (SLF4JLogger.java:71) INFO  org.mongodb.driver.cluster - Adding discovered server 10.0.2.79:20000 to client view of cluster
+[2018-10-30 18:04:30,532] [main] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.cluster - Updating cluster description to  {type=UNKNOWN, servers=[{address=10.0.2.79:20000, type=UNKNOWN, state=CONNECTING}]
+[2018-10-30 18:04:30,550] [main] (SLF4JLogger.java:71) INFO  org.mongodb.driver.cluster - No server chosen by ReadPreferenceServerSelector{readPreference=primary} from cluster description ClusterDescription{type=UNKNOWN, connectionMode=MULTIPLE, all=[ServerDescription{address=10.0.2.79:20000, type=UNKNOWN, state=CONNECTING}]}. Waiting for 30000 ms before timing out
+[2018-10-30 18:04:30,579] [cluster-ClusterId{value='5bd82cae7e7cc31f9865c353', description='null'}-10.0.2.79:20000] (SLF4JLogger.java:71) INFO  org.mongodb.driver.connection - Opened connection [connectionId{localValue:1}] to 10.0.2.79:20000
+[2018-10-30 18:04:30,580] [cluster-ClusterId{value='5bd82cae7e7cc31f9865c353', description='null'}-10.0.2.79:20000] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.cluster - Checking status of 10.0.2.79:20000
+[2018-10-30 18:04:30,584] [cluster-ClusterId{value='5bd82cae7e7cc31f9865c353', description='null'}-10.0.2.79:20000] (SLF4JLogger.java:71) INFO  org.mongodb.driver.cluster - Monitor thread successfully connected to server with description ServerDescription{address=10.0.2.79:20000, type=SHARD_ROUTER, state=CONNECTED, ok=true, version=ServerVersion{versionList=[3, 4, 2]}, minWireVersion=0, maxWireVersion=5, electionId=null, maxDocumentSize=16777216, roundTripTimeNanos=3991244}
+[2018-10-30 18:04:30,585] [cluster-ClusterId{value='5bd82cae7e7cc31f9865c353', description='null'}-10.0.2.79:20000] (SLF4JLogger.java:71) INFO  org.mongodb.driver.cluster - Discovered cluster type of SHARDED
+[2018-10-30 18:04:30,586] [cluster-ClusterId{value='5bd82cae7e7cc31f9865c353', description='null'}-10.0.2.79:20000] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.cluster - Updating cluster description to  {type=SHARDED, servers=[{address=10.0.2.79:20000, type=SHARD_ROUTER, roundTripTime=4.0 ms, state=CONNECTED}]
+[2018-10-30 18:04:30,606] [main] (SLF4JLogger.java:71) INFO  org.mongodb.driver.connection - Opened connection [connectionId{localValue:2}] to 10.0.2.79:20000
+[2018-10-30 18:04:30,645] [main] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.protocol.command - Sending command {count : BsonString{value='55EBE5FC650B4752A53B18C6A0EA7BDB'}} to database rws on connection [connectionId{localValue:2}] to server 10.0.2.79:20000
+[2018-10-30 18:04:30,660] [main] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.protocol.command - Command execution completed
+[2018-10-30 18:11:27,049] [main] (SLF4JLogger.java:71) INFO  org.mongodb.driver.cluster - Cluster created with settings {hosts=[10.0.2.79:20000], mode=MULTIPLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+[2018-10-30 18:11:27,051] [main] (SLF4JLogger.java:71) INFO  org.mongodb.driver.cluster - Adding discovered server 10.0.2.79:20000 to client view of cluster
+[2018-10-30 18:11:27,104] [main] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.cluster - Updating cluster description to  {type=UNKNOWN, servers=[{address=10.0.2.79:20000, type=UNKNOWN, state=CONNECTING}]
+[2018-10-30 18:11:27,120] [main] (SLF4JLogger.java:71) INFO  org.mongodb.driver.cluster - No server chosen by ReadPreferenceServerSelector{readPreference=primary} from cluster description ClusterDescription{type=UNKNOWN, connectionMode=MULTIPLE, all=[ServerDescription{address=10.0.2.79:20000, type=UNKNOWN, state=CONNECTING}]}. Waiting for 30000 ms before timing out
+[2018-10-30 18:11:27,149] [cluster-ClusterId{value='5bd82e4e7e7cc30880b4c896', description='null'}-10.0.2.79:20000] (SLF4JLogger.java:71) INFO  org.mongodb.driver.connection - Opened connection [connectionId{localValue:1}] to 10.0.2.79:20000
+[2018-10-30 18:11:27,149] [cluster-ClusterId{value='5bd82e4e7e7cc30880b4c896', description='null'}-10.0.2.79:20000] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.cluster - Checking status of 10.0.2.79:20000
+[2018-10-30 18:11:27,153] [cluster-ClusterId{value='5bd82e4e7e7cc30880b4c896', description='null'}-10.0.2.79:20000] (SLF4JLogger.java:71) INFO  org.mongodb.driver.cluster - Monitor thread successfully connected to server with description ServerDescription{address=10.0.2.79:20000, type=SHARD_ROUTER, state=CONNECTED, ok=true, version=ServerVersion{versionList=[3, 4, 2]}, minWireVersion=0, maxWireVersion=5, electionId=null, maxDocumentSize=16777216, roundTripTimeNanos=3667086}
+[2018-10-30 18:11:27,154] [cluster-ClusterId{value='5bd82e4e7e7cc30880b4c896', description='null'}-10.0.2.79:20000] (SLF4JLogger.java:71) INFO  org.mongodb.driver.cluster - Discovered cluster type of SHARDED
+[2018-10-30 18:11:27,155] [cluster-ClusterId{value='5bd82e4e7e7cc30880b4c896', description='null'}-10.0.2.79:20000] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.cluster - Updating cluster description to  {type=SHARDED, servers=[{address=10.0.2.79:20000, type=SHARD_ROUTER, roundTripTime=3.7 ms, state=CONNECTED}]
+[2018-10-30 18:11:27,175] [main] (SLF4JLogger.java:71) INFO  org.mongodb.driver.connection - Opened connection [connectionId{localValue:2}] to 10.0.2.79:20000
+[2018-10-30 18:11:27,180] [main] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.protocol.command - Sending command {count : BsonString{value='55EBE5FC650B4752A53B18C6A0EA7BDB'}} to database rws on connection [connectionId{localValue:2}] to server 10.0.2.79:20000
+[2018-10-30 18:11:27,189] [main] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.protocol.command - Command execution completed
+[2018-10-30 18:11:27,196] [main] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.protocol.command - Sending command {find : BsonString{value='55EBE5FC650B4752A53B18C6A0EA7BDB'}} to database rws on connection [connectionId{localValue:2}] to server 10.0.2.79:20000
+[2018-10-30 18:11:27,254] [main] (SLF4JLogger.java:56) DEBUG org.mongodb.driver.protocol.command - Command execution completed

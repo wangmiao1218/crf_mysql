@@ -41,7 +41,6 @@ public class ListAndStringUtils {
 		return ftf.format(LocalDateTime.ofInstant(Instant.ofEpochMilli(time),
 				ZoneId.systemDefault()));
 	}
-
 	
 	/**
 	 * 将字符串转日期成Long类型的时间戳，格式为：yyyy-MM-dd HH:mm:ss

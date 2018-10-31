@@ -24,7 +24,7 @@ public class MongodbJDBCUtils {
 	private static final String ipYantai="10.0.2.176";
 
 	/** 
-	* @Title: connectRwsMongodbOfInsertReturnMongoCollection 
+	* @Title: connectRwsMongodbReturnMongoCollection 
 	* @Description: 链接到rws库，无用户密码
 	* @author: wangmiao
 	* @Date: 2018年10月30日 下午6:00:01 
@@ -35,7 +35,7 @@ public class MongodbJDBCUtils {
 	* @return: MongoCollection<Document>
 	* @throws 
 	*/
-	public static MongoCollection<Document> connectRwsMongodbOfInsertReturnMongoCollection(
+	public static MongoCollection<Document> connectRwsMongodbReturnMongoCollection(
 			String mongodbIp,String dataBaseName,String dbCollectionName) {
 		MongoCollection<Document> mongoCollection = null;
 		try {

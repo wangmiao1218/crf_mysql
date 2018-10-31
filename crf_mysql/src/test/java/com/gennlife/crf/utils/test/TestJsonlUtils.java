@@ -45,7 +45,7 @@ public class TestJsonlUtils {
 		
 		//============================================
 		//查数据库获取全部的pat
-		MongoCollection<Document> collection = MongodbJDBCUtils.connectRwsMongodbOfInsertReturnMongoCollection(
+		MongoCollection<Document> collection = MongodbJDBCUtils.connectRwsMongodbReturnMongoCollection(
 				"10.0.2.79", "rws", "55EBE5FC650B4752A53B18C6A0EA7BDB");
 		
 		System.out.println(collection.count());

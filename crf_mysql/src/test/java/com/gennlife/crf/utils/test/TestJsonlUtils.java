@@ -49,6 +49,8 @@ public class TestJsonlUtils {
 				"10.0.2.79", "rws", "55EBE5FC650B4752A53B18C6A0EA7BDB");
 		
 		System.out.println(collection.count());
+		
+		
 		FindIterable<Document> findIterable = collection.find();
 		MongoCursor<Document> mongoCursor = findIterable.iterator();
 		System.out.println(mongoCursor.next());
@@ -59,7 +61,6 @@ public class TestJsonlUtils {
 		
 		//============================================
 		//对比两个list的不同值
-		
 		
 		
 		

@@ -50,7 +50,6 @@ public class TestJsonlUtils {
 		
 		System.out.println(collection.count());
 		
-		
 		FindIterable<Document> findIterable = collection.find();
 		MongoCursor<Document> mongoCursor = findIterable.iterator();
 		System.out.println(mongoCursor.next());

@@ -19,7 +19,6 @@ import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 
-
 public class TestJsonlUtils {
 	
 	private String path = "E:\\CRFLogic\\test\\New1.json";

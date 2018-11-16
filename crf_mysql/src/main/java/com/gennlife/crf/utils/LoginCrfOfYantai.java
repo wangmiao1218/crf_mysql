@@ -19,7 +19,7 @@ public class LoginCrfOfYantai {
 	//public static final String loginUrl ="http://119.253.137.167/uranus/login.html";
 	//test4科室
 	public static final String loginName ="3333";
-	public static final String pwd ="123456";
+	public static final String pwd ="33333333";
 	
 	public static final String danbingzhongUrl="http://119.253.137.167/uranus/crf_case.html";
 

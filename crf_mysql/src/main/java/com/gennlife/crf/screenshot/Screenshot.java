@@ -13,7 +13,7 @@ import org.openqa.selenium.phantomjs.PhantomJSDriver;
  * @author: wangmiao
  * @Date: 2017年7月6日 下午2:15:26
  */
-public class Jiangsu_screenshot {
+public class Screenshot {
 
 	/** 
 	* @Title: screenshot 

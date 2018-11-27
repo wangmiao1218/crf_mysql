@@ -15,7 +15,6 @@ import com.gennlife.crf.utils.QuitWebDriver;
 @ContextConfiguration("classpath:spring.xml")
 public class TestRws {
 
-	
 	public static final String rwsUrl = "http://10.0.2.162/uranus/project_index.html";
 	public static final String newuiUrl = "http://10.0.2.162/newui/#/22e0b2ca-4bee-4e73-b394-20a682bde354/rws-uql%E6%B5%8B%E8%AF%953%E8%BD%AE/cdebb876-96ac-45b7-ad97-790576a6df27/EMR";
 	private static final String loginName = "3333";

@@ -29,6 +29,7 @@ public class TestRws {
 	public static final String projectId = "rws_defined.html";
 	public static final String firstIndexXpath = " //*[@id='app']/div/div/div/div[2]/div/div[1]/table/tbody/tr[1]/td[2]/a";
 	
+	
 	@Test
 	public void rwsEvent() throws Exception {
 		// 登录并到add页面

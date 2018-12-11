@@ -6,6 +6,7 @@ import java.util.concurrent.Callable;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import com.gennlife.crf.utils.CreateWebDriver;
 import com.gennlife.crf.utils.LoginRws;
 import com.gennlife.crf.utils.QuitWebDriver;
@@ -132,7 +133,6 @@ public class RwsTask {
 				PhantomJSDriver driver = CreateWebDriver.createWebDriverByPhantomJSDriver();
 				//执行登录并改条件执行计算
 				String value = RwsTask.createRwsTask(driver, rwsUrl,loginName, pwd);
-				// 关闭driver
 				QuitWebDriver.quitWebDriverByPhantomJSDriver(driver);
 				if ("保存成功".equals(value)) {
 					logger.info(loginName+"_success_"+new Date());

@@ -115,6 +115,7 @@ public class RwsTask {
 		return returnString;
 	}
 	
+	
 	/** 
 	* @Title: CreateRwsCallable 
 	* @Description: 创建rws的Callable，返回Callable实例，便于多线程调用

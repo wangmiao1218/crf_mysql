@@ -12,6 +12,11 @@ import com.gennlife.crf.utils.QuitWebDriver;
 public class TestSelenium {
 
 	@Test
+	public void test(){
+		System.out.println((int)((Math.random()*9+1)*1000));  
+	}
+	
+	@Test
 	public void loginAndToAddByPhantomJSDriver(){
 		PhantomJSDriver driver = CreateWebDriver.createWebDriverByPhantomJSDriver();
 		String string = LoginCrfOfAnzhen.loginAndToAddOfMenZhenAndBasicInfoByPhantomJSDriver(driver);

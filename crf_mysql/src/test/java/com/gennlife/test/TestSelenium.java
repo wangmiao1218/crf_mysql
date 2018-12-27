@@ -15,7 +15,6 @@ public class TestSelenium {
 	public void test(){
 		System.out.println((int)((Math.random()*9+1)*1000));  
 	}
-	
 	@Test
 	public void loginAndToAddByPhantomJSDriver(){
 		PhantomJSDriver driver = CreateWebDriver.createWebDriverByPhantomJSDriver();

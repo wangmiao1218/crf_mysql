@@ -30,7 +30,6 @@ public class TestSelenium {
 		String string = LoginCrfOfAnzhen.loginByPhantomJSDriver(driver);
 		System.out.println(string);
 		QuitWebDriver.quitWebDriverByPhantomJSDriver(driver);
-		
 	}
 	
 	@Test

@@ -14,7 +14,6 @@ public class Test1 {
 		Arrays.asList("a","b").forEach(e->{
 			System.out.print(e);
 		});
-		
 	}
 	
 }

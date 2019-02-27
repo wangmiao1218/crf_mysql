@@ -31,11 +31,13 @@ public class TranslateToEnglish{
 		
 		//获取中文名称一列
 		List<String> list = ExcelUtils.readExcelOfList(excelmb, chNameCellNum);
-		
-		//除去表头开始遍历
-		for (int i = 1; i < list.size(); i++) {
+		//
+		System.out.println(list);
+		//除去表头开始遍历(上面读取时候已经去除表头了，所以从0开始)
+		for (int i = 0; i < list.size(); i++) {
 			//设置excel的sheet值
 			excel.setSheetName(list.get(i));
+			System.out.println(list.get(i));
 			//判断excel是否存在该sheet
 			if (ExcelUtils.checkSheetOfExcelExist(excel)) {
 				//继续判断为两组还是三组
@@ -142,13 +144,23 @@ public class TranslateToEnglish{
 		String output=null;
 		//开始处理翻译，并返回list
 		for (int i = 0; i < chNamesList.size(); i++) {
+			//使用谷歌翻译
+			driver.navigate().to("https://translate.google.cn/#view=home&op=translate&sl=zh-CN&tl=en");
+			Thread.sleep(1000);
+			driver.findElementById("source").clear();
+			Thread.sleep(1000);
+			driver.findElementById("source").sendKeys(chNamesList.get(i));
+			Thread.sleep(1800);
+			
+			/*百度翻译不好使了。。。。
 			driver.findElementById("baidu_translate_input").clear();
 			driver.findElementById("baidu_translate_input").sendKeys(chNamesList.get(i));
 			Thread.sleep(1000);
 			driver.findElementById("translate-button").click();
 			Thread.sleep(1800);
+			*/
 			//获取翻译后的值
-			output=driver.findElementByXPath("//div[@class='output-bd']//p//span").getText();
+			output=driver.findElementByXPath("/html/body/div[2]/div[1]/div[3]/div[1]/div[1]/div[2]/div[3]/div[1]/div[2]/div/span[1]/span").getText();
 			if (output==null) {
 				enNamesList.add("a");
 			}else {

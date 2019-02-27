@@ -1,10 +1,10 @@
 package com.gennlife.crf.utils;
 
 import java.io.File;
-import java.time.Instant;
+/*import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatter;*/
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -29,11 +29,11 @@ import com.gennlife.crf.bean.CrfTemplateAnzhenXinXueguan;
  * @Date: 2017年6月9日 上午9:58:00
  */
 public class ListAndStringUtils {
-
+/*
 	
-	/**
+	*//**
 	 * 将Long类型的时间戳转换成String类型的时间格式，时间格式为：yyyy-MM-dd HH:mm:ss
-	 */
+	 *//*
 	public static String convertTimeToString(Long time) {
 		//Assert.notNull(time, "time is null");
 		DateTimeFormatter ftf = DateTimeFormatter
@@ -42,9 +42,9 @@ public class ListAndStringUtils {
 				ZoneId.systemDefault()));
 	}
 	
-	/**
+	*//**
 	 * 将字符串转日期成Long类型的时间戳，格式为：yyyy-MM-dd HH:mm:ss
-	 */
+	 *//*
 	public static Long convertTimeToLong(String time) {
 		//Assert.notNull(time, "time is null");
 		DateTimeFormatter ftf = DateTimeFormatter
@@ -53,7 +53,7 @@ public class ListAndStringUtils {
 		return LocalDateTime.from(parse).atZone(ZoneId.systemDefault())
 				.toInstant().toEpochMilli();
 	}
-
+*/
 	/**
 	 * @Title: isJsonObject
 	 * @Description: 判断是否为JsonObject

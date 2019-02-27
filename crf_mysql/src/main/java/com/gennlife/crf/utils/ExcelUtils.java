@@ -35,14 +35,13 @@ public class ExcelUtils {
     public static Boolean checkSheetOfExcelExist(Excel excel) {  
         // 构造Workbook
     	Workbook workbook = excel.getWorkbook();  
-  
+    	
         if (workbook == null){
         	return null;  //不存在
         }  
         
         //获取sheet
     	Sheet sheet = workbook.getSheet(excel.getSheetName());
-    	
     	return sheet==null ? false:true;
     }  
     

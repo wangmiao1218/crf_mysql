@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 
 import com.gennlife.crf.bean.Excel;
+import com.gennlife.crf.screenshot.Screenshot;
 import com.gennlife.crf.utils.CreateWebDriver;
 import com.gennlife.crf.utils.ExcelUtils;
 import com.gennlife.crf.utils.ListAndStringUtils;
@@ -15,13 +16,23 @@ import com.gennlife.myujie.TranslateToEnglish;
 
 public class TestTranslateToEnglish {
 
-	private String filePath = "E:\\yujie\\3";
+	private String filePath = "E:\\yujie\\TranslateToEnglish";
 	
 	private String fileName = "模板结构.xlsx";
-	private String fileName2 = "test.xlsx";
+	private String fileName2 = "胃癌字段对接表.xlsx";
 	
 	private String sheetName = "总体结构";
-	private String sheetName2 = "就诊－院内药物治疗";
+	private String sheetName2 = "患者信息";
+	
+
+	@Test
+	public void writeEnNames() throws Exception{
+		Excel excelmb = new Excel(filePath, fileName, sheetName);
+		Excel excel = new Excel(filePath, fileName2, sheetName);
+		TranslateToEnglish.writeEnNames(excelmb, excel);
+		
+		System.out.println("ok");
+	}
 	
 	
 	@Test
@@ -34,14 +45,6 @@ public class TestTranslateToEnglish {
 		}
 	}
 	
-	@Test
-	public void writeEnNames() throws Exception{
-		Excel excelmb = new Excel(filePath, fileName, sheetName);
-		Excel excel = new Excel(filePath, fileName2, sheetName);
-		TranslateToEnglish.writeEnNames(excelmb, excel);
-		
-		System.out.println("ok");
-	}
 	
 	@Test
 	public void writeEnNamesOfTwoGroups() throws Exception{
@@ -102,14 +105,18 @@ public class TestTranslateToEnglish {
 		String output=null;
 		// 登录并到add页面
 		PhantomJSDriver driver = CreateWebDriver.createWebDriverByPhantomJSDriver();
-		driver.navigate().to("http://fanyi.baidu.com/translate#zh/en/");
-		driver.findElementById("baidu_translate_input").clear();
-		driver.findElementById("baidu_translate_input").sendKeys(input);
-		driver.findElementById("translate-button").click();
-		Thread.sleep(500);
-		//获取翻译后的值
-		output=driver.findElementByXPath("//div[@class='output-bd']//p//span").getText();
+		//driver.navigate().to("http://fanyi.baidu.com/translate#zh/en/");
+		driver.navigate().to("https://translate.google.cn/#view=home&op=translate&sl=zh-CN&tl=en");
+		Thread.sleep(1000);
 		
+		driver.findElementById("source").sendKeys(input);
+		Thread.sleep(2000);
+		
+		//获取翻译后的值
+		output=driver.findElementByXPath("/html/body/div[2]/div[1]/div[3]/div[1]/div[1]/div[2]/div[3]/div[1]/div[2]/div/span[1]/span").getText();
+		//调试
+		//Screenshot.screenshot(driver);
+
 		System.out.println(output);
 		
 		QuitWebDriver.quitWebDriverByPhantomJSDriver(driver);

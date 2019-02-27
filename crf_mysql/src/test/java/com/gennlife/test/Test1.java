@@ -1,7 +1,6 @@
 package com.gennlife.test;
 
 import java.util.Arrays;
-
 import org.junit.Test;
 
 

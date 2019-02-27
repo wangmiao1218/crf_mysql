@@ -2,6 +2,7 @@ package test;
 
 
 public class Test002 {
+	//-----------------快速排序（优化后：三数取中）-----------------
 	public static int partition(int []array,int lo,int hi){
         //三数取中
         int mid=lo+(hi-lo)/2;
@@ -45,5 +46,43 @@ public class Test002 {
         sort(array,lo,index-1);
         sort(array,index+1,hi);
     }
+    
+    
+    
+    
+    
+ 
+    
+    
+    //-------------冒泡排序 （优化后的，设置标志位）-----------------
+    public static void BubbleSort(int[] arr) {
+        boolean flag = true;
+        while(flag){
+            int temp;//定义一个临时变量
+            for(int i=0;i<arr.length-1;i++){//冒泡趟数，n-1趟
+                for(int j=0;j<arr.length-i-1;j++){
+                    if(arr[j+1]<arr[j]){
+                        temp = arr[j];
+                        arr[j] = arr[j+1];
+                        arr[j+1] = temp;
+                        flag = true;
+                    }
+                }
+                if(!flag){
+                    break;//若果没有发生交换，则退出循环
+                }
+            }
+        }
+    }    
+    /*public static void main(String[] args) {
+        int arr[] = new int[]{1,6,2,2,5};
+        BubbleSort.BubbleSort(arr);
+        System.out.println(Arrays.toString(arr));
+    }*/
+  
+    
+    
+    
+    
 
 }

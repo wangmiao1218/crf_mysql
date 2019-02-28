@@ -34,7 +34,6 @@ public class TestTranslateToEnglish {
 		System.out.println("ok");
 	}
 	
-	
 	@Test
 	public void sameListTransferToSequenceList() throws Exception{
 		Excel excel = new Excel(filePath, fileName2, sheetName2);

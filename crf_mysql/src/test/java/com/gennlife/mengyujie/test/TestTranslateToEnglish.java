@@ -30,7 +30,6 @@ public class TestTranslateToEnglish {
 		Excel excelmb = new Excel(filePath, fileName, sheetName);
 		Excel excel = new Excel(filePath, fileName2, sheetName);
 		TranslateToEnglish.writeEnNames(excelmb, excel);
-		
 		System.out.println("ok");
 	}
 	
@@ -43,7 +42,6 @@ public class TestTranslateToEnglish {
 			System.out.println(list.get(i));
 		}
 	}
-	
 	
 	@Test
 	public void writeEnNamesOfTwoGroups() throws Exception{

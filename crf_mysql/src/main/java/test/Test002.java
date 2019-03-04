@@ -1,6 +1,5 @@
 package test;
 
-
 public class Test002 {
 	//-----------------快速排序（优化后：三数取中）-----------------
 	public static int partition(int []array,int lo,int hi){

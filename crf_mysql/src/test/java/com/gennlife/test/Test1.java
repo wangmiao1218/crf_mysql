@@ -19,5 +19,4 @@ public class Test1 {
 		ConcurrentHashMap<Object,Object> map = new ConcurrentHashMap<>();
 	}
 	
-	
 }

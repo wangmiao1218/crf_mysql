@@ -1,5 +1,7 @@
 package test;
 
+import java.util.Arrays;
+
 public class Test002 {
 	//-----------------快速排序（优化后：三数取中）-----------------
 	public static int partition(int []array,int lo,int hi){
@@ -74,10 +76,11 @@ public class Test002 {
         }
     }    
     
-    /*public static void main(String[] args) {
-        int arr[] = new int[]{1,6,2,2,5};
-        BubbleSort.BubbleSort(arr);
+    public static void main(String[] args) {
+        int arr[] = new int[]{1,6,2,2,5,10,8,9};
+        //BubbleSort.BubbleSort(arr);
+        sort(arr, 0, arr.length-1);
         System.out.println(Arrays.toString(arr));
-    }*/
+    }
     
 }

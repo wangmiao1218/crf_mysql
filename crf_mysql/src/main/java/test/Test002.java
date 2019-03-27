@@ -7,6 +7,7 @@ public class Test002 {
 	public static int partition(int []array,int lo,int hi){
         //三数取中
         int mid=lo+(hi-lo)/2;
+        System.out.println(mid);
         if(array[mid]>array[hi]){
             swap(array[mid],array[hi]);
         }
@@ -17,7 +18,8 @@ public class Test002 {
             swap(array[mid],array[lo]);
         }
         int key=array[lo];
-        
+        System.out.println(key);
+
         while(lo<hi){
             while(array[hi]>=key&&hi>lo){
                 hi--;
@@ -49,12 +51,6 @@ public class Test002 {
     }
     
     
-    
-    
-    
- 
-    
-    
     //-------------冒泡排序 （优化后的，设置标志位）-----------------
     public static void BubbleSort(int[] arr) {
         boolean flag = true;
@@ -76,12 +72,12 @@ public class Test002 {
         }
     }    
     
-    /*
+    
     public static void main(String[] args) {
-        int arr[] = new int[]{1,6,2,2,5,10,8,9};
-        //BubbleSort.BubbleSort(arr);
-        sort(arr, 0, arr.length-1);
-        System.out.println(Arrays.toString(arr));
+        int array[] = new int[]{1,6,2,5,10,8,9};
+        //BubbleSort.BubbleSort(array);
+        sort(array, 0, array.length-1);
+        System.out.println(Arrays.toString(array));
     }
-    */
+    
 }

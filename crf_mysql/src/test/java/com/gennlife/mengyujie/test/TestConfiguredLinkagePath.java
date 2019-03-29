@@ -20,6 +20,7 @@ public class TestConfiguredLinkagePath {
 		Excel excelmb = new Excel(filePath, fileName, sheetName);
 		Excel excel = new Excel(filePath, fileName2, sheetName);
 		ConfiguredLinkagePath.writeLinkagePath(excelmb,excel);
+		
 		System.out.println("ok");
 	}
 	

@@ -18,8 +18,8 @@ public class TestTranslateToEnglish {
 
 	private String filePath = "E:\\yujie\\TranslateToEnglish";
 	
-	private String fileName = "模板结构.xlsx";
-	private String fileName2 = "胃癌字段对接表.xlsx";
+	private String fileName = "模板结构-广东省人民结直肠癌淼淼.xlsx";
+	private String fileName2 = "结直肠癌字段对接表.xlsx";
 	
 	private String sheetName = "总体结构";
 	private String sheetName2 = "患者信息";

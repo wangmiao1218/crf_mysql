@@ -7,13 +7,13 @@ import com.gennlife.myujie.ConfiguredLinkagePath;
 
 public class TestConfiguredLinkagePath {
 
-private String filePath = "E:\\yujie\\3";
+	private String filePath = "E:\\yujie\\TranslateToEnglish";
 	
-	private String fileName = "模板结构.xlsx";
-	private String fileName2 = "test.xlsx";
+	private String fileName = "模板结构-广东省人民结直肠癌淼淼.xlsx";
+	private String fileName2 = "结直肠癌字段对接表.xlsx";
 	
 	private String sheetName = "总体结构";
-	private String sheetName2 = "就诊－院内药物治疗";
+	private String sheetName2 = "基本信息";
 	
 	@Test
 	public void writeLinkagePath(){

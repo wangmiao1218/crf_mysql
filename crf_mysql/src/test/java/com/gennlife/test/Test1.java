@@ -10,13 +10,18 @@ public class Test1 {
 
 	@Test
 	public void test(){
-		//System.out.println((int)((Math.random()*9+1)*1000));  
 		
+		String a="ab";
+		String b="a"+"b";
+		System.out.println(a==b);
+				
+		//System.out.println((int)((Math.random()*9+1)*1000));  
+		/*
 		Arrays.asList("a","b").forEach(e->{
 			System.out.print(e);
 		});
 		
-		ConcurrentHashMap<Object,Object> map = new ConcurrentHashMap<>();
+		ConcurrentHashMap<Object,Object> map = new ConcurrentHashMap<>();*/
 		
 	}
 	

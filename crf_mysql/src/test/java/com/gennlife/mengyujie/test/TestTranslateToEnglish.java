@@ -17,9 +17,9 @@ public class TestTranslateToEnglish {
 	private String filePath = "E:\\yujie\\TranslateToEnglish\\1";
 	
 	//配置表
-	private String fileName = "模板结构-广东省人民结直肠癌淼淼.xlsx";
+	private String fileName = "模板结构-房颤-给淼淼2.xlsx";
 	//数据表
-	private String fileName2 = "房颤数据平台表单.xlsx";
+	private String fileName2 = "房颤数据平台表单2.xlsx";
 	
 	private String sheetName = "总体结构";
 	private String sheetName2 = "患者信息";

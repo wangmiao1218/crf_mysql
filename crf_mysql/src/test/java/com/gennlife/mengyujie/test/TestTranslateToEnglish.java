@@ -6,25 +6,26 @@ import org.junit.Test;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 
 import com.gennlife.crf.bean.Excel;
-import com.gennlife.crf.screenshot.Screenshot;
 import com.gennlife.crf.utils.CreateWebDriver;
 import com.gennlife.crf.utils.ExcelUtils;
 import com.gennlife.crf.utils.ListAndStringUtils;
 import com.gennlife.crf.utils.QuitWebDriver;
-import com.gennlife.myujie.ConfiguredLinkagePath;
 import com.gennlife.myujie.TranslateToEnglish;
 
 public class TestTranslateToEnglish {
 
-	private String filePath = "E:\\yujie\\TranslateToEnglish";
+	private String filePath = "E:\\yujie\\TranslateToEnglish\\1";
 	
+	//配置表
 	private String fileName = "模板结构-广东省人民结直肠癌淼淼.xlsx";
-	private String fileName2 = "结直肠癌字段对接表.xlsx";
+	//数据表
+	private String fileName2 = "房颤数据平台表单.xlsx";
 	
 	private String sheetName = "总体结构";
 	private String sheetName2 = "患者信息";
 	
 
+	//直接运行此方法，翻译英文名
 	@Test
 	public void writeEnNames() throws Exception{
 		Excel excelmb = new Excel(filePath, fileName, sheetName);
@@ -33,6 +34,9 @@ public class TestTranslateToEnglish {
 		System.out.println("ok");
 	}
 	
+	
+	
+	//===============================================
 	@Test
 	public void sameListTransferToSequenceList() throws Exception{
 		Excel excel = new Excel(filePath, fileName2, sheetName2);
